@@ -1,0 +1,183 @@
+//==================================================
+//テクスチャのパス読み込み用ファイル
+//Author:加藤瑞葵
+//==================================================
+
+//テクスチャ最大数
+TEX_NUM = 44
+
+//空
+PAS = data/TEXTURE/sky.jpg
+NAME = TEX_TYPE_SKY
+
+//ダンジョンの床
+PAS = data/TEXTURE/DungeonFloor_01.jpg
+NAME = TEX_TYPE_DUNGEON_FLOOR
+
+//ダンジョンの壁
+PAS = data/TEXTURE/wall_01.jpg
+NAME = TEX_TYPE_DUNGEON_WALL
+
+//ダンジョンの柱
+PAS = data/TEXTURE/piller_01.jpg
+NAME = TEX_TYPE_DUNGEON_PILLER
+
+//メッシュ軌道1
+PAS = data/TEXTURE/trajectory_01.png
+NAME = TEX_TYPE_MESH_TRAJECTORY_01
+
+//メッシュ軌道2
+PAS = data/TEXTURE/trajectory_02.png
+NAME = TEX_TYPE_MESH_TRAJECTORY_02
+
+//歯車
+PAS = data/TEXTURE/gear.png
+NAME = TEX_TYPE_GEAR
+
+//チェックポイント用魔法陣
+PAS = data/TEXTURE/check_point.png
+NAME = TEX_TYPE_CHECK_POINT
+
+//パーティクル
+PAS = data/TEXTURE/effect000.jpg
+NAME = TEX_TYPE_EFFECT_3D
+
+//敵の弾
+PAS = data/TEXTURE/enemy_bullet.png
+NAME = TEX_TYPE_BULLET_ENEMY
+
+//ヒットエフェクト
+PAS = data/TEXTURE/effect_hit.png
+NAME = TEX_TYPE_EFFECT_HIT
+
+//魔法陣01
+PAS = data/TEXTURE/magic_circle_01.jpg
+NAME = TEX_TYPE_MAGIC_CIRCLE_01
+
+//パーティクル2
+PAS = data/TEXTURE/effect002.jpg
+NAME = TEX_TYPE_EFFECT_3D_002
+
+//HPMPSPのUI
+PAS = data/TEXTURE/ui_hp_mp_sp.png
+NAME = TEX_TYPE_UI_HP_MP_SP
+
+//HPMPSPのゲージの枠
+PAS = data/TEXTURE/ui_hp_mp_sp_gauge_frame.png
+NAME = TEX_TYPE_UI_HP_MP_SP_FRAME
+
+//HPのゲージ
+PAS = data/TEXTURE/ui_hp.png
+NAME = TEX_TYPE_UI_HP_GAUGE
+
+//MPのゲージ
+PAS = data/TEXTURE/ui_mp.png
+NAME = TEX_TYPE_UI_MP_GAUGE
+
+//SPのゲージ
+PAS = data/TEXTURE/ui_sp.png
+NAME = TEX_TYPE_UI_SP_GAUGE
+
+//チェックポイントのマスク
+PAS = data/TEXTURE/check_point_mask.png
+NAME = TEX_TYPE_CHECK_MASK
+
+//チェックポイントのゲージ	
+PAS = data/TEXTURE/check_point_gauge.png
+NAME = TEX_TYPE_CHECK_GAUGE
+
+//チェックポイントのゲージのフレーム
+PAS = data/TEXTURE/check_point_gauge_frame.png
+NAME = TEX_TYPE_CHECK_GAUGE_FRAME
+
+//炎パーティクル
+PAS = data/TEXTURE/effect_fire.jpg
+NAME = TEX_TYPE_EFFECT_FIRE
+
+//ロックオン
+PAS = data/TEXTURE/lockon.png
+NAME = TEX_TYPE_LOCK_ON
+
+//バツマーク
+PAS = data/TEXTURE/cross.png
+NAME = TEX_TYPE_CROSS
+
+//リングエフェクト
+PAS = data/TEXTURE/effect_ring.jpg
+NAME = TEX_TYPE_EFFECT_RING
+
+//マップ道
+PAS = data/TEXTURE/map_road.png
+NAME = TEX_TYPE_MAP_ROAD
+
+//マップ壁
+PAS = data/TEXTURE/map_wall.png
+NAME = TEX_TYPE_MAP_WALL
+
+//マップチェックポイント
+PAS = data/TEXTURE/map_check.png
+NAME = TEX_TYPE_MAP_CHECK
+
+//マップワープ
+PAS = data/TEXTURE/map_warp.png
+NAME = TEX_TYPE_MAP_WARP
+
+//マッププレイヤー
+PAS = data/TEXTURE/map_player.png
+NAME = TEX_TYPE_MAP_PLAYER
+
+//マップ敵
+PAS = data/TEXTURE/map_enemy.png
+NAME = TEX_TYPE_MAP_ENEMY
+
+//ビックリマーク
+PAS = data/TEXTURE/exclamation_mark.png
+NAME = TEX_TYPE_EXCLAMATION_MARK
+
+//メッセージ01
+PAS = data/TEXTURE/message_01.png
+NAME = TEX_TYPE_MESSAGE_01
+
+//メッセージ02
+PAS = data/TEXTURE/message_02.png
+NAME = TEX_TYPE_MESSAGE_02
+
+//タイトル
+PAS = data/TEXTURE/title.jpg
+NAME = TEX_TYPE_TITLE
+
+//タイトルロゴ
+PAS = data/TEXTURE/title_logo.png
+NAME = TEX_TYPE_TITLE_LOGO
+
+//PRESS START
+PAS = data/TEXTURE/press_start.png
+NAME = TEX_TYPE_PRESS_START
+
+//メニュー
+PAS = data/TEXTURE/menu.jpg
+NAME = TEX_TYPE_MENU
+
+//START
+PAS = data/TEXTURE/start.png
+NAME = TEX_TYPE_START
+
+//TUTORIAL
+PAS = data/TEXTURE/tutorial.png
+NAME = TEX_TYPE_TUTORIAL
+
+//EXIT
+PAS = data/TEXTURE/exit.png
+NAME = TEX_TYPE_EXIT
+
+//ポーズ
+PAS = data/TEXTURE/pause_flame.png
+NAME = TEX_TYPE_PAUSE
+
+//操作説明
+PAS = data/TEXTURE/tutorial_flame.png
+NAME = TEX_TYPE_TUTORIAL_FLAME
+
+//数字
+PAS = data/TEXTURE/number.png
+NAME = TEX_TYPE_NUMBER
