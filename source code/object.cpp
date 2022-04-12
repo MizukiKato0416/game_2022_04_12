@@ -19,14 +19,14 @@ vector<CObject*> CObject::m_object[(int)PRIORITY::MAX];
 //=============================================================================
 CObject::CObject(PRIORITY priolty)
 {
-	m_object[m_priority].push_back(this);
-
 	m_obj_type = OBJTYPE::NONE;
 	m_pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_pos_old = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_size = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_priority = (int)priolty;
 	m_deth = false;
+
+	m_object[m_priority].push_back(this);
 }
 
 //=============================================================================
@@ -47,9 +47,15 @@ void CObject::ReleaseAll(void)
 		int object_size = m_object[count_priolty].size();
 		for (int count_object = 0; count_object < object_size; count_object++)
 		{
-			delete m_object[count_priolty][count_object];
+			if (m_object[count_priolty][count_object]->m_priority != static_cast<int>(PRIORITY::FADE))
+			{
+				delete m_object[count_priolty][count_object];
+			}
 		}
-		m_object[count_priolty].pop_back();
+		if (object_size != 0)
+		{
+			m_object[count_priolty].pop_back();
+		}
 	}
 }
 
@@ -67,7 +73,7 @@ void CObject::UpdateAll(void)
 			{
 				delete m_object[count_priolty][count_object];
 				m_object[count_priolty][count_object] = NULL;
-				m_object[count_priolty].erase(m_object[count_priolty].begin() + object_size);
+				m_object[count_priolty].erase(m_object[count_priolty].begin() + count_object);
 			}
 			else
 			{
