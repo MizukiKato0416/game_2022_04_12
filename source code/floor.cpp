@@ -12,7 +12,7 @@
 //================================================
 //デフォルトコンストラクタ
 //================================================
-CFloor::CFloor(int nPriority) :CObject3D(nPriority)
+CFloor::CFloor(CObject::PRIORITY Priority) :CObject3D(Priority)
 {
 	
 }
@@ -100,7 +100,7 @@ bool CFloor::Collision(CObject *pObject)
 	CObject *pSaveObject = nullptr;
 
 	//先頭のポインタを代入
-	pThisObject = pThisObject->GetTopObj(CObject::PRIORITY_POLYGON_3D);
+	pThisObject = pThisObject->GetTopObj(CObject::PRIORITY::POLYGON_3D);
 
 	while (pThisObject != nullptr)
 	{

@@ -29,11 +29,11 @@ public:
 		MAX
 	};
 
-	CUi(int nPriority = PRIORITY_UI);	//コンストラクタ
+	CUi(CObject::PRIORITY Priority = CObject::PRIORITY::UI);	//コンストラクタ
 	~CUi();								//デストラクタ
 
 	//メンバ関数
-	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR3 size);
+	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);

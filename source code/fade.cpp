@@ -13,7 +13,7 @@
 //================================================
 //デフォルトコンストラクタ
 //================================================
-CFade::CFade(int nPriority) :CObject2D(nPriority)
+CFade::CFade(CObject::PRIORITY Priority) :CObject2D(Priority)
 {
 	m_fade = FADE_NONE;								//フェードの状態
 	m_color = D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f);	//フェードの色

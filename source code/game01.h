@@ -26,7 +26,7 @@ class CGauge;
 class CGame01 : public CObject
 {
 public:
-	CGame01(int nPriority = PRIORITY_NONE);		//コンストラクタ
+	CGame01(CObject::PRIORITY Priority = CObject::PRIORITY::NONE);		//コンストラクタ
 	~CGame01();									//デストラクタ
 
 	//メンバ関数

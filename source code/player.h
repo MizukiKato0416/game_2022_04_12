@@ -24,7 +24,7 @@ class CPlayer : public CObject
 public:
 
 	//メンバ関数
-	CPlayer(int nPriority = PRIORITY_PLAYER);				//コンストラクタ
+	CPlayer(CObject::PRIORITY Priority = CObject::PRIORITY::PLAYER);				//コンストラクタ
 	~CPlayer();												//デストラクタ
 
 	HRESULT Init(void);

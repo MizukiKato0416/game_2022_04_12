@@ -20,7 +20,7 @@
 //================================================
 //デフォルトコンストラクタ
 //================================================
-CEffect3D::CEffect3D(int nPriority) :CBillboard(nPriority)
+CEffect3D::CEffect3D(CObject::PRIORITY Priority) : CBillboard(Priority)
 {
 	m_type = EFFECT3D_TYPE::NONE;
 	m_pControl = nullptr;
@@ -95,7 +95,7 @@ void CEffect3D::Draw(void)
 	CObject *pSaveObject = nullptr;
 
 	//先頭のポインタを代入
-	pObject = pObject->GetTopObj(CObject::PRIORITY_PLAYER);
+	pObject = pObject->GetTopObj(CObject::OBJTYPE::PLAYER);
 
 	while (pObject != nullptr)
 	{

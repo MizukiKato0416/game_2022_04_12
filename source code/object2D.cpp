@@ -13,7 +13,7 @@
 //================================================
 //デフォルトコンストラクタ
 //================================================
-CObject2D::CObject2D(int nPriority):CObject(nPriority)
+CObject2D::CObject2D(CObject::PRIORITY Priority):CObject(Priority)
 {
 	m_pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_size = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
@@ -161,7 +161,7 @@ CObject2D* CObject2D::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, int nPriolity)
 	CObject2D *pObject2D = nullptr;
 	if (pObject2D == nullptr)
 	{
-		pObject2D = new CObject2D(nPriolity);
+		pObject2D = new CObject2D(static_cast<CObject::PRIORITY>(nPriolity));
 		if (pObject2D != nullptr)
 		{
 			pObject2D->m_pos = pos;

@@ -18,7 +18,7 @@
 class CMeshField : public CObject
 {
 public:
-	CMeshField(int nPriority = PRIORITY_MESH_FIELD);	//コンストラクタ
+	CMeshField(CObject::PRIORITY Priority = CObject::PRIORITY::MESH_FIELD);	//コンストラクタ
 	~CMeshField();										//デストラクタ
 
 	//メンバ関数

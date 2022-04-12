@@ -20,7 +20,7 @@
 //================================================
 //デフォルトコンストラクタ
 //================================================
-CShadow::CShadow(int nPriority) :CObject3D(nPriority)
+CShadow::CShadow(CObject::PRIORITY Priority) :CObject3D(Priority)
 {
 	m_pObject = nullptr;
 	m_bDraw = false;

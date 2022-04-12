@@ -356,7 +356,7 @@ void CCamera::MainCameraUpdate(void)
 	CObject *pSaveObject = nullptr;
 
 	//æ“ª‚Ìƒ|ƒCƒ“ƒ^‚ð‘ã“ü
-	pThisObject = pThisObject->GetTopObj(CObject::PRIORITY_PLAYER);
+	pThisObject = pThisObject->GetTopObj(CObject::PRIORITY::PLAYER);
 
 	while (pThisObject != nullptr)
 	{
