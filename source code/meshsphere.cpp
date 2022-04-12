@@ -41,16 +41,12 @@ CMeshSphere::~CMeshSphere()
 //================================================
 //初期化処理
 //================================================
-HRESULT CMeshSphere::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+HRESULT CMeshSphere::Init(void)
 {
 	//デバイスのポインタ
 	LPDIRECT3DDEVICE9 pDevice;
 	//デバイスの取得
 	pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
-
-	//変数初期化
-	m_pos = pos;
-	m_size = size;
 
 	//位置・サイズ設定処理
 	CObject::SetPos(m_pos);
@@ -240,8 +236,10 @@ CMeshSphere* CMeshSphere::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXVECTOR3 
 			pMeshSphere->m_rot = rot;
 			pMeshSphere->m_nLine = nLine;
 			pMeshSphere->m_nVertical = nVertical;
+			pMeshSphere->m_pos = pos;
+			pMeshSphere->m_size = size;
 			//初期化処理
-			pMeshSphere->Init(pos, size);
+			pMeshSphere->Init();
 		}
 	}
 	return pMeshSphere;

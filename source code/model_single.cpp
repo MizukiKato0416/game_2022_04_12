@@ -44,10 +44,8 @@ CModelSingle::~CModelSingle()
 //================================================
 //‰Šú‰»ˆ—
 //================================================
-HRESULT CModelSingle::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+HRESULT CModelSingle::Init(void)
 {
-	m_pos = pos;
-
 	//ƒ‚ƒfƒ‹‚Ì¶¬
 	m_pModel = CModel::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), m_rot, m_type);
 
@@ -127,7 +125,8 @@ CModelSingle *CModelSingle::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, CXload::X_T
 			pModelSingle->m_rot = rot;
 			pModelSingle->m_type = type;
 			pModelSingle->m_pParent = pParent;
-			pModelSingle->Init(pos, pModelSingle->m_size);
+			pModelSingle->m_pos = pos;
+			pModelSingle->Init();
 		}
 	}
 	return pModelSingle;

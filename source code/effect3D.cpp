@@ -41,9 +41,9 @@ CEffect3D::~CEffect3D()
 //================================================
 //初期化処理
 //================================================
-HRESULT CEffect3D::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+HRESULT CEffect3D::Init(void)
 {
-	CBillboard::Init(pos,size);
+	CBillboard::Init();
 
 	//オブジェクトの種類を設定
 	SetObjType(CObject::OBJTYPE::EFFECT_3D);
@@ -213,7 +213,9 @@ CEffect3D* CEffect3D::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXCOLOR col, E
 		{
 			pEffect3D->m_type = type;
 			pEffect3D->m_rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-			pEffect3D->Init(pos, size);
+			pEffect3D->m_pos = pos;
+			pEffect3D->m_size = size;
+			pEffect3D->Init();
 
 			//種類によってどのコントロールクラスの派生クラスを割り当てるかを決める
 			switch (pEffect3D->m_type)

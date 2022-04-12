@@ -39,12 +39,12 @@ CScore::~CScore()
 //================================================
 //èâä˙âªèàóù
 //================================================
-HRESULT CScore::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+HRESULT CScore::Init()
 {
 	for (int nCntNumber = 0; nCntNumber < MAX_SCORE_POLYGON; nCntNumber++)
 	{
-		m_apNumber[nCntNumber] = CNumber::Create(D3DXVECTOR3(pos.x - (size.x * MAX_SCORE_POLYGON / 2) + (size.x * nCntNumber) + (size.x / 2.0f), pos.y, 0.0f),
-												 size);
+		m_apNumber[nCntNumber] = CNumber::Create(D3DXVECTOR3(m_pos.x - (m_size.x * MAX_SCORE_POLYGON / 2) + (m_size.x * nCntNumber) + (m_size.x / 2.0f), m_pos.y, 0.0f),
+												 m_size);
 		m_apNumber[nCntNumber]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_NUMBER"));
 	}
 	return S_OK;
@@ -108,7 +108,9 @@ CScore* CScore::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size)
 		pScore = new CScore;
 		if (pScore != NULL)
 		{
-			pScore->Init(pos, size);
+			pScore->m_pos = pos;
+			pScore->m_size = size;
+			pScore->Init();
 		}
 	}
 	return pScore;

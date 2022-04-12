@@ -35,7 +35,7 @@ public:
 	~CTime();								//デストラクタ
 
 	//メンバ関数
-	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR3 size);
+	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
@@ -50,6 +50,8 @@ private:
 	CNumber *m_apNumber[MAX_TIME_POLYGON];	//numberのインスタンス
 	int m_nTime;							//タイム
 	int m_nCounter;							//時間を変えるためのカウンター
+	D3DXVECTOR3 m_pos;						//位置
+	D3DXVECTOR3 m_size;						//サイズ
 };
 
 //================================================

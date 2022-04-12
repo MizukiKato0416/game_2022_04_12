@@ -50,7 +50,7 @@ CBillboard::~CBillboard()
 //================================================
 //初期化処理
 //================================================
-HRESULT CBillboard::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+HRESULT CBillboard::Init(void)
 {
 	//デバイスのポインタ
 	LPDIRECT3DDEVICE9 pDevice;
@@ -58,8 +58,6 @@ HRESULT CBillboard::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
 	pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
 
 	//変数初期化
-	m_pos = pos;
-	m_size = size;
 	m_mode = BILLBOARD_MODE::NORMAL;
 	m_bCulling = true;
 	m_bAlphaBlend = false;
@@ -320,7 +318,7 @@ void CBillboard::Draw(void)
 //================================================
 //生成処理
 //================================================
-CBillboard* CBillboard::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXVECTOR3 rot)
+CBillboard* CBillboard::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size)
 {
 	//インスタンスの生成
 	CBillboard *pBillboard = nullptr;
@@ -329,8 +327,9 @@ CBillboard* CBillboard::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXVECTOR3 ro
 		pBillboard = new CBillboard();
 		if (pBillboard != nullptr)
 		{
-			//pBillboard->m_rot = rot;
-			pBillboard->Init(pos, size);
+			pBillboard->m_pos = pos;
+			pBillboard->m_size = size;
+			pBillboard->Init();
 		}
 	}
 	return pBillboard;

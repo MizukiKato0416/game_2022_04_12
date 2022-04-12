@@ -41,13 +41,13 @@ CTime::~CTime()
 //================================================
 //èâä˙âªèàóù
 //================================================
-HRESULT CTime::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+HRESULT CTime::Init(void)
 {
 	m_nCounter = 0;
 
 	for (int nCntNumber = 0; nCntNumber < MAX_TIME_POLYGON; nCntNumber++)
 	{
-		m_apNumber[nCntNumber] = CNumber::Create(D3DXVECTOR3(pos.x - (size.x * MAX_TIME_POLYGON / 2) + (size.x * nCntNumber) + (size.x / 2.0f), pos.y, 0.0f), size);
+		m_apNumber[nCntNumber] = CNumber::Create(D3DXVECTOR3(m_pos.x - (m_size.x * MAX_TIME_POLYGON / 2) + (m_size.x * nCntNumber) + (m_size.x / 2.0f), m_pos.y, 0.0f), m_size);
 		m_apNumber[nCntNumber]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_NUMBER"));
 	}
 	return S_OK;
@@ -115,7 +115,9 @@ CTime* CTime::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, int nStartTime)
 		if (pTime != NULL)
 		{
 			pTime->m_nTime = nStartTime;
-			pTime->Init(pos, size);
+			pTime->m_pos = pos;
+			pTime->m_size = size;
+			pTime->Init();
 			pTime->SetTime(pTime->m_nTime);
 		}
 	}

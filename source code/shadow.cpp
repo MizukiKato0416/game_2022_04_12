@@ -42,13 +42,12 @@ CShadow::~CShadow()
 //================================================
 //初期化処理
 //================================================
-HRESULT CShadow::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+HRESULT CShadow::Init(void)
 {
 	//変数初期化
 	m_bDraw = true;
-	m_size = size;
 
-	CObject3D::Init(pos, m_size);
+	CObject3D::Init();
 
 	//オブジェクトの種類を設定
 	SetObjType(CObject::OBJTYPE::SHADOW);
@@ -157,8 +156,10 @@ CShadow* CShadow::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, CObject *pObject)
 		pShadow = new CShadow();
 		if (pShadow != nullptr)
 		{
+			pShadow->m_pos = pos;
+			pShadow->m_size = size;
 			pShadow->m_pObject = pObject;
-			pShadow->Init(pos, size);
+			pShadow->Init();
 			pShadow->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_EFFECT_3D"));
 		}
 	}

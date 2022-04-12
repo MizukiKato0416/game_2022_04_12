@@ -46,13 +46,13 @@ CRanking::~CRanking()
 //================================================
 //初期化処理
 //================================================
-HRESULT CRanking::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+HRESULT CRanking::Init(void)
 {
 	//スコアの生成
 	for (int nCntRanking = 0; nCntRanking < MAX_RANKING; nCntRanking++)
 	{
-		m_apScore[nCntRanking] = CScore::Create(D3DXVECTOR3((pos.x), (float)(SCREEN_HEIGHT / (MAX_RANKING + 1)) * nCntRanking + (float)(SCREEN_HEIGHT / (MAX_RANKING + 1)), 0.0f),
-											    size);
+		m_apScore[nCntRanking] = CScore::Create(D3DXVECTOR3((m_pos.x), (float)(SCREEN_HEIGHT / (MAX_RANKING + 1)) * nCntRanking + (float)(SCREEN_HEIGHT / (MAX_RANKING + 1)), 0.0f),
+											    m_size);
 	}
 
 	//ロード処理
@@ -173,7 +173,9 @@ CRanking* CRanking::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size)
 		pRanking = new CRanking;
 		if (pRanking != NULL)
 		{
-			pRanking->Init(pos, size);
+			pRanking->m_pos = pos;
+			pRanking->m_size = size;
+			pRanking->Init();
 		}
 	}
 	return pRanking;

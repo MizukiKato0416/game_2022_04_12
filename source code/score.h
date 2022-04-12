@@ -29,7 +29,7 @@ public:
 	~CScore();								//デストラクタ
 
 	//メンバ関数
-	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR3 size);
+	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
@@ -43,6 +43,8 @@ public:
 private:
 	CNumber *m_apNumber[MAX_SCORE_POLYGON];			//numberのインスタンス
 	int m_nScore;									//スコア
+	D3DXVECTOR3 m_pos;								//位置
+	D3DXVECTOR3 m_size;								//サイズ
 
 };
 

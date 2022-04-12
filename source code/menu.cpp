@@ -51,7 +51,7 @@ CMenu::~CMenu()
 //================================================
 //èâä˙âªèàóù
 //================================================
-HRESULT CMenu::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+HRESULT CMenu::Init(void)
 {
 	m_nSelect = CMenu::SELECT_MENU_TYPE::SELECT_MENU_TYPE_GAME_START;
 

@@ -30,11 +30,11 @@ public:
 	~CBillboard();										//デストラクタ
 
 	//メンバ関数
-	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR3 size);
+	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	static CBillboard *Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXVECTOR3 rot);
+	static CBillboard *Create(D3DXVECTOR3 pos, D3DXVECTOR3 size);
 	D3DXVECTOR3 GetPos(void);								//位置取得処理
 	void SetPos(D3DXVECTOR3 pos, D3DXVECTOR3 size);			//位置設定処理
 	void SetTex(int nPattern, int nMaxPattern);				//テクスチャアニメーション設定処理

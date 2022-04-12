@@ -50,7 +50,7 @@ CPause::~CPause()
 //================================================
 //初期化処理
 //================================================
-HRESULT CPause::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+HRESULT CPause::Init(void)
 {
 	m_bPause = false;
 	m_nSelect = SELECT::SELECT_START;
@@ -252,7 +252,7 @@ bool CPause::SetPause(bool bPause)
 //================================================
 //生成処理
 //================================================
-CPause* CPause::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+CPause* CPause::Create(void)
 {
 	//インスタンスの生成
 	CPause *pPause = nullptr;
@@ -261,7 +261,7 @@ CPause* CPause::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size)
 		pPause = new CPause;
 		if (pPause != nullptr)
 		{
-			pPause->Init(pos, size);
+			pPause->Init();
 		}
 	}
 	return pPause;

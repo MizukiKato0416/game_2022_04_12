@@ -46,16 +46,12 @@ CMeshField::~CMeshField()
 //================================================
 //初期化処理
 //================================================
-HRESULT CMeshField::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+HRESULT CMeshField::Init(void)
 {
 	//デバイスのポインタ
 	LPDIRECT3DDEVICE9 pDevice;
 	//デバイスの取得
 	pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
-
-	//変数初期化
-	m_pos = pos;
-	m_size = size;
 
 	//位置・サイズ設定処理
 	CObject::SetPos(m_pos);
@@ -285,8 +281,10 @@ CMeshField* CMeshField::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXVECTOR3 ro
 			pMeshField->m_rot = rot;
 			pMeshField->m_nLine = nLine;
 			pMeshField->m_nVertical = nVertical;
+			pMeshField->m_pos = pos;
+			pMeshField->m_size = size;
 			//初期化処理
-			pMeshField->Init(pos, size);
+			pMeshField->Init();
 		}
 	}
 	return pMeshField;

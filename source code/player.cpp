@@ -70,10 +70,8 @@ CPlayer::~CPlayer()
 //================================================
 //‰Šú‰»ˆ—
 //================================================
-HRESULT CPlayer::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+HRESULT CPlayer::Init(void)
 {
-	m_pos = pos;
-	m_posOld = pos;
 	m_move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_fObjectiveRot = 0.0f;
 	m_fNumRot = 0.0f;
@@ -305,8 +303,10 @@ CPlayer *CPlayer::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot)
 		pPlayer = new CPlayer;
 		if (pPlayer != nullptr)
 		{
+			pPlayer->m_pos = pos;
+			pPlayer->m_posOld = pos;
 			pPlayer->m_rot = rot;
-			pPlayer->Init(pos, pPlayer->m_size);
+			pPlayer->Init();
 		}
 	}
 	return pPlayer;

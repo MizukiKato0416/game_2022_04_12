@@ -31,7 +31,7 @@ public:
 	~CRanking();									//デストラクタ
 
 	//メンバ関数
-	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR3 size);
+	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
@@ -43,6 +43,8 @@ private:
 	int m_nScore[MAX_SCORE_DATA];			//スコア
 	int m_nNowScore;						//今回のスコア
 	D3DCOLORVALUE	m_col;					//カラー
+	D3DXVECTOR3 m_pos;						//位置
+	D3DXVECTOR3 m_size;						//サイズ
 };
 
 //================================================

@@ -32,9 +32,9 @@ CFloor::~CFloor()
 //================================================
 //初期化処理
 //================================================
-HRESULT CFloor::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+HRESULT CFloor::Init(void)
 {
-	CObject3D::Init(pos,size);
+	CObject3D::Init();
 
 	//オブジェクトの種類を設定
 	SetObjType(CObject::OBJTYPE::FLOOR);
@@ -78,8 +78,10 @@ CFloor* CFloor::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXVECTOR3 rot)
 		pFloor = new CFloor();
 		if (pFloor != nullptr)
 		{
+			pFloor->m_pos = pos;
+			pFloor->m_size = size;
 			pFloor->m_rot = rot;
-			pFloor->Init(pos, size);
+			pFloor->Init();
 		}
 	}
 	return pFloor;

@@ -56,9 +56,7 @@ CCamera::CCamera()
 	m_bRotateX = false;								//カメラX軸が回転しているかどうか
 	m_bRotateY = false;								//カメラY軸が回転しているかどうか
 	m_nNum = 0;										//cameraの個体識別番号
-	m_state = CAMERA_STATE::NONE;					//カメラの状態
 	m_fDifferVR = 0.0f;								//視点と注視点の距離
-	m_type = TYPE::NONE;							//種類
 }
 
 //================================================
@@ -77,7 +75,7 @@ CCamera::~CCamera()
 //================================================
 //初期化処理
 //================================================
-HRESULT CCamera::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, float viewportX, float viewportY, float viewportWidth, float viewporHeight, TYPE type)
+HRESULT CCamera::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, float viewportX, float viewportY, float viewportWidth, float viewporHeight)
 {
 	m_rot = rot;																	//カメラの向き
 	m_rotAsk = D3DXVECTOR3(0.0f, 0.0f, 0.0f);		//目的のカメラの向き
@@ -96,16 +94,11 @@ HRESULT CCamera::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, float viewportX, float v
 	m_viewport.Height = (DWORD)viewporHeight;		//描画する画面の高さ
 	m_bRotateX = false;								//カメラX軸が回転しているかどうか
 	m_bRotateY = false;								//カメラY軸が回転しているかどうか
-	m_state = CAMERA_STATE::NORMAL;					//カメラの状態
-	m_type = type;									//種類
 
-	if (m_type == TYPE::MAIN)
-	{
-		//視点の場所を注視点を元に移動
-		m_fDifferVR = CAMERA_DISTANCE;
-		m_posV.x = m_posR.x + sinf(m_rot.y) * m_fDifferVR;
-		m_posV.z = m_posR.z + cosf(m_rot.y) * m_fDifferVR;
-	}
+	//視点の場所を注視点を元に移動
+	m_fDifferVR = CAMERA_DISTANCE;
+	m_posV.x = m_posR.x + sinf(m_rot.y) * m_fDifferVR;
+	m_posV.z = m_posR.z + cosf(m_rot.y) * m_fDifferVR;
 
 	return S_OK;
 }
@@ -123,24 +116,13 @@ void CCamera::Uninit(void)
 //================================================
 void CCamera::Update(void)
 {
-	//カメラの種類によって分ける
-	switch (m_type)
-	{
-	case CCamera::TYPE::MAIN:
-		MainCameraUpdate();
-		break;
-	case CCamera::TYPE::SMALL_MAP:
-		SmallMapUpdate();
-		break;
-	default:
-		break;
-	}
+	
 }
 
 //================================================
 //生成処理
 //================================================
-CCamera *CCamera::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, float viewportX, float viewportY, float viewportWidth, float viewporHeight, TYPE type)
+CCamera *CCamera::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, float viewportX, float viewportY, float viewportWidth, float viewporHeight)
 {
 	//インスタンスの生成
 	CCamera *pCamera = nullptr;
@@ -149,7 +131,7 @@ CCamera *CCamera::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, float viewportX, floa
 		pCamera = new CCamera;
 		if (pCamera != nullptr)
 		{
-			pCamera->Init(pos, rot, viewportX, viewportY,viewportWidth, viewporHeight, type);
+			pCamera->Init(pos, rot, viewportX, viewportY,viewportWidth, viewporHeight);
 		}
 	}
 	return pCamera;
@@ -182,26 +164,7 @@ void CCamera::Set(void)
 	//ビューマトリックスの初期化
 	D3DXMatrixIdentity(&m_mtxView);
 
-	//カメラの位置をどれくらい動かすかを決める
-	D3DXVECTOR3 sway = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-
-	switch (m_state)
-	{
-	case CAMERA_STATE::NORMAL:				//通常
-		break;
-	case CAMERA_STATE::SWAY_SMALL:			//小さい揺れ
-		sway.x = CAMERA_SWAY_SMALL_X_RAND;
-		sway.y = CAMERA_SWAY_SMALL_Y_RAND;
-		break;
-	case CAMERA_STATE::SWAY_LARGE:			//大きい揺れ
-		sway.x = CAMERA_SWAY_LARGE_X_RAND;
-		sway.y = CAMERA_SWAY_LARGE_Y_RAND;
-		break;
-	default:
-		break;
-	}
-
-	D3DXVECTOR3 pos(m_posV.x + sway.x, m_posV.y + sway.y, m_posV.z + sway.z);
+	D3DXVECTOR3 pos(m_posV.x, m_posV.y, m_posV.z);
 
 	//ビューマトリックスの作成
 	D3DXMatrixLookAtLH(&m_mtxView, &pos, &m_posR, &m_vecU);
@@ -475,36 +438,4 @@ void CCamera::MainCameraUpdate(void)
 	{
 		m_rot.x = D3DX_PI / 8.0f;
 	}
-}
-
-//================================================
-//小マップの更新処理
-//================================================
-void CCamera::SmallMapUpdate(void)
-{
-	//オブジェクト情報を入れるポインタ
-	CObject *pThisObject = nullptr;
-	//オブジェクト情報を保存するポインタ変数
-	CObject *pSaveObject = nullptr;
-
-	//先頭のポインタを代入
-	pThisObject = pThisObject->GetTopObj(CObject::PRIORITY_PLAYER);
-
-	while (pThisObject != nullptr)
-	{
-		//現在のオブジェクトのポインタを保存
-		pSaveObject = pThisObject;
-		if (pThisObject->GetObjType() == CObject::OBJTYPE::PLAYER)
-		{
-			//プレイヤーに追従させる
-			D3DXVECTOR3 pos = pThisObject->GetPos();
-			m_posV = D3DXVECTOR3(pos.x, 5000.0f, pos.z);
-		}
-		pThisObject = pSaveObject->GetObjNext(pSaveObject);
-	}
-
-	//視点の場所を注視点を元に移動
-	m_posV.x = m_posR.x + m_fDifferVR * sinf(m_rot.x) * sinf(m_rot.y);
-	m_posV.z = m_posR.z + m_fDifferVR * sinf(m_rot.x) * cosf(m_rot.y);
-	m_posV.y = m_posR.y + m_fDifferVR * cosf(m_rot.x);
 }

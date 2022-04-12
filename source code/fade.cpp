@@ -34,11 +34,13 @@ CFade::~CFade()
 //================================================
 //‰Šú‰»ˆ—
 //================================================
-HRESULT CFade::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+HRESULT CFade::Init(void)
 {
 	m_fade = FADE_IN;
 	m_color = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);
-	CObject2D::Init(pos, size);
+	CObject2D::Init();
+
+	SetPos(m_pos, m_size);
 
 	return S_OK;
 }
@@ -103,7 +105,9 @@ CFade *CFade::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, CManager::MODE modeNext)
 		pFade = new CFade;
 		if (pFade != nullptr)
 		{
-			pFade->Init(pos, size);
+			pFade->m_pos = pos;
+			pFade->m_size = size;
+			pFade->Init();
 			pFade->m_fade = FADE_OUT;
 			pFade->m_modeNext = modeNext;				//ŽŸ‚Ì‰æ–Ê(ƒ‚[ƒh)
 			pFade->m_color = D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f);

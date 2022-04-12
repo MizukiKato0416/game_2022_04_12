@@ -43,7 +43,7 @@ CResult::~CResult()
 //================================================
 //èâä˙âªèàóù
 //================================================
-HRESULT CResult::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+HRESULT CResult::Init(void)
 {
 	CObject2D *pObject2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f), 
 											 D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), CObject::PRIORITY_UI);

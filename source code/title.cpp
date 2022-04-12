@@ -49,7 +49,7 @@ CTitle::~CTitle()
 //================================================
 //èâä˙âªèàóù
 //================================================
-HRESULT CTitle::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+HRESULT CTitle::Init(void)
 {
 	//É^ÉCÉgÉãîwåiÇÃê∂ê¨
 	CObject2D *pObject2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f), 

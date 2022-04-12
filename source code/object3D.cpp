@@ -48,7 +48,7 @@ CObject3D::~CObject3D()
 //================================================
 //初期化処理
 //================================================
-HRESULT CObject3D::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+HRESULT CObject3D::Init(void)
 {
 	//デバイスのポインタ
 	LPDIRECT3DDEVICE9 pDevice;
@@ -56,8 +56,6 @@ HRESULT CObject3D::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
 	pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
 
 	//変数初期化
-	m_pos = pos;
-	m_size = size;
 	m_bCulling = true;
 	m_bAlphaBlend = false;
 	m_bAlphaTest = false;
@@ -305,8 +303,10 @@ CObject3D* CObject3D::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXVECTOR3 rot)
 		pScene3D = new CObject3D();
 		if (pScene3D != nullptr)
 		{
+			pScene3D->m_pos = pos;
+			pScene3D->m_size = size;
 			pScene3D->m_rot = rot;
-			pScene3D->Init(pos, size);
+			pScene3D->Init();
 		}
 	}
 	return pScene3D;

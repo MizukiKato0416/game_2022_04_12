@@ -26,13 +26,13 @@ public:
 	~CPause();										//デストラクタ
 
 	//メンバ関数
-	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR3 size);
+	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
 	static bool GetPause(void);
 	static bool SetPause(bool bPause);
-	static CPause *Create(D3DXVECTOR3 pos, D3DXVECTOR3 size);
+	static CPause *Create(void);
 
 private:
 	//画面遷移の選択肢ボタン

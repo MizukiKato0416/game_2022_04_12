@@ -44,7 +44,10 @@ CUi::~CUi()
 //================================================
 HRESULT CUi::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
 {
-	CObject2D::Init(pos, size);
+	CObject2D::Init();
+
+	//位置とサイズを設定
+	SetPos(pos, size);
 
 	SetObjType(CObject::OBJTYPE::UI);
 

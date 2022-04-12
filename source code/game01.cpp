@@ -50,7 +50,7 @@ CGame01::~CGame01()
 //================================================
 //初期化処理
 //================================================
-HRESULT CGame01::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+HRESULT CGame01::Init(void)
 {
 	//タイムの生成
 	CTime::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, TIME_POLIGON_POSY, 0.0f), D3DXVECTOR3(TIME_POLYGON_WIDTH, TIME_POLYGON_HEIGHT, 0.0f), 0);
@@ -62,7 +62,7 @@ HRESULT CGame01::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
 	CManager::GetInstance()->GetPlayData()->SetScorePoint(pSocre);
 
 	//ポーズの生成
-	CPause::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	CPause::Create();
 
 	return S_OK;
 }

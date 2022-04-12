@@ -81,7 +81,7 @@ public:
 	virtual ~CObject();								//デストラクタ
 
 	//メンバ関数
-	virtual HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR3 size) = 0;
+	virtual HRESULT Init(void) = 0;
 	virtual void Uninit(void) = 0;
 	virtual void Update(void) = 0;
 	virtual void Draw(void) = 0;

@@ -27,7 +27,7 @@ public:
 	CPlayer(int nPriority = PRIORITY_PLAYER);				//コンストラクタ
 	~CPlayer();												//デストラクタ
 
-	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR3 size);
+	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
