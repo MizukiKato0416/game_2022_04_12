@@ -45,16 +45,16 @@ void CObject::ReleaseAll(void)
 	for (int count_priolty = 0; count_priolty < (int)PRIORITY::MAX; count_priolty++)
 	{
 		int object_size = m_object[count_priolty].size();
-		for (int count_object = 0; count_object < object_size; count_object++)
+		if (object_size > 0)
 		{
-			if (m_object[count_priolty][count_object]->m_priority != static_cast<int>(PRIORITY::FADE))
+			for (int count_object = object_size - 1; count_object >= 0; count_object--)
 			{
-				delete m_object[count_priolty][count_object];
+				if (m_object[count_priolty][count_object]->m_priority != static_cast<int>(PRIORITY::FADE))
+				{
+					delete m_object[count_priolty][count_object];
+					m_object[count_priolty].pop_back();
+				}
 			}
-		}
-		if (object_size != 0)
-		{
-			m_object[count_priolty].pop_back();
 		}
 	}
 }
@@ -74,6 +74,8 @@ void CObject::UpdateAll(void)
 				delete m_object[count_priolty][count_object];
 				m_object[count_priolty][count_object] = NULL;
 				m_object[count_priolty].erase(m_object[count_priolty].begin() + count_object);
+				object_size = m_object[count_priolty].size();
+				count_object--;
 			}
 			else
 			{
@@ -93,7 +95,10 @@ void CObject::DrawAll(void)
 		int object_size = m_object[count_priolty].size();
 		for (int count_object = 0; count_object < object_size; count_object++)
 		{
-			m_object[count_priolty][count_object]->Draw();
+			if (m_object[count_priolty][count_object]->m_deth == false)
+			{
+				m_object[count_priolty][count_object]->Draw();
+			}
 		}
 	}
 }

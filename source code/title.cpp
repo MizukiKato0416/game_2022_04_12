@@ -92,6 +92,7 @@ void CTitle::Update(void)
 	{
 		//フェード取得処理
 		CFade *pFade;
+
 		pFade = CManager::GetInstance()->GetFade();
 
 		if (pFade->GetFade() == CFade::FADE_NONE)
