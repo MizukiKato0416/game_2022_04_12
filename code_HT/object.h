@@ -24,13 +24,31 @@ public:
 	//---------------------------
 	enum class PRIORITY
 	{
-		NONE = 0,	//なし
+		NONE = 0,			//なし
+		PLAYER,			//プレイヤー
+		MODEL,				//モデル
+		POLYGON_3D,		//3Dポリゴン
+		SHADOW,			//影
+		MESH_FIELD,		//メッシュフィールド
+		EFFECT3D,			//パーティクル
+		UI,				//UI
+		RANKING,			//ランキング
+		MASK,				//マスク
+		PAUSE,				//ポーズ
+		FADE,				//フェード
 		MAX
 	};
 
 	enum class OBJTYPE
 	{
-		NONE = 0,	//なし
+		NONE = 0,			//なし
+		EFFECT_3D,			//3Dエフェクト
+		FLOOR,				//床
+		PLAYER,				//プレイヤー
+		MODEL,				//モデル
+		UI,					//UI
+		POLYGON_3D,			//3Dポリゴン
+		SHADOW,				//影
 		MAX
 	};
 	CObject(LAYER_TYPE Layer = LAYER_TYPE::LAYER_00);	// デフォルトコンストラクタ
