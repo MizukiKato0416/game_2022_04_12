@@ -12,14 +12,14 @@
 //=============================================================================
 // 静的メンバ変数宣言
 //=============================================================================
-vector<CObject*> CObject::m_object[(int)OBJTYPE::MAX];
+vector<CObject*> CObject::m_object[(int)PRIORITY::MAX];
 
 //=============================================================================
 // デフォルトコンストラクタ
 //=============================================================================
 CObject::CObject(PRIORITY priolty)
 {
-	m_object[m_nPriority].push_back(this);
+	m_object[m_priority].push_back(this);
 
 	m_obj_type = OBJTYPE::NONE;
 	m_pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
@@ -63,12 +63,15 @@ void CObject::UpdateAll(void)
 		int object_size = m_object[count_priolty].size();
 		for (int count_object = 0; count_object < object_size; count_object++)
 		{
-			m_object[count_priolty][count_object]->Update();
-			if (m_object[count_priolty][count_object]->m_bDeth == true)
+			if (m_object[count_priolty][count_object]->m_deth == true)
 			{
 				delete m_object[count_priolty][count_object];
 				m_object[count_priolty][count_object] = NULL;
 				m_object[count_priolty].erase(m_object[count_priolty].begin() + object_size);
+			}
+			else
+			{
+				m_object[count_priolty][count_object]->Update();
 			}
 		}
 	}

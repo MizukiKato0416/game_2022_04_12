@@ -15,7 +15,7 @@
 //================================================
 //デフォルトコンストラクタ
 //================================================
-CBillboard::CBillboard(int nPriority) : CObject(static_cast<CObject::PRIORITY>(nPriority))
+CBillboard::CBillboard(CObject::PRIORITY Priority) : CObject(static_cast<CObject::PRIORITY>(Priority))
 {
 	m_pTexture = nullptr;
 	m_pVtxBuff = nullptr;

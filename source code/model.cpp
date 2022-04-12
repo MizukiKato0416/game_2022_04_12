@@ -353,19 +353,15 @@ D3DXVECTOR3 CModel::GetSize(void)
 void CModel::Collision(void)
 {
 	//オブジェクト情報を入れるポインタ
-	CObject *pObject = nullptr;
-	//オブジェクト情報を保存するポインタ変数
-	CObject *pSaveObject = nullptr;
+	vector<CObject*> object;
 
 	//先頭のポインタを代入
-	pObject = pObject->GetTopObj(CObject::PRIORITY::MODEL);
+	object = CObject::GetObject(static_cast<int>(CObject::PRIORITY::MODEL));
+	int nProprty_Size = object.size();
 
-	while (pObject != nullptr)
+	for (int nCntPriorty = 0; nCntPriorty < nProprty_Size; nCntPriorty++)
 	{
-		//現在のオブジェクトのポインタを保存
-		pSaveObject = pObject;
-
-		if (pObject->GetObjType() == CObject::OBJTYPE::PLAYER)
+		if (object[nProprty_Size]->GetObjType() == CObject::OBJTYPE::PLAYER)
 		{
 			//横からの当たり判定に使う
 			CPlayer *pPlayer = nullptr;									//プレイヤーのポインタ
@@ -402,13 +398,13 @@ void CModel::Collision(void)
 				fVecNorObjOld[nCnt] = 0.0f;
 			}
 
-			for (int nCnt1 = 0; nCnt1 < 2; nCnt1++)
+			for (int nCnt = 0; nCnt < 2; nCnt++)
 			{
-				vecNorVtx[nCnt1] = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+				vecNorVtx[nCnt] = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 			}
 
 			//プレイヤーのポインタにキャスト
-			pPlayer = (CPlayer*)pObject;
+			pPlayer = (CPlayer*)object[nProprty_Size];
 
 			//プレイヤーの位置取得
 			posPlayer = pPlayer->GetPos();
@@ -621,7 +617,6 @@ void CModel::Collision(void)
 				pPlayer->SetPos(posPlayer);
 			}
 		}
-		pObject = pSaveObject->GetObjNext(pSaveObject);
 	}
 }
 

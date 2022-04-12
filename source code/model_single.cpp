@@ -140,24 +140,20 @@ bool CModelSingle::SimpleCollision(CObject *pObject)
 	bool bLand = false;	//着地しているかどうか
 
 	//オブジェクト情報を入れるポインタ
-	CObject *pThisObject = nullptr;
-	//オブジェクト情報を保存するポインタ変数
-	CObject *pSaveObject = nullptr;
+	vector<CObject*> object;
 
 	//先頭のポインタを代入
-	pThisObject = pThisObject->GetTopObj(CObject::PRIORITY::MODEL);
+	object = CObject::GetObject(static_cast<int>(CObject::PRIORITY::MODEL));
+	int nProprty_Size = object.size();
 
-	while (pThisObject != nullptr)
+	for (int nCnt = 0; nCnt < nProprty_Size; nCnt++)
 	{
-		//現在のオブジェクトのポインタを保存
-		pSaveObject = pThisObject;
-
-		if (pThisObject->GetObjType() == CObject::OBJTYPE::MODEL)
+		if (object[nCnt]->GetObjType() == CObject::OBJTYPE::MODEL)
 		{
 
 			//モデルシングルにキャスト
 			CModelSingle *pModelSingle = nullptr;
-			pModelSingle = (CModelSingle*)pThisObject;
+			pModelSingle = (CModelSingle*)object[nCnt];
 
 			D3DXVECTOR3 pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);			//対象の位置
 			D3DXVECTOR3 posModel = D3DXVECTOR3(0.0f, 0.0f, 0.0f);		//モデルの位置
@@ -243,7 +239,6 @@ bool CModelSingle::SimpleCollision(CObject *pObject)
 				pObject->SetPos(pos);
 			}
 		}
-		pThisObject = pSaveObject->GetObjNext(pSaveObject);
 	}
 	return bLand;
 }
@@ -257,22 +252,18 @@ bool CModelSingle::Collision(CObject *pObject)
 	bool bLand = false;
 
 	//オブジェクト情報を入れるポインタ
-	CObject *pThisObject = nullptr;
-	//オブジェクト情報を保存するポインタ変数
-	CObject *pSaveObject = nullptr;
+	vector<CObject*> object;
 
 	//先頭のポインタを代入
-	pThisObject = pThisObject->GetTopObj(CObject::PRIORITY::MODEL);
+	object = CObject::GetObject(static_cast<int>(CObject::PRIORITY::MODEL));
+	int nProprty_Size = object.size();
 
-	while (pThisObject != nullptr)
+	for (int nCnt = 0; nCnt < nProprty_Size; nCnt++)
 	{
-		//現在のオブジェクトのポインタを保存
-		pSaveObject = pThisObject;
-
-		if (pThisObject->GetObjType() == CObject::OBJTYPE::MODEL)
+		if (object[nProprty_Size]->GetObjType() == CObject::OBJTYPE::MODEL)
 		{
 			//pObjectをCModelSingleにキャスト
-			CModelSingle *pModelSingle = (CModelSingle*)pThisObject;
+			CModelSingle *pModelSingle = (CModelSingle*)object[nProprty_Size];
 
 			//当たり判定をする設定なら
 			if (pModelSingle->m_bCollision == true)
@@ -489,7 +480,6 @@ bool CModelSingle::Collision(CObject *pObject)
 				}
 			}
 		}
-		pThisObject = pSaveObject->GetObjNext(pSaveObject);
 	}
 	return bLand;
 }
@@ -500,22 +490,18 @@ bool CModelSingle::Collision(CObject *pObject)
 bool CModelSingle::CollisionAny(CObject * pObject)
 {
 	//オブジェクト情報を入れるポインタ
-	CObject *pThisObject = nullptr;
-	//オブジェクト情報を保存するポインタ変数
-	CObject *pSaveObject = nullptr;
+	vector<CObject*> object;
 
 	//先頭のポインタを代入
-	pThisObject = pThisObject->GetTopObj(CObject::PRIORITY::MODEL);
+	object = CObject::GetObject(static_cast<int>(CObject::PRIORITY::MODEL));
+	int nProprty_Size = object.size();
 
-	while (pThisObject != nullptr)
+	for (int nCnt = 0; nCnt < nProprty_Size; nCnt++)
 	{
-		//現在のオブジェクトのポインタを保存
-		pSaveObject = pThisObject;
-
-		if (pThisObject->GetObjType() == CObject::OBJTYPE::MODEL)
+		if (object[nProprty_Size]->GetObjType() == CObject::OBJTYPE::MODEL)
 		{
 			//pObjectをCModelSingleにキャスト
-			CModelSingle *pModelSingle = (CModelSingle*)pThisObject;
+			CModelSingle *pModelSingle = (CModelSingle*)object[nProprty_Size];
 
 			//当たり判定をする設定なら
 			if (pModelSingle->m_bCollision == true)
@@ -603,7 +589,6 @@ bool CModelSingle::CollisionAny(CObject * pObject)
 				}
 			}
 		}
-		pThisObject = pSaveObject->GetObjNext(pSaveObject);
 	}
 	return false;
 }

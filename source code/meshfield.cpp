@@ -307,23 +307,19 @@ bool CMeshField::Collision(CObject * pSubjectObject, float fRadius)
 	bool bLand = false;
 
 	//オブジェクト情報を入れるポインタ
-	CObject *pThisObject = nullptr;
-	//オブジェクト情報を保存するポインタ変数
-	CObject *pSaveObject = nullptr;
+	vector<CObject*> object;
 
 	//先頭のポインタを代入
-	pThisObject = pThisObject->GetTopObj(CObject::PRIORITY::MESH_FIELD);
+	object = CObject::GetObject(static_cast<int>(CObject::PRIORITY::MESH_FIELD));
+	int nProprty_Size = object.size();
 
-	while (pThisObject != nullptr)
+	for (int nCnt = 0; nCnt < nProprty_Size; nCnt++)
 	{
-		//現在のオブジェクトのポインタを保存
-		pSaveObject = pThisObject;
-
-		if (pThisObject->GetObjType() == CObject::OBJTYPE::FLOOR)
+		if (object[nProprty_Size]->GetObjType() == CObject::OBJTYPE::FLOOR)
 		{
 			//ポインタをCMeshFieldにキャスト
 			CMeshField *pMeshField = nullptr;
-			pMeshField = (CMeshField*)pThisObject;
+			pMeshField = (CMeshField*)object[nProprty_Size];
 
 			for (int nCnt1 = 0; nCnt1 < 2 * pMeshField->m_nLine * pMeshField->m_nVertical + (pMeshField->m_nVertical * 4) - 4; nCnt1++)
 			{
@@ -451,7 +447,6 @@ bool CMeshField::Collision(CObject * pSubjectObject, float fRadius)
 				}
 			}
 		}
-		pThisObject = pSaveObject->GetObjNext(pSaveObject);
 	}
 	return bLand;
 }

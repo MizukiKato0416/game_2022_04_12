@@ -47,7 +47,7 @@ HRESULT CUi::Init(void)
 	CObject2D::Init();
 
 	//位置とサイズを設定
-	SetPos(pos, size);
+	SetPos(m_pos, m_size);
 
 	SetObjType(CObject::OBJTYPE::UI);
 
@@ -95,6 +95,8 @@ CUi* CUi::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, int nPriolity, TYPE type)
 		if (pUi != nullptr)
 		{
 			pUi->m_type = type;
+			pUi->m_pos = pos;
+			pUi->m_size = size;
 			pUi->Init();
 			// 指定したUIの種類でテクスチャを変える
 			switch (type)

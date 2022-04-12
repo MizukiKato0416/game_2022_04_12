@@ -90,23 +90,19 @@ void CEffect3D::Update(void)
 void CEffect3D::Draw(void)
 {
 	//オブジェクト情報を入れるポインタ
-	CObject *pObject = nullptr;
-	//オブジェクト情報を保存するポインタ変数
-	CObject *pSaveObject = nullptr;
+	vector<CObject*> object;
 
 	//先頭のポインタを代入
-	pObject = pObject->GetTopObj(CObject::OBJTYPE::PLAYER);
+	object = CObject::GetObject(static_cast<int>(CObject::PRIORITY::PLAYER));
+	int nProprty_Size = object.size();
 
-	while (pObject != nullptr)
+	for (int nCnt = 0; nCnt < nProprty_Size; nCnt++)
 	{
-		//現在のオブジェクトのポインタを保存
-		pSaveObject = pObject;
-
 		//オブジェクトの種類がプレイヤーだったら
-		if (pObject->GetObjType() == CObject::OBJTYPE::PLAYER)
+		if (object[nProprty_Size]->GetObjType() == CObject::OBJTYPE::PLAYER)
 		{
 			//オブジェクトの位置を取得
-			D3DXVECTOR3 posObj = pObject->GetPos();
+			D3DXVECTOR3 posObj = object[nProprty_Size]->GetPos();
 
 			//自身から対象のオブジェクトまでの距離を求める
 			float fRadius = sqrtf((posObj.x - m_pos.x) * (posObj.x - m_pos.x) +
@@ -194,8 +190,6 @@ void CEffect3D::Draw(void)
 				pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 			}
 		}
-		//次のオブジェクトに進める
-		pObject = pSaveObject->GetObjNext(pSaveObject);
 	}
 }
 

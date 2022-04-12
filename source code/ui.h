@@ -44,6 +44,8 @@ private:
 	TYPE m_type;						// UIの種類
 	LPDIRECT3DTEXTURE9 m_pTexture;		//テクスチャへのポインタ
 	CControl *m_pControl;
+	D3DXVECTOR3 m_pos;					//位置
+	D3DXVECTOR3 m_size;					//サイズ
 };
 
 //================================================

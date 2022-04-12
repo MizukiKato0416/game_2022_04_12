@@ -351,24 +351,20 @@ void CCamera::MainCameraUpdate(void)
 	pInputPadX = CManager::GetInstance()->GetInputPadX();
 
 	//オブジェクト情報を入れるポインタ
-	CObject *pThisObject = nullptr;
-	//オブジェクト情報を保存するポインタ変数
-	CObject *pSaveObject = nullptr;
+	vector<CObject*> object;
 
 	//先頭のポインタを代入
-	pThisObject = pThisObject->GetTopObj(CObject::PRIORITY::PLAYER);
+	object = CObject::GetObject(static_cast<int>(CObject::PRIORITY::PLAYER));
+	int nProprty_Size = object.size();
 
-	while (pThisObject != nullptr)
+	for (int nCnt = 0; nCnt < nProprty_Size; nCnt++)
 	{
-		//現在のオブジェクトのポインタを保存
-		pSaveObject = pThisObject;
-		if (pThisObject->GetObjType() == CObject::OBJTYPE::PLAYER)
+		if (object[nProprty_Size]->GetObjType() == CObject::OBJTYPE::PLAYER)
 		{
 			//プレイヤーに追従させる
-			D3DXVECTOR3 pos = pThisObject->GetPos();
+			D3DXVECTOR3 pos = object[nProprty_Size]->GetPos();
 			m_posR = D3DXVECTOR3(pos.x + sinf(m_rot.y) * 0.0f, pos.y + 70.0f, pos.z + cosf(m_rot.y) * 0.0f);
 		}
-		pThisObject = pSaveObject->GetObjNext(pSaveObject);
 	}
 
 	//視点の場所を注視点を元に移動
