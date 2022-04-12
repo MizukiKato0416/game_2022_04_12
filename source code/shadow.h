@@ -17,7 +17,7 @@
 class CShadow : public CObject3D
 {
 public:
-	CShadow(int nPriority = PRIORITY_SHADOW);		//コンストラクタ
+	CShadow(CObject::PRIORITY Priority = CObject::PRIORITY::SHADOW);		//コンストラクタ
 	~CShadow();										//デストラクタ
 
 	//メンバ関数

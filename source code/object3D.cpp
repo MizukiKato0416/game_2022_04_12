@@ -14,7 +14,7 @@
 //================================================
 //デフォルトコンストラクタ
 //================================================
-CObject3D::CObject3D(int nPriority) :CObject(nPriority)
+CObject3D::CObject3D(CObject::PRIORITY Priority) :CObject(Priority)
 {
 	m_pTexture = nullptr;
 	m_pVtxBuff = nullptr;
@@ -30,7 +30,7 @@ CObject3D::CObject3D(int nPriority) :CObject(nPriority)
 	m_bAlphaBlend = false;
 	m_bAlphaTest = false;
 	m_bLighting = false;
-	SetObjType(OBJTYPE::POLYGON_3D);
+	SetObjType(CObject::OBJTYPE::POLYGON_3D);
 }
 
 //================================================

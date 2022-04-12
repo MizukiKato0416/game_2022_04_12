@@ -31,7 +31,7 @@
 class CTime : public CObject
 {
 public:
-	CTime(int nPriority = PRIORITY_UI);		//コンストラクタ
+	CTime(CObject::PRIORITY Priority = CObject::PRIORITY::UI);		//コンストラクタ
 	~CTime();								//デストラクタ
 
 	//メンバ関数

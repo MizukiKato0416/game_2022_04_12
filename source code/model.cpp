@@ -358,7 +358,7 @@ void CModel::Collision(void)
 	CObject *pSaveObject = nullptr;
 
 	//æ“ª‚Ìƒ|ƒCƒ“ƒ^‚ð‘ã“ü
-	pObject = pObject->GetTopObj(CObject::PRIORITY_MODEL);
+	pObject = pObject->GetTopObj(CObject::PRIORITY::MODEL);
 
 	while (pObject != nullptr)
 	{

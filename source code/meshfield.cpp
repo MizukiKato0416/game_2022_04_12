@@ -14,7 +14,7 @@
 //================================================
 //デフォルトコンストラクタ
 //================================================
-CMeshField::CMeshField(int nPriority):CObject(nPriority)
+CMeshField::CMeshField(CObject::PRIORITY Priority):CObject(Priority)
 {
 	m_pTexture = nullptr;
 	m_pVtxBuff = nullptr;
@@ -312,7 +312,7 @@ bool CMeshField::Collision(CObject * pSubjectObject, float fRadius)
 	CObject *pSaveObject = nullptr;
 
 	//先頭のポインタを代入
-	pThisObject = pThisObject->GetTopObj(CObject::PRIORITY_MESH_FIELD);
+	pThisObject = pThisObject->GetTopObj(CObject::PRIORITY::MESH_FIELD);
 
 	while (pThisObject != nullptr)
 	{

@@ -18,7 +18,7 @@
 class CMeshSphere : public CObject
 {
 public:
-	CMeshSphere(int nPriority = PRIORITY_NONE);	//コンストラクタ
+	CMeshSphere(CObject::PRIORITY Priority = CObject::PRIORITY::NONE);	//コンストラクタ
 	~CMeshSphere();								//デストラクタ
 
 	//メンバ関数

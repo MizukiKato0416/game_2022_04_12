@@ -20,7 +20,7 @@
 //================================================
 //デフォルトコンストラクタ
 //================================================
-CRanking::CRanking(int nPriority) :CObject(nPriority)
+CRanking::CRanking(CObject::PRIORITY Priority) :CObject(Priority)
 {
 	for (int nCntRanking = 0; nCntRanking < MAX_SCORE_DATA; nCntRanking++)
 	{

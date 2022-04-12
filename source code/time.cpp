@@ -19,7 +19,7 @@
 //================================================
 //デフォルトコンストラクタ
 //================================================
-CTime::CTime(int nPriority) : CObject(nPriority)
+CTime::CTime(CObject::PRIORITY Priority) : CObject(Priority)
 {
 	m_nTime = 0;
 	m_nCounter = 0;

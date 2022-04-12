@@ -26,7 +26,7 @@ public:
 		MAX
 	};
 
-	CBillboard(int nPriority = PRIORITY_POLYGON_3D);	//コンストラクタ
+	CBillboard(CObject::PRIORITY Priority = CObject::PRIORITY::POLYGON_3D);	//コンストラクタ
 	~CBillboard();										//デストラクタ
 
 	//メンバ関数

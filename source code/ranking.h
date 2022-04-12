@@ -27,7 +27,7 @@
 class CRanking : public CObject
 {
 public:
-	CRanking(int nPriority = PRIORITY_RANKING);		//コンストラクタ
+	CRanking(CObject::PRIORITY Priority = CObject::PRIORITY::RANKING);		//コンストラクタ
 	~CRanking();									//デストラクタ
 
 	//メンバ関数

@@ -24,7 +24,7 @@ class CObject2D;
 class CTitle : public CObject
 {
 public:
-	CTitle(int nPriority = PRIORITY_NONE);		//コンストラクタ
+	CTitle(CObject::PRIORITY Priority = CObject::PRIORITY::NONE);		//コンストラクタ
 	~CTitle();									//デストラクタ
 
 	//メンバ関数

@@ -22,7 +22,7 @@ class CModelSingle : public CObject
 {
 public:
 	//メンバ関数
-	CModelSingle(int nPriority = PRIORITY_MODEL);				//コンストラクタ
+	CModelSingle(CObject::PRIORITY Priority = CObject::PRIORITY::MODEL);				//コンストラクタ
 	~CModelSingle();											//デストラクタ
 
 	HRESULT Init(void);

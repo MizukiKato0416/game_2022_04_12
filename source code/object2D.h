@@ -39,7 +39,7 @@ public:
 		MAX
 	};
 
-	CObject2D(int nPriority = PRIORITY_NONE);	//コンストラクタ
+	CObject2D(CObject::PRIORITY Priority = CObject::PRIORITY::NONE);	//コンストラクタ
 	~CObject2D();								//デストラクタ
 
 	//メンバ関数

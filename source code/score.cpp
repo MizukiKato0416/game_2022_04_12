@@ -18,7 +18,7 @@
 //================================================
 //デフォルトコンストラクタ
 //================================================
-CScore::CScore(int nPriority) :CObject(nPriority)
+CScore::CScore(CObject::PRIORITY Priority) :CObject(Priority)
 {
 	m_nScore = 0;
 	memset(m_apNumber, NULL, sizeof(m_apNumber[MAX_SCORE_POLYGON]));

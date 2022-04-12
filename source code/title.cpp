@@ -28,7 +28,7 @@
 //================================================
 //デフォルトコンストラクタ
 //================================================
-CTitle::CTitle(int nPriority):CObject(nPriority)
+CTitle::CTitle(CObject::PRIORITY Priority):CObject(Priority)
 {
 	m_nTitleCounter = 0;
 }
@@ -53,12 +53,12 @@ HRESULT CTitle::Init(void)
 {
 	//タイトル背景の生成
 	CObject2D *pObject2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f), 
-											 D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), CObject::PRIORITY_UI);
+											 D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 	pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_TITLE"));
 
 	//タイトルロゴの生成
 	CObject2D *pObject2DTitleLogo = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
-													  D3DXVECTOR3(TITLE_LOGO_SIZE_X, TITLE_LOGO_SIZE_Y, 0.0f), CObject::PRIORITY_UI);
+													  D3DXVECTOR3(TITLE_LOGO_SIZE_X, TITLE_LOGO_SIZE_Y, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 	pObject2DTitleLogo->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_TITLE_LOGO"));
 
 	m_nTitleCounter = 0;
@@ -103,7 +103,7 @@ void CTitle::Update(void)
 	if (m_nTitleCounter % 90 == 0 || m_nTitleCounter == 0)
 	{
 		CUi::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, TITLE_PRESS_START_POS_Y, 0.0f),
-			        D3DXVECTOR3(TITLE_PRESS_START_SIZE_X, TITLE_PRESS_START_SIZE_Y, 0.0f), CObject::PRIORITY_UI, CUi::TYPE::PRESS_START);
+			        D3DXVECTOR3(TITLE_PRESS_START_SIZE_X, TITLE_PRESS_START_SIZE_Y, 0.0f), static_cast<int>(CObject::PRIORITY::UI), CUi::TYPE::PRESS_START);
 	}
 
 	//カウンターを増やす

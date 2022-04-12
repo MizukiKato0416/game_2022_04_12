@@ -17,7 +17,7 @@
 class CFloor : public CObject3D
 {
 public:
-	CFloor(int nPriority = PRIORITY_POLYGON_3D);	//コンストラクタ
+	CFloor(CObject::PRIORITY Priority = CObject::PRIORITY::POLYGON_3D);	//コンストラクタ
 	~CFloor();										//デストラクタ
 
 	//メンバ関数

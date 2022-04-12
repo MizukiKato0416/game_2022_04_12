@@ -1,3 +1,75 @@
-﻿  object2D.cpp
-  game_2022_04_12.vcxproj -> C:\Users\student\Documents\Visual Studio 2015\Projects\game_2022_04_12\source code\Debug\game_2022_04_12.exe
-  game_2022_04_12.vcxproj -> C:\Users\student\Documents\Visual Studio 2015\Projects\game_2022_04_12\source code\Debug\game_2022_04_12.pdb (Full PDB)
+﻿  ui.cpp
+c:\users\student\desktop\git\game_2022_04_12\source code\ui.cpp(50): error C2065: 'pos': 定義されていない識別子です。
+  player.cpp
+c:\users\student\desktop\git\game_2022_04_12\source code\player.cpp(558): error C2039: 'GetTopObj': 'CObject' のメンバーではありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(20): note: 'CObject' の宣言を確認してください
+c:\users\student\desktop\git\game_2022_04_12\source code\player.cpp(596): error C2039: 'GetObjNext': 'CObject' のメンバーではありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(20): note: 'CObject' の宣言を確認してください
+  object.cpp
+c:\users\student\desktop\git\game_2022_04_12\source code\object.cpp(15): error C2369: 'm_object': 再定義されています。異なる添字です。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(75): note: 'm_object' の宣言を確認してください
+c:\users\student\desktop\git\game_2022_04_12\source code\object.cpp(22): error C2065: 'm_nPriority': 定義されていない識別子です。
+c:\users\student\desktop\git\game_2022_04_12\source code\object.cpp(22): error C2228: '.push_back' の左側はクラス、構造体、共用体でなければなりません
+c:\users\student\desktop\git\game_2022_04_12\source code\object.cpp(67): error C2039: 'm_bDeth': 'CObject' のメンバーではありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(20): note: 'CObject' の宣言を確認してください
+  model_single.cpp
+c:\users\student\desktop\git\game_2022_04_12\source code\model_single.cpp(148): error C2039: 'GetTopObj': 'CObject' のメンバーではありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(20): note: 'CObject' の宣言を確認してください
+c:\users\student\desktop\git\game_2022_04_12\source code\model_single.cpp(246): error C2039: 'GetObjNext': 'CObject' のメンバーではありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(20): note: 'CObject' の宣言を確認してください
+c:\users\student\desktop\git\game_2022_04_12\source code\model_single.cpp(265): error C2039: 'GetTopObj': 'CObject' のメンバーではありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(20): note: 'CObject' の宣言を確認してください
+c:\users\student\desktop\git\game_2022_04_12\source code\model_single.cpp(492): error C2039: 'GetObjNext': 'CObject' のメンバーではありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(20): note: 'CObject' の宣言を確認してください
+c:\users\student\desktop\git\game_2022_04_12\source code\model_single.cpp(508): error C2039: 'GetTopObj': 'CObject' のメンバーではありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(20): note: 'CObject' の宣言を確認してください
+c:\users\student\desktop\git\game_2022_04_12\source code\model_single.cpp(606): error C2039: 'GetObjNext': 'CObject' のメンバーではありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(20): note: 'CObject' の宣言を確認してください
+  model.cpp
+c:\users\student\desktop\git\game_2022_04_12\source code\model.cpp(361): error C2039: 'GetTopObj': 'CObject' のメンバーではありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(20): note: 'CObject' の宣言を確認してください
+c:\users\student\desktop\git\game_2022_04_12\source code\model.cpp(624): error C2039: 'GetObjNext': 'CObject' のメンバーではありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(20): note: 'CObject' の宣言を確認してください
+  meshfield.cpp
+c:\users\student\desktop\git\game_2022_04_12\source code\meshfield.cpp(315): error C2039: 'GetTopObj': 'CObject' のメンバーではありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(20): note: 'CObject' の宣言を確認してください
+c:\users\student\desktop\git\game_2022_04_12\source code\meshfield.cpp(454): error C2039: 'GetObjNext': 'CObject' のメンバーではありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(20): note: 'CObject' の宣言を確認してください
+  floor.cpp
+c:\users\student\desktop\git\game_2022_04_12\source code\floor.cpp(103): error C2039: 'GetTopObj': 'CObject' のメンバーではありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(20): note: 'CObject' の宣言を確認してください
+c:\users\student\desktop\git\game_2022_04_12\source code\floor.cpp(211): error C2039: 'GetObjNext': 'CObject' のメンバーではありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(20): note: 'CObject' の宣言を確認してください
+  effect3D.cpp
+c:\users\student\desktop\git\game_2022_04_12\source code\effect3d.cpp(98): error C2039: 'GetTopObj': 'CObject' のメンバーではありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(20): note: 'CObject' の宣言を確認してください
+c:\users\student\desktop\git\game_2022_04_12\source code\effect3d.cpp(198): error C2039: 'GetObjNext': 'CObject' のメンバーではありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(20): note: 'CObject' の宣言を確認してください
+  camera.cpp
+c:\users\student\desktop\git\game_2022_04_12\source code\camera.cpp(359): error C2039: 'GetTopObj': 'CObject' のメンバーではありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(20): note: 'CObject' の宣言を確認してください
+c:\users\student\desktop\git\game_2022_04_12\source code\camera.cpp(371): error C2039: 'GetObjNext': 'CObject' のメンバーではありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(20): note: 'CObject' の宣言を確認してください
+  billboard.cpp
+c:\users\student\desktop\git\game_2022_04_12\source code\billboard.cpp(18): error C2511: 'CBillboard::CBillboard(int)': オーバーロードされたメンバー関数が 'CBillboard' にありません。
+  c:\users\student\desktop\git\game_2022_04_12\source code\billboard.h(17): note: 'CBillboard' の宣言を確認してください
+c:\users\student\desktop\git\game_2022_04_12\source code\billboard.cpp(19): error C2550: 'CBillboard::{ctor}': コンストラクターの初期化子リストはコンストラクターの定義だけに許されます。
+c:\users\student\desktop\git\game_2022_04_12\source code\billboard.cpp(20): error C2597: 静的でないメンバー 'CBillboard::m_pTexture' への参照が正しくありません。
+c:\users\student\desktop\git\game_2022_04_12\source code\billboard.cpp(21): error C2597: 静的でないメンバー 'CBillboard::m_pVtxBuff' への参照が正しくありません。
+c:\users\student\desktop\git\game_2022_04_12\source code\billboard.cpp(22): error C2597: 静的でないメンバー 'CBillboard::m_pos' への参照が正しくありません。
+c:\users\student\desktop\git\game_2022_04_12\source code\billboard.cpp(25): error C2597: 静的でないメンバー 'CBillboard::m_vtxPos' への参照が正しくありません。
+c:\users\student\desktop\git\game_2022_04_12\source code\billboard.cpp(25): error C3867: 'CBillboard::m_vtxPos': 非標準の構文です。メンバーにポインタを作成するには '&' を使用してください
+c:\users\student\desktop\git\game_2022_04_12\source code\billboard.cpp(25): error C2109: 配列または、ポインターでない変数に添字が使われました。
+c:\users\student\desktop\git\game_2022_04_12\source code\billboard.cpp(26): error C2597: 静的でないメンバー 'CBillboard::m_vtxRot' への参照が正しくありません。
+c:\users\student\desktop\git\game_2022_04_12\source code\billboard.cpp(26): error C3867: 'CBillboard::m_vtxRot': 非標準の構文です。メンバーにポインタを作成するには '&' を使用してください
+c:\users\student\desktop\git\game_2022_04_12\source code\billboard.cpp(26): error C2109: 配列または、ポインターでない変数に添字が使われました。
+c:\users\student\desktop\git\game_2022_04_12\source code\billboard.cpp(28): error C2597: 静的でないメンバー 'CBillboard::m_size' への参照が正しくありません。
+c:\users\student\desktop\git\game_2022_04_12\source code\billboard.cpp(29): error C2597: 静的でないメンバー 'CBillboard::m_rot' への参照が正しくありません。
+c:\users\student\desktop\git\game_2022_04_12\source code\billboard.cpp(30): error C2597: 静的でないメンバー 'CBillboard::m_mode' への参照が正しくありません。
+c:\users\student\desktop\git\game_2022_04_12\source code\billboard.cpp(31): error C2352: 'CObject::SetObjType': 静的でないメンバー関数の呼び出しが正しくありません
+  c:\users\student\desktop\git\game_2022_04_12\source code\object.h(71): note: 'CObject::SetObjType' の宣言を確認してください
+c:\users\student\desktop\git\game_2022_04_12\source code\billboard.cpp(32): error C2597: 静的でないメンバー 'CBillboard::m_bCulling' への参照が正しくありません。
+c:\users\student\desktop\git\game_2022_04_12\source code\billboard.cpp(33): error C2597: 静的でないメンバー 'CBillboard::m_bAlphaBlend' への参照が正しくありません。
+c:\users\student\desktop\git\game_2022_04_12\source code\billboard.cpp(34): error C2597: 静的でないメンバー 'CBillboard::m_bAlphaTest' への参照が正しくありません。
+c:\users\student\desktop\git\game_2022_04_12\source code\billboard.cpp(35): error C2597: 静的でないメンバー 'CBillboard::m_bLighting' への参照が正しくありません。
+  コードを生成中...

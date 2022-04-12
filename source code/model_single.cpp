@@ -18,7 +18,7 @@
 //================================================
 //デフォルトコンストラクタ
 //================================================
-CModelSingle::CModelSingle(int nPriority):CObject(nPriority)
+CModelSingle::CModelSingle(CObject::PRIORITY Priority):CObject(Priority)
 {
 	m_size = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
@@ -145,7 +145,7 @@ bool CModelSingle::SimpleCollision(CObject *pObject)
 	CObject *pSaveObject = nullptr;
 
 	//先頭のポインタを代入
-	pThisObject = pThisObject->GetTopObj(CObject::PRIORITY_MODEL);
+	pThisObject = pThisObject->GetTopObj(CObject::PRIORITY::MODEL);
 
 	while (pThisObject != nullptr)
 	{
@@ -262,7 +262,7 @@ bool CModelSingle::Collision(CObject *pObject)
 	CObject *pSaveObject = nullptr;
 
 	//先頭のポインタを代入
-	pThisObject = pThisObject->GetTopObj(CObject::PRIORITY_MODEL);
+	pThisObject = pThisObject->GetTopObj(CObject::PRIORITY::MODEL);
 
 	while (pThisObject != nullptr)
 	{
@@ -505,7 +505,7 @@ bool CModelSingle::CollisionAny(CObject * pObject)
 	CObject *pSaveObject = nullptr;
 
 	//先頭のポインタを代入
-	pThisObject = pThisObject->GetTopObj(CObject::PRIORITY_MODEL);
+	pThisObject = pThisObject->GetTopObj(CObject::PRIORITY::MODEL);
 
 	while (pThisObject != nullptr)
 	{

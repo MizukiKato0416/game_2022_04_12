@@ -31,7 +31,7 @@ typedef struct
 class CObject3D : public CObject
 {
 public:
-	CObject3D(int nPriority = PRIORITY_POLYGON_3D);	//コンストラクタ
+	CObject3D(CObject::PRIORITY Priority = CObject::PRIORITY::POLYGON_3D);	//コンストラクタ
 	~CObject3D();									//デストラクタ
 
 												//メンバ関数

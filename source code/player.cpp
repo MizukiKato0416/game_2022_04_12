@@ -38,7 +38,7 @@
 //================================================
 //デフォルトコンストラクタ
 //================================================
-CPlayer::CPlayer(int nPriority):CObject(nPriority)
+CPlayer::CPlayer(CObject::PRIORITY Priority):CObject(Priority)
 {
 	m_size = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
@@ -555,7 +555,7 @@ void CPlayer::Collision(CObject *pSubjectObject, float fObjRadius)
 	CObject *pSaveObject = nullptr;
 
 	//先頭のポインタを代入
-	pObject = pObject->GetTopObj(CObject::PRIORITY_PLAYER);
+	pObject = pObject->GetTopObj(CObject::PRIORITY::PLAYER);
 
 	while (pObject != nullptr)
 	{

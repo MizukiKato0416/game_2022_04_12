@@ -15,7 +15,7 @@
 //================================================
 //デフォルトコンストラクタ
 //================================================
-CBillboard::CBillboard(int nPriority) :CObject(nPriority)
+CBillboard::CBillboard(int nPriority) : CObject(static_cast<CObject::PRIORITY>(nPriority))
 {
 	m_pTexture = nullptr;
 	m_pVtxBuff = nullptr;
@@ -28,7 +28,7 @@ CBillboard::CBillboard(int nPriority) :CObject(nPriority)
 	m_size = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_mode = BILLBOARD_MODE::NONE;
-	SetObjType(OBJTYPE::POLYGON_3D);
+	SetObjType(CObject::OBJTYPE::POLYGON_3D);
 	m_bCulling = false;
 	m_bAlphaBlend = false;
 	m_bAlphaTest = false;

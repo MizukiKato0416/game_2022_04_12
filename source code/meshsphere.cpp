@@ -14,7 +14,7 @@
 //================================================
 //デフォルトコンストラクタ
 //================================================
-CMeshSphere::CMeshSphere(int nPriority):CObject(nPriority)
+CMeshSphere::CMeshSphere(CObject::PRIORITY Priority):CObject(Priority)
 {
 	m_pTexture = nullptr;
 	m_pVtxBuff = nullptr;

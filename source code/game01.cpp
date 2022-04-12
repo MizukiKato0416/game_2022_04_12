@@ -29,7 +29,7 @@
 //================================================
 //デフォルトコンストラクタ
 //================================================
-CGame01::CGame01(int nPriority):CObject(nPriority)
+CGame01::CGame01(CObject::PRIORITY Priority):CObject(Priority)
 {
 	
 }

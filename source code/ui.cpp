@@ -22,7 +22,7 @@
 //================================================
 //デフォルトコンストラクタ
 //================================================
-CUi::CUi(int nPriority) :CObject2D(nPriority)
+CUi::CUi(CObject::PRIORITY Priority) :CObject2D(Priority)
 {
 	m_pControl = nullptr;
 }
@@ -42,7 +42,7 @@ CUi::~CUi()
 //================================================
 //初期化処理
 //================================================
-HRESULT CUi::Init(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+HRESULT CUi::Init(void)
 {
 	CObject2D::Init();
 
@@ -91,11 +91,11 @@ CUi* CUi::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, int nPriolity, TYPE type)
 	CUi *pUi = nullptr;
 	if (pUi == nullptr)
 	{
-		pUi = new CUi(nPriolity);
+		pUi = new CUi(static_cast<CObject::PRIORITY>(nPriolity));
 		if (pUi != nullptr)
 		{
 			pUi->m_type = type;
-			pUi->Init(pos, size);
+			pUi->Init();
 			// 指定したUIの種類でテクスチャを変える
 			switch (type)
 			{

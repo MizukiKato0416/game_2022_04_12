@@ -22,7 +22,7 @@ class CManager;
 class CPause : public CObject
 {
 public:
-	CPause(int nPriority = PRIORITY_PAUSE);			//コンストラクタ
+	CPause(CObject::PRIORITY Priority = CObject::PRIORITY::PAUSE);			//コンストラクタ
 	~CPause();										//デストラクタ
 
 	//メンバ関数

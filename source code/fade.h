@@ -29,7 +29,7 @@ public:
 		FADE_MAX
 	} FADE;
 
-	CFade(int nPriority = PRIORITY_FADE);		//コンストラクタ
+	CFade(CObject::PRIORITY Priority = CObject::PRIORITY::FADE);		//コンストラクタ
 	~CFade();									//デストラクタ
 
 	//メンバ関数

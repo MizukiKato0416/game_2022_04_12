@@ -33,7 +33,7 @@ public:
 		MAX
 	};
 
-	CEffect3D(int nPriority = PRIORITY_EFFECT3D);		//コンストラクタ
+	CEffect3D(CObject::PRIORITY Priority = CObject::PRIORITY::EFFECT3D);		//コンストラクタ
 	~CEffect3D();										//デストラクタ
 
 	//メンバ関数
