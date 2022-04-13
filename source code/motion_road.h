@@ -77,15 +77,15 @@ public:
 	void Uninit(void);
 	static CMotionRoad *Create(void);								//生成処理
 	//モーション情報取得処理
-	MOTION_INFO GetMotionInfo(MOTION_HAVE_TYPE motionHaveType, int nMotionType);
+	MOTION_INFO GetMotionInfo(const MOTION_HAVE_TYPE &motionHaveType, const int &nMotionType);
 	//モーション情報->キー情報->再生フレーム取得処理
-	int GetMotionKeyInfoFrame(MOTION_HAVE_TYPE motionHaveType, int nMotionType, int nCntKey);
+	int GetMotionKeyInfoFrame(const MOTION_HAVE_TYPE &motionHaveType, const int &nMotionType, const int &nCntKey);
 	//モーション情報->キー情報->位置取得処理
-	D3DXVECTOR3 GetMotionKeyInfoPos(MOTION_HAVE_TYPE motionHaveType, int nMotionType, int nCntKey, int nCntModel);
+	D3DXVECTOR3 GetMotionKeyInfoPos(const MOTION_HAVE_TYPE &motionHaveType, const int &nMotionType, const int &nCntKey, const int &nCntModel);
 	//モーション情報->キー情報->回転取得処理
-	D3DXVECTOR3 GetMotionKeyInfoRot(MOTION_HAVE_TYPE motionHaveType, int nMotionType, int nCntKey, int nCntModel);
+	D3DXVECTOR3 GetMotionKeyInfoRot(const MOTION_HAVE_TYPE &motionHaveType, const int &nMotionType, const int &nCntKey, const int &nCntModel);
 	//モーション情報->キー情報->位置と回転設定処理
-	void SetMotionKeyInfoPosRot(MOTION_HAVE_TYPE motionHaveType, int nMotionType, int nCntKey, int nCntModel, D3DXVECTOR3 pos, D3DXVECTOR3 rot);
+	void SetMotionKeyInfoPosRot(const MOTION_HAVE_TYPE &motionHaveType, const int &nMotionType, const int &nCntKey, const int &nCntModel, const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot);
 
 private:
 	std::vector<MOTION_INFO> m_aInfo[MOTION_HAVE_TYPE_MAX];			//モーション情報

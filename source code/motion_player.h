@@ -29,18 +29,18 @@ public:
 	~CMotionPlayer();			//デストラクタ
 
 	//メンバ関数
-	HRESULT Init(CPlayer *pPlayer);
+	HRESULT Init(CPlayer *&pPlayer);
 	void Uninit(void);
-	void Update(CPlayer *pPlayer);
+	void Update(CPlayer *&pPlayer);
 
-	static CMotionPlayer *Create(CPlayer *pPlayer);									//生成処理
-	void SetMotion(CMotionRoad::MOTION_PLAYER_TYPE type, CPlayer *pPlayer);			//モーション設定処理
-	void SetMotion(int nType, CPlayer *pPlayer);									//モーション設定処理
+	static CMotionPlayer *Create(CPlayer *&pPlayer);									//生成処理
+	void SetMotion(const CMotionRoad::MOTION_PLAYER_TYPE &type, CPlayer *&pPlayer);			//モーション設定処理
+	void SetMotion(const int &nType, CPlayer *&pPlayer);									//モーション設定処理
 	CMotionRoad::MOTION_PLAYER_TYPE GetMotion(void);								//モーション取得処理
 	bool GetConnect(void);															//モーションをつなげている最中かどうか取得処理
 	int GetKey(void) { return m_nKey; }												//キー取得処理
 	int GetFrame(void) { return (int)m_fCounter; }									//モーションカウンター取得処理
-	void SetFrameMax(int nFrame) { m_fConnectMaxFrame = (float)nFrame; }			//モーションカウンター最大値設定処理
+	void SetFrameMax(const int &nFrame) { m_fConnectMaxFrame = (float)nFrame; }			//モーションカウンター最大値設定処理
 	//キー最大数取得処理
 	int GetKeyMax(void) { return CManager::GetInstance()->GetMotionRoad()->GetMotionInfo(CMotionRoad::MOTION_HAVE_TYPE_PLAYER, m_type).nNumKey; }
 	//モーションカウンター最大数取得処理

@@ -40,8 +40,8 @@ public:
 	void SetNumber(int nNumber);
 	void SetCol(D3DCOLORVALUE col);
 
-	static CNumber *Create(D3DXVECTOR3 pos, D3DXVECTOR3 size);
-	void BindTexture(LPDIRECT3DTEXTURE9 pTexture);				//テクスチャ割り当て
+	static CNumber *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size);
+	void BindTexture(const LPDIRECT3DTEXTURE9 &pTexture);				//テクスチャ割り当て
 
 private:
 	LPDIRECT3DTEXTURE9 m_pTexture;			//テクスチャへのポインタ

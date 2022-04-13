@@ -38,7 +38,7 @@ public:
 	int GetScore(void);
 	CNumber *GetNumber(int nNumber);
 
-	static CScore *Create(D3DXVECTOR3 pos, D3DXVECTOR3 size);
+	static CScore *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size);
 
 private:
 	CNumber *m_apNumber[MAX_SCORE_POLYGON];			//numberのインスタンス

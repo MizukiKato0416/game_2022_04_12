@@ -244,7 +244,7 @@ bool CPause::GetPause(void)
 //================================================
 //ƒ|[ƒYİ’èˆ—
 //================================================
-bool CPause::SetPause(bool bPause)
+bool CPause::SetPause(const bool &bPause)
 {
 	m_bPause = bPause;
 	return m_bPause;

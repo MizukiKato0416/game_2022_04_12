@@ -85,7 +85,7 @@ void CUi::Draw(void)
 //================================================
 //生成処理
 //================================================
-CUi* CUi::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, int nPriolity, TYPE type)
+CUi* CUi::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const int &nPriolity, const TYPE &type)
 {
 	//インスタンスの生成
 	CUi *pUi = nullptr;

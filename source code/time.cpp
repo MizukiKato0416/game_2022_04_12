@@ -105,7 +105,7 @@ void CTime::Draw(void)
 //================================================
 //生成処理
 //================================================
-CTime* CTime::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, int nStartTime)
+CTime* CTime::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const int &nStartTime)
 {
 	//インスタンスの生成
 	CTime *pTime = NULL;

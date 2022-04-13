@@ -31,7 +31,7 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	static CPlayer *Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot);
+	static CPlayer *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot);
 
 	void SetModelPos(const int &nCntModel, const D3DXVECTOR3 &pos);								//モデルの位置設定処理
 	D3DXVECTOR3 GetModelPos(const int &nCntModel);											//モデルの位置取得処理

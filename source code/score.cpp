@@ -99,7 +99,7 @@ void CScore::Draw(void)
 //================================================
 //生成処理
 //================================================
-CScore* CScore::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+CScore* CScore::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size)
 {
 	//インスタンスの生成
 	CScore *pScore = NULL;

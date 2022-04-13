@@ -36,7 +36,7 @@ public:
 	void Update(void);
 	void Draw(void);
 
-	static CRanking *Create(D3DXVECTOR3 pos, D3DXVECTOR3 size);
+	static CRanking *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size);
 
 private:
 	CScore *m_apScore[MAX_RANKING];			//スコアのポインタ
