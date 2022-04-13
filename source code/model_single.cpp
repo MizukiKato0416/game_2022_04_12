@@ -112,7 +112,7 @@ void CModelSingle::Draw(void)
 //================================================
 //生成処理
 //================================================
-CModelSingle *CModelSingle::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, CXload::X_TYPE type, CModel *pParent, bool Collision)
+CModelSingle *CModelSingle::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const CXload::X_TYPE &type, CModel *&pParent, const bool &Collision)
 {
 	//インスタンスの生成
 	CModelSingle *pModelSingle = nullptr;
@@ -135,7 +135,7 @@ CModelSingle *CModelSingle::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, CXload::X_T
 //================================================
 //当たり判定処理
 //================================================
-bool CModelSingle::SimpleCollision(CObject *pObject)
+bool CModelSingle::SimpleCollision(CObject *&pObject)
 {
 	bool bLand = false;	//着地しているかどうか
 
@@ -487,7 +487,7 @@ bool CModelSingle::Collision(CObject *pObject)
 //================================================
 //ただの衝突判定
 //================================================
-bool CModelSingle::CollisionAny(CObject * pObject)
+bool CModelSingle::CollisionAny(CObject *&pObject)
 {
 	//オブジェクト情報を入れるポインタ
 	vector<CObject*> object;

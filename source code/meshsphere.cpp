@@ -223,7 +223,7 @@ void CMeshSphere::Draw(void)
 //================================================
 //生成処理
 //================================================
-CMeshSphere* CMeshSphere::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXVECTOR3 rot, int nLine, int nVertical)
+CMeshSphere* CMeshSphere::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const D3DXVECTOR3 &rot, const int &nLine, const int &nVertical)
 {
 	//インスタンスの生成
 	CMeshSphere *pMeshSphere = nullptr;
@@ -248,7 +248,7 @@ CMeshSphere* CMeshSphere::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXVECTOR3 
 //================================================
 //テクスチャ割り当て処理
 //================================================
-void CMeshSphere::BindTexture(LPDIRECT3DTEXTURE9 pTexture)
+void CMeshSphere::BindTexture(const LPDIRECT3DTEXTURE9 &pTexture)
 {
 	m_pTexture = pTexture;
 }

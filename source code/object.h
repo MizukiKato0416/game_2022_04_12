@@ -65,7 +65,7 @@ public:
 	bool GetDeath(void) { return m_deth; }				// ゲッダー
 	D3DXVECTOR3 GetPosOld(void) { return m_pos_old; }	// ゲッダー
 	OBJTYPE GetObjType(void) { return m_obj_type; }		// ゲッダー
-	static vector<CObject*> GetObject(int &priority) { return m_object[priority]; }	// ゲッダー
+	static vector<CObject*> GetObject(const int &priority) { return m_object[priority]; }	// ゲッダー
 	void SetPos(const D3DXVECTOR3 &pos) { m_pos = pos; }				// セッター
 	void SetSize(const D3DXVECTOR3 &size) { m_size = size; }			// セッター
 	void SetObjType(const OBJTYPE &obj_type) { m_obj_type = obj_type; }	// セッター

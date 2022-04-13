@@ -29,18 +29,18 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	static CModel *Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, CXload::X_TYPE type);
-	void SetParent(CModel *pModel);							//親設定処理
-	D3DXMATRIX GetMtx(void);								//ワールドマトリックス取得処理
-	D3DXMATRIX *GetMtxPoint(void) { return &m_mtxWorld; }	//ワールドマトリックス取得処理
-	D3DXVECTOR3 GetSize(void);								//サイズ取得処理
-	void SetPos(D3DXVECTOR3 pos);							//モデルの位置設定処理
-	D3DXVECTOR3 GetPos(void);								//モデルの位置取得処理
-	D3DXVECTOR3 GetVtxPos(int nCntVtx);						//モデルの頂点位置取得処理
-	void SetRot(D3DXVECTOR3 rot);							//モデルの向き設定処理
-	D3DXVECTOR3 GetRot(void);								//モデルの向き取得処理
-	D3DXMATRIX *GetVtxMtxWorld(void);						//ワールドマトリックス取得処理
-	void SetVtxMtxWorld(D3DXVECTOR3 vtxPos, int nCntVtx);	//ワールドマトリックス設定処理
+	static CModel *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const CXload::X_TYPE &type);
+	void SetParent(CModel *pModel);										//親設定処理
+	D3DXMATRIX GetMtx(void);											//ワールドマトリックス取得処理
+	D3DXMATRIX *GetMtxPoint(void) { return &m_mtxWorld; }				//ワールドマトリックス取得処理
+	D3DXVECTOR3 GetSize(void);											//サイズ取得処理
+	void SetPos(const D3DXVECTOR3 &pos);								//モデルの位置設定処理
+	D3DXVECTOR3 GetPos(void);											//モデルの位置取得処理
+	D3DXVECTOR3 GetVtxPos(const int &nCntVtx);							//モデルの頂点位置取得処理
+	void SetRot(const D3DXVECTOR3 &rot);								//モデルの向き設定処理
+	D3DXVECTOR3 GetRot(void);											//モデルの向き取得処理
+	D3DXMATRIX *GetVtxMtxWorld(void);									//ワールドマトリックス取得処理
+	void SetVtxMtxWorld(const D3DXVECTOR3 &vtxPos, const int &nCntVtx);	//ワールドマトリックス設定処理
 
 private:
 	//メンバ関数

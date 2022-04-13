@@ -142,7 +142,7 @@ void CMotionPlayer::Uninit(void)
 //================================================
 //更新処理
 //================================================
-void CMotionPlayer::Update(CPlayer *&pPlayer)
+void CMotionPlayer::Update(CPlayer *pPlayer)
 {
 	D3DXVECTOR3 posAsk[MAX_PLAYER_MODEL];		//求めたい値
 	D3DXVECTOR3 rotAsk[MAX_PLAYER_MODEL];		//求めたい値
@@ -341,7 +341,7 @@ void CMotionPlayer::Update(CPlayer *&pPlayer)
 //================================================
 //生成処理
 //================================================
-CMotionPlayer *CMotionPlayer::Create(CPlayer *&pPlayer)
+CMotionPlayer *CMotionPlayer::Create(CPlayer *pPlayer)
 {
 	//インスタンスの生成
 	CMotionPlayer *pMotionPlayer = nullptr;
@@ -382,7 +382,7 @@ void CMotionPlayer::SetMotion(const CMotionRoad::MOTION_PLAYER_TYPE &type, CPlay
 //================================================
 //モーション設定処理
 //================================================
-void CMotionPlayer::SetMotion(const int &nType, CPlayer *&pPlayer)
+void CMotionPlayer::SetMotion(const int &nType, CPlayer *pPlayer)
 {
 	for (int nCntModel = 0; nCntModel < MAX_PLAYER_MODEL; nCntModel++)
 	{

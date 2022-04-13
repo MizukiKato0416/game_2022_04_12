@@ -147,7 +147,7 @@ void CShadow::Draw(void)
 //================================================
 //生成処理
 //================================================
-CShadow* CShadow::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const CObject *pObject)
+CShadow* CShadow::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, CObject *pObject)
 {
 	//インスタンスの生成
 	CShadow *pShadow = nullptr;

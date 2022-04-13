@@ -31,11 +31,11 @@ public:
 	//メンバ関数
 	HRESULT Init(CPlayer *&pPlayer);
 	void Uninit(void);
-	void Update(CPlayer *&pPlayer);
+	void Update(CPlayer *pPlayer);
 
-	static CMotionPlayer *Create(CPlayer *&pPlayer);									//生成処理
+	static CMotionPlayer *Create(CPlayer *pPlayer);									//生成処理
 	void SetMotion(const CMotionRoad::MOTION_PLAYER_TYPE &type, CPlayer *&pPlayer);			//モーション設定処理
-	void SetMotion(const int &nType, CPlayer *&pPlayer);									//モーション設定処理
+	void SetMotion(const int &nType, CPlayer *pPlayer);									//モーション設定処理
 	CMotionRoad::MOTION_PLAYER_TYPE GetMotion(void);								//モーション取得処理
 	bool GetConnect(void);															//モーションをつなげている最中かどうか取得処理
 	int GetKey(void) { return m_nKey; }												//キー取得処理
