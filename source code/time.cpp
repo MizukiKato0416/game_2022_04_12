@@ -135,7 +135,7 @@ int CTime::GetTime(void)
 //================================================
 //ƒXƒRƒAİ’èˆ—
 //================================================
-void CTime::SetTime(int nTime)
+void CTime::SetTime(const int &nTime)
 {
 	m_nTime = nTime;
 

@@ -40,7 +40,7 @@ public:
 	void Update(void);
 	void Draw(void);
 	void AddTime(int nValue);
-	void SetTime(int nTime);
+	void SetTime(const int &nTime);
 	int GetTime(void);
 	CNumber *GetNumber(int nNumber);
 
