@@ -28,9 +28,9 @@ CInputPadD::~CInputPadD()
 //=============================================================================
 // èâä˙âª
 //=============================================================================
-HRESULT CInputPadD::Init(HINSTANCE hInstance, HWND hWnd)
+HRESULT CInputPadD::Init(const HINSTANCE &hInstance, const HWND &hWnd)
 {
-	CInput::Init(hInstance, hWnd);
+	CInput::Init(hInstance);
 
 	m_pInput->EnumDevices(	DI8DEVCLASS_GAMECTRL, 
 							EnumJoysticksCallback,
@@ -102,17 +102,17 @@ void CInputPadD::Update(void)
 //=============================================================================
 // É{É^ÉìèÓïÒÇÃéÊìæ
 //=============================================================================
-bool CInputPadD::GetPress(int Botton_Type)
+bool CInputPadD::GetPress(const int &Botton_Type)
 {
 	return (m_aState.rgbButtons[Botton_Type] & 0x80) ? true : false;
 }
 
-bool CInputPadD::GetTrigger(int Botton_Type)
+bool CInputPadD::GetTrigger(const int &Botton_Type)
 {
 	return (m_aStateTrigger.rgbButtons[Botton_Type] & 0x80) ? true : false;
 }
 
-bool CInputPadD::GetRelease(int Botton_Type)
+bool CInputPadD::GetRelease(const int &Botton_Type)
 {
 	return (m_aStateRelease.rgbButtons[Botton_Type] & 0x80) ? true : false;
 }

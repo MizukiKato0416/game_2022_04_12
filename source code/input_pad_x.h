@@ -40,18 +40,18 @@ public:
 	~CInputPadX();			//デストラクタ
 
 	//メンバ関数
-	HRESULT Init(HINSTANCE hInstance, HWND hWnd);
+	HRESULT Init(const HINSTANCE &hInstance, const HWND &hWnd);
 	void Uninit(void);
 	void Update(void);
-	bool GetButtonPress(int nButton, int nCntPad);
-	bool GetButtonTrigger(int nButton, int nCntPad);
-	bool GetTriggerPress(int nTrigger, int nCntPad);
-	bool GetTriggerTrigger(int nTrigger, int nCntPad);
-	bool GetLeftStick(int nLstick, int nCntPad);
-	bool GetLeftStickTrigger(int nLstick, int nCntPad);
-	bool GetLeftStickRelease(int nLstick, int nCntPad);
-	bool GetRightStick(int nRstick, int nCntPad);
-	void SetVibration(int nLeftSpeed, int nRightSpeed, int nCntEnd, int nCntPad);
+	bool GetButtonPress(const int &nButton, const int &nCntPad);
+	bool GetButtonTrigger(const int &nButton, const int &nCntPad);
+	bool GetTriggerPress(const int &nTrigger, const int &nCntPad);
+	bool GetTriggerTrigger(const int &nTrigger, const int &nCntPad);
+	bool GetLeftStick(const int &nLstick, const int &nCntPad);
+	bool GetLeftStickTrigger(const int &nLstick, const int &nCntPad);
+	bool GetLeftStickRelease(const int &nLstick, const int &nCntPad);
+	bool GetRightStick(const int &nRstick, const int &nCntPad);
+	void SetVibration(const int &nLeftSpeed, const int &nRightSpeed, const int &nCntEnd, const int &nCntPad);
 
 private:
 	XINPUT_STATE m_astate[XUSER_MAX_COUNT];

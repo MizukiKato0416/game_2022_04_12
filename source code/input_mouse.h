@@ -35,12 +35,12 @@ public:
 	~CInputMouse();			//デストラクタ
 
 	//メンバ関数
-	HRESULT Init(HINSTANCE hInstance, HWND hWnd);
+	HRESULT Init(const HINSTANCE &hInstance, const HWND &hWnd);
 	void Uninit(void);
 	void Update(void);
-	bool GetPress(int nMouse);
-	bool GetTrigger(int nMouse);
-	bool GetRelease(int nMouse);
+	bool GetPress(const int &nMouse);
+	bool GetTrigger(const int &nMouse);
+	bool GetRelease(const int &nMouse);
 	DIMOUSESTATE2 GetMouseState(void);	//マウスの入力情報取得処理
 
 	D3DXVECTOR2 GetMouseVelocity(void);	//マウスの移動量取得処理

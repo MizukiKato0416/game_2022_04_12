@@ -27,12 +27,12 @@ public:
 	~CInputKeyboard();			//デストラクタ
 
 	//メンバ関数
-	HRESULT Init(HINSTANCE hInstance, HWND hWnd);
+	HRESULT Init(const HINSTANCE &hInstance, const HWND &hWnd);
 	void Uninit(void);
 	void Update(void);
-	bool GetPress(int nKey);
-	bool GetTrigger(int nKey);
-	bool GetRelease(int nKey);
+	bool GetPress(const int &nKey);
+	bool GetTrigger(const int &nKey);
+	bool GetRelease(const int &nKey);
 
 private:
 	BYTE m_aKeyState[NUM_KEY_MAX];

@@ -46,13 +46,13 @@ public:
 	CInputPadD();		//デフォルトコンストラクタ
 	~CInputPadD();		//デストラクタ
 
-	HRESULT Init(HINSTANCE hInstance, HWND hWnd);		//初期化
+	HRESULT Init(const HINSTANCE &hInstance, const HWND &hWnd);		//初期化
 	void Uninit(void);									//終了
 	void Update(void);									//更新
 
-	bool GetPress(int Botton_Type);						//押す
-	bool GetTrigger(int Botton_Type);					//一回押す
-	bool GetRelease(int Botton_Type);					//離した
+	bool GetPress(const int &Botton_Type);						//押す
+	bool GetTrigger(const int &Botton_Type);					//一回押す
+	bool GetRelease(const int &Botton_Type);					//離した
 	DIJOYSTATE2 GetGamepad(void);						//ゲームパッド情報取得
 	DIJOYSTATE2 GetGamepadOld(void);					//1フレーム前のゲームパッド情報取得
 	static BOOL CALLBACK EnumJoysticksCallback(const LPCDIDEVICEINSTANCE lpddi, LPVOID pvRef);

@@ -25,7 +25,7 @@ public:
 	CInput();					//コンストラクタ
 	virtual ~CInput();			//デストラクタ
 
-	virtual HRESULT Init(HINSTANCE hInstance, HWND hWnd);
+	virtual HRESULT Init(const HINSTANCE &hInstance/*, const HWND &hWnd*/);
 	virtual void Uninit(void);
 	virtual void Update(void) = 0;
 

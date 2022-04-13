@@ -24,10 +24,10 @@ public:
 	CControlUiSubtractAlpha();			//コンストラクタ	
 	~CControlUiSubtractAlpha();			//デストラクタ	
 
-	HRESULT Init(CObject *pObject);
+	HRESULT Init(const CObject *pObject);
 	void Uninit(void);					
-	void Update(CObject *pObject);		
-	static CControlUiSubtractAlpha *Create(CObject *pObject, float fSubtractAlpha, int nDelay);
+	void Update(const CObject *pObject);
+	static CControlUiSubtractAlpha *Create(const CObject *pObject, const float &fSubtractAlpha, const int &nDelay);
 
 private:
 	float m_fSubtractAlpha;		//α値減算値

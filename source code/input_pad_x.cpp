@@ -35,9 +35,9 @@ CInputPadX::CInputPadX()
 //================================================
 //初期化処理
 //================================================
-HRESULT  CInputPadX::Init(HINSTANCE hInstance, HWND hWnd)
+HRESULT  CInputPadX::Init(const HINSTANCE &hInstance, const HWND &hWnd)
 {
-	CInput::Init(hInstance, hWnd);
+	CInput::Init(hInstance);
 
 	return S_OK;
 }
@@ -125,19 +125,19 @@ void CInputPadX::Update(void)
 //=======================================================================
 //パッドの入力情報取得
 //=======================================================================
-bool CInputPadX::GetButtonPress(int nButton, int nCntPad)
+bool CInputPadX::GetButtonPress(const int &nButton, const int &nCntPad)
 {
 //	return m_astate[nCntPad].Gamepad.wButtons & nButton ? true : false;
 	return (m_astate[nCntPad].Gamepad.wButtons & nButton) != 0;
 }
 
-bool CInputPadX::GetButtonTrigger(int nButton, int nCntPad)
+bool CInputPadX::GetButtonTrigger(const int &nButton, const int &nCntPad)
 {
 //	return (((m_astateLast[nCntPad].Gamepad.wButtons & nButton) == false) && (m_astate[nCntPad].Gamepad.wButtons & nButton)) ? true : false;
 	return ((m_astateLast[nCntPad].Gamepad.wButtons & nButton) == 0) && ((m_astate[nCntPad].Gamepad.wButtons & nButton) != 0);
 }
 
-bool CInputPadX::GetTriggerPress(int nTrigger, int nCntPad)
+bool CInputPadX::GetTriggerPress(const int &nTrigger, const int &nCntPad)
 {
 	if (m_aConnect[nCntPad] == false)
 	{
@@ -155,7 +155,7 @@ bool CInputPadX::GetTriggerPress(int nTrigger, int nCntPad)
 	}
 }
 
-bool CInputPadX::GetTriggerTrigger(int nTrigger, int nCntPad)
+bool CInputPadX::GetTriggerTrigger(const int &nTrigger, const int &nCntPad)
 {
 	if (m_aConnect[nCntPad] == false)
 	{
@@ -173,7 +173,7 @@ bool CInputPadX::GetTriggerTrigger(int nTrigger, int nCntPad)
 	}
 }
 
-bool CInputPadX::GetLeftStick(int nLstick, int nCntPad)
+bool CInputPadX::GetLeftStick(const int &nLstick, const int &nCntPad)
 {
 	if (m_aConnect[nCntPad] == false)
 	{
@@ -200,7 +200,7 @@ bool CInputPadX::GetLeftStick(int nLstick, int nCntPad)
 	}
 }
 
-bool CInputPadX::GetLeftStickTrigger(int nLstick, int nCntPad)//不完全
+bool CInputPadX::GetLeftStickTrigger(const int &nLstick, const int &nCntPad)//不完全
 {
 	if (m_aConnect[nCntPad] == false)
 	{
@@ -227,7 +227,7 @@ bool CInputPadX::GetLeftStickTrigger(int nLstick, int nCntPad)//不完全
 	}
 }
 
-bool CInputPadX::GetRightStick(int nRstick, int nCntPad)
+bool CInputPadX::GetRightStick(const int &nRstick, const int &nCntPad)
 {
 	if (m_aConnect[nCntPad] == false)
 	{
@@ -254,7 +254,7 @@ bool CInputPadX::GetRightStick(int nRstick, int nCntPad)
 	}
 }
 
-bool CInputPadX::GetLeftStickRelease(int nLstick, int nCntPad)
+bool CInputPadX::GetLeftStickRelease(const int &nLstick, const int &nCntPad)
 {
 	if (m_aConnect[nCntPad] == false)
 	{
@@ -284,7 +284,7 @@ bool CInputPadX::GetLeftStickRelease(int nLstick, int nCntPad)
 //=======================================================================
 //バイブレーション設定
 //=======================================================================
-void CInputPadX::SetVibration(int nLeftSpeed, int nRightSpeed, int nCntEnd, int nCntPad)
+void CInputPadX::SetVibration(const int &nLeftSpeed, const int &nRightSpeed, const int &nCntEnd, const int &nCntPad)
 {
 	m_avibration[nCntPad].wLeftMotorSpeed = static_cast<WORD>(nLeftSpeed);
 	m_avibration[nCntPad].wRightMotorSpeed = static_cast<WORD>(nRightSpeed);

@@ -38,8 +38,8 @@ public:
 	void Update(void);
 	void Draw(void);
 	FADE GetFade(void);
-	void SetFade(CManager::MODE modeNext);
-	static CFade *Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, CManager::MODE modeNext);
+	void SetFade(const CManager::MODE &modeNext);
+	static CFade *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const CManager::MODE &modeNext);
 
 private:
 	FADE m_fade;							//フェードの状態

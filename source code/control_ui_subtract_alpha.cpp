@@ -30,7 +30,7 @@ CControlUiSubtractAlpha::~CControlUiSubtractAlpha()
 //=============================================================================
 // 初期化処理
 //=============================================================================
-HRESULT CControlUiSubtractAlpha::Init(CObject *pObject)
+HRESULT CControlUiSubtractAlpha::Init(const CObject *pObject)
 {
 	m_nDelayCounter = 0;
 
@@ -48,7 +48,7 @@ void CControlUiSubtractAlpha::Uninit(void)
 //=============================================================================
 // 更新処理
 //=============================================================================
-void CControlUiSubtractAlpha::Update(CObject *pObject)
+void CControlUiSubtractAlpha::Update(const CObject *pObject)
 {
 	//カウンターを加算
 	m_nDelayCounter++;
@@ -78,7 +78,7 @@ void CControlUiSubtractAlpha::Update(CObject *pObject)
 //=============================================================================
 // 生成処理
 //=============================================================================
-CControlUiSubtractAlpha *CControlUiSubtractAlpha::Create(CObject *pObject, float fSubtractAlpha, int nDelay)
+CControlUiSubtractAlpha *CControlUiSubtractAlpha::Create(const CObject *pObject, const float &fSubtractAlpha, const int &nDelay)
 {
 	//インスタンスの生成
 	CControlUiSubtractAlpha *pControlUiSubtractAlpha = NULL;

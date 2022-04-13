@@ -318,7 +318,7 @@ void CBillboard::Draw(void)
 //================================================
 //生成処理
 //================================================
-CBillboard* CBillboard::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+CBillboard* CBillboard::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size)
 {
 	//インスタンスの生成
 	CBillboard *pBillboard = nullptr;
@@ -346,7 +346,7 @@ D3DXVECTOR3 CBillboard::GetPos(void)
 //================================================
 //位置設定処理
 //================================================
-void CBillboard::SetPos(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+void CBillboard::SetPos(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size)
 {
 	m_pos = pos;
 	m_size = size;
@@ -372,7 +372,7 @@ void CBillboard::SetPos(D3DXVECTOR3 pos, D3DXVECTOR3 size)
 //================================================
 //テクスチャ設定処理
 //================================================
-void CBillboard::SetTex(int nPattern, int nMaxPattern)
+void CBillboard::SetTex(const int &nPattern, const int &nMaxPattern)
 {
 	VERTEX_3D *pVtx;	// 頂点情報
 	//頂点バッファをロックし、頂点データへのポインタを取得
@@ -390,7 +390,7 @@ void CBillboard::SetTex(int nPattern, int nMaxPattern)
 //================================================
 //テクスチャ設定処理
 //================================================
-void CBillboard::SetTex(float fMoveTexU, float fMoveTexV)
+void CBillboard::SetTex(const float &fMoveTexU, const float &fMoveTexV)
 {
 	VERTEX_3D *pVtx;	// 頂点情報
 	//頂点バッファをロックし、頂点データへのポインタを取得
@@ -408,7 +408,7 @@ void CBillboard::SetTex(float fMoveTexU, float fMoveTexV)
 //================================================
 //カラー設定処理
 //================================================
-void CBillboard::SetCol(D3DCOLORVALUE col)
+void CBillboard::SetCol(const D3DCOLORVALUE &col)
 {
 	VERTEX_3D *pVtx;	// 頂点情報
 						//頂点バッファをロックし、頂点データへのポインタを取得
@@ -426,10 +426,10 @@ void CBillboard::SetCol(D3DCOLORVALUE col)
 //================================================
 //カラー設定処理
 //================================================
-void CBillboard::SetCol(D3DXCOLOR col)
+void CBillboard::SetCol(const D3DXCOLOR &col)
 {
 	VERTEX_3D *pVtx;	// 頂点情報
-						//頂点バッファをロックし、頂点データへのポインタを取得
+	//頂点バッファをロックし、頂点データへのポインタを取得
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
 	pVtx[0].col = col;
@@ -462,7 +462,7 @@ D3DXCOLOR CBillboard::GetCol(void)
 //================================================
 //テクスチャ割り当て処理
 //================================================
-void CBillboard::BindTexture(LPDIRECT3DTEXTURE9 pTexture)
+void CBillboard::BindTexture(const LPDIRECT3DTEXTURE9 &pTexture)
 {
 	m_pTexture = pTexture;
 }
@@ -470,7 +470,7 @@ void CBillboard::BindTexture(LPDIRECT3DTEXTURE9 pTexture)
 //================================================
 //カリング設定処理
 //================================================
-void CBillboard::SetCulling(bool bCulling)
+void CBillboard::SetCulling(const bool &bCulling)
 {
 	m_bCulling = bCulling;
 }
@@ -478,7 +478,7 @@ void CBillboard::SetCulling(bool bCulling)
 //================================================
 //加算合成設定処理
 //================================================
-void CBillboard::SetAlphaBlend(bool bAlphaBlend)
+void CBillboard::SetAlphaBlend(const bool &bAlphaBlend)
 {
 	m_bAlphaBlend = bAlphaBlend;
 }
@@ -486,7 +486,7 @@ void CBillboard::SetAlphaBlend(bool bAlphaBlend)
 //================================================
 //αテスト設定処理
 //================================================
-void CBillboard::SetAlphaTest(bool bAlphaTest)
+void CBillboard::SetAlphaTest(const bool &bAlphaTest)
 {
 	m_bAlphaTest = bAlphaTest;
 }
@@ -494,7 +494,7 @@ void CBillboard::SetAlphaTest(bool bAlphaTest)
 //================================================
 //ライティング設定処理
 //================================================
-void CBillboard::SetLighting(bool bLighting)
+void CBillboard::SetLighting(const bool &bLighting)
 {
 	m_bLighting = bLighting;
 }

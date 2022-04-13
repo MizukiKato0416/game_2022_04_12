@@ -196,7 +196,7 @@ void CEffect3D::Draw(void)
 //================================================
 //生成処理
 //================================================
-CEffect3D* CEffect3D::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXCOLOR col, EFFECT3D_TYPE type)
+CEffect3D* CEffect3D::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const D3DXCOLOR &col, const EFFECT3D_TYPE &type)
 {
 	//インスタンスの生成
 	CEffect3D *pEffect3D = nullptr;

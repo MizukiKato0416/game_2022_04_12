@@ -75,9 +75,9 @@ CCamera::~CCamera()
 //================================================
 //初期化処理
 //================================================
-HRESULT CCamera::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, float viewportX, float viewportY, float viewportWidth, float viewporHeight)
+HRESULT CCamera::Init(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const float &viewportX, const float &viewportY, const float &viewportWidth, const float &viewporHeight)
 {
-	m_rot = rot;																	//カメラの向き
+	m_rot = rot;									//カメラの向き
 	m_rotAsk = D3DXVECTOR3(0.0f, 0.0f, 0.0f);		//目的のカメラの向き
 	m_posV = pos;									//現在の視点
 	m_posVDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);		//目的の視点
@@ -122,7 +122,7 @@ void CCamera::Update(void)
 //================================================
 //生成処理
 //================================================
-CCamera *CCamera::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, float viewportX, float viewportY, float viewportWidth, float viewporHeight)
+CCamera *CCamera::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const float &viewportX, const float &viewportY, const float &viewportWidth, const float &viewporHeight)
 {
 	//インスタンスの生成
 	CCamera *pCamera = nullptr;
@@ -192,7 +192,7 @@ D3DXVECTOR3 CCamera::GetPosR(void)
 //=======================================================================
 //視点設定処理
 //=======================================================================
-void CCamera::SetPosV(D3DXVECTOR3 pos)
+void CCamera::SetPosV(const D3DXVECTOR3 &pos)
 {
 	m_posV = pos;
 }
@@ -200,7 +200,7 @@ void CCamera::SetPosV(D3DXVECTOR3 pos)
 //=======================================================================
 //注視点設定処理
 //=======================================================================
-void CCamera::SetPosR(D3DXVECTOR3 pos)
+void CCamera::SetPosR(const D3DXVECTOR3 &pos)
 {
 	m_posR = pos;
 }
@@ -216,7 +216,7 @@ D3DXVECTOR3 CCamera::GetRotV(void)
 //=======================================================================
 //視点の向き設定処理
 //=======================================================================
-void CCamera::SetRotV(D3DXVECTOR3 rot)
+void CCamera::SetRotV(const D3DXVECTOR3 &rot)
 {
 	m_rot = rot;
 }
@@ -224,7 +224,7 @@ void CCamera::SetRotV(D3DXVECTOR3 rot)
 //=======================================================================
 //cameraの個体識別番号設定処理
 //=======================================================================
-void CCamera::SetNum(int nNum)
+void CCamera::SetNum(const int &nNum)
 {
 	m_nNum = nNum;
 }

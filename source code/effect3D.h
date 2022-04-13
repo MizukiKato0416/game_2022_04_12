@@ -41,7 +41,7 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	static CEffect3D *Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXCOLOR col, EFFECT3D_TYPE type);
+	static CEffect3D *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const D3DXCOLOR &col, const EFFECT3D_TYPE &type);
 
 private:
 	EFFECT3D_TYPE m_type;		//エフェクトの種類

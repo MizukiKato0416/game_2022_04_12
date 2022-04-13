@@ -29,7 +29,7 @@ CInput::~CInput()
 //================================================
 //初期化処理
 //================================================
-HRESULT CInput::Init(HINSTANCE hInstance, HWND /*hWnd*/)
+HRESULT CInput::Init(const HINSTANCE &hInstance/*, const HWND &hWnd*/)
 {
 	//DirectInputオブジェクトの作成
 	if (FAILED(DirectInput8Create(hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&m_pInput, NULL)))

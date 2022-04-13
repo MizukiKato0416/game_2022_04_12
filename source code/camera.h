@@ -25,19 +25,19 @@ public:
 	CCamera();				//コンストラクタ
 	~CCamera();				//デストラクタ
 
-	HRESULT Init(D3DXVECTOR3 m_pos, D3DXVECTOR3 rot, float viewportX, float viewportY, float viewportWidth, float viewporHeight);
+	HRESULT Init(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const float &viewportX, const float &viewportY, const float &viewportWidth, const float &viewporHeight);
 	void Uninit(void);
 	void Update(void);
-	static CCamera *Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, float viewportX, float viewportY, float viewportWidth, float viewporHeight);
+	static CCamera *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const float &viewportX, const float &viewportY, const float &viewportWidth, const float &viewporHeight);
 	void Set(void);
 
 	D3DXVECTOR3 GetPosV(void);					//視点取得処理
 	D3DXVECTOR3 GetPosR(void);					//注視点取得処理
-	void SetPosV(D3DXVECTOR3 pos);				//視点設定処理
-	void SetPosR(D3DXVECTOR3 pos);				//注視点設定処理
+	void SetPosV(const D3DXVECTOR3 &pos);				//視点設定処理
+	void SetPosR(const D3DXVECTOR3 &pos);				//注視点設定処理
 	D3DXVECTOR3 GetRotV(void);					//視点の向き取得処理
-	void SetRotV(D3DXVECTOR3 rot);				//視点の向き設定処理
-	void SetNum(int nNum);						//cameraの個体識別番号設定処理
+	void SetRotV(const D3DXVECTOR3 &rot);				//視点の向き設定処理
+	void SetNum(const int &nNum);						//cameraの個体識別番号設定処理
 	int GetNum(void);							//cameraの個体識別番号取得処理
 	//ビューポート取得処理
 	D3DVIEWPORT9 *GetViewPort(void) { return &m_viewport; }

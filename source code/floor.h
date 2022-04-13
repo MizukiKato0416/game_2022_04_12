@@ -25,7 +25,7 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	static CFloor *Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXVECTOR3 rot);
+	static CFloor *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const D3DXVECTOR3 &rot);
 	static bool Collision(CObject *pObject);			//“–‚½‚è”»’è
 
 private:

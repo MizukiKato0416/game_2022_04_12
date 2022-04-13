@@ -28,9 +28,9 @@ CInputMouse::CInputMouse()
 //================================================
 //初期化処理
 //================================================
-HRESULT  CInputMouse::Init(HINSTANCE hInstance, HWND hWnd)
+HRESULT  CInputMouse::Init(const HINSTANCE &hInstance, const HWND &hWnd)
 {
-	CInput::Init(hInstance, hWnd);
+	CInput::Init(hInstance);
 
 	// 入力デバイスの生成
 	if (FAILED(m_pInput->CreateDevice(GUID_SysMouse, &m_pDevice, NULL)))
@@ -91,17 +91,17 @@ void  CInputMouse::Update(void)
 //=======================================================================
 //マウスの入力情報取得
 //=======================================================================
-bool CInputMouse::GetPress(int nMouse)
+bool CInputMouse::GetPress(const int &nMouse)
 {
 	return(m_mouseState.rgbButtons[nMouse] & 0x80) ? true : false;
 }
 
-bool CInputMouse::GetTrigger(int nMouse)
+bool CInputMouse::GetTrigger(const int &nMouse)
 {
 	return(m_mouseStateTrigger.rgbButtons[nMouse] & 0x80) ? true : false;
 }
 
-bool CInputMouse::GetRelease(int nMouse)
+bool CInputMouse::GetRelease(const int &nMouse)
 {
 	return(m_mouseStateRelease.rgbButtons[nMouse] & 0x80) ? true : false;
 }

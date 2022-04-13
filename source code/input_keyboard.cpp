@@ -30,9 +30,9 @@ CInputKeyboard::CInputKeyboard()
 //================================================
 //初期化処理
 //================================================
-HRESULT  CInputKeyboard::Init(HINSTANCE hInstance, HWND hWnd)
+HRESULT  CInputKeyboard::Init(const HINSTANCE &hInstance, const HWND &hWnd)
 {
-	CInput::Init(hInstance, hWnd);
+	CInput::Init(hInstance);
 
 	// 入力デバイス(キーボード)の生成
 	if (FAILED(m_pInput->CreateDevice(GUID_SysKeyboard, &m_pDevice, NULL)))
@@ -93,17 +93,17 @@ void  CInputKeyboard::Update(void)
 //=======================================================================
 //キーボードの入力情報取得
 //=======================================================================
-bool CInputKeyboard::GetPress(int nKey)
+bool CInputKeyboard::GetPress(const int &nKey)
 {
 	return(m_aKeyState[nKey] & 0x80) ? true : false;
 }
 
-bool CInputKeyboard::GetTrigger(int nKey)
+bool CInputKeyboard::GetTrigger(const int &nKey)
 {
 	return(m_aKeyStateTrigger[nKey] & 0x80) ? true : false;
 }
 
-bool CInputKeyboard::GetRelease(int nKey)
+bool CInputKeyboard::GetRelease(const int &nKey)
 {
 	return(m_aKeyStateRelease[nKey] & 0x80) ? true : false;
 }

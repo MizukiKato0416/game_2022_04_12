@@ -96,7 +96,7 @@ void CFade::Draw(void)
 //================================================
 //生成処理
 //================================================
-CFade *CFade::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, CManager::MODE modeNext)
+CFade *CFade::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const CManager::MODE &modeNext)
 {
 	//インスタンスの生成
 	CFade *pFade = nullptr;
@@ -120,7 +120,7 @@ CFade *CFade::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, CManager::MODE modeNext)
 //================================================
 //設定処理
 //================================================
-void CFade::SetFade(CManager::MODE modeNext)
+void CFade::SetFade(const CManager::MODE &modeNext)
 {
 	m_fade = FADE_OUT;
 	m_modeNext = modeNext;
