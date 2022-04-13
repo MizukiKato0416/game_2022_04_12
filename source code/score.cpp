@@ -127,7 +127,7 @@ int CScore::GetScore(void)
 //================================================
 //スコア設定処理
 //================================================
-void CScore::SetScore(int nScore)
+void CScore::SetScore(const int &nScore)
 {
 	m_nScore = nScore;
 
@@ -151,7 +151,7 @@ void CScore::SetScore(int nScore)
 //================================================
 //スコア加算処理
 //================================================
-void CScore::AddScore(int nValue)
+void CScore::AddScore(const int &nValue)
 {
 	m_nScore += nValue;
 
