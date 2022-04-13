@@ -55,10 +55,10 @@ public:
 	~CXload();									//デストラクタ
 
 	void Init(void);									// テクスチャの生成
-	LPD3DXMESH GetMesh(X_TYPE type);					// メッシュの割り当て
-	LPD3DXBUFFER GetBuffMat(X_TYPE type);				// マテリアルの割り当て
-	DWORD GetNumMat(X_TYPE type);						// マテリアル数の割り当て
-	X_TYPE GetType(int nType) { return (X_TYPE)nType; }	// タイプ取得処理
+	LPD3DXMESH GetMesh(const X_TYPE &type);					// メッシュの割り当て
+	LPD3DXBUFFER GetBuffMat(const X_TYPE &type);				// マテリアルの割り当て
+	DWORD GetNumMat(const X_TYPE &type);						// マテリアル数の割り当て
+	X_TYPE GetType(const int &nType) { return (X_TYPE)nType; }	// タイプ取得処理
 	void Uninit(void);									// 終了
 private:
 	LPD3DXMESH m_apMesh[X_TYPE_MAX];			//メッシュ(頂点情報)へのポインタ

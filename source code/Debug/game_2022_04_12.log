@@ -1,12 +1,54 @@
-﻿  スキップ中... (関連する変更は検出されませんでした)
+﻿  x_load.cpp
   ui.cpp
+  title.cpp
+  time.cpp
+  texture.cpp
+  sound.cpp
+c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\sound.cpp(47): warning C4100: 'hWnd': 引数は関数の本体部で 1 度も参照されません。
+  shadow.cpp
+  score.cpp
+c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\score.cpp(146): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\score.cpp(170): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+  result.cpp
+  renderer.cpp
+  ranking.cpp
+  play_data.cpp
   player.cpp
+  pause.cpp
+  object3D.cpp
+  object2D.cpp
+  object.cpp
+  number.cpp
+  motion_road.cpp
+  motion_player.cpp
+  コードを生成中...
+  コンパイル中...
   model_single.cpp
   model.cpp
+  meshsphere.cpp
   meshfield.cpp
+  menu.cpp
+  manager.cpp
+c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\manager.cpp(324): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  main.cpp
+  light.cpp
+  input_pad_x.cpp
+  input_pad_d.cpp
+  input_mouse.cpp
+  input_keyboard.cpp
+  input.cpp
+  game01.cpp
   floor.cpp
+  fade.cpp
   effect3D.cpp
+  control_ui_subtract_alpha.cpp
+c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\control_ui_subtract_alpha.cpp(33): warning C4100: 'pObject': 引数は関数の本体部で 1 度も参照されません。
+  control.cpp
   camera.cpp
+  コードを生成中...
+  コンパイル中...
   billboard.cpp
-  game_2022_04_12.vcxproj -> C:\Users\student\Desktop\Git\game_2022_04_12\source code\Debug\game_2022_04_12.exe
-  game_2022_04_12.vcxproj -> C:\Users\student\Desktop\Git\game_2022_04_12\source code\Debug\game_2022_04_12.pdb (Full PDB)
+  コードを生成中...
+  LINK : 前回のインクリメンタル リンクで C:\Users\student\Documents\Visual Studio 2015\Projects\game_2022_04_12\source code\Debug\game_2022_04_12.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
+  game_2022_04_12.vcxproj -> C:\Users\student\Documents\Visual Studio 2015\Projects\game_2022_04_12\source code\Debug\game_2022_04_12.exe
+  game_2022_04_12.vcxproj -> C:\Users\student\Documents\Visual Studio 2015\Projects\game_2022_04_12\source code\Debug\game_2022_04_12.pdb (Full PDB)

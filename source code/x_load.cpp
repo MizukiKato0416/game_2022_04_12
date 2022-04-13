@@ -175,7 +175,7 @@ void CXload::Uninit(void)
 //=============================================================================
 //メッシュの割り当て
 //=============================================================================
-LPD3DXMESH CXload::GetMesh(X_TYPE type)
+LPD3DXMESH CXload::GetMesh(const X_TYPE &type)
 {
 	return m_apMesh[type];
 }
@@ -183,7 +183,7 @@ LPD3DXMESH CXload::GetMesh(X_TYPE type)
 //=============================================================================
 //マテリアル割り当て
 //=============================================================================
-LPD3DXBUFFER CXload::GetBuffMat(X_TYPE type)
+LPD3DXBUFFER CXload::GetBuffMat(const X_TYPE &type)
 {
 	return m_apBuffMat[type];
 }
@@ -191,7 +191,7 @@ LPD3DXBUFFER CXload::GetBuffMat(X_TYPE type)
 //=============================================================================
 //マテリアル数割り当て
 //=============================================================================
-DWORD CXload::GetNumMat(X_TYPE type)
+DWORD CXload::GetNumMat(const X_TYPE &type)
 {
 	return m_aNumMat[type];
 }
