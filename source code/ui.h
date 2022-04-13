@@ -37,7 +37,7 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	static CUi *Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, int nPriolty, TYPE type);
+	static CUi *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const int &nPriolty, const TYPE &type);
 	TYPE GetUIType(void) { return m_type; }		//í—Şæ“¾ˆ—
 
 private:

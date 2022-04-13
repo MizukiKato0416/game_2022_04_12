@@ -25,7 +25,7 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	static CShadow *Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, CObject *pObject);
+	static CShadow *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const CObject *pObject);
 
 	bool GetDraw(void) { return m_bDraw; }						//•`‰ææ“¾ˆ—
 	void SetDraw(const bool &bDraw) { m_bDraw = bDraw; }		//•`‰æİ’èˆ—

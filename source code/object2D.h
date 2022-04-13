@@ -47,18 +47,19 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	static CObject2D *Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, int nPriolty);
+	static CObject2D *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const int &nPriolty);
 	D3DXVECTOR3 GetPos(void);
-	void SetPos(D3DXVECTOR3 pos, D3DXVECTOR3 size);					//位置設定処理
-	void SetPos(D3DXVECTOR3 pos, D3DXVECTOR3 size, float fRot);		//位置設定処理
-	void SetTex(int nPattern, int nMaxPattern);						//テクスチャアニメーション設定処理
-	void SetTex(float fMoveTexU, float fMoveTexV);					//テクスチャ移動処理
-	void SetCol(D3DCOLORVALUE col);									//カラー設定処理
-	void SetCol(D3DXCOLOR col);										//カラー設定処理
-	D3DXCOLOR GetCol(void);											//カラー取得処理
-	void SetVtx(D3DXVECTOR3 pos, D3DXVECTOR3 vtx0, D3DXVECTOR3 vtx1, D3DXVECTOR3 vtx2, D3DXVECTOR3 vtx3);		//頂点設定処理
-	void BindTexture(LPDIRECT3DTEXTURE9 pTexture);									//テクスチャ設定処理
-	void SetOriginType(ORIGIN_TYPE originType) { m_OriginType = originType; }		//原点の種類設定処理
+	void SetPos(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size);							//位置設定処理
+	void SetPos(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const float &fRot);		//位置設定処理
+	void SetTex(const int &nPattern, const int &nMaxPattern);								//テクスチャアニメーション設定処理
+	void SetTex(const float &fMoveTexU, const float &fMoveTexV);							//テクスチャ移動処理
+	void SetCol(const D3DCOLORVALUE &col);													//カラー設定処理
+	void SetCol(const D3DXCOLOR &col);														//カラー設定処理
+	D3DXCOLOR GetCol(void);																	//カラー取得処理
+	//頂点設定処理
+	void SetVtx(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &vtx0, const D3DXVECTOR3 &vtx1, const D3DXVECTOR3 &vtx2, const D3DXVECTOR3 &vtx3);
+	void BindTexture(const LPDIRECT3DTEXTURE9 &pTexture);									//テクスチャ設定処理
+	void SetOriginType(const ORIGIN_TYPE &originType) { m_OriginType = originType; }		//原点の種類設定処理
 
 private:
 	LPDIRECT3DTEXTURE9 m_pTexture;			//テクスチャへのポインタ

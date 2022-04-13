@@ -39,19 +39,19 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	static CObject3D *Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXVECTOR3 rot);
-	D3DXVECTOR3 GetPos(void);							//位置取得処理
-	void SetPos(D3DXVECTOR3 pos, D3DXVECTOR3 size);		//位置設定処理
-	void SetTex(int nPattern, int nMaxPattern);			//テクスチャアニメーション設定処理
-	void SetTex(float fMoveTexU, float fMoveTexV);		//テクスチャ移動設定処理
-	void SetCol(D3DCOLORVALUE col);						//カラーバリュー設定処理
-	void SetCol(D3DXCOLOR col);							//カラー設定処理
-	D3DXCOLOR GetCol(void);								//カラー取得処理
-	void SetCulling(bool bCulling);						//カリング設定処理
-	void SetAlphaBlend(bool bAlphaBlend);				//加算合成設定処理
-	void SetAlphaTest(bool bAlphaTest);					//αアテスト設定処理
-	void SetLighting(bool bLighting);					//ライティング設定処理
-	void BindTexture(LPDIRECT3DTEXTURE9 pTexture);		//テクスチャ設定処理
+	static CObject3D *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const D3DXVECTOR3 &rot);
+	D3DXVECTOR3 GetPos(void);											//位置取得処理
+	void SetPos(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size);		//位置設定処理
+	void SetTex(const int &nPattern, const int &nMaxPattern);			//テクスチャアニメーション設定処理
+	void SetTex(const float &fMoveTexU, const float &fMoveTexV);		//テクスチャ移動設定処理
+	void SetCol(const D3DCOLORVALUE &col);								//カラーバリュー設定処理
+	void SetCol(const D3DXCOLOR &col);									//カラー設定処理
+	D3DXCOLOR GetCol(void);												//カラー取得処理
+	void SetCulling(const bool &bCulling);								//カリング設定処理
+	void SetAlphaBlend(const bool &bAlphaBlend);						//加算合成設定処理
+	void SetAlphaTest(const bool &bAlphaTest);							//αアテスト設定処理
+	void SetLighting(const bool &bLighting);							//ライティング設定処理
+	void BindTexture(const LPDIRECT3DTEXTURE9 &pTexture);				//テクスチャ設定処理
 
 private:
 

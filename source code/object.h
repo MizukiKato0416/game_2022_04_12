@@ -62,17 +62,17 @@ public:
 	static void DrawAll(void);		// 全描画
 	D3DXVECTOR3 GetPos(void) { return m_pos; }			// ゲッダー
 	D3DXVECTOR3 GetSize(void) { return m_size; }		// ゲッダー
-	bool GetDeath(void) { return m_deth; }			// ゲッダー
+	bool GetDeath(void) { return m_deth; }				// ゲッダー
 	D3DXVECTOR3 GetPosOld(void) { return m_pos_old; }	// ゲッダー
 	OBJTYPE GetObjType(void) { return m_obj_type; }		// ゲッダー
-	static vector<CObject*> GetObject(int priority) { return m_object[priority]; }	// ゲッダー
-	void SetPos(D3DXVECTOR3 pos) { m_pos = pos; }		// セッター
-	void SetSize(D3DXVECTOR3 size) { m_size = size; }	// セッター
-	void SetObjType(OBJTYPE obj_type) { m_obj_type = obj_type; }	// セッター
-	void SetPosOld(D3DXVECTOR3 pos_old) { m_pos_old = pos_old; }	// セッター
-	void SetPriority(int priority) { m_priority = priority; }		// セッター
+	static vector<CObject*> GetObject(int &priority) { return m_object[priority]; }	// ゲッダー
+	void SetPos(const D3DXVECTOR3 &pos) { m_pos = pos; }				// セッター
+	void SetSize(const D3DXVECTOR3 &size) { m_size = size; }			// セッター
+	void SetObjType(const OBJTYPE &obj_type) { m_obj_type = obj_type; }	// セッター
+	void SetPosOld(const D3DXVECTOR3 &pos_old) { m_pos_old = pos_old; }	// セッター
+	void SetPriority(const int &priority) { m_priority = priority; }	// セッター
 private:
-	static vector<CObject*> m_object[(int)PRIORITY::MAX];	// オブジェクト
+	static vector<CObject*> m_object[(int)PRIORITY::MAX];				// オブジェクト
 	D3DXVECTOR3	m_pos;		// 位置
 	D3DXVECTOR3 m_pos_old;	// 1フレーム前の位置
 	D3DXVECTOR3 m_size;		// サイズ

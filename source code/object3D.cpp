@@ -294,7 +294,7 @@ void CObject3D::Draw(void)
 //================================================
 //生成処理
 //================================================
-CObject3D* CObject3D::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXVECTOR3 rot)
+CObject3D* CObject3D::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const D3DXVECTOR3 &rot)
 {
 	//インスタンスの生成
 	CObject3D *pScene3D = nullptr;
@@ -323,7 +323,7 @@ D3DXVECTOR3 CObject3D::GetPos(void)
 //================================================
 //位置設定処理
 //================================================
-void CObject3D::SetPos(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+void CObject3D::SetPos(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size)
 {
 	m_pos = pos;
 	m_size = size;
@@ -349,7 +349,7 @@ void CObject3D::SetPos(D3DXVECTOR3 pos, D3DXVECTOR3 size)
 //================================================
 //テクスチャ設定処理
 //================================================
-void CObject3D::SetTex(int nPattern, int nMaxPattern)
+void CObject3D::SetTex(const int &nPattern, const int &nMaxPattern)
 {
 	VERTEX_3D *pVtx;	// 頂点情報
 						//頂点バッファをロックし、頂点データへのポインタを取得
@@ -367,7 +367,7 @@ void CObject3D::SetTex(int nPattern, int nMaxPattern)
 //================================================
 //テクスチャ設定処理
 //================================================
-void CObject3D::SetTex(float fMoveTexU, float fMoveTexV)
+void CObject3D::SetTex(const float &fMoveTexU, const float &fMoveTexV)
 {
 	VERTEX_3D *pVtx;	// 頂点情報
 	//頂点バッファをロックし、頂点データへのポインタを取得
@@ -385,7 +385,7 @@ void CObject3D::SetTex(float fMoveTexU, float fMoveTexV)
 //================================================
 //カラー設定処理
 //================================================
-void CObject3D::SetCol(D3DCOLORVALUE col)
+void CObject3D::SetCol(const D3DCOLORVALUE &col)
 {
 	VERTEX_3D *pVtx;	// 頂点情報
 						//頂点バッファをロックし、頂点データへのポインタを取得
@@ -403,7 +403,7 @@ void CObject3D::SetCol(D3DCOLORVALUE col)
 //================================================
 //カラー設定処理
 //================================================
-void CObject3D::SetCol(D3DXCOLOR col)
+void CObject3D::SetCol(const D3DXCOLOR &col)
 {
 	VERTEX_3D *pVtx;	// 頂点情報
 						//頂点バッファをロックし、頂点データへのポインタを取得
@@ -439,7 +439,7 @@ D3DXCOLOR CObject3D::GetCol(void)
 //================================================
 //カリング設定処理
 //================================================
-void CObject3D::SetCulling(bool bCulling)
+void CObject3D::SetCulling(const bool &bCulling)
 {
 	m_bCulling = bCulling;
 }
@@ -447,7 +447,7 @@ void CObject3D::SetCulling(bool bCulling)
 //================================================
 //加算合成設定処理
 //================================================
-void CObject3D::SetAlphaBlend(bool bAlphaBlend)
+void CObject3D::SetAlphaBlend(const bool &bAlphaBlend)
 {
 	m_bAlphaBlend = bAlphaBlend;
 }
@@ -455,7 +455,7 @@ void CObject3D::SetAlphaBlend(bool bAlphaBlend)
 //================================================
 //αテスト設定処理
 //================================================
-void CObject3D::SetAlphaTest(bool bAlphaTest)
+void CObject3D::SetAlphaTest(const bool &bAlphaTest)
 {
 	m_bAlphaTest = bAlphaTest;
 }
@@ -463,7 +463,7 @@ void CObject3D::SetAlphaTest(bool bAlphaTest)
 //================================================
 //ライティング設定処理
 //================================================
-void CObject3D::SetLighting(bool bLighting)
+void CObject3D::SetLighting(const bool &bLighting)
 {
 	m_bLighting = bLighting;
 }
@@ -471,7 +471,7 @@ void CObject3D::SetLighting(bool bLighting)
 //================================================
 //テクスチャ割り当て処理
 //================================================
-void CObject3D::BindTexture(LPDIRECT3DTEXTURE9 pTexture)
+void CObject3D::BindTexture(const LPDIRECT3DTEXTURE9 &pTexture)
 {
 	m_pTexture = pTexture;
 }

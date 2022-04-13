@@ -44,7 +44,7 @@ public:
 	int GetTime(void);
 	CNumber *GetNumber(int nNumber);
 
-	static CTime *Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, int nStartTime);
+	static CTime *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const int &nStartTime);
 
 private:
 	CNumber *m_apNumber[MAX_TIME_POLYGON];	//numberのインスタンス

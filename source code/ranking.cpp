@@ -164,7 +164,7 @@ void CRanking::Draw(void)
 //================================================
 //生成処理
 //================================================
-CRanking* CRanking::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+CRanking* CRanking::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size)
 {
 	//インスタンスの生成
 	CRanking *pRanking = NULL;

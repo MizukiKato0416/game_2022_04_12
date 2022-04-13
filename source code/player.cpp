@@ -294,7 +294,7 @@ void CPlayer::Draw(void)
 //================================================
 //生成処理
 //================================================
-CPlayer *CPlayer::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot)
+CPlayer *CPlayer::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot)
 {
 	//インスタンスの生成
 	CPlayer *pPlayer = nullptr;

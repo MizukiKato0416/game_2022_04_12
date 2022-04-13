@@ -218,7 +218,7 @@ CMotionRoad *CMotionRoad::Create(void)
 //================================================
 //モーション情報取得処理
 //================================================
-MOTION_INFO CMotionRoad::GetMotionInfo(MOTION_HAVE_TYPE motionHaveType, int nMotionType)
+MOTION_INFO CMotionRoad::GetMotionInfo(const MOTION_HAVE_TYPE &motionHaveType, const int &nMotionType)
 {
 	return m_aInfo[motionHaveType][nMotionType];
 }
@@ -226,7 +226,7 @@ MOTION_INFO CMotionRoad::GetMotionInfo(MOTION_HAVE_TYPE motionHaveType, int nMot
 //================================================
 //モーション情報->キー情報->再生フレーム取得処理
 //================================================
-int CMotionRoad::GetMotionKeyInfoFrame(MOTION_HAVE_TYPE motionHaveType, int nMotionType, int nCntKey)
+int CMotionRoad::GetMotionKeyInfoFrame(const MOTION_HAVE_TYPE &motionHaveType, const int &nMotionType, const int &nCntKey)
 {
 	return m_aInfo[motionHaveType][nMotionType].aKeyInfo[nCntKey].nFrame;
 }
@@ -234,7 +234,7 @@ int CMotionRoad::GetMotionKeyInfoFrame(MOTION_HAVE_TYPE motionHaveType, int nMot
 //================================================
 //モーション情報->キー情報->位置取得処理
 //================================================
-D3DXVECTOR3 CMotionRoad::GetMotionKeyInfoPos(MOTION_HAVE_TYPE motionHaveType, int nMotionType, int nCntKey, int nCntModel)
+D3DXVECTOR3 CMotionRoad::GetMotionKeyInfoPos(const MOTION_HAVE_TYPE &motionHaveType, const int &nMotionType, const int &nCntKey, const int &nCntModel)
 {
 	return m_aInfo[motionHaveType][nMotionType].aKeyInfo[nCntKey].aKey[nCntModel].pos;
 }
@@ -242,7 +242,7 @@ D3DXVECTOR3 CMotionRoad::GetMotionKeyInfoPos(MOTION_HAVE_TYPE motionHaveType, in
 //================================================
 //モーション情報->キー情報->回転取得処理
 //================================================
-D3DXVECTOR3 CMotionRoad::GetMotionKeyInfoRot(MOTION_HAVE_TYPE motionHaveType, int nMotionType, int nCntKey, int nCntModel)
+D3DXVECTOR3 CMotionRoad::GetMotionKeyInfoRot(const MOTION_HAVE_TYPE &motionHaveType, const int &nMotionType, const int &nCntKey, const int &nCntModel)
 {
 	return m_aInfo[motionHaveType][nMotionType].aKeyInfo[nCntKey].aKey[nCntModel].rot;
 }
@@ -250,7 +250,7 @@ D3DXVECTOR3 CMotionRoad::GetMotionKeyInfoRot(MOTION_HAVE_TYPE motionHaveType, in
 //================================================
 //モーション情報->キー情報->位置と回転設定処理
 //================================================
-void CMotionRoad::SetMotionKeyInfoPosRot(MOTION_HAVE_TYPE motionHaveType, int nMotionType, int nCntKey, int nCntModel, D3DXVECTOR3 pos, D3DXVECTOR3 rot)
+void CMotionRoad::SetMotionKeyInfoPosRot(const MOTION_HAVE_TYPE &motionHaveType, const int &nMotionType, const int &nCntKey, const int &nCntModel, const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot)
 {
 	m_aInfo[motionHaveType][nMotionType].aKeyInfo[nCntKey].aKey[nCntModel].pos = pos;
 	m_aInfo[motionHaveType][nMotionType].aKeyInfo[nCntKey].aKey[nCntModel].rot = rot;

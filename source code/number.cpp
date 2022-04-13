@@ -134,7 +134,7 @@ void CNumber::Draw(void)
 //================================================
 //生成処理
 //================================================
-CNumber* CNumber::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+CNumber* CNumber::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size)
 {
 	//インスタンスの生成
 	CNumber *pNumber = NULL;
@@ -188,7 +188,7 @@ void CNumber::SetCol(D3DCOLORVALUE col)
 //================================================
 //テクスチャ割り当て処理
 //================================================
-void CNumber::BindTexture(LPDIRECT3DTEXTURE9 pTexture)
+void CNumber::BindTexture(const LPDIRECT3DTEXTURE9 &pTexture)
 {
 	m_pTexture = pTexture;
 }

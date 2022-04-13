@@ -31,7 +31,7 @@ public:
 	void Update(void);
 	void Draw(void);
 	static bool GetPause(void);
-	static bool SetPause(bool bPause);
+	static bool SetPause(const bool &bPause);
 	static CPause *Create(void);
 
 private:
