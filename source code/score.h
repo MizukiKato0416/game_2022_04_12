@@ -33,8 +33,8 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	void SetScore(int nScore);
-	void AddScore(int nValue);
+	void SetScore(const int &nScore);
+	void AddScore(const int &nValue);
 	int GetScore(void);
 	CNumber *GetNumber(int nNumber);
 
