@@ -159,7 +159,7 @@ void CTime::SetTime(int nTime)
 //================================================
 //ÉXÉRÉAâ¡éZèàóù
 //================================================
-void CTime::AddTime(int nValue)
+void CTime::AddTime(const int &nValue)
 {
 	m_nTime += nValue;
 

@@ -1,11 +1,10 @@
-﻿  object.cpp
-  コードを生成中...
-  スキップ中... (関連する変更は検出されませんでした)
+﻿  スキップ中... (関連する変更は検出されませんでした)
   ui.cpp
   texture.cpp
   player.cpp
   model_single.cpp
   meshfield.cpp
+  game01.cpp
   floor.cpp
   effect3D.cpp
   camera.cpp

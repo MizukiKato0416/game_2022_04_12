@@ -39,7 +39,7 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	void AddTime(int nValue);
+	void AddTime(const int &nValue);
 	void SetTime(int nTime);
 	int GetTime(void);
 	CNumber *GetNumber(int nNumber);
