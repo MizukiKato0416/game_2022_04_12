@@ -28,11 +28,11 @@ public:
 	HRESULT Init(void);
 	void Uninit(void);
 
-	void SetScore(int nScore) { m_nScore = nScore; }								//スコアの設定
+	void SetScore(const int &nScore) { m_nScore = nScore; }							//スコアの設定
 	int GetScore(void) { return m_nScore; }											//スコアの取得
-	void SetScorePoint(CScore *pScore) { m_pScore = pScore; }						//スコアのポインタ設定処理
+	void SetScorePoint(CScore *&pScore) { m_pScore = pScore; }						//スコアのポインタ設定処理
 	CScore *GetScorePoint(void) { return m_pScore; }								//スコアのポインタ取得処理
-	void SetTime(int nTime) { m_nTime = nTime; }									//時間の設定
+	void SetTime(const int &nTime) { m_nTime = nTime; }								//時間の設定
 	int GetTime(void) { return m_nTime; }											//時間の取得
 
 private:
