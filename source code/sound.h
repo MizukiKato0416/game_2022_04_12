@@ -45,12 +45,12 @@ public:
 	} SOUND_LABEL;
 
 	//メンバ関数
-	HRESULT Init(HWND hWnd);
+	HRESULT Init(void);
 	void Uninit(void);
-	HRESULT Play(SOUND_LABEL label);
-	void Stop(SOUND_LABEL label);
+	HRESULT Play(const SOUND_LABEL &label);
+	void Stop(const SOUND_LABEL &label);
 	void Stop(void);
-	void ControllVoice(SOUND_LABEL label, float fVolume) { m_apSourceVoice[label]->SetVolume(fVolume); }	//音量調整
+	void ControllVoice(const SOUND_LABEL &label, const float &fVolume) { m_apSourceVoice[label]->SetVolume(fVolume); }	//音量調整
 
 private:
 	//パラメーター構造体

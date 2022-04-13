@@ -37,7 +37,7 @@ CRenderer::~CRenderer()
 //================================================
 //èâä˙âªèàóù
 //================================================
-HRESULT CRenderer::Init(HWND hWnd, bool bWindow)
+HRESULT CRenderer::Init(const HWND &hWnd, const bool &bWindow)
 {
 	D3DPRESENT_PARAMETERS d3dpp;
 	D3DDISPLAYMODE d3ddm;

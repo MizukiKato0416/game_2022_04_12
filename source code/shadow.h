@@ -27,8 +27,8 @@ public:
 	void Draw(void);
 	static CShadow *Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, CObject *pObject);
 
-	bool GetDraw(void) { return m_bDraw; }				//描画取得処理
-	void SetDraw(bool bDraw) { m_bDraw = bDraw; }		//描画設定処理
+	bool GetDraw(void) { return m_bDraw; }						//描画取得処理
+	void SetDraw(const bool &bDraw) { m_bDraw = bDraw; }		//描画設定処理
 
 private:
 	CObject *m_pObject;		//対象のオブジェクトのポインタ

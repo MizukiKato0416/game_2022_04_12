@@ -44,7 +44,7 @@ CSound::~CSound()
 //================================================
 //初期化処理
 //================================================
-HRESULT CSound::Init(HWND hWnd)
+HRESULT CSound::Init(void)
 {
 	HRESULT hr;
 
@@ -197,7 +197,7 @@ void CSound::Uninit(void)
 //=============================================================================
 // セグメント再生(停止)
 //=============================================================================
-HRESULT CSound::Play(SOUND_LABEL label)
+HRESULT CSound::Play(const SOUND_LABEL &label)
 {
 	XAUDIO2_VOICE_STATE xa2state;
 	XAUDIO2_BUFFER       buffer;
@@ -232,7 +232,7 @@ HRESULT CSound::Play(SOUND_LABEL label)
 //=============================================================================
 // セグメント停止
 //=============================================================================
-void CSound::Stop(SOUND_LABEL label)
+void CSound::Stop(const SOUND_LABEL &label)
 {
 	XAUDIO2_VOICE_STATE xa2state;
 
