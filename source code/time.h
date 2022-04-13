@@ -39,8 +39,13 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
+<<<<<<< HEAD
 	void AddTime(const int &nValue);
 	void SetTime(int nTime);
+=======
+	void AddTime(int nValue);
+	void SetTime(const int &nTime);
+>>>>>>> 6b6b36046129b1dca2838e423af92c2792de8bf9
 	int GetTime(void);
 	CNumber *GetNumber(int nNumber);
 
