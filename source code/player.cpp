@@ -598,7 +598,7 @@ bool CPlayer::CollisionOnly(CObject *&pSubjectObject, const float &fObjRadius)
 {
 	//オブジェクトの位置を取得
 	D3DXVECTOR3 posObj = pSubjectObject->GetPos();
-	
+	int n = 9;
 	//プレイヤーから対象のオブジェクトまでの距離を求める
 	float fRadius = sqrtf((posObj.x - m_pos.x) * (posObj.x - m_pos.x) +
 		(posObj.z - m_pos.z) * (posObj.z - m_pos.z));
