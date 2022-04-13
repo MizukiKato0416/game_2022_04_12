@@ -29,10 +29,10 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	static CModelSingle *Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, CXload::X_TYPE type, CModel *pParent, bool Collision);
-	static bool SimpleCollision(CObject *pObject);	//‰ñ“]‚³‚¹‚½‚çƒ_ƒ‚È“–‚½‚è”»’è
+	static CModelSingle *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const CXload::X_TYPE &type, CModel *&pParent, const bool &Collision);
+	static bool SimpleCollision(CObject *&pObject);	//‰ñ“]‚³‚¹‚½‚çƒ_ƒ‚È“–‚½‚è”»’è
 	static bool Collision(CObject *pObject);		//y²‚ğ‰ñ“]‚³‚¹‚Ä‚¢‚¢“–‚½‚è”»’è
-	static bool CollisionAny(CObject *pObject);		//‚½‚¾‚ÌÕ“Ë”»’è
+	static bool CollisionAny(CObject *&pObject);		//‚½‚¾‚ÌÕ“Ë”»’è
 
 private:
 	//ƒƒ“ƒo•Ï”

@@ -39,7 +39,7 @@ CLight::~CLight()
 //================================================
 //初期化処理
 //================================================
-HRESULT CLight::Init(D3DXVECTOR3 vecDir, D3DXVECTOR3 pos)
+HRESULT CLight::Init(D3DXVECTOR3 vecDir, const D3DXVECTOR3 &pos)
 {
 	//デバイスのポインタ
 	LPDIRECT3DDEVICE9 pDevice;
@@ -90,7 +90,7 @@ void CLight::Update(void)
 //================================================
 //生成処理
 //================================================
-CLight *CLight::Create(D3DXVECTOR3 vecDir, D3DXVECTOR3 pos)
+CLight *CLight::Create(const D3DXVECTOR3 &vecDir, const D3DXVECTOR3 &pos)
 {
 	//インスタンスの生成
 	CLight *pLight = nullptr;

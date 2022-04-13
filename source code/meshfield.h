@@ -26,15 +26,15 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	static CMeshField *Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXVECTOR3 rot, int nLine, int nVertical);
+	static CMeshField *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const D3DXVECTOR3 &rot, const int &nLine, const int &nVertical);
 	//テクスチャ設定処理
-	void BindTexture(LPDIRECT3DTEXTURE9 pTexture);
+	void BindTexture(const LPDIRECT3DTEXTURE9 &pTexture);
 	//当たり判定(第二引数は当たり判定をする半径)
-	static bool Collision(CObject *pSubjectObject, float fRadius);
+	static bool Collision(CObject *&pSubjectObject, const float &fRadius);
 	//頂点座標設定処理
-	void SetVtxPos(int nNumVtx, D3DXVECTOR3 pos);
+	void SetVtxPos(const int &nNumVtx, const D3DXVECTOR3 &pos);
 	//頂点座標取得処理
-	D3DXVECTOR3 GetVtxPos(int nNumVtx) { return m_bufferPos[nNumVtx]; }
+	D3DXVECTOR3 GetVtxPos(const int &nNumVtx) { return m_bufferPos[nNumVtx]; }
 	//インデックスバッファーの頂点位置取得処理
 	void GetIndexPos(void);						
 private:

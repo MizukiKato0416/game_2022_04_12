@@ -1,9 +1,2 @@
-﻿  input_keyboard.cpp
-  コードを生成中...
-  スキップ中... (関連する変更は検出されませんでした)
-  object.cpp
-  model_single.cpp
-  meshfield.cpp
-  LINK : 前回のインクリメンタル リンクで C:\Users\student\Desktop\Git\game_2022_04_12\source code\Debug\game_2022_04_12.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
-  game_2022_04_12.vcxproj -> C:\Users\student\Desktop\Git\game_2022_04_12\source code\Debug\game_2022_04_12.exe
-  game_2022_04_12.vcxproj -> C:\Users\student\Desktop\Git\game_2022_04_12\source code\Debug\game_2022_04_12.pdb (Full PDB)
+﻿  game_2022_04_12.vcxproj -> C:\Users\student\Documents\Visual Studio 2015\Projects\game_2022_04_12\source code\Debug\game_2022_04_12.exe
+  game_2022_04_12.vcxproj -> C:\Users\student\Documents\Visual Studio 2015\Projects\game_2022_04_12\source code\Debug\game_2022_04_12.pdb (Full PDB)

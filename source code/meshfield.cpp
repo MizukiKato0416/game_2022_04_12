@@ -268,7 +268,7 @@ void CMeshField::Draw(void)
 //================================================
 //生成処理
 //================================================
-CMeshField* CMeshField::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXVECTOR3 rot, int nLine, int nVertical)
+CMeshField* CMeshField::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const D3DXVECTOR3 &rot, const int &nLine, const int &nVertical)
 {
 	//インスタンスの生成
 	CMeshField *pMeshField = nullptr;
@@ -293,7 +293,7 @@ CMeshField* CMeshField::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXVECTOR3 ro
 //================================================
 //テクスチャ割り当て処理
 //================================================
-void CMeshField::BindTexture(LPDIRECT3DTEXTURE9 pTexture)
+void CMeshField::BindTexture(const LPDIRECT3DTEXTURE9 &pTexture)
 {
 	m_pTexture = pTexture;
 }
@@ -301,7 +301,7 @@ void CMeshField::BindTexture(LPDIRECT3DTEXTURE9 pTexture)
 //================================================
 //当たり判定
 //================================================
-bool CMeshField::Collision(CObject * pSubjectObject, float fRadius)
+bool CMeshField::Collision(CObject *&pSubjectObject, const float &fRadius)
 {
 	//着地しているかどうか
 	bool bLand = false;
@@ -454,7 +454,7 @@ bool CMeshField::Collision(CObject * pSubjectObject, float fRadius)
 //================================================
 //頂点座標設定処理
 //================================================
-void CMeshField::SetVtxPos(int nNumVtx, D3DXVECTOR3 pos)
+void CMeshField::SetVtxPos(const int &nNumVtx, const D3DXVECTOR3 &pos)
 {
 	VERTEX_3D *pVtx;
 	//頂点バッファをロックし、頂点データのポインタを取得

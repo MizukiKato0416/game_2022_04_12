@@ -308,7 +308,7 @@ void CModel::Draw(void)
 //================================================
 //生成処理
 //================================================
-CModel* CModel::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, CXload::X_TYPE type)
+CModel* CModel::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const CXload::X_TYPE &type)
 {
 	//インスタンスの生成
 	CModel *pModel = nullptr;
@@ -623,7 +623,7 @@ void CModel::Collision(void)
 //================================================
 //モデルの位置設定処理
 //================================================
-void CModel::SetPos(D3DXVECTOR3 pos)
+void CModel::SetPos(const D3DXVECTOR3 &pos)
 {
 	m_pos = pos;
 }
@@ -639,7 +639,7 @@ D3DXVECTOR3 CModel::GetPos(void)
 //================================================
 //モデルの頂点位置取得処理
 //================================================
-D3DXVECTOR3 CModel::GetVtxPos(int nCntVtx)
+D3DXVECTOR3 CModel::GetVtxPos(const int &nCntVtx)
 {
 	return m_vtxPos[nCntVtx];
 }
@@ -648,7 +648,7 @@ D3DXVECTOR3 CModel::GetVtxPos(int nCntVtx)
 //================================================
 //モデルの向き設定処理
 //================================================
-void CModel::SetRot(D3DXVECTOR3 rot)
+void CModel::SetRot(const D3DXVECTOR3 &rot)
 {
 	m_rot = rot;
 }
@@ -672,7 +672,7 @@ D3DXMATRIX *CModel::GetVtxMtxWorld(void)
 //================================================
 //ワールドマトリックス設定処理
 //================================================
-void CModel::SetVtxMtxWorld(D3DXVECTOR3 vtxPos, int nCntVtx)
+void CModel::SetVtxMtxWorld(const D3DXVECTOR3 &vtxPos, const int &nCntVtx)
 {
 	//デバイスのポインタ
 	LPDIRECT3DDEVICE9 pDevice;

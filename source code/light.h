@@ -26,10 +26,10 @@ public:
 	~CLight();					//デストラクタ
 
 	//メンバ関数
-	HRESULT Init(D3DXVECTOR3 vecDir, D3DXVECTOR3 pos);
+	HRESULT Init(D3DXVECTOR3 vecDir, const D3DXVECTOR3 &pos);
 	void Uninit(void);
 	void Update(void);
-	static CLight *Create(D3DXVECTOR3 vecDir, D3DXVECTOR3 pos);
+	static CLight *Create(const D3DXVECTOR3 &vecDir, const D3DXVECTOR3 &pos);
 
 
 private:
