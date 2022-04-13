@@ -21,7 +21,7 @@ public:
 	~CRenderer();			//デストラクタ
 
 	//メンバ関数
-	HRESULT Init(HWND hWnd, bool bWindow);
+	HRESULT Init(const HWND &hWnd, const bool &bWindow);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);

@@ -315,7 +315,7 @@ CPlayer *CPlayer::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot)
 //================================================
 //モデルの位置設定処理
 //================================================
-void CPlayer::SetModelPos(int nCntModel, D3DXVECTOR3 pos)
+void CPlayer::SetModelPos(const int &nCntModel, const D3DXVECTOR3 &pos)
 {
 	m_apModel[nCntModel]->SetPos(pos);
 }
@@ -323,7 +323,7 @@ void CPlayer::SetModelPos(int nCntModel, D3DXVECTOR3 pos)
 //================================================
 //モデルの位置取得処理
 //================================================
-D3DXVECTOR3 CPlayer::GetModelPos(int nCntModel)
+D3DXVECTOR3 CPlayer::GetModelPos(const int &nCntModel)
 {
 	return m_apModel[nCntModel]->GetPos();
 }
@@ -331,7 +331,7 @@ D3DXVECTOR3 CPlayer::GetModelPos(int nCntModel)
 //================================================
 //モデルの向き設定処理
 //================================================
-void CPlayer::SetModelRot(int nCntModel, D3DXVECTOR3 rot)
+void CPlayer::SetModelRot(const int &nCntModel, const D3DXVECTOR3 &rot)
 {
 	m_apModel[nCntModel]->SetRot(rot);
 }
@@ -339,7 +339,7 @@ void CPlayer::SetModelRot(int nCntModel, D3DXVECTOR3 rot)
 //================================================
 //モデルの向き取得処理
 //================================================
-D3DXVECTOR3 CPlayer::GetModelRot(int nCntModel)
+D3DXVECTOR3 CPlayer::GetModelRot(const int &nCntModel)
 {
 	return m_apModel[nCntModel]->GetRot();
 }
@@ -547,7 +547,7 @@ void CPlayer::Jump(void)
 //================================================
 //プレイヤーとの当たり判定
 //================================================
-void CPlayer::Collision(CObject *pSubjectObject, float fObjRadius)
+void CPlayer::Collision(CObject *&pSubjectObject, const float &fObjRadius)
 {
 	//オブジェクト情報を入れるポインタ
 	vector<CObject*> object;
@@ -594,11 +594,11 @@ void CPlayer::Collision(CObject *pSubjectObject, float fObjRadius)
 //================================================
 //プレイヤーとの衝突判定のみの処理
 //================================================
-bool CPlayer::CollisionOnly(CObject * pSubjectObject, float fObjRadius)
+bool CPlayer::CollisionOnly(CObject *&pSubjectObject, const float &fObjRadius)
 {
 	//オブジェクトの位置を取得
 	D3DXVECTOR3 posObj = pSubjectObject->GetPos();
-
+	
 	//プレイヤーから対象のオブジェクトまでの距離を求める
 	float fRadius = sqrtf((posObj.x - m_pos.x) * (posObj.x - m_pos.x) +
 		(posObj.z - m_pos.z) * (posObj.z - m_pos.z));

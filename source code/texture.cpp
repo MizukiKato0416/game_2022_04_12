@@ -116,7 +116,7 @@ void CTexture::Uninit(void)
 //=============================================================================
 //テクスチャ割り当て
 //=============================================================================
-LPDIRECT3DTEXTURE9 CTexture::GetTexture(std::string texType)
+LPDIRECT3DTEXTURE9 CTexture::GetTexture(const std::string &texType)
 {
 	return m_apTexture[m_texType[texType]];
 }
