@@ -114,9 +114,12 @@ void CGame01::Update(void)
 		}
 
 		//道0の位置がプレイヤーの位置よりも小さくなったら
-		if ()
+		if (m_apRoad[0]->GetPos() <= m_pPlayer->GetPos)
 		{
-
+			if (m_apRoad[1] == nullptr)
+			{
+				m_apRoad[1] = CRoad::Create(D3DXVECTOR3(2000.0f, 0.0f, 0.0f), CRoad::HAPPENING_TYPE::NONE, 0.0f);
+			}
 		}
 
 
