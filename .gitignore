@@ -147,3 +147,5 @@ $RECYCLE.BIN/
 # Mac crap
 .DS_Store
 /source code/game_2022_04_12.VC.VC.opendb
+/source code/.vs
+/source code/*.db
