@@ -58,7 +58,7 @@ void CLoad::Uninit(void)
 void CLoad::Update(void)
 {
 	D3DXVECTOR3 pos = m_floor->GetPos();
-	pos.x -= 3.0f;
+	pos.x -= m_move_speed;
 	m_floor->SetPos(pos, D3DXVECTOR3(1000.0f, 0.0f, 100.0f));
 }
 
@@ -73,7 +73,7 @@ void CLoad::Draw(void)
 //================================================
 //生成処理
 //================================================
-CLoad *CLoad::Create(const D3DXVECTOR3 &pos, const HAPPENING_TYPE &type)
+CLoad *CLoad::Create(const D3DXVECTOR3 &pos, const HAPPENING_TYPE &type, const float &move_speed)
 {
 	//インスタンスの生成
 	CLoad *load = nullptr;
@@ -83,6 +83,7 @@ CLoad *CLoad::Create(const D3DXVECTOR3 &pos, const HAPPENING_TYPE &type)
 		if (load != nullptr)
 		{
 			load->m_pos = pos;
+			load->m_move_speed = move_speed;
 			load->m_happening_type = type;
 			load->Init();
 		}
