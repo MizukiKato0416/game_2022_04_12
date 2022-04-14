@@ -26,7 +26,7 @@
 //================================================
 //マクロ定義
 //================================================
-#define PLAYER_JUMP							(30.0f)		//ジャンプ力
+#define PLAYER_JUMP							(15.0f)		//ジャンプ力
 #define PLAYER_BOUND						(0.82f)		//バウンド力
 #define PLAYER_GRAVITY						(0.4f)		//重力の大きさ
 #define PLAYER_MOVE_SPEED					(4.0f)		//通常移動の移動量

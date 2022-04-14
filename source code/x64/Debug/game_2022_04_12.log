@@ -1,66 +1,5 @@
 ﻿  x_load.cpp
   ui.cpp
-  title.cpp
-c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\title.cpp(52): warning C4100: 'size': 引数は関数の本体部で 1 度も参照されません。
-c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\title.cpp(52): warning C4100: 'pos': 引数は関数の本体部で 1 度も参照されません。
-  time.cpp
-  texture.cpp
-  sound.cpp
-c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\sound.cpp(47): warning C4100: 'hWnd': 引数は関数の本体部で 1 度も参照されません。
-  shadow.cpp
-  score.cpp
-c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\score.cpp(144): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\score.cpp(168): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-  result.cpp
-c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\result.cpp(46): warning C4100: 'size': 引数は関数の本体部で 1 度も参照されません。
-c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\result.cpp(46): warning C4100: 'pos': 引数は関数の本体部で 1 度も参照されません。
-  renderer.cpp
-  ranking.cpp
-  play_data.cpp
-  player.cpp
-c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\player.cpp(73): warning C4100: 'size': 引数は関数の本体部で 1 度も参照されません。
-  pause.cpp
-c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\pause.cpp(53): warning C4100: 'size': 引数は関数の本体部で 1 度も参照されません。
-c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\pause.cpp(53): warning C4100: 'pos': 引数は関数の本体部で 1 度も参照されません。
-  object3D.cpp
-  object2D.cpp
-  object.cpp
-  number.cpp
-  motion_road.cpp
-  motion_player.cpp
-  コードを生成中...
-  コンパイル中...
-  model_single.cpp
-c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\model_single.cpp(47): warning C4100: 'size': 引数は関数の本体部で 1 度も参照されません。
-  model.cpp
-  meshsphere.cpp
-  meshfield.cpp
-  menu.cpp
-c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\menu.cpp(54): warning C4100: 'size': 引数は関数の本体部で 1 度も参照されません。
-c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\menu.cpp(54): warning C4100: 'pos': 引数は関数の本体部で 1 度も参照されません。
-  manager.cpp
-c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\manager.cpp(324): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  main.cpp
-  light.cpp
-  input_pad_x.cpp
-  input_pad_d.cpp
-  input_mouse.cpp
-  input_keyboard.cpp
-  input.cpp
-  game01.cpp
-c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\game01.cpp(53): warning C4100: 'size': 引数は関数の本体部で 1 度も参照されません。
-c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\game01.cpp(53): warning C4100: 'pos': 引数は関数の本体部で 1 度も参照されません。
-  floor.cpp
-  fade.cpp
-  effect3D.cpp
-  control_ui_subtract_alpha.cpp
-c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\control_ui_subtract_alpha.cpp(33): warning C4100: 'pObject': 引数は関数の本体部で 1 度も参照されません。
-  control.cpp
-  camera.cpp
-  コードを生成中...
-  コンパイル中...
-  billboard.cpp
-c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\billboard.cpp(323): warning C4100: 'rot': 引数は関数の本体部で 1 度も参照されません。
   コードを生成中...
 meshsphere.obj : error LNK2001: 外部シンボル "D3DXVec3Normalize" は未解決です。
 model.obj : error LNK2001: 外部シンボル "D3DXVec3Normalize" は未解決です。
@@ -93,29 +32,37 @@ score.obj : error LNK2001: 外部シンボル "__imp__invalid_parameter" は未�
 shadow.obj : error LNK2001: 外部シンボル "__imp__invalid_parameter" は未解決です。
 texture.obj : error LNK2001: 外部シンボル "__imp__invalid_parameter" は未解決です。
 time.obj : error LNK2001: 外部シンボル "__imp__invalid_parameter" は未解決です。
+object.obj : error LNK2001: 外部シンボル "__imp__invalid_parameter" は未解決です。
+pause.obj : error LNK2001: 外部シンボル "__imp__invalid_parameter" は未解決です。
+player.obj : error LNK2001: 外部シンボル "__imp__invalid_parameter" は未解決です。
+result.obj : error LNK2001: 外部シンボル "__imp__invalid_parameter" は未解決です。
+model.obj : error LNK2001: 外部シンボル "__imp__invalid_parameter" は未解決です。
+model_single.obj : error LNK2001: 外部シンボル "__imp__invalid_parameter" は未解決です。
 motion_player.obj : error LNK2001: 外部シンボル "__imp__invalid_parameter" は未解決です。
 motion_road.obj : error LNK2001: 外部シンボル "__imp__invalid_parameter" は未解決です。
-pause.obj : error LNK2001: 外部シンボル "__imp__invalid_parameter" は未解決です。
-result.obj : error LNK2001: 外部シンボル "__imp__invalid_parameter" は未解決です。
 effect3D.obj : error LNK2001: 外部シンボル "__imp__invalid_parameter" は未解決です。
+floor.obj : error LNK2001: 外部シンボル "__imp__invalid_parameter" は未解決です。
 menu.obj : error LNK2001: 外部シンボル "__imp__invalid_parameter" は未解決です。
 meshfield.obj : error LNK2001: 外部シンボル "__imp__invalid_parameter" は未解決です。
-model.obj : error LNK2001: 外部シンボル "__imp__invalid_parameter" は未解決です。
-title.obj : error LNK2019: 未解決の外部シンボル __imp__CrtDbgReportW が関数 "public: void __cdecl std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::_Tidy(bool,unsigned __int64)" (?_Tidy@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAX_N_K@Z) で参照されました。
+title.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
 ui.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
 score.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
 shadow.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
 texture.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
 time.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
+object.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
+pause.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
+player.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
+result.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
+model.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
+model_single.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
 motion_player.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
 motion_road.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
-pause.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
-result.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
 effect3D.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
+floor.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
 menu.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
 meshfield.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
-model.obj : error LNK2001: 外部シンボル "__imp__CrtDbgReportW" は未解決です。
-input.obj : error LNK2019: 未解決の外部シンボル DirectInput8Create が関数 "public: virtual long __cdecl CInput::Init(struct HINSTANCE__ *,struct HWND__ *)" (?Init@CInput@@UEAAJPEAUHINSTANCE__@@PEAUHWND__@@@Z) で参照されました。
+input.obj : error LNK2019: 未解決の外部シンボル DirectInput8Create が関数 "public: virtual long __cdecl CInput::Init(struct HINSTANCE__ * const &)" (?Init@CInput@@UEAAJAEBQEAUHINSTANCE__@@@Z) で参照されました。
 input.obj : error LNK2001: 外部シンボル "IID_IDirectInput8A" は未解決です。
 input_keyboard.obj : error LNK2001: 外部シンボル "GUID_SysKeyboard" は未解決です。
 input_keyboard.obj : error LNK2001: 外部シンボル "c_dfDIKeyboard" は未解決です。
@@ -123,7 +70,7 @@ input_mouse.obj : error LNK2001: 外部シンボル "GUID_SysMouse" は未解決
 input_mouse.obj : error LNK2001: 外部シンボル "c_dfDIMouse" は未解決です。
 input_pad_d.obj : error LNK2001: 外部シンボル "c_dfDIJoystick2" は未解決です。
 input_pad_x.obj : error LNK2019: 未解決の外部シンボル XInputGetState が関数 "public: virtual void __cdecl CInputPadX::Update(void)" (?Update@CInputPadX@@UEAAXXZ) で参照されました。
-input_pad_x.obj : error LNK2019: 未解決の外部シンボル XInputSetState が関数 "public: void __cdecl CInputPadX::SetVibration(int,int,int,int)" (?SetVibration@CInputPadX@@QEAAXHHHH@Z) で参照されました。
+input_pad_x.obj : error LNK2019: 未解決の外部シンボル XInputSetState が関数 "public: void __cdecl CInputPadX::SetVibration(int const &,int const &,int const &,int const &)" (?SetVibration@CInputPadX@@QEAAXAEBH000@Z) で参照されました。
 input_pad_x.obj : error LNK2019: 未解決の外部シンボル XInputEnable が関数 "public: virtual void __cdecl CInputPadX::Uninit(void)" (?Uninit@CInputPadX@@UEAAXXZ) で参照されました。
 object3D.obj : error LNK2001: 外部シンボル "D3DXMatrixRotationYawPitchRoll" は未解決です。
 player.obj : error LNK2001: 外部シンボル "D3DXMatrixRotationYawPitchRoll" は未解決です。
@@ -132,8 +79,8 @@ meshsphere.obj : error LNK2001: 外部シンボル "D3DXMatrixRotationYawPitchRo
 model.obj : error LNK2001: 外部シンボル "D3DXMatrixRotationYawPitchRoll" は未解決です。
 model_single.obj : error LNK2001: 外部シンボル "D3DXMatrixRotationYawPitchRoll" は未解決です。
 model.obj : error LNK2019: 未解決の外部シンボル D3DXGetFVFVertexSize が関数 "public: long __cdecl CModel::Init(struct D3DXVECTOR3,struct D3DXVECTOR3,enum CXload::X_TYPE)" (?Init@CModel@@QEAAJUD3DXVECTOR3@@0W4X_TYPE@CXload@@@Z) で参照されました。
-renderer.obj : error LNK2019: 未解決の外部シンボル Direct3DCreate9 が関数 "public: long __cdecl CRenderer::Init(struct HWND__ *,bool)" (?Init@CRenderer@@QEAAJPEAUHWND__@@_N@Z) で参照されました。
-renderer.obj : error LNK2019: 未解決の外部シンボル D3DXCreateFontA が関数 "public: long __cdecl CRenderer::Init(struct HWND__ *,bool)" (?Init@CRenderer@@QEAAJPEAUHWND__@@_N@Z) で参照されました。
+renderer.obj : error LNK2019: 未解決の外部シンボル Direct3DCreate9 が関数 "public: long __cdecl CRenderer::Init(struct HWND__ * const &,bool const &)" (?Init@CRenderer@@QEAAJAEBQEAUHWND__@@AEB_N@Z) で参照されました。
+renderer.obj : error LNK2019: 未解決の外部シンボル D3DXCreateFontA が関数 "public: long __cdecl CRenderer::Init(struct HWND__ * const &,bool const &)" (?Init@CRenderer@@QEAAJAEBQEAUHWND__@@AEB_N@Z) で参照されました。
 texture.obj : error LNK2019: 未解決の外部シンボル D3DXCreateTextureFromFileA が関数 "public: static void __cdecl CTexture::Init(void)" (?Init@CTexture@@SAXXZ) で参照されました。
 x_load.obj : error LNK2019: 未解決の外部シンボル D3DXLoadMeshFromXA が関数 "public: void __cdecl CXload::Init(void)" (?Init@CXload@@QEAAXXZ) で参照されました。
 C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86\d3d9.lib : warning LNK4272: ライブラリのコンピューターの種類 'X86' がターゲットのコンピューターの種類' x64' と競合しています

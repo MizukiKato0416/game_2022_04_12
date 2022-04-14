@@ -18,6 +18,7 @@
 #include "score.h"
 #include "time.h"
 #include "load.h"
+#include "floor.h"
 
 //================================================
 //マクロ定義
@@ -32,7 +33,8 @@
 //================================================
 CGame01::CGame01(CObject::PRIORITY Priority):CObject(Priority)
 {
-	
+	m_pPlayer = nullptr;
+	m_pFloor = nullptr;
 }
 
 //================================================
@@ -65,9 +67,11 @@ HRESULT CGame01::Init(void)
 	//ポーズの生成
 	CPause::Create();
 
-	CPlayer::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, -D3DX_PI / 2.0f, 0.0f));
+	m_pPlayer = CPlayer::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, -D3DX_PI / 2.0f, 0.0f));
 
-	CLoad::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), CLoad::HAPPENING_TYPE::NONE);
+	m_pFloor = CFloor::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(2000.0f, 0.0f, 100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+
+	CLoad::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), CLoad::HAPPENING_TYPE::NONE, 0.0f);
 
 	return S_OK;
 }
@@ -89,6 +93,23 @@ void CGame01::Uninit(void)
 //================================================
 void CGame01::Update(void)
 {
+	//発射したら
+	if (m_pPlayer->GetShot() == true)
+	{
+		//位置サイズを取得
+		D3DXVECTOR3 floorPos = m_pFloor->GetPos();
+		D3DXVECTOR3 floorSize = m_pFloor->GetSize();
+		//位置Xを移動させる
+		floorPos.x -= 3.0f;
+		//位置設定
+		m_pFloor->SetPos(floorPos, floorSize);
+	}
+
+
+
+
+
+
 	//キーボード取得処理
 	CInputKeyboard *pInputKeyboard;
 	pInputKeyboard = CManager::GetInstance()->GetInputKeyboard();

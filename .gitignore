@@ -149,3 +149,5 @@ $RECYCLE.BIN/
 /source code/game_2022_04_12.VC.VC.opendb
 /source code/.vs
 /source code/*.db
+/source code/Debug
+/source code/x64

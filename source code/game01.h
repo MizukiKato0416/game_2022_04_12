@@ -6,10 +6,10 @@
 #define _GAME01_H_
 #include "object.h"
 #include "main.h"
-#include "player.h"
 
 //前方宣言
-class CGauge;
+class CPlayer;
+class CFloor;
 
 //================================================
 //マクロ定義
@@ -37,7 +37,8 @@ public:
 
 private:
 	//メンバ変数
-	
+	CPlayer *m_pPlayer;		//プレイヤーのポインタ
+	CFloor *m_pFloor;		//床のポインタ
 };
 
 #endif // !_GAME01_H_

@@ -41,6 +41,7 @@ public:
 	void SetMove(const D3DXVECTOR3 &move) { m_move = move; }								//ˆÚ“®—Êİ’èˆ—
 	static void CPlayer::Collision(CObject *&pSubjectObject, const float &fObjRadius);		//“–‚½‚è”»’èˆ—
 	bool CPlayer::CollisionOnly(CObject *&pSubjectObject, const float &fObjRadius);			//Õ“Ë”»’è‚Ì‚İ‚Ìˆ—
+	bool GetShot(void) { return m_bShot; }													//”­Ëæ“¾ˆ—
 
 private:
 	//ƒƒ“ƒoŠÖ”
