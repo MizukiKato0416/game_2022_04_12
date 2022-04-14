@@ -31,7 +31,7 @@ CRoad::~CRoad()
 //=============================================================================
 HRESULT CRoad::Init(void)
 {
-	m_floor = CFloor::Create(m_pos, D3DXVECTOR3(1000.0f, 0.0f, 100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	m_floor = CFloor::Create(m_pos, m_size, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
 	switch (m_happening_type)
 	{
@@ -57,9 +57,12 @@ void CRoad::Uninit(void)
 //=============================================================================
 void CRoad::Update(void)
 {
-	D3DXVECTOR3 pos = m_floor->GetPos();
-	pos.x -= m_move_speed;
-	m_floor->SetPos(pos, D3DXVECTOR3(1000.0f, 0.0f, 100.0f));
+	m_pos = m_floor->GetPos();
+	m_size = m_floor->GetSize();
+
+	m_pos.x -= m_move_speed;
+
+	m_floor->SetPos(m_pos, m_size);
 }
 
 //=============================================================================
