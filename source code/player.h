@@ -13,7 +13,7 @@ class CMotionPlayer;
 //================================================
 //マクロ定義
 //================================================
-#define MAX_PLAYER_MODEL					(16)		//モデルの数
+#define MAX_PLAYER_MODEL					(5)		//モデルの数
 
 //================================================
 //クラスの定義
@@ -33,10 +33,10 @@ public:
 	void Draw(void);
 	static CPlayer *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot);
 
-	void SetModelPos(const int &nCntModel, const D3DXVECTOR3 &pos);								//モデルの位置設定処理
+	void SetModelPos(const int &nCntModel, const D3DXVECTOR3 &pos);							//モデルの位置設定処理
 	D3DXVECTOR3 GetModelPos(const int &nCntModel);											//モデルの位置取得処理
-	D3DXVECTOR3 GetRot(void) { return m_rot; }										//プレイヤーの向き取得処理
-	void SetModelRot(const int &nCntModel, const D3DXVECTOR3 &rot);								//モデルの向き設定処理
+	D3DXVECTOR3 GetRot(void) { return m_rot; }												//プレイヤーの向き取得処理
+	void SetModelRot(const int &nCntModel, const D3DXVECTOR3 &rot);							//モデルの向き設定処理
 	D3DXVECTOR3 GetModelRot(const int &nCntModel);											//モデルの向き取得処理
 	void SetMove(const D3DXVECTOR3 &move) { m_move = move; }								//移動量設定処理
 	static void CPlayer::Collision(CObject *&pSubjectObject, const float &fObjRadius);		//当たり判定処理

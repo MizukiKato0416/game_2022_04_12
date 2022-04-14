@@ -94,7 +94,7 @@ bool CFloor::Collision(CObject *pObject)
 {
 	bool bLand = false;	//着地しているかどうか
 
-//オブジェクト情報を入れるポインタ
+	//オブジェクト情報を入れるポインタ
 	vector<CObject*> object;
 
 	//先頭のポインタを代入
@@ -103,11 +103,11 @@ bool CFloor::Collision(CObject *pObject)
 
 	for (int nCnt = 0; nCnt < nProprty_Size; nCnt++)
 	{
-		if (object[nProprty_Size]->GetObjType() == CObject::OBJTYPE::FLOOR)
+		if (object[nCnt]->GetObjType() == CObject::OBJTYPE::FLOOR)
 		{
 			//ポインタをCFloorにキャスト
 			CFloor *pFloor = nullptr;
-			pFloor = (CFloor*)object[nProprty_Size];
+			pFloor = (CFloor*)object[nCnt];
 
 			//各頂点から各頂点のベクトルを算出
 			D3DXVECTOR3 vtxPos[VERTEX_3D_NUM];

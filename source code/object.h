@@ -51,6 +51,7 @@ public:
 		SHADOW,				//影
 		MAX
 	};
+
 	CObject(PRIORITY priorty = PRIORITY::NONE);	// デフォルトコンストラクタ
 	virtual ~CObject();	// デフォルトデストラクタ
 	virtual HRESULT Init(void) = 0;	// 初期化

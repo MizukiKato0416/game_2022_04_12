@@ -17,6 +17,7 @@
 #include "pause.h"
 #include "score.h"
 #include "time.h"
+#include "floor.h"
 
 //================================================
 //マクロ定義
@@ -63,6 +64,10 @@ HRESULT CGame01::Init(void)
 
 	//ポーズの生成
 	CPause::Create();
+
+	CPlayer::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, -D3DX_PI / 2.0f, 0.0f));
+
+	CFloor::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(1000.0f, 0.0f, 100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
 	return S_OK;
 }

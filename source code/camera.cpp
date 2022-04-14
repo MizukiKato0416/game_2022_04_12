@@ -116,7 +116,7 @@ void CCamera::Uninit(void)
 //================================================
 void CCamera::Update(void)
 {
-	
+	MainCameraUpdate();
 }
 
 //================================================
@@ -350,22 +350,6 @@ void CCamera::MainCameraUpdate(void)
 	CInputPadX *pInputPadX;
 	pInputPadX = CManager::GetInstance()->GetInputPadX();
 
-	//オブジェクト情報を入れるポインタ
-	vector<CObject*> object;
-
-	//先頭のポインタを代入
-	object = CObject::GetObject(static_cast<int>(CObject::PRIORITY::PLAYER));
-	int nProprty_Size = object.size();
-
-	for (int nCnt = 0; nCnt < nProprty_Size; nCnt++)
-	{
-		if (object[nProprty_Size]->GetObjType() == CObject::OBJTYPE::PLAYER)
-		{
-			//プレイヤーに追従させる
-			D3DXVECTOR3 pos = object[nProprty_Size]->GetPos();
-			m_posR = D3DXVECTOR3(pos.x + sinf(m_rot.y) * 0.0f, pos.y + 70.0f, pos.z + cosf(m_rot.y) * 0.0f);
-		}
-	}
 
 	//視点の場所を注視点を元に移動
 	m_posV.x = m_posR.x + m_fDifferVR * sinf(m_rot.x) * sinf(m_rot.y);

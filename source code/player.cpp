@@ -26,9 +26,9 @@
 //================================================
 //マクロ定義
 //================================================
-#define PLAYER_JUMP							(7.0f)		//ジャンプ力
-#define PLAYER_GRAVITY						(0.2f)		//重力の大きさ
-#define PLAYER_MOVE_SPEED					(9.0f)		//通常移動の移動量
+#define PLAYER_JUMP							(5.0f)		//ジャンプ力
+#define PLAYER_GRAVITY						(0.4f)		//重力の大きさ
+#define PLAYER_MOVE_SPEED					(4.0f)		//通常移動の移動量
 #define PLAYER_SIZE							(10.0f)		//プレイヤーのサイズ調整値
 
 //================================================
@@ -92,11 +92,10 @@ HRESULT CPlayer::Init(void)
 			//文字列の中にPARTSSETがあったら
 			if (strncmp("PARTSSET", cString, 9) == 0)
 			{
-				fscanf(pFile, "%*s%*s");
-
 				//インデックス読み込み
 				int nIndex = 0;
 				fscanf(pFile, "%*s%*s%d", &nIndex);
+				fscanf(pFile, "%*s%*s");
 
 				//親読み込み
 				int nParent = 0;
@@ -197,6 +196,9 @@ void CPlayer::Update(void)
 
 	//重力
 	m_move.y -= PLAYER_GRAVITY;
+
+	//移動処理
+	Move();
 
 	m_pos += m_move;		//移動量反映
 
@@ -443,12 +445,7 @@ void CPlayer::Move(void)
 		//回転をさせる
 		m_bRotate = true;
 
-		if (m_pMotionPlayer->GetMotion() != CMotionRoad::MOTION_PLAYER_TYPE_SLASH_01 &&	//斬撃1モーションでない
-			m_pMotionPlayer->GetMotion() != CMotionRoad::MOTION_PLAYER_TYPE_SLASH_02 &&	//斬撃2モーションでない
-			m_pMotionPlayer->GetMotion() != CMotionRoad::MOTION_PLAYER_TYPE_SLASH_03 &&	//斬撃3モーションでない
-			m_pMotionPlayer->GetMotion() != CMotionRoad::MOTION_PLAYER_TYPE_SLASH_04 &&	//斬撃4モーションでない
-			m_pMotionPlayer->GetMotion() != CMotionRoad::MOTION_PLAYER_TYPE_SPECIAL &&	//必殺技モーションでない
-			m_pMotionPlayer->GetMotion() != CMotionRoad::MOTION_PLAYER_TYPE_MOVE)		//移動モーションでない
+		if (m_pMotionPlayer->GetMotion() != CMotionRoad::MOTION_PLAYER_TYPE_MOVE)		//移動モーションでない
 		{
 			//移動モーションにする
 			m_pMotionPlayer->SetMotion(CMotionRoad::MOTION_PLAYER_TYPE_MOVE, this);
@@ -536,7 +533,7 @@ void CPlayer::Jump(void)
 	CInputPadD *pInputPadD;
 	pInputPadD = CManager::GetInstance()->GetInputPadD();
 
-	if (pInputPadD->GetTrigger(CInputPadD::A) == true)	//Aボタンを押したときの処理
+	if (pInputPadD->GetTrigger(CInputPadD::A) == true || pInputKeyboard->GetTrigger(DIK_SPACE) == true)	//Aボタンを押したときの処理
 	{
 		//移動量をジャンプ分加算
 		m_move.y = PLAYER_JUMP;

@@ -20,34 +20,10 @@ public:
 	typedef enum
 	{
 		X_TYPE_PLAYER_BODY = 0,					//プレイヤーの体
-		X_TYPE_PLAYER_HEAD,						//プレイヤーの頭
-		X_TYPE_PLAYER_ARM_R,					//プレイヤーの右上腕
-		X_TYPE_PLAYER_FRONTARM_R,				//プレイヤーの右腕
-		X_TYPE_PLAYER_HAND_R,					//プレイヤーの右手
-		X_TYPE_PLAYER_ARM_L,					//プレイヤーの左上腕
-		X_TYPE_PLAYER_FRONTARM_L,				//プレイヤーの左腕
-		X_TYPE_PLAYER_HAND_L,					//プレイヤーの左手
-		X_TYPE_PLAYER_WAIST,					//プレイヤーの腰
-		X_TYPE_PLAYER_THIGH_R,					//プレイヤーの右腿
-		X_TYPE_PLAYER_LEG_R,					//プレイヤーの右脚
-		X_TYPE_PLAYER_FOOT_R,					//プレイヤーの右足
-		X_TYPE_PLAYER_THIGH_L,					//プレイヤーの左腿
-		X_TYPE_PLAYER_LEG_L,					//プレイヤーの左脚
-		X_TYPE_PLAYER_FOOT_L,					//プレイヤーの左足
-		X_TYPE_PLAYER_SWORD,					//プレイヤーの剣
-		X_TYPE_WALL_01,							//壁01
-		X_TYPE_PILLER_01,						//柱01
-		X_TYPE_BEE,								//蜂
-		X_TYPE_ENEMY_FAT_BODY,					//太型敵の体
-		X_TYPE_ENEMY_FAT_HEAD,					//太型敵の頭
-		X_TYPE_ENEMY_FAT_ARM_R,					//太型敵の右腕
-		X_TYPE_ENEMY_FAT_ARM_L,					//太型敵の左腕
-		X_TYPE_ENEMY_FAT_LEG,					//太型敵の足
-		X_TYPE_ENEMY_BOSS_BODY,					//ボスの体
-		X_TYPE_ENEMY_BOSS_HEAD,					//ボスの頭
-		X_TYPE_ENEMY_BOSS_ARM_R,				//ボスの右腕
-		X_TYPE_ENEMY_BOSS_ARM_L,				//ボスの左腕
-		X_TYPE_ENEMY_BOSS_LEG,					//ボスの足
+		X_TYPE_PLAYER_ARM_R,					//プレイヤーの右腕
+		X_TYPE_PLAYER_ARM_L,					//プレイヤーの左腕
+		X_TYPE_PLAYER_LEG_R,					//プレイヤーの右足
+		X_TYPE_PLAYER_LEG_L,					//プレイヤーの右足
 		X_TYPE_MAX								//最大数
 	} X_TYPE;
 

@@ -100,12 +100,8 @@ HRESULT CMotionPlayer::Init(CPlayer *&pPlayer)
 				D3DXVECTOR3 pos = pPlayer->GetModelPos(nCntModel);
 				D3DXVECTOR3 rot = pPlayer->GetModelRot(nCntModel);
 
-				m_aInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].pos.x = pos.x + m_aInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].pos.x;
-				m_aInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].pos.y = pos.y + m_aInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].pos.y;
-				m_aInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].pos.z = pos.z + m_aInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].pos.z;
-				m_aInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].rot.x = rot.x + m_aInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].rot.x;
-				m_aInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].rot.y = rot.y + m_aInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].rot.y;
-				m_aInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].rot.z = rot.z + m_aInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].rot.z;
+				m_aInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].pos += pos;
+				m_aInfo[nCntMotion].aKeyInfo[nCntKey].aKey[nCntModel].rot += rot;
 			}
 		}
 	}
@@ -306,10 +302,6 @@ void CMotionPlayer::Update(CPlayer *pPlayer)
 				{
 					//次のモーションをニュートラルモーションにする
 					SetMotion(CMotionRoad::MOTION_PLAYER_TYPE_NEUTRAL, pPlayer);
-					if (m_typeOld == CMotionRoad::MOTION_PLAYER_TYPE_SLASH_04)
-					{
-						m_fConnectMaxFrame = 30;
-					}
 				}
 				else	//ループするとき
 				{
