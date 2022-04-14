@@ -17,7 +17,7 @@
 #include "pause.h"
 #include "score.h"
 #include "time.h"
-#include "floor.h"
+#include "load.h"
 
 //================================================
 //É}ÉNÉçíËã`
@@ -67,7 +67,7 @@ HRESULT CGame01::Init(void)
 
 	CPlayer::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, -D3DX_PI / 2.0f, 0.0f));
 
-	CFloor::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(1000.0f, 0.0f, 100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	CLoad::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), CLoad::HAPPENING_TYPE::NONE);
 
 	return S_OK;
 }

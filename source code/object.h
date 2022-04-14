@@ -30,6 +30,7 @@ public:
 		POLYGON_3D,		//3Dポリゴン
 		SHADOW,			//影
 		MESH_FIELD,		//メッシュフィールド
+		STAGE,			//ステージ
 		EFFECT3D,			//パーティクル
 		UI,				//UI
 		RANKING,			//ランキング
