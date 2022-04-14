@@ -7,13 +7,13 @@
 //=============================================================================
 // インクルード
 //=============================================================================
-#include "load.h"
+#include "road.h"
 #include "floor.h"
 
 //=============================================================================
 // デフォルトコンストラクタ
 //=============================================================================
-CLoad::CLoad(CObject::PRIORITY priorty) : CObject(priorty)
+CRoad::CRoad(CObject::PRIORITY priorty) : CObject(priorty)
 {
 
 }
@@ -21,7 +21,7 @@ CLoad::CLoad(CObject::PRIORITY priorty) : CObject(priorty)
 //=============================================================================
 // デフォルトデストラクタ
 //=============================================================================
-CLoad::~CLoad()
+CRoad::~CRoad()
 {
 
 }
@@ -29,7 +29,7 @@ CLoad::~CLoad()
 //=============================================================================
 // 初期化処理
 //=============================================================================
-HRESULT CLoad::Init(void)
+HRESULT CRoad::Init(void)
 {
 	m_floor = CFloor::Create(m_pos, D3DXVECTOR3(1000.0f, 0.0f, 100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
@@ -47,7 +47,7 @@ HRESULT CLoad::Init(void)
 //=============================================================================
 // 終了処理
 //=============================================================================
-void CLoad::Uninit(void)
+void CRoad::Uninit(void)
 {
 	m_floor->Uninit();
 }
@@ -55,7 +55,7 @@ void CLoad::Uninit(void)
 //=============================================================================
 // 更新処理
 //=============================================================================
-void CLoad::Update(void)
+void CRoad::Update(void)
 {
 	D3DXVECTOR3 pos = m_floor->GetPos();
 	pos.x -= m_move_speed;
@@ -65,7 +65,7 @@ void CLoad::Update(void)
 //=============================================================================
 // 描画処理
 //=============================================================================
-void CLoad::Draw(void)
+void CRoad::Draw(void)
 {
 
 }
@@ -73,13 +73,13 @@ void CLoad::Draw(void)
 //================================================
 //生成処理
 //================================================
-CLoad *CLoad::Create(const D3DXVECTOR3 &pos, const HAPPENING_TYPE &type, const float &move_speed)
+CRoad *CRoad::Create(const D3DXVECTOR3 &pos, const HAPPENING_TYPE &type, const float &move_speed)
 {
 	//インスタンスの生成
-	CLoad *load = nullptr;
+	CRoad *load = nullptr;
 	if (load == nullptr)
 	{
-		load = new CLoad();
+		load = new CRoad();
 		if (load != nullptr)
 		{
 			load->m_pos = pos;

@@ -151,3 +151,5 @@ $RECYCLE.BIN/
 /source code/*.db
 /source code/Debug
 /source code/x64
+/source code/Debug
+/source code/x64

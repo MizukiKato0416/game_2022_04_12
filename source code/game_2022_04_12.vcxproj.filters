@@ -266,7 +266,7 @@
     <ClInclude Include="x_load.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="load.h">
+    <ClInclude Include="road.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

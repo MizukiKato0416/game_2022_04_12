@@ -20,7 +20,7 @@ class CFloor;
 //*****************************************************************************
 // クラス定義
 //*****************************************************************************
-class CLoad : public CObject
+class CRoad : public CObject
 {
 public:
 	//---------------------------
@@ -30,14 +30,15 @@ public:
 	{
 		NONE = 0,	// 無し
 	};
-	CLoad(CObject::PRIORITY priorty = PRIORITY::STAGE);	// デフォルトコンストラクタ
-	~CLoad();	// デフォルトデストラクタ
+	CRoad(CObject::PRIORITY priorty = PRIORITY::ROAD);	// デフォルトコンストラクタ
+	~CRoad();	// デフォルトデストラクタ
 	HRESULT Init(void);	// 初期化
 	void Uninit(void);	// 終了
 	void Update(void);	// 更新
 	void Draw(void);	// 描画
-	static CLoad *Create(const D3DXVECTOR3 &pos, const HAPPENING_TYPE &type, const float &move_speed);	// 生成処理
+	static CRoad *Create(const D3DXVECTOR3 &pos, const HAPPENING_TYPE &type, const float &move_speed);	// 生成処理
 	void SetSpeed(const int &move_speed) { m_move_speed = move_speed; }	// セッター
+	float GetSpeed(void) { return m_move_speed; }	// ゲッダー
 private:
 	HAPPENING_TYPE m_happening_type;	// 種類
 	D3DXVECTOR3 m_pos;	// 位置
