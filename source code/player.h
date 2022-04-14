@@ -61,8 +61,8 @@ private:
 	float m_fObjectiveRot;							//目的の向き
 	float m_fNumRot;								//向きを変える量
 	bool m_bRotate;									//回転しているかどうか
-	bool m_bJump;									//ジャンプしてるかどうか
-	
+	bool m_bShot;									//発射したかどうか
+	float m_fJump;									//ジャンプ力
 };
 
 #endif // !_PLAYER_H_

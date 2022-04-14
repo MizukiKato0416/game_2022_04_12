@@ -644,7 +644,7 @@ void CManager::SetMode(MODE mode)
 				//ƒƒCƒ“ƒJƒƒ‰‚Ì¶¬
 				for (int nCntCamera = 0; nCntCamera < MAX_MAIN_CAMERA; nCntCamera++)
 				{
-					m_apCamera[nCntCamera] = CCamera::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(CAMERA_INIT_ROT_X, D3DX_PI, 0.0f),
+					m_apCamera[nCntCamera] = CCamera::Create(CAMERA_INIT_POS, D3DXVECTOR3(CAMERA_INIT_ROT_X, D3DX_PI, 0.0f),
 																(float)(SCREEN_WIDTH / MAX_MAIN_CAMERA * nCntCamera), 0.0f,
 																(float)(SCREEN_WIDTH / MAX_MAIN_CAMERA), (float)SCREEN_HEIGHT);
 					m_apCamera[nCntCamera]->SetNum(nCntCamera);

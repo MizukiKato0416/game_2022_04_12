@@ -25,7 +25,7 @@ class CTitle : public CObject
 {
 public:
 	CTitle(CObject::PRIORITY Priority = CObject::PRIORITY::NONE);		//コンストラクタ
-	~CTitle();									//デストラクタ
+	~CTitle();															//デストラクタ
 
 	//メンバ関数
 	HRESULT Init(void);
