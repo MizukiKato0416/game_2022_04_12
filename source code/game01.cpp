@@ -17,7 +17,7 @@
 #include "pause.h"
 #include "score.h"
 #include "time.h"
-#include "load.h"
+#include "road.h"
 #include "floor.h"
 
 //================================================
@@ -71,7 +71,7 @@ HRESULT CGame01::Init(void)
 
 	m_pFloor = CFloor::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(2000.0f, 0.0f, 100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
-	CLoad::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), CLoad::HAPPENING_TYPE::NONE, 0.0f);
+	CRoad::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), CRoad::HAPPENING_TYPE::NONE, 0.0f);
 
 	return S_OK;
 }

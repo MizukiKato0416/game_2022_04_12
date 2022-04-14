@@ -138,7 +138,7 @@
     <ClCompile Include="x_load.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="load.cpp">
+    <ClCompile Include="road.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
