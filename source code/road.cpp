@@ -9,6 +9,8 @@
 //=============================================================================
 #include "road.h"
 #include "floor.h"
+#include "manager.h"
+#include "texture.h"
 
 //=============================================================================
 // デフォルトコンストラクタ
@@ -32,6 +34,7 @@ CRoad::~CRoad()
 HRESULT CRoad::Init(void)
 {
 	m_floor = CFloor::Create(m_pos, m_size, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	m_floor->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_DUNGEON_WALL"));
 
 	switch (m_happening_type)
 	{
@@ -52,6 +55,7 @@ HRESULT CRoad::Init(void)
 void CRoad::Uninit(void)
 {
 	m_floor->Uninit();
+	Release();
 }
 
 //=============================================================================

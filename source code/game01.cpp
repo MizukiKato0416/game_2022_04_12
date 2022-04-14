@@ -23,7 +23,7 @@
 //================================================
 //マクロ定義
 //================================================
-#define GAME01_ROAD_SPEED		(-10.0f)								//道が進むスピード
+#define GAME01_ROAD_SPEED		(-30.0f)								//道が進むスピード
 
 //================================================
 //静的メンバ変数宣言
@@ -113,27 +113,22 @@ void CGame01::Update(void)
 			m_apRoad[0]->SetSpeed(GAME01_ROAD_SPEED);
 		}
 
-		////道1の位置がプレイヤーの位置よりも小さくなったら
-		//if (m_apRoad[1]->GetPos() <= m_pPlayer->GetPos())
-		//{
-		//	//道0を消す
-		//	m_apRoad[0]->Uninit();
-		//	m_apRoad[0] = nullptr;
 
-		//	if (m_apRoad[0] == nullptr)
-		//	{
-		//		//1の情報を0にコピー
-		//		m_apRoad[0] = m_apRoad[1];
-		//	}
-		//}
-
-		//プレイヤーの位置取得
-		D3DXVECTOR3 playerPos = m_pPlayer->GetPos();
-		//道0の位置取得
-		D3DXVECTOR3 roadPos = m_apRoad[0]->GetPos();
+		if (m_apRoad[1] != nullptr)
+		{
+			//道1の位置がプレイヤーの位置よりも小さくなったら
+			if (m_apRoad[1]->GetPos().x <= m_pPlayer->GetPos().x)
+			{
+				//道0を消す
+				m_apRoad[0]->Uninit();
+				m_apRoad[0] = nullptr;
+				//配列を入れ替える
+				std::swap(m_apRoad[1], m_apRoad[0]);
+			}
+		}
 
 		//道0の位置がプレイヤーの位置よりも小さくなったら
-		if (roadPos.x <= playerPos.x)
+		if (m_apRoad[0]->GetPos().x <= m_pPlayer->GetPos().x)
 		{
 			if (m_apRoad[1] == nullptr)
 			{

@@ -200,9 +200,6 @@ void CPlayer::Update(void)
 	//d—Í
 	m_move.y -= PLAYER_GRAVITY;
 
-	//ˆÚ“®ˆ—
-	Move();
-
 	m_pos += m_move;		//ˆÚ“®—Ê”½‰f
 
 	//‰ñ“]‚ÌŠµ«
