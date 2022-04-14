@@ -59,7 +59,7 @@ void CLoad::Update(void)
 {
 	D3DXVECTOR3 pos = m_floor->GetPos();
 	pos.x -= 3.0f;
-	m_floor->SetPos(pos, D3DXVECTOR3(1000.0f, 1.0f, 100.0f));
+	m_floor->SetPos(pos, D3DXVECTOR3(1000.0f, 0.0f, 100.0f));
 }
 
 //=============================================================================
