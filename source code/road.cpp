@@ -31,7 +31,7 @@ CRoad::~CRoad()
 //=============================================================================
 HRESULT CRoad::Init(void)
 {
-	m_floor = CFloor::Create(m_pos, D3DXVECTOR3(1000.0f, 0.0f, 100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	m_floor = CFloor::Create(m_pos, m_size, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
 	switch (m_happening_type)
 	{
@@ -58,7 +58,11 @@ void CRoad::Uninit(void)
 void CRoad::Update(void)
 {
 	D3DXVECTOR3 pos = m_floor->GetPos();
+
+	m_pos = pos;
 	pos.x -= m_move_speed;
+
+	CObject::SetPos(m_pos);
 	m_floor->SetPos(pos, D3DXVECTOR3(1000.0f, 0.0f, 100.0f));
 }
 
@@ -73,7 +77,7 @@ void CRoad::Draw(void)
 //================================================
 //生成処理
 //================================================
-CRoad *CRoad::Create(const D3DXVECTOR3 &pos, const HAPPENING_TYPE &type, const float &move_speed)
+CRoad *CRoad::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const HAPPENING_TYPE &type, const float &move_speed)
 {
 	//インスタンスの生成
 	CRoad *load = nullptr;
@@ -83,6 +87,7 @@ CRoad *CRoad::Create(const D3DXVECTOR3 &pos, const HAPPENING_TYPE &type, const f
 		if (load != nullptr)
 		{
 			load->m_pos = pos;
+			load->m_size = size;
 			load->m_move_speed = move_speed;
 			load->m_happening_type = type;
 			load->Init();
