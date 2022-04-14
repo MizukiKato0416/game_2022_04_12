@@ -29,7 +29,7 @@ public:
 		MAX
 	};
 
-	explicit CUi(CObject::PRIORITY Priority = CObject::PRIORITY::UI);	//コンストラクタ
+	CUi(CObject::PRIORITY Priority = CObject::PRIORITY::UI);	//コンストラクタ
 	~CUi();								//デストラクタ
 
 	//メンバ関数
