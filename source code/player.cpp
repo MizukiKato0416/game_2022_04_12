@@ -26,7 +26,8 @@
 //================================================
 //マクロ定義
 //================================================
-#define PLAYER_JUMP							(5.0f)		//ジャンプ力
+#define PLAYER_JUMP							(20.0f)		//ジャンプ力
+#define PLAYER_BOUND						(0.85f)		//バウンド力
 #define PLAYER_GRAVITY						(0.4f)		//重力の大きさ
 #define PLAYER_MOVE_SPEED					(4.0f)		//通常移動の移動量
 #define PLAYER_SIZE							(10.0f)		//プレイヤーのサイズ調整値
@@ -51,7 +52,8 @@ CPlayer::CPlayer(CObject::PRIORITY Priority):CObject(Priority)
 	m_fObjectiveRot = 0.0f;
 	m_fNumRot = 0.0f;
 	m_bRotate = false;
-	m_bJump = false;
+	m_bShot = false;
+	m_fJump = 0.0f;
 }
 
 //================================================
@@ -76,7 +78,8 @@ HRESULT CPlayer::Init(void)
 	m_fObjectiveRot = 0.0f;
 	m_fNumRot = 0.0f;
 	m_bRotate = false;
-	m_bJump = false;
+	m_bShot = false;
+	m_fJump = PLAYER_JUMP;
 
 	//モデルの生成
 	//textファイル読み込み
@@ -211,32 +214,41 @@ void CPlayer::Update(void)
 	//位置反映
 	SetPos(m_pos);
 
+
+
+
 	//床との当たり判定
 	if (CFloor::Collision(this) == true)
 	{
-		m_bJump = false;
+		//重力を0にする
 		m_move.y = 0.0f;
-		//ジャンプ処理
-		Jump();
-
-		if (m_bJump == false)
+		//発射していない状態なら
+		if (m_bShot == false)
 		{
-			m_move.y -= 40.0f;
+			//ジャンプ処理
+			Jump();
+		}
+		else
+		{
+			//ジャンプ力を小さくする
+			m_fJump *= PLAYER_BOUND;
+			//バウンドさせる
+			m_move.y = m_fJump;
 		}
 	}
 
 	//モデルとの当たり判定
 	if (CModelSingle::Collision(this) == true)
 	{
-		m_bJump = false;
+		//m_bJump = false;
 		m_move.y = 0.0f;
 		//ジャンプ処理
 		Jump();
 
-		if (m_bJump == false)
+		/*if (m_bJump == false)
 		{
 			m_move.y -= 40.0f;
-		}
+		}*/
 	}
 
 	//メッシュフィールドとの当たり判定
@@ -536,8 +548,8 @@ void CPlayer::Jump(void)
 	if (pInputPadD->GetTrigger(CInputPadD::A) == true || pInputKeyboard->GetTrigger(DIK_SPACE) == true)	//Aボタンを押したときの処理
 	{
 		//移動量をジャンプ分加算
-		m_move.y = PLAYER_JUMP;
-		m_bJump = true;
+		m_move.y = m_fJump;
+		m_bShot = true;
 	}
 }
 
