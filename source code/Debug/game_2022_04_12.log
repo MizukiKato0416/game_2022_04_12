@@ -1,4 +1,0 @@
-﻿  game01.cpp
-c:\users\student\documents\visual studio 2015\projects\game_2022_04_12\source code\load.h(40): warning C4244: '=': 'const int' から 'float' への変換です。データが失われる可能性があります。
-  game_2022_04_12.vcxproj -> C:\Users\student\Documents\Visual Studio 2015\Projects\game_2022_04_12\source code\Debug\game_2022_04_12.exe
-  game_2022_04_12.vcxproj -> C:\Users\student\Documents\Visual Studio 2015\Projects\game_2022_04_12\source code\Debug\game_2022_04_12.pdb (Full PDB)
