@@ -23,6 +23,7 @@
 //================================================
 //マクロ定義
 //================================================
+#define GAME01_ROAD_SPEED		(-10.0f)		//道が進むスピード
 
 //================================================
 //静的メンバ変数宣言
@@ -35,6 +36,7 @@ CGame01::CGame01(CObject::PRIORITY Priority):CObject(Priority)
 {
 	m_pPlayer = nullptr;
 	m_pFloor = nullptr;
+	memset(m_apRoad, NULL, sizeof(m_apRoad[GAME01_MAX_ROAD]));
 }
 
 //================================================
@@ -70,8 +72,9 @@ HRESULT CGame01::Init(void)
 	m_pPlayer = CPlayer::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, -D3DX_PI / 2.0f, 0.0f));
 
 	m_pFloor = CFloor::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(2000.0f, 0.0f, 100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	m_pFloor->SetCol(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
 
-	CRoad::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), CRoad::HAPPENING_TYPE::NONE, 0.0f);
+	m_apRoad[0] = CRoad::Create(D3DXVECTOR3(2000.0f, 0.0f, 0.0f), CRoad::HAPPENING_TYPE::NONE, 0.0f);
 
 	return S_OK;
 }
@@ -100,10 +103,30 @@ void CGame01::Update(void)
 		D3DXVECTOR3 floorPos = m_pFloor->GetPos();
 		D3DXVECTOR3 floorSize = m_pFloor->GetSize();
 		//位置Xを移動させる
-		floorPos.x -= 3.0f;
+		floorPos.x += GAME01_ROAD_SPEED;
 		//位置設定
 		m_pFloor->SetPos(floorPos, floorSize);
+
+		//道の移動量が0がったら移動させる
+		if (m_apRoad[0]->GetSpeed() == 0.0f)
+		{
+			m_apRoad[0]->SetSpeed(GAME01_ROAD_SPEED);
+		}
+
+		//道0の位置がプレイヤーの位置よりも小さくなったら
+		if ()
+		{
+
+		}
+
+
+
 	}
+
+
+
+
+
 
 
 

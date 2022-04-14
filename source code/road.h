@@ -37,7 +37,7 @@ public:
 	void Update(void);	// 更新
 	void Draw(void);	// 描画
 	static CRoad *Create(const D3DXVECTOR3 &pos, const HAPPENING_TYPE &type, const float &move_speed);	// 生成処理
-	void SetSpeed(const int &move_speed) { m_move_speed = move_speed; }	// セッター
+	void SetSpeed(const float &move_speed) { m_move_speed = move_speed; }	// セッター
 	float GetSpeed(void) { return m_move_speed; }	// ゲッダー
 private:
 	HAPPENING_TYPE m_happening_type;	// 種類

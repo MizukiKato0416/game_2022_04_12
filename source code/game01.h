@@ -10,10 +10,12 @@
 //前方宣言
 class CPlayer;
 class CFloor;
+class CRoad;
 
 //================================================
 //マクロ定義
 //================================================
+#define GAME01_MAX_ROAD		(2)		//道の最大数
 
 //========================================================
 //構造体の定義
@@ -37,8 +39,9 @@ public:
 
 private:
 	//メンバ変数
-	CPlayer *m_pPlayer;		//プレイヤーのポインタ
-	CFloor *m_pFloor;		//床のポインタ
+	CPlayer *m_pPlayer;					//プレイヤーのポインタ
+	CFloor *m_pFloor;					//床のポインタ
+	CRoad *m_apRoad[GAME01_MAX_ROAD];	//道のポインタ
 };
 
 #endif // !_GAME01_H_
