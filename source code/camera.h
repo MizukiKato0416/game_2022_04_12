@@ -9,10 +9,11 @@
 //========================================================
 //マクロ定義
 //========================================================
-#define MAX_CAMERA					(1)						//カメラの最大数
-#define MAX_MAIN_CAMERA				(1)						//メインカメラの最大数
-#define CAMERA_DISTANCE				(220.0f)				//視点と注視点の距離
-#define CAMERA_INIT_ROT_X			(1.5f)					//カメラの向きX
+#define MAX_CAMERA					(1)									//カメラの最大数
+#define MAX_MAIN_CAMERA				(1)									//メインカメラの最大数
+#define CAMERA_DISTANCE				(1000.0f)							//視点と注視点の距離
+#define CAMERA_INIT_ROT_X			(1.5f)								//カメラの向きX
+#define CAMERA_INIT_POS				(D3DXVECTOR3(0.0f, 300.0f, 0.0f))	//カメラの初期位置
 
 //================================================
 //クラスの定義

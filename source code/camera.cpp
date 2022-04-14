@@ -24,10 +24,6 @@
 #define CAMERA_V_MIN_POS_Y			(50.0f)									//視点のy座標最小値
 #define CAMERA_MAX_RENDERER			(200000.0f)								//cameraでの描画最大Z値
 #define CAMERA_MIN_RENDERER			(50.0f)									//cameraでの描画最小Z値
-#define CAMERA_SWAY_SMALL_X_RAND	(float (rand() % 200 + -100) / 100)		//揺れ幅(x座標)を決めるためのランダム値
-#define CAMERA_SWAY_SMALL_Y_RAND	(float (rand() % 200 + -100) / 100)		//揺れ幅(y座標)を決めるためのランダム値
-#define CAMERA_SWAY_LARGE_X_RAND	(float (rand() % 600 + -300) / 100)		//揺れ幅(x座標)を決めるためのランダム値
-#define CAMERA_SWAY_LARGE_Y_RAND	(float (rand() % 1200 + -600) / 100)	//揺れ幅(y座標)を決めるためのランダム値
 
 //================================================
 //静的メンバ変数宣言
@@ -81,7 +77,7 @@ HRESULT CCamera::Init(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const floa
 	m_rotAsk = D3DXVECTOR3(0.0f, 0.0f, 0.0f);		//目的のカメラの向き
 	m_posV = pos;									//現在の視点
 	m_posVDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);		//目的の視点
-	m_posR = D3DXVECTOR3(0.0f, 0.0f, 0.0f);			//現在の注視点
+	m_posR = CAMERA_INIT_POS;						//現在の注視点
 	m_posRDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);		//目的の注視点
 	m_vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);			//法線
 	m_numRot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);		//向きを変える量
