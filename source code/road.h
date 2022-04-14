@@ -38,8 +38,6 @@ public:
 	void Draw(void);	// 描画
 	static CRoad *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const HAPPENING_TYPE &type, const float &move_speed);	// 生成処理
 	void SetSpeed(const float &move_speed) { m_move_speed = move_speed; }	// セッター
-	void SetPos(const D3DXVECTOR3 &pos) { m_pos = pos; }	// セッター
-	void SetSize(const D3DXVECTOR3 &size) { m_size = size; }	// セッター
 	float GetSpeed(void) { return m_move_speed; }	// ゲッダー
 private:
 	HAPPENING_TYPE m_happening_type;	// 種類

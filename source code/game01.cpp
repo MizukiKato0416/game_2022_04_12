@@ -23,7 +23,7 @@
 //================================================
 //マクロ定義
 //================================================
-#define GAME01_ROAD_SPEED		(-10.0f)		//道が進むスピード
+#define GAME01_ROAD_SPEED		(-10.0f)								//道が進むスピード
 
 //================================================
 //静的メンバ変数宣言
@@ -74,7 +74,7 @@ HRESULT CGame01::Init(void)
 	m_pFloor = CFloor::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(2000.0f, 0.0f, 100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	m_pFloor->SetCol(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
 
-	m_apRoad[0] = CRoad::Create(D3DXVECTOR3(2000.0f, 0.0f, 0.0f), CRoad::HAPPENING_TYPE::NONE, 0.0f);
+	m_apRoad[0] = CRoad::Create(D3DXVECTOR3(2000.0f, 0.0f, 0.0f), FLOOR_SIZE, CRoad::HAPPENING_TYPE::NONE, 0.0f);
 
 	return S_OK;
 }
@@ -113,15 +113,36 @@ void CGame01::Update(void)
 			m_apRoad[0]->SetSpeed(GAME01_ROAD_SPEED);
 		}
 
+		////道1の位置がプレイヤーの位置よりも小さくなったら
+		//if (m_apRoad[1]->GetPos() <= m_pPlayer->GetPos())
+		//{
+		//	//道0を消す
+		//	m_apRoad[0]->Uninit();
+		//	m_apRoad[0] = nullptr;
+
+		//	if (m_apRoad[0] == nullptr)
+		//	{
+		//		//1の情報を0にコピー
+		//		m_apRoad[0] = m_apRoad[1];
+		//	}
+		//}
+
+		//プレイヤーの位置取得
+		D3DXVECTOR3 playerPos = m_pPlayer->GetPos();
+		//道0の位置取得
+		D3DXVECTOR3 roadPos = m_apRoad[0]->GetPos();
+
 		//道0の位置がプレイヤーの位置よりも小さくなったら
-		if (m_apRoad[0]->GetPos() <= m_pPlayer->GetPos)
+		if (roadPos.x <= playerPos.x)
 		{
 			if (m_apRoad[1] == nullptr)
 			{
-				m_apRoad[1] = CRoad::Create(D3DXVECTOR3(2000.0f, 0.0f, 0.0f), CRoad::HAPPENING_TYPE::NONE, 0.0f);
+				//プレイヤーの現在地化から道の現在地を引く
+				D3DXVECTOR3 pos = m_pPlayer->GetPos() - m_apRoad[0]->GetPos();
+				//引いて出た分だけXの位置をずらして道を生成
+				m_apRoad[1] = CRoad::Create(D3DXVECTOR3(2000.0f - pos.x, 0.0f, 0.0f), FLOOR_SIZE, CRoad::HAPPENING_TYPE::NONE, GAME01_ROAD_SPEED);
 			}
 		}
-
 
 
 	}

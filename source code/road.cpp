@@ -41,6 +41,8 @@ HRESULT CRoad::Init(void)
 		break;
 	}
 
+	SetPos(m_pos);
+
 	return S_OK;
 }
 
@@ -60,9 +62,10 @@ void CRoad::Update(void)
 	m_pos = m_floor->GetPos();
 	m_size = m_floor->GetSize();
 
-	m_pos.x -= m_move_speed;
+	m_pos.x += m_move_speed;
 
 	m_floor->SetPos(m_pos, m_size);
+	SetPos(m_pos);
 }
 
 //=============================================================================
