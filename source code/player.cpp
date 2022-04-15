@@ -27,10 +27,11 @@
 //マクロ定義
 //================================================
 #define PLAYER_JUMP							(15.0f)		//ジャンプ力
-#define PLAYER_JUMP_MIN						(0.0001f)	//ジャンプ力最小値
-#define PLAYER_BOUND						(0.82f)		//バウンド力
-#define PLAYER_MOVE_FORWARD_SUBTRACTION		(0.85f)		//前に進む力の減算量
+#define PLAYER_JUMP_MIN						(0.1f)	//ジャンプ力最小値
+#define PLAYER_BOUND						(0.84f)		//バウンド力
+#define PLAYER_MOVE_FORWARD_SUBTRACTION		(0.993f)	//前に進む力の減算量
 #define PLAYER_MOVE_FORWARD_MIN				(1.0f)		//前に進む力の最小値
+#define PLAYER_MOVE_FORWARD_MAX				(70.0f)		//前に進む力の最大値
 #define PLAYER_GRAVITY						(0.4f)		//重力の大きさ
 #define PLAYER_MOVE_SPEED					(4.0f)		//通常移動の移動量
 #define PLAYER_SIZE							(10.0f)		//プレイヤーのサイズ調整値
@@ -216,8 +217,19 @@ void CPlayer::Update(void)
 	//位置反映
 	SetPos(m_pos);
 
+	//発射している状態なら
+	if (m_bShot == true)
+	{
 
-
+		//前に進む力を少なくする
+		m_fMoveForward *= PLAYER_MOVE_FORWARD_SUBTRACTION;
+		//前に進む力が既定の値より小さくなったら
+		if (m_fMoveForward < PLAYER_MOVE_FORWARD_MIN)
+		{
+			//0にする
+			m_fMoveForward = 0.0f;
+		}
+	}
 
 	//床との当たり判定
 	if (CFloor::Collision(this) == true)
@@ -241,15 +253,6 @@ void CPlayer::Update(void)
 			}
 			//バウンドさせる
 			m_move.y = m_fJump;
-			
-			//前に進む力を少なくする
-			m_fMoveForward *= PLAYER_MOVE_FORWARD_SUBTRACTION;
-			//前に進む力が既定の値より小さくなったら
-			if (m_fMoveForward < PLAYER_MOVE_FORWARD_MIN)
-			{
-				//0にする
-				m_fMoveForward = 0.0f;
-			}
 		}
 	}
 
@@ -292,6 +295,11 @@ void CPlayer::Update(void)
 		m_fJump = PLAYER_JUMP;
 		m_move.y = m_fJump;
 		m_fMoveForward += PLAYER_MOVE_FORWARD;
+
+		if (m_fMoveForward >= PLAYER_MOVE_FORWARD_MAX)
+		{
+			m_fMoveForward = PLAYER_MOVE_FORWARD_MAX;
+		}
 	}
 #endif // !_DEBUG
 
