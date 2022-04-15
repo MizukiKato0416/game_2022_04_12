@@ -40,7 +40,7 @@ HRESULT CRoad::Init(void)
 	switch (m_happening_type)
 	{
 	case CModelSingle::HAPPENING_TYPE::NONE:
-		//m_happening_model = CModelSingle::Create();
+		//m_happening_model = CModelSingle::Create(D3DXVECTOR3(m_pos.x + 500.0f, m_pos.y, m_pos.z), D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_PLAYER_BODY, );
 		break;
 	default:
 		break;
