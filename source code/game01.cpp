@@ -23,7 +23,6 @@
 //================================================
 //マクロ定義
 //================================================
-#define GAME01_ROAD_SPEED		(-30.0f)								//道が進むスピード
 
 //================================================
 //静的メンバ変数宣言
@@ -99,20 +98,26 @@ void CGame01::Update(void)
 	//発射したら
 	if (m_pPlayer->GetShot() == true)
 	{
-		//位置サイズを取得
-		D3DXVECTOR3 floorPos = m_pFloor->GetPos();
-		D3DXVECTOR3 floorSize = m_pFloor->GetSize();
-		//位置Xを移動させる
-		floorPos.x += GAME01_ROAD_SPEED;
-		//位置設定
-		m_pFloor->SetPos(floorPos, floorSize);
-
-		//道の移動量が0がったら移動させる
-		if (m_apRoad[0]->GetSpeed() == 0.0f)
+		//スタート地点の床が消えていなかったら
+		if (m_pFloor != nullptr)
 		{
-			m_apRoad[0]->SetSpeed(GAME01_ROAD_SPEED);
+			//位置サイズを取得
+			D3DXVECTOR3 floorPos = m_pFloor->GetPos();
+			D3DXVECTOR3 floorSize = m_pFloor->GetSize();
+			//位置Xを移動させる
+			floorPos.x += -m_pPlayer->GetMoveForward();
+			//位置設定
+			m_pFloor->SetPos(floorPos, floorSize);
 		}
 
+		//常にプレイヤーが前に進む力分逆の方向に移動させる
+		for (int nCntRoad = 0; nCntRoad < GAME01_MAX_ROAD; nCntRoad++)
+		{
+			if (m_apRoad[nCntRoad] != nullptr)
+			{
+				m_apRoad[nCntRoad]->SetSpeed(-m_pPlayer->GetMoveForward());
+			}
+		}
 
 		if (m_apRoad[1] != nullptr)
 		{
@@ -124,6 +129,14 @@ void CGame01::Update(void)
 				m_apRoad[0] = nullptr;
 				//配列を入れ替える
 				std::swap(m_apRoad[1], m_apRoad[0]);
+
+				//スタート地点の床が消えていなかったら
+				if (m_pFloor != nullptr)
+				{
+					//消す
+					m_pFloor->Uninit();
+					m_pFloor = nullptr;
+				}
 			}
 		}
 
@@ -135,29 +148,17 @@ void CGame01::Update(void)
 				//プレイヤーの現在地化から道の現在地を引く
 				D3DXVECTOR3 pos = m_pPlayer->GetPos() - m_apRoad[0]->GetPos();
 				//引いて出た分だけXの位置をずらして道を生成
-				m_apRoad[1] = CRoad::Create(D3DXVECTOR3(2000.0f - pos.x, 0.0f, 0.0f), FLOOR_SIZE, CRoad::HAPPENING_TYPE::NONE, GAME01_ROAD_SPEED);
+				m_apRoad[1] = CRoad::Create(D3DXVECTOR3(2000.0f - pos.x, 0.0f, 0.0f), FLOOR_SIZE, CRoad::HAPPENING_TYPE::NONE, -m_pPlayer->GetMoveForward());
 			}
 		}
-
-
 	}
-
-
-
-
-
-
-
-
-
-
 
 	//キーボード取得処理
 	CInputKeyboard *pInputKeyboard;
 	pInputKeyboard = CManager::GetInstance()->GetInputKeyboard();
 
 	//Enterキー、スタートボタンを押したら
-	if (pInputKeyboard->GetTrigger(DIK_RETURN) == true)
+	if (pInputKeyboard->GetTrigger(DIK_LSHIFT) == true)
 	{
 		//フェード取得処理
 		CFade *pFade;

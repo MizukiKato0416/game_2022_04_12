@@ -27,7 +27,10 @@
 //マクロ定義
 //================================================
 #define PLAYER_JUMP							(15.0f)		//ジャンプ力
+#define PLAYER_JUMP_MIN						(0.5f)		//ジャンプ力最小値
 #define PLAYER_BOUND						(0.82f)		//バウンド力
+#define PLAYER_MOVE_FORWARD_SUBTRACTION		(0.85f)		//前に進む力の減算量
+#define PLAYER_MOVE_FORWARD_MIN				(1.0f)		//前に進む力の最小値
 #define PLAYER_GRAVITY						(0.4f)		//重力の大きさ
 #define PLAYER_MOVE_SPEED					(4.0f)		//通常移動の移動量
 #define PLAYER_SIZE							(10.0f)		//プレイヤーのサイズ調整値
@@ -54,6 +57,7 @@ CPlayer::CPlayer(CObject::PRIORITY Priority):CObject(Priority)
 	m_bRotate = false;
 	m_bShot = false;
 	m_fJump = 0.0f;
+	m_fMoveForward = 0.0f;
 }
 
 //================================================
@@ -80,6 +84,7 @@ HRESULT CPlayer::Init(void)
 	m_bRotate = false;
 	m_bShot = false;
 	m_fJump = PLAYER_JUMP;
+	m_fMoveForward = PLAYER_MOVE_FORWARD;
 
 	//モデルの生成
 	//textファイル読み込み
@@ -229,8 +234,22 @@ void CPlayer::Update(void)
 		{
 			//ジャンプ力を小さくする
 			m_fJump *= PLAYER_BOUND;
+			//ジャンプ力が既定の値より小さくなったら
+			if (m_fJump < PLAYER_JUMP_MIN)
+			{
+				m_fJump = 0.0f;
+			}
 			//バウンドさせる
 			m_move.y = m_fJump;
+			
+			//前に進む力を少なくする
+			m_fMoveForward *= PLAYER_MOVE_FORWARD_SUBTRACTION;
+			//前に進む力が既定の値より小さくなったら
+			if (m_fMoveForward < PLAYER_MOVE_FORWARD_MIN)
+			{
+				//0にする
+				m_fMoveForward = 0.0f;
+			}
 		}
 	}
 
@@ -261,6 +280,23 @@ void CPlayer::Update(void)
 	//		m_move.y -= 40.0f;
 	//	}
 	//}
+
+#ifdef _DEBUG
+	//キーボード取得処理
+	CInputKeyboard *pInputKeyboard;
+	pInputKeyboard = CManager::GetInstance()->GetInputKeyboard();
+
+	//Enterキー、スタートボタンを押したら
+	if (pInputKeyboard->GetTrigger(DIK_UP) == true)
+	{
+		m_fJump = 20.0f;
+		m_move.y = m_fJump;
+		m_fMoveForward = 50.0f;
+	}
+#endif // !_DEBUG
+
+
+
 
 	//位置取得
 	pos = GetPos();

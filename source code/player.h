@@ -13,7 +13,8 @@ class CMotionPlayer;
 //================================================
 //マクロ定義
 //================================================
-#define MAX_PLAYER_MODEL					(5)		//モデルの数
+#define MAX_PLAYER_MODEL					(5)			//モデルの数
+#define PLAYER_MOVE_FORWARD					(30.0f)		//プレイヤーが前に進むスピード
 
 //================================================
 //クラスの定義
@@ -42,6 +43,8 @@ public:
 	static void CPlayer::Collision(CObject *&pSubjectObject, const float &fObjRadius);		//当たり判定処理
 	bool CPlayer::CollisionOnly(CObject *&pSubjectObject, const float &fObjRadius);			//衝突判定のみの処理
 	bool GetShot(void) { return m_bShot; }													//発射取得処理
+	float GetMoveForward(void) { return m_fMoveForward; }									//前に進む力取得処理
+	void GetMoveForward(const float &fMoveForward) { m_fMoveForward = fMoveForward; }		//前に進む力設定処理
 
 private:
 	//メンバ関数
@@ -64,6 +67,7 @@ private:
 	bool m_bRotate;									//回転しているかどうか
 	bool m_bShot;									//発射したかどうか
 	float m_fJump;									//ジャンプ力
+	float m_fMoveForward;							//前に進む力
 };
 
 #endif // !_PLAYER_H_
