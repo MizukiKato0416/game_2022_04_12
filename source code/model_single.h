@@ -26,11 +26,11 @@ public:
 	//---------------------------
 	enum class HAPPENING_TYPE
 	{
-		TRAMPOLINE = 0,	// トランポリン
+		NONE = 0,	// 無し
+		TRAMPOLINE,	// トランポリン
 		FAN,	// 扇風機
 		BALANCE_BALL,	// バランスボール
 		GIRL,	// ロキ子
-		NONE,	// 無し
 		MAX,	// 総数
 	};
 	//メンバ関数
@@ -45,6 +45,8 @@ public:
 	static bool SimpleCollision(CObject *&pObject);	//回転させたらダメな当たり判定
 	static bool Collision(CObject *pObject);		//y軸を回転させていい当たり判定
 	static bool CollisionAny(CObject *&pObject);		//ただの衝突判定
+	void SetPos(const D3DXVECTOR3 &pos) { m_pos = pos; }
+	D3DXVECTOR3 GetPos(void) { return m_pos; }
 
 private:
 	//メンバ変数

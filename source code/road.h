@@ -16,6 +16,7 @@
 //マクロ定義
 //================================================
 #define CANDIDATES_POS_00 (-500)	// 候補位置
+#define CANDIDATES_POS_01 (500)	// 候補位置
 
 //*****************************************************************************
 // 前方宣言
@@ -49,10 +50,12 @@ public:
 	void SetSpeed(const float &move_speed) { m_move_speed = move_speed; }	// セッター
 	float GetSpeed(void) { return m_move_speed; }	// ゲッダー
 private:
+	void SkyInstallation(const int &happening_type);	// 空用の設置
+	void GroundInstallation(const int &happening_type, const int &installation_position);	// 地面用の設置
 	D3DXVECTOR3 m_pos;	// 位置
 	D3DXVECTOR3 m_size;	// サイズ
 	CFloor *m_floor;	// 床
-	CModelSingle *m_happening_model;	// ハプニング用モデル
+	vector<CModelSingle*> m_happening_model;	// ハプニング用モデル
 	float m_move_speed;	// 移動量
 };
 

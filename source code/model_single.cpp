@@ -52,7 +52,6 @@ HRESULT CModelSingle::Init(void)
 	//親の設定
 	m_pModel->SetParent(m_pParent);
 
-
 	//オブジェクトの種類の設定
 	SetObjType(CObject::OBJTYPE::MODEL);
 

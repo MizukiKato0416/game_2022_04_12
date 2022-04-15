@@ -48,10 +48,13 @@ HRESULT CRoad::Init(void)
 		switch ((CANDIDATES_PLACE)count_candidate)
 		{
 		case CANDIDATES_PLACE::CANDIDATES_00:
-			if (happening_type <= (int)CModelSingle::HAPPENING_TYPE::GIRL)
-			{
-				m_happening_model = CModelSingle::Create(D3DXVECTOR3(m_pos.x + CANDIDATES_POS_00, m_pos.y, m_pos.z), D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_PLAYER_BODY, NULL, false);
-			}
+			GroundInstallation(happening_type, CANDIDATES_POS_00);
+			break;
+		case CANDIDATES_PLACE::CANDIDATES_01:
+			GroundInstallation(happening_type, CANDIDATES_POS_01);
+			break;
+		case CANDIDATES_PLACE::CANDIDATES_02:
+			SkyInstallation(happening_type);
 			break;
 		default:
 			break;
@@ -68,13 +71,21 @@ HRESULT CRoad::Init(void)
 //=============================================================================
 void CRoad::Uninit(void)
 {
+	int model_size = m_happening_model.size();
 	if (m_floor != nullptr)
 	{
 		m_floor->Uninit();
 	}
-	if (m_happening_model != nullptr)
+	for (int model_count = 0; model_count < model_size; model_count++)
 	{
-		m_happening_model->Uninit();
+		if (m_happening_model[model_count] != nullptr)
+		{
+			m_happening_model[model_count]->Uninit();
+			m_happening_model[model_count] = NULL;
+			m_happening_model.erase(m_happening_model.begin() + model_count);
+			model_size = m_happening_model.size();
+			model_count--;
+		}
 	}
 	Release();
 }
@@ -84,6 +95,8 @@ void CRoad::Uninit(void)
 //=============================================================================
 void CRoad::Update(void)
 {
+	int model_size = m_happening_model.size();
+
 	m_pos = m_floor->GetPos();
 	m_size = m_floor->GetSize();
 
@@ -91,6 +104,16 @@ void CRoad::Update(void)
 
 	m_floor->SetPos(m_pos, m_size);
 	SetPos(m_pos);
+
+	for (int mdoel_sount = 0; mdoel_sount < model_size; mdoel_sount++)
+	{
+		D3DXVECTOR3 pos = m_happening_model[mdoel_sount]->GetPos();
+		D3DXVECTOR3 size = m_happening_model[mdoel_sount]->GetSize();
+
+		pos.x += m_move_speed;
+
+		m_happening_model[mdoel_sount]->SetPos(pos);
+	}
 }
 
 //=============================================================================
@@ -120,4 +143,37 @@ CRoad *CRoad::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const floa
 		}
 	}
 	return load;
+}
+
+//================================================
+//ê›íuèàóù
+//================================================
+void CRoad::SkyInstallation(const int &happening_type)
+{
+	switch ((CModelSingle::HAPPENING_TYPE)happening_type)
+	{
+	default:
+		break;
+	}
+}
+
+void CRoad::GroundInstallation(const int &happening_type, const int &installation_position)
+{
+	switch ((CModelSingle::HAPPENING_TYPE)happening_type)
+	{
+	case CModelSingle::HAPPENING_TYPE::TRAMPOLINE:
+		m_happening_model.push_back(CModelSingle::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y, m_pos.z), D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_PLAYER_BODY, NULL, false));
+		break;
+	case CModelSingle::HAPPENING_TYPE::FAN:
+		m_happening_model.push_back(CModelSingle::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y, m_pos.z), D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_PLAYER_BODY, NULL, false));
+		break;
+	case CModelSingle::HAPPENING_TYPE::BALANCE_BALL:
+		m_happening_model.push_back(CModelSingle::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y, m_pos.z), D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_PLAYER_BODY, NULL, false));
+		break;
+	case CModelSingle::HAPPENING_TYPE::GIRL:
+		m_happening_model.push_back(CModelSingle::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y, m_pos.z), D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_PLAYER_BODY, NULL, false));
+		break;
+	default:
+		break;
+	}
 }
