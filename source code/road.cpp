@@ -50,7 +50,7 @@ HRESULT CRoad::Init(void)
 		case CANDIDATES_PLACE::CANDIDATES_00:
 			if (happening_type <= (int)CModelSingle::HAPPENING_TYPE::GIRL)
 			{
-				m_happening_model = CModelSingle::Create(D3DXVECTOR3(m_pos.x + CANDIDATES_POS_00, m_pos.y, m_pos.z), D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_PLAYER_BODY, );
+				m_happening_model = CModelSingle::Create(D3DXVECTOR3(m_pos.x + CANDIDATES_POS_00, m_pos.y, m_pos.z), D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_PLAYER_BODY, NULL, false);
 			}
 			break;
 		default:
@@ -68,8 +68,14 @@ HRESULT CRoad::Init(void)
 //=============================================================================
 void CRoad::Uninit(void)
 {
-	m_floor->Uninit();
-	m_happening_model->Uninit();
+	if (m_floor != nullptr)
+	{
+		m_floor->Uninit();
+	}
+	if (m_happening_model != nullptr)
+	{
+		m_happening_model->Uninit();
+	}
 	Release();
 }
 

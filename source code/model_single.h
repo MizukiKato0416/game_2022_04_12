@@ -41,7 +41,7 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	static CModelSingle *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const CXload::X_TYPE &type, CModel *&pParent, const bool &Collision);
+	static CModelSingle *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const CXload::X_TYPE &type, CModel *pParent, const bool &Collision);
 	static bool SimpleCollision(CObject *&pObject);	//‰ñ“]‚³‚¹‚½‚çƒ_ƒ‚È“–‚½‚è”»’è
 	static bool Collision(CObject *pObject);		//y²‚ğ‰ñ“]‚³‚¹‚Ä‚¢‚¢“–‚½‚è”»’è
 	static bool CollisionAny(CObject *&pObject);		//‚½‚¾‚ÌÕ“Ë”»’è

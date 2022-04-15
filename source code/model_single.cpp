@@ -112,7 +112,7 @@ void CModelSingle::Draw(void)
 //================================================
 //生成処理
 //================================================
-CModelSingle *CModelSingle::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const CXload::X_TYPE &type, CModel *&pParent, const bool &Collision)
+CModelSingle *CModelSingle::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const CXload::X_TYPE &type, CModel *pParent, const bool &Collision)
 {
 	//インスタンスの生成
 	CModelSingle *pModelSingle = nullptr;
@@ -260,10 +260,10 @@ bool CModelSingle::Collision(CObject *pObject)
 
 	for (int nCnt = 0; nCnt < nProprty_Size; nCnt++)
 	{
-		if (object[nProprty_Size]->GetObjType() == CObject::OBJTYPE::MODEL)
+		if (object[nCnt]->GetObjType() == CObject::OBJTYPE::MODEL)
 		{
 			//pObjectをCModelSingleにキャスト
-			CModelSingle *pModelSingle = (CModelSingle*)object[nProprty_Size];
+			CModelSingle *pModelSingle = (CModelSingle*)object[nCnt];
 
 			//当たり判定をする設定なら
 			if (pModelSingle->m_bCollision == true)
@@ -498,10 +498,10 @@ bool CModelSingle::CollisionAny(CObject *&pObject)
 
 	for (int nCnt = 0; nCnt < nProprty_Size; nCnt++)
 	{
-		if (object[nProprty_Size]->GetObjType() == CObject::OBJTYPE::MODEL)
+		if (object[nCnt]->GetObjType() == CObject::OBJTYPE::MODEL)
 		{
 			//pObjectをCModelSingleにキャスト
-			CModelSingle *pModelSingle = (CModelSingle*)object[nProprty_Size];
+			CModelSingle *pModelSingle = (CModelSingle*)object[nCnt];
 
 			//当たり判定をする設定なら
 			if (pModelSingle->m_bCollision == true)
