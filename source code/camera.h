@@ -11,9 +11,9 @@
 //========================================================
 #define MAX_CAMERA					(1)									//カメラの最大数
 #define MAX_MAIN_CAMERA				(1)									//メインカメラの最大数
-#define CAMERA_DISTANCE				(600.0f)							//視点と注視点の距離
+#define CAMERA_DISTANCE				(500.0f)							//視点と注視点の距離
 #define CAMERA_INIT_ROT_X			(1.5f)								//カメラの向きX
-#define CAMERA_INIT_POS				(D3DXVECTOR3(0.0f, 200.0f, 0.0f))	//カメラの初期位置
+#define CAMERA_INIT_POS				(D3DXVECTOR3(0.0f, 100.0f, 0.0f))	//カメラの初期位置
 
 //================================================
 //クラスの定義
@@ -34,11 +34,11 @@ public:
 
 	D3DXVECTOR3 GetPosV(void);					//視点取得処理
 	D3DXVECTOR3 GetPosR(void);					//注視点取得処理
-	void SetPosV(const D3DXVECTOR3 &pos);				//視点設定処理
-	void SetPosR(const D3DXVECTOR3 &pos);				//注視点設定処理
+	void SetPosV(const D3DXVECTOR3 &pos);		//視点設定処理
+	void SetPosR(const D3DXVECTOR3 &pos);		//注視点設定処理
 	D3DXVECTOR3 GetRotV(void);					//視点の向き取得処理
-	void SetRotV(const D3DXVECTOR3 &rot);				//視点の向き設定処理
-	void SetNum(const int &nNum);						//cameraの個体識別番号設定処理
+	void SetRotV(const D3DXVECTOR3 &rot);		//視点の向き設定処理
+	void SetNum(const int &nNum);				//cameraの個体識別番号設定処理
 	int GetNum(void);							//cameraの個体識別番号取得処理
 	//ビューポート取得処理
 	D3DVIEWPORT9 *GetViewPort(void) { return &m_viewport; }

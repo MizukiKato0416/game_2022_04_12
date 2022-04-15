@@ -27,7 +27,7 @@
 //マクロ定義
 //================================================
 #define PLAYER_JUMP							(15.0f)		//ジャンプ力
-#define PLAYER_JUMP_MIN						(0.5f)		//ジャンプ力最小値
+#define PLAYER_JUMP_MIN						(0.0001f)	//ジャンプ力最小値
 #define PLAYER_BOUND						(0.82f)		//バウンド力
 #define PLAYER_MOVE_FORWARD_SUBTRACTION		(0.85f)		//前に進む力の減算量
 #define PLAYER_MOVE_FORWARD_MIN				(1.0f)		//前に進む力の最小値
@@ -289,9 +289,9 @@ void CPlayer::Update(void)
 	//Enterキー、スタートボタンを押したら
 	if (pInputKeyboard->GetTrigger(DIK_UP) == true)
 	{
-		m_fJump = 20.0f;
+		m_fJump = PLAYER_JUMP;
 		m_move.y = m_fJump;
-		m_fMoveForward = 50.0f;
+		m_fMoveForward += PLAYER_MOVE_FORWARD;
 	}
 #endif // !_DEBUG
 
