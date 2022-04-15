@@ -21,6 +21,13 @@ class CModel;
 class CModelSingle : public CObject
 {
 public:
+	//---------------------------
+	// 列挙型
+	//---------------------------
+	enum class HAPPENING_TYPE
+	{
+		NONE = 0,	// 無し
+	};
 	//メンバ関数
 	CModelSingle(CObject::PRIORITY Priority = CObject::PRIORITY::MODEL);				//コンストラクタ
 	~CModelSingle();											//デストラクタ

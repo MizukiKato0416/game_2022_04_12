@@ -9,6 +9,7 @@
 //=============================================================================
 #include "road.h"
 #include "floor.h"
+#include "model_single.h"
 #include "manager.h"
 #include "texture.h"
 
@@ -38,7 +39,8 @@ HRESULT CRoad::Init(void)
 
 	switch (m_happening_type)
 	{
-	case HAPPENING_TYPE::NONE:
+	case CModelSingle::HAPPENING_TYPE::NONE:
+		//m_happening_model = CModelSingle::Create();
 		break;
 	default:
 		break;
@@ -55,6 +57,7 @@ HRESULT CRoad::Init(void)
 void CRoad::Uninit(void)
 {
 	m_floor->Uninit();
+	m_happening_model->Uninit();
 	Release();
 }
 
@@ -83,7 +86,7 @@ void CRoad::Draw(void)
 //================================================
 //生成処理
 //================================================
-CRoad *CRoad::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const HAPPENING_TYPE &type, const float &move_speed)
+CRoad *CRoad::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const CModelSingle::HAPPENING_TYPE &type, const float &move_speed)
 {
 	//インスタンスの生成
 	CRoad *load = nullptr;
