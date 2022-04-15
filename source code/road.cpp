@@ -36,6 +36,7 @@ HRESULT CRoad::Init(void)
 {
 	m_floor = CFloor::Create(m_pos, m_size, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	m_floor->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_DUNGEON_WALL"));
+	int n = 19;
 
 	switch (m_happening_type)
 	{
