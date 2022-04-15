@@ -76,7 +76,7 @@ HRESULT CGame01::Init(void)
 	m_pFloor->SetCol(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
 
 	//最初の道の生成
-	m_apRoad[0] = CRoad::Create(D3DXVECTOR3(FLOOR_SIZE.x, 0.0f, 0.0f), FLOOR_SIZE, CModelSingle::HAPPENING_TYPE::NONE, 0.0f);
+	m_apRoad[0] = CRoad::Create(D3DXVECTOR3(FLOOR_SIZE.x, 0.0f, 0.0f), FLOOR_SIZE, 0.0f);
 
 	return S_OK;
 }
@@ -151,7 +151,7 @@ void CGame01::Update(void)
 				//プレイヤーの現在地化から道の現在地を引く
 				D3DXVECTOR3 pos = m_pPlayer->GetPos() - m_apRoad[0]->GetPos();
 				//引いて出た分だけXの位置をずらして道を生成
-				m_apRoad[1] = CRoad::Create(D3DXVECTOR3(FLOOR_SIZE.x - pos.x, 0.0f, 0.0f), FLOOR_SIZE, CModelSingle::HAPPENING_TYPE::NONE, -m_pPlayer->GetMoveForward());
+				m_apRoad[1] = CRoad::Create(D3DXVECTOR3(FLOOR_SIZE.x - pos.x, 0.0f, 0.0f), FLOOR_SIZE, -m_pPlayer->GetMoveForward());
 			}
 		}
 	}

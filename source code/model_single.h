@@ -26,7 +26,12 @@ public:
 	//---------------------------
 	enum class HAPPENING_TYPE
 	{
-		NONE = 0,	// 無し
+		TRAMPOLINE = 0,	// トランポリン
+		FAN,	// 扇風機
+		BALANCE_BALL,	// バランスボール
+		GIRL,	// ロキ子
+		NONE,	// 無し
+		MAX,	// 総数
 	};
 	//メンバ関数
 	CModelSingle(CObject::PRIORITY Priority = CObject::PRIORITY::MODEL);				//コンストラクタ

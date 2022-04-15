@@ -7,6 +7,7 @@
 //=============================================================================
 // インクルード
 //=============================================================================
+#include <random>
 #include "road.h"
 #include "floor.h"
 #include "model_single.h"
@@ -37,13 +38,24 @@ HRESULT CRoad::Init(void)
 	m_floor = CFloor::Create(m_pos, m_size, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	m_floor->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_DUNGEON_WALL"));
 
-	switch (m_happening_type)
+	for (int count_candidate = 0; count_candidate < (int)CANDIDATES_PLACE::MAX; count_candidate++)
 	{
-	case CModelSingle::HAPPENING_TYPE::NONE:
-		//m_happening_model = CModelSingle::Create(D3DXVECTOR3(m_pos.x + 500.0f, m_pos.y, m_pos.z), D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_PLAYER_BODY, );
-		break;
-	default:
-		break;
+		random_device randomdev;
+		mt19937 mt(randomdev());
+		uniform_int_distribution<> randomangle(0, 9);
+		int happening_type = randomangle(mt);
+
+		switch ((CANDIDATES_PLACE)count_candidate)
+		{
+		case CANDIDATES_PLACE::CANDIDATES_00:
+			if (happening_type <= (int)CModelSingle::HAPPENING_TYPE::GIRL)
+			{
+				m_happening_model = CModelSingle::Create(D3DXVECTOR3(m_pos.x + CANDIDATES_POS_00, m_pos.y, m_pos.z), D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_PLAYER_BODY, );
+			}
+			break;
+		default:
+			break;
+		}
 	}
 
 	SetPos(m_pos);
@@ -86,7 +98,7 @@ void CRoad::Draw(void)
 //================================================
 //生成処理
 //================================================
-CRoad *CRoad::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const CModelSingle::HAPPENING_TYPE &type, const float &move_speed)
+CRoad *CRoad::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const float &move_speed)
 {
 	//インスタンスの生成
 	CRoad *load = nullptr;
@@ -98,7 +110,6 @@ CRoad *CRoad::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const CMod
 			load->m_pos = pos;
 			load->m_size = size;
 			load->m_move_speed = move_speed;
-			load->m_happening_type = type;
 			load->Init();
 		}
 	}

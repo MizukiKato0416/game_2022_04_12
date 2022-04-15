@@ -12,6 +12,11 @@
 //*****************************************************************************
 #include "object.h"
 
+//================================================
+//マクロ定義
+//================================================
+#define CANDIDATES_POS_00 (-500)	// 候補位置
+
 //*****************************************************************************
 // 前方宣言
 //*****************************************************************************
@@ -24,17 +29,26 @@ class CModelSingle;
 class CRoad : public CObject
 {
 public:
+	//---------------------------
+	// 列挙型
+	//---------------------------
+	enum class CANDIDATES_PLACE
+	{
+		CANDIDATES_00 = 0,	// 候補1
+		CANDIDATES_01,	// 候補2
+		CANDIDATES_02,	// 候補3
+		MAX	// 総数
+	};
 	CRoad(CObject::PRIORITY priorty = PRIORITY::ROAD);	// デフォルトコンストラクタ
 	~CRoad();	// デフォルトデストラクタ
 	HRESULT Init(void);	// 初期化
 	void Uninit(void);	// 終了
 	void Update(void);	// 更新
 	void Draw(void);	// 描画
-	static CRoad *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const CModelSingle::HAPPENING_TYPE &type, const float &move_speed);	// 生成処理
+	static CRoad *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const float &move_speed);	// 生成処理
 	void SetSpeed(const float &move_speed) { m_move_speed = move_speed; }	// セッター
 	float GetSpeed(void) { return m_move_speed; }	// ゲッダー
 private:
-	CModelSingle::HAPPENING_TYPE m_happening_type;	// 種類
 	D3DXVECTOR3 m_pos;	// 位置
 	D3DXVECTOR3 m_size;	// サイズ
 	CFloor *m_floor;	// 床
