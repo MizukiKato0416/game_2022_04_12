@@ -27,9 +27,9 @@
 //マクロ定義
 //================================================
 #define PLAYER_JUMP							(15.0f)		//ジャンプ力
-#define PLAYER_JUMP_MIN						(0.1f)	//ジャンプ力最小値
+#define PLAYER_JUMP_MIN						(5.0f)		//ジャンプ力最小値
 #define PLAYER_BOUND						(0.84f)		//バウンド力
-#define PLAYER_MOVE_FORWARD_SUBTRACTION		(0.993f)	//前に進む力の減算量
+#define PLAYER_MOVE_FORWARD_SUBTRACTION		(0.991f)	//前に進む力の減算量
 #define PLAYER_MOVE_FORWARD_MIN				(1.0f)		//前に進む力の最小値
 #define PLAYER_MOVE_FORWARD_MAX				(70.0f)		//前に進む力の最大値
 #define PLAYER_GRAVITY						(0.4f)		//重力の大きさ
