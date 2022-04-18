@@ -25,14 +25,14 @@ public:
 	enum class PRIORITY
 	{
 		NONE = 0,			//なし
-		PLAYER,			//プレイヤー
+		PLAYER,				//プレイヤー
 		MODEL,				//モデル
-		POLYGON_3D,		//3Dポリゴン
-		SHADOW,			//影
-		MESH_FIELD,		//メッシュフィールド
-		ROAD,			//ステージ
+		POLYGON_3D,			//3Dポリゴン
+		SHADOW,				//影
+		MESH_FIELD,			//メッシュフィールド
+		ROAD,				//ステージ
 		EFFECT3D,			//パーティクル
-		UI,				//UI
+		UI,					//UI
 		RANKING,			//ランキング
 		MASK,				//マスク
 		PAUSE,				//ポーズ

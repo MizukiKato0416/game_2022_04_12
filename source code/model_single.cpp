@@ -26,6 +26,7 @@ CModelSingle::CModelSingle(CObject::PRIORITY Priority):CObject(Priority)
 	m_pParent = nullptr;
 	m_pModel = nullptr;
 	m_bCollision = false;
+	m_happeningType = HAPPENING_TYPE::NONE;
 }
 
 //================================================
@@ -58,7 +59,7 @@ HRESULT CModelSingle::Init(void)
 	//サイズを取得
 	m_size = m_pModel->GetSize();
 	SetSize(m_size);
-	SetPos(m_pos);
+	CObject::SetPos(m_pos);
 
 	return S_OK;
 }
@@ -111,7 +112,7 @@ void CModelSingle::Draw(void)
 //================================================
 //生成処理
 //================================================
-CModelSingle *CModelSingle::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const CXload::X_TYPE &type, CModel *pParent, const bool &Collision)
+CModelSingle *CModelSingle::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const CXload::X_TYPE &type, CModel *pParent, const bool &Collision, HAPPENING_TYPE happeningType)
 {
 	//インスタンスの生成
 	CModelSingle *pModelSingle = nullptr;
@@ -125,6 +126,7 @@ CModelSingle *CModelSingle::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &ro
 			pModelSingle->m_type = type;
 			pModelSingle->m_pParent = pParent;
 			pModelSingle->m_pos = pos;
+			pModelSingle->m_happeningType = happeningType;
 			pModelSingle->Init();
 		}
 	}
@@ -486,7 +488,7 @@ bool CModelSingle::Collision(CObject *pObject)
 //================================================
 //ただの衝突判定
 //================================================
-bool CModelSingle::CollisionAny(CObject *&pObject)
+int CModelSingle::CollisionAny(CObject *pObject)
 {
 	//オブジェクト情報を入れるポインタ
 	vector<CObject*> object;
@@ -511,6 +513,27 @@ bool CModelSingle::CollisionAny(CObject *&pObject)
 				{
 					vtxPos[nCntVtx] = pModelSingle->m_pModel->GetVtxPos(nCntVtx);
 				}
+
+				//プレイヤーのサイズ取得
+				D3DXVECTOR3 objectSize = pObject->GetSize();
+
+				//対象の幅の分大きくする
+				vtxPos[0].x -= objectSize.x / 2.0f;
+				vtxPos[1].x += objectSize.x / 2.0f;
+				vtxPos[2].x -= objectSize.x / 2.0f;
+				vtxPos[3].x += objectSize.x / 2.0f;
+				vtxPos[4].x -= objectSize.x / 2.0f;
+				vtxPos[5].x += objectSize.x / 2.0f;
+				vtxPos[6].x -= objectSize.x / 2.0f;
+				vtxPos[7].x += objectSize.x / 2.0f;
+				vtxPos[0].z += objectSize.x / 2.0f;
+				vtxPos[1].z += objectSize.x / 2.0f;
+				vtxPos[2].z += objectSize.x / 2.0f;
+				vtxPos[3].z += objectSize.x / 2.0f;
+				vtxPos[4].z -= objectSize.x / 2.0f;
+				vtxPos[5].z -= objectSize.x / 2.0f;
+				vtxPos[6].z -= objectSize.x / 2.0f;
+				vtxPos[7].z -= objectSize.x / 2.0f;
 
 				//8頂点のワールドマトリックスを取得
 				D3DXMATRIX *pVtxMtxWorld = pModelSingle->m_pModel->GetVtxMtxWorld();
@@ -584,10 +607,29 @@ bool CModelSingle::CollisionAny(CObject *&pObject)
 				if (fVecDot[0] <= 0.0f && fVecDot[1] <= 0.0f && fVecDot[2] <= 0.0f &&
 					fVecDot[3] <= 0.0f && fVecDot[4] <= 0.0f && fVecDot[5] <= 0.0f)
 				{
-					return true;
+					//モデルのタイプによって返り値を変える
+					switch (pModelSingle->m_happeningType)
+					{
+					case CModelSingle::HAPPENING_TYPE::NONE:
+						break;
+					case CModelSingle::HAPPENING_TYPE::TRAMPOLINE:
+						return (int)CModelSingle::HAPPENING_TYPE::TRAMPOLINE;
+						break;
+					case CModelSingle::HAPPENING_TYPE::FAN:
+						return (int)CModelSingle::HAPPENING_TYPE::FAN;
+						break;
+					case CModelSingle::HAPPENING_TYPE::BALANCE_BALL:
+						return (int)CModelSingle::HAPPENING_TYPE::BALANCE_BALL;
+						break;
+					case CModelSingle::HAPPENING_TYPE::GIRL:
+						return (int)CModelSingle::HAPPENING_TYPE::GIRL;
+						break;
+					default:
+						break;
+					}
 				}
 			}
 		}
 	}
-	return false;
+	return 0;	//当たっていない
 }

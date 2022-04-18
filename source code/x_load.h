@@ -24,6 +24,7 @@ public:
 		X_TYPE_PLAYER_ARM_L,					//プレイヤーの左腕
 		X_TYPE_PLAYER_LEG_R,					//プレイヤーの右足
 		X_TYPE_PLAYER_LEG_L,					//プレイヤーの右足
+		X_TYPE_A,								//プレイヤーの右足
 		X_TYPE_MAX								//最大数
 	} X_TYPE;
 

@@ -27,8 +27,16 @@
 //マクロ定義
 //================================================
 #define PLAYER_JUMP							(15.0f)		//ジャンプ力
+#define PLAYER_JUMP_TRAMPOLINE				(30.0f)		//トランポリンのジャンプ力
+#define PLAYER_JUMP_FAN						(10.0f)		//扇風機のジャンプ力
+#define PLAYER_JUMP_BALANCE_BALL			(15.0f)		//バランスボールのジャンプ力
+#define PLAYER_JUMP_GIRL					(20.0f)		//ロキコちゃんのジャンプ力
 #define PLAYER_JUMP_MIN						(5.0f)		//ジャンプ力最小値
 #define PLAYER_BOUND						(0.84f)		//バウンド力
+#define PLAYER_MOVE_FORWARD_TRAMPOLINE		(20.0f)		//トランポリンの前に進む力
+#define PLAYER_MOVE_FORWARD_FAN				(40.0f)		//扇風機の前に進む力
+#define PLAYER_MOVE_FORWARD_BALANCE_BALL	(30.0f)		//バランスボールの前に進む力
+#define PLAYER_MOVE_FORWARD_GIRL			(40.0f)		//ロキコちゃんの前に進む力
 #define PLAYER_MOVE_FORWARD_SUBTRACTION		(0.991f)	//前に進む力の減算量
 #define PLAYER_MOVE_FORWARD_MIN				(1.0f)		//前に進む力の最小値
 #define PLAYER_MOVE_FORWARD_MAX				(70.0f)		//前に進む力の最大値
@@ -84,8 +92,8 @@ HRESULT CPlayer::Init(void)
 	m_fNumRot = 0.0f;
 	m_bRotate = false;
 	m_bShot = false;
-	m_fJump = PLAYER_JUMP;
-	m_fMoveForward = PLAYER_MOVE_FORWARD;
+	m_fJump = 0.0f;
+	m_fMoveForward = 0.0f;
 
 	//モデルの生成
 	//textファイル読み込み
@@ -206,6 +214,8 @@ void CPlayer::Update(void)
 	//重力
 	m_move.y -= PLAYER_GRAVITY;
 
+	Move();
+
 	m_pos += m_move;		//移動量反映
 
 	//回転の慣性
@@ -226,8 +236,17 @@ void CPlayer::Update(void)
 		//前に進む力が既定の値より小さくなったら
 		if (m_fMoveForward < PLAYER_MOVE_FORWARD_MIN)
 		{
-			//0にする
-			m_fMoveForward = 0.0f;
+			//まだジャンプしている状態なら
+			if (m_fJump > 0.0f)
+			{
+				//少しだけ前に動かす
+				m_fMoveForward = PLAYER_MOVE_FORWARD_MIN;
+			}
+			else
+			{//ジャンプしていない状態なら
+				//0にする
+				m_fMoveForward = 0.0f;
+			}
 		}
 	}
 
@@ -257,18 +276,49 @@ void CPlayer::Update(void)
 	}
 
 	//モデルとの当たり判定
-	if (CModelSingle::Collision(this) == true)
+	int nHappeningType = 0;
+	nHappeningType = CModelSingle::CollisionAny(this);
+	//当たっているなら
+	if (nHappeningType != 0)
 	{
-		//m_bJump = false;
-		m_move.y = 0.0f;
-		//ジャンプ処理
-		Jump();
+		//ジャンプ量用変数
+		float fJump = 0.0f;
+		//前に進む量用変数
+		float fMoveForward = 0.0f;
 
-		/*if (m_bJump == false)
+		//返り値によって何に当たったのかを判断してそれぞれの処理を実行
+		switch (nHappeningType)
 		{
-			m_move.y -= 40.0f;
-		}*/
+		case (int)CModelSingle::HAPPENING_TYPE::TRAMPOLINE:
+			fJump = PLAYER_JUMP_TRAMPOLINE;
+			fMoveForward = PLAYER_MOVE_FORWARD_TRAMPOLINE;
+			break;
+		case (int)CModelSingle::HAPPENING_TYPE::FAN:
+			fJump = PLAYER_JUMP_FAN;
+			fMoveForward = PLAYER_MOVE_FORWARD_FAN;
+			break;
+		case (int)CModelSingle::HAPPENING_TYPE::BALANCE_BALL:
+			fJump = PLAYER_JUMP_BALANCE_BALL;
+			fMoveForward = PLAYER_MOVE_FORWARD_BALANCE_BALL;
+			break;
+		case (int)CModelSingle::HAPPENING_TYPE::GIRL:
+			fJump = PLAYER_JUMP_GIRL;
+			fMoveForward = PLAYER_MOVE_FORWARD_GIRL;
+			break;
+		default:
+			break;
+		}
+
+		m_fJump = fJump;
+		m_move.y = m_fJump;
+		m_fMoveForward += fMoveForward;
+
+		if (m_fMoveForward >= PLAYER_MOVE_FORWARD_MAX)
+		{
+			m_fMoveForward = PLAYER_MOVE_FORWARD_MAX;
+		}
 	}
+	
 
 	//メッシュフィールドとの当たり判定
 	//if (CMeshField::Collision(this, 100.0f) == true)
@@ -588,9 +638,14 @@ void CPlayer::Jump(void)
 
 	if (pInputPadD->GetTrigger(CInputPadD::A) == true || pInputKeyboard->GetTrigger(DIK_SPACE) == true)	//Aボタンを押したときの処理
 	{
+		//ジャンプ量を設定
+		m_fJump = PLAYER_JUMP;
 		//移動量をジャンプ分加算
 		m_move.y = m_fJump;
+		//発射された状態にする
 		m_bShot = true;
+		//前に進む力を設定
+		m_fMoveForward = PLAYER_MOVE_FORWARD;
 	}
 }
 

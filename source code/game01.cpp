@@ -78,6 +78,9 @@ HRESULT CGame01::Init(void)
 	//ç≈èâÇÃìπÇÃê∂ê¨
 	m_apRoad[0] = CRoad::Create(D3DXVECTOR3(FLOOR_SIZE.x, 0.0f, 0.0f), FLOOR_SIZE, 0.0f);
 
+	CModelSingle::Create(D3DXVECTOR3(100.0f, 0.0f, 0.0f),
+			                        D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_A, NULL, true, CModelSingle::HAPPENING_TYPE::TRAMPOLINE);
+
 	return S_OK;
 }
 
