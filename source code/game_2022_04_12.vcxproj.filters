@@ -270,4 +270,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="data\TEXTURE\trophy_frag.txt">
+      <Filter>リソース ファイル</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

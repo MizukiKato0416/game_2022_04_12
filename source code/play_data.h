@@ -34,12 +34,14 @@ public:
 	CScore *GetScorePoint(void) { return m_pScore; }								//スコアのポインタ取得処理
 	void SetTime(const int &nTime) { m_nTime = nTime; }								//時間の設定
 	int GetTime(void) { return m_nTime; }											//時間の取得
+	vector<bool> GetFlag(void) { return m_trophy_flag; }	// ゲッダー
 
 private:
 	//メンバ変数
 	int m_nScore;					//スコア
 	CScore *m_pScore;				//スコアのポインタ
 	int m_nTime;					//時間
+	vector<bool> m_trophy_flag;	// トロフィーのフラグ
 };
 
 //================================================

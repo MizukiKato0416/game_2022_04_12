@@ -3,6 +3,7 @@
 //Author:‰Á“¡ˆ¨
 //================================================
 #include "play_data.h"
+#include "model_single.h"
 
 //================================================
 //Ã“Iƒƒ“ƒo•Ï”éŒ¾
@@ -16,6 +17,12 @@ CPlayData::CPlayData()
 	m_nScore = 0;
 	m_pScore = nullptr;
 	m_nTime = 0;
+	for (int count_happening = 0; count_happening < (int)CModelSingle::HAPPENING_TYPE::MAX - 1; count_happening++)
+	{
+		bool flag = false;
+
+		m_trophy_flag.push_back(flag);
+	}
 }
 
 //================================================
