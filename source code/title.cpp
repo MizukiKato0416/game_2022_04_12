@@ -59,16 +59,20 @@ HRESULT CTitle::Init(void)
 
 		if (trophy_flag[count_trophy_size])
 		{
-
+			CObject2D *pObject2D = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 4.0f) + (250.0f * count_trophy_size), SCREEN_HEIGHT / 4.0f, 0.0f),
+													 D3DXVECTOR3(200.0f, 200.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+			pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_TITLE"));
 		}
 		else
 		{
-
+			CObject2D *pObject2D = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 4.0f) + (250.0f * count_trophy_size), SCREEN_HEIGHT / 4.0f, 0.0f),
+													 D3DXVECTOR3(200.0f, 200.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+			pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_TITLE_LOGO"));
 		}
 	}
 
 	//É^ÉCÉgÉãîwåiÇÃê∂ê¨
-	CObject2D *pObject2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f), 
+	/*CObject2D *pObject2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
 											 D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 	pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_TITLE"));
 
@@ -77,7 +81,7 @@ HRESULT CTitle::Init(void)
 													  D3DXVECTOR3(TITLE_LOGO_SIZE_X, TITLE_LOGO_SIZE_Y, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 	pObject2DTitleLogo->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_TITLE_LOGO"));
 
-	m_nTitleCounter = 0;
+	m_nTitleCounter = 0;*/
 	return S_OK;
 }
 
