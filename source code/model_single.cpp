@@ -61,6 +61,8 @@ HRESULT CModelSingle::Init(void)
 	SetSize(m_size);
 	CObject::SetPos(m_pos);
 
+	//モデルのワールドマトリックス設定
+	m_pModel->SetMtxWorldPos(m_pos);
 	return S_OK;
 }
 
@@ -397,14 +399,7 @@ bool CModelSingle::Collision(CObject *pObject)
 					D3DXVECTOR3 objectPos = pos;
 					objectPos.y = ((vecNor[4].x * vecPos[4].x) - (vecNor[4].z * vecPos[4].z)) / vecNor[4].y;
 
-					if (pModelSingle->m_type == CXload::X_TYPE_CLOUD)
-					{
-						objectPos.y += pModelSingle->m_pos.y;
-					}
-					else
-					{
-						objectPos.y += pModelSingle->m_pos.y + pModelSingle->m_size.y;
-					}
+					objectPos.y += pModelSingle->m_pos.y + pModelSingle->m_size.y;
 
 					pObject->SetPos(objectPos);
 					bLand = true;

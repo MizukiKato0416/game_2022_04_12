@@ -263,7 +263,7 @@ void CPlayer::Update(void)
 		}
 	}
 
-	//°‚Æ‚Ì“–‚½‚è”»’è
+	//ƒ‚ƒfƒ‹‚Æ‚Ì“–‚½‚è”»’è
 	if (CModelSingle::Collision(this) == true)
 	{
 		//d—Í‚ğ0‚É‚·‚é

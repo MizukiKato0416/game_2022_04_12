@@ -56,6 +56,9 @@ CGame01::~CGame01()
 //================================================
 HRESULT CGame01::Init(void)
 {
+	CObject3D *pObject3D = CObject3D::Create(D3DXVECTOR3(0.0f, 0.0f, 1000.0f), D3DXVECTOR3(4000.0f, 2000.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	pObject3D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_SKY"));
+
 	//É^ÉCÉÄÇÃê∂ê¨
 	CTime::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, TIME_POLIGON_POSY, 0.0f), D3DXVECTOR3(TIME_POLYGON_WIDTH, TIME_POLYGON_HEIGHT, 0.0f), 0);
 
