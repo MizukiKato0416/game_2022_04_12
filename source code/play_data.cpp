@@ -17,12 +17,6 @@ CPlayData::CPlayData()
 	m_nScore = 0;
 	m_pScore = nullptr;
 	m_nTime = 0;
-	for (int count_happening = 0; count_happening < (int)CModelSingle::HAPPENING_TYPE::MAX - 1; count_happening++)
-	{
-		bool flag = false;
-
-		m_trophy_flag.push_back(flag);
-	}
 }
 
 //================================================
@@ -38,9 +32,19 @@ CPlayData::~CPlayData()
 //================================================
 HRESULT CPlayData::Init(void)
 {
+	FILE *file;
 	m_nScore = 0;
 	m_pScore = nullptr;
 	m_nTime = 0;
+
+	file = fopen("data/trophy_frag.txt", "r");
+
+	for (int count_flag = 0; count_flag < (int)CModelSingle::HAPPENING_TYPE::MAX - 1; count_flag++)
+	{
+		bool buf = false;
+		fscanf(file, "%*s%*s%d", &buf);
+		m_trophy_flag.push_back(buf);
+	}
 
 	return S_OK;
 }
@@ -50,5 +54,12 @@ HRESULT CPlayData::Init(void)
 //================================================
 void CPlayData::Uninit(void)
 {
-	
+	FILE *file;
+
+	file = fopen("data/trophy_frag.txt", "w");
+
+	for (int count_flag = 0; count_flag < (int)CModelSingle::HAPPENING_TYPE::MAX - 1; count_flag++)
+	{
+		fprintf(file, "frag_%d : %d\n", count_flag, m_trophy_flag[count_flag]);
+	}
 }

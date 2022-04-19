@@ -244,7 +244,7 @@
     <ClInclude Include="x_load.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="data\TEXTURE\trophy_frag.txt" />
+    <Text Include="data\trophy_frag.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

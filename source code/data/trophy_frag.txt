@@ -1,0 +1,4 @@
+frag_0 : 1
+frag_1 : 1
+frag_2 : 1
+frag_3 : 0

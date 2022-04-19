@@ -6,6 +6,7 @@
 #define _MAIN_H_
 
 //インクルードファイル
+#define _CRT_SECURE_NO_WARNINGS
 #include <windows.h>
 #include "d3dx9.h"						//描画に必要
 #define DIRECTINPUT_VERSION (0x0800)	//ビルド時の警告対応処理用マクロ
