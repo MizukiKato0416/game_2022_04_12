@@ -35,8 +35,7 @@ CRoad::~CRoad()
 //=============================================================================
 HRESULT CRoad::Init(void)
 {
-	m_floor = CFloor::Create(m_pos, m_size, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	m_floor->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_DUNGEON_WALL"));
+	m_cloud = CModelSingle::Create(D3DXVECTOR3(m_pos.x, m_pos.y, m_pos.z + 500.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_CLOUD, NULL, true, CModelSingle::HAPPENING_TYPE::NONE);
 
 	for (int count_candidate = 0; count_candidate < (int)CANDIDATES_PLACE::MAX; count_candidate++)
 	{
@@ -72,9 +71,9 @@ HRESULT CRoad::Init(void)
 void CRoad::Uninit(void)
 {
 	int model_size = m_happening_model.size();
-	if (m_floor != nullptr)
+	if (m_cloud != nullptr)
 	{
-		m_floor->Uninit();
+		m_cloud->Uninit();
 	}
 	for (int model_count = 0; model_count < model_size; model_count++)
 	{
@@ -97,12 +96,12 @@ void CRoad::Update(void)
 {
 	int model_size = m_happening_model.size();
 
-	m_pos = m_floor->GetPos();
-	m_size = m_floor->GetSize();
+	m_pos = m_cloud->GetPos();
+	m_size = m_cloud->GetSize();
 
 	m_pos.x += m_move_speed;
 
-	m_floor->SetPos(m_pos, m_size);
+	m_cloud->SetPos(m_pos);
 	SetPos(m_pos);
 
 	for (int mdoel_sount = 0; mdoel_sount < model_size; mdoel_sount++)

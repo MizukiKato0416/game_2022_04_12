@@ -42,7 +42,7 @@ public:
 	void Update(void);
 	void Draw(void);
 	static CModelSingle *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const CXload::X_TYPE &type, CModel *pParent, const bool &Collision, HAPPENING_TYPE happeningType);
-	static bool SimpleCollision(CObject *&pObject);				//‰ñ“]‚³‚¹‚½‚çƒ_ƒ‚È“–‚½‚è”»’è
+	static bool SimpleCollision(CObject *pObject);				//‰ñ“]‚³‚¹‚½‚çƒ_ƒ‚È“–‚½‚è”»’è
 	static bool Collision(CObject *pObject);					//y²‚ğ‰ñ“]‚³‚¹‚Ä‚¢‚¢“–‚½‚è”»’è
 	static int CollisionAny(CObject *pObject);					//‚½‚¾‚ÌÕ“Ë”»’è
 	void SetPos(const D3DXVECTOR3 &pos) { m_pos = pos; }		//ˆÊ’uİ’èˆ—

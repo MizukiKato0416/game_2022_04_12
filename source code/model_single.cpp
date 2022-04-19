@@ -136,7 +136,7 @@ CModelSingle *CModelSingle::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &ro
 //================================================
 //当たり判定処理
 //================================================
-bool CModelSingle::SimpleCollision(CObject *&pObject)
+bool CModelSingle::SimpleCollision(CObject *pObject)
 {
 	bool bLand = false;	//着地しているかどうか
 
@@ -390,14 +390,21 @@ bool CModelSingle::Collision(CObject *pObject)
 				}
 
 				//内積の計算結果がマイナスの時
-				if (fVecDot[0] <= 0.0f && fVecDot[1] <= 0.0f && fVecDot[2] <= 0.0f && fVecDot[3] <= 0.0f && fVecDot[4] <= 0.0f &&
-					fVecDotOld[4] > -FLT_EPSILON * 10000)
+				if (fVecDot[0] <= 0.0f && fVecDot[1] <= 0.0f && fVecDot[2] <= 0.0f && fVecDot[3] <= 0.0f && fVecDot[4] <= 0.0f/* &&
+					fVecDotOld[4] > -FLT_EPSILON * 10000*/)
 				{//上の面
 				 //押し出す位置を求める
 					D3DXVECTOR3 objectPos = pos;
 					objectPos.y = ((vecNor[4].x * vecPos[4].x) - (vecNor[4].z * vecPos[4].z)) / vecNor[4].y;
 
-					objectPos.y += pModelSingle->m_pos.y + pModelSingle->m_size.y;
+					if (pModelSingle->m_type == CXload::X_TYPE_CLOUD)
+					{
+						objectPos.y += pModelSingle->m_pos.y;
+					}
+					else
+					{
+						objectPos.y += pModelSingle->m_pos.y + pModelSingle->m_size.y;
+					}
 
 					pObject->SetPos(objectPos);
 					bLand = true;
