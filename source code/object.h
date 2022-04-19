@@ -48,6 +48,7 @@ public:
 		PLAYER,				//プレイヤー
 		MODEL,				//モデル
 		UI,					//UI
+		TROPHY,				// トロフィー
 		POLYGON_3D,			//3Dポリゴン
 		SHADOW,				//影
 		MAX

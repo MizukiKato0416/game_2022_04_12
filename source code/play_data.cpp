@@ -43,7 +43,7 @@ HRESULT CPlayData::Init(void)
 	{
 		int buf = 0;
 		fscanf(file, "%*s%*s%d", &buf);
-		m_trophy_flag.push_back(buf);
+		m_trophy_flag.push_back(static_cast<bool>(buf));
 	}
 
 	return S_OK;
