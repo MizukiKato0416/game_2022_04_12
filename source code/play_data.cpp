@@ -41,7 +41,7 @@ HRESULT CPlayData::Init(void)
 
 	for (int count_flag = 0; count_flag < (int)CModelSingle::HAPPENING_TYPE::MAX - 1; count_flag++)
 	{
-		bool buf = false;
+		int buf = 0;
 		fscanf(file, "%*s%*s%d", &buf);
 		m_trophy_flag.push_back(buf);
 	}
@@ -60,6 +60,6 @@ void CPlayData::Uninit(void)
 
 	for (int count_flag = 0; count_flag < (int)CModelSingle::HAPPENING_TYPE::MAX - 1; count_flag++)
 	{
-		fprintf(file, "frag_%d : %d\n", count_flag, m_trophy_flag[count_flag]);
+		fprintf(file, "frag_%d : %d\n", count_flag, static_cast<int>(m_trophy_flag[count_flag]));
 	}
 }
