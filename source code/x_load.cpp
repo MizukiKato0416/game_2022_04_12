@@ -55,6 +55,10 @@ void CXload::Init(void)
 	//ÉvÉåÉCÉÑÅ[ÇÃç∂ë´
 	D3DXLoadMeshFromX("data/MODEL/a.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
 		&m_apBuffMat[X_TYPE_A], NULL, &m_aNumMat[X_TYPE_A], &m_apMesh[X_TYPE_A]);
+
+	//â_
+	D3DXLoadMeshFromX("data/MODEL/cloud.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
+		&m_apBuffMat[X_TYPE_CLOUD], NULL, &m_aNumMat[X_TYPE_CLOUD], &m_apMesh[X_TYPE_CLOUD]);
 }	
 
 //=============================================================================

@@ -27,9 +27,9 @@
 //マクロ定義
 //================================================
 #define PLAYER_JUMP							(15.0f)		//ジャンプ力
-#define PLAYER_JUMP_TRAMPOLINE				(30.0f)		//トランポリンのジャンプ力
-#define PLAYER_JUMP_FAN						(10.0f)		//扇風機のジャンプ力
-#define PLAYER_JUMP_BALANCE_BALL			(15.0f)		//バランスボールのジャンプ力
+#define PLAYER_JUMP_TRAMPOLINE				(20.0f)		//トランポリンのジャンプ力
+#define PLAYER_JUMP_FAN						(7.0f)		//扇風機のジャンプ力
+#define PLAYER_JUMP_BALANCE_BALL			(13.0f)		//バランスボールのジャンプ力
 #define PLAYER_JUMP_GIRL					(20.0f)		//ロキコちゃんのジャンプ力
 #define PLAYER_JUMP_MIN						(5.0f)		//ジャンプ力最小値
 #define PLAYER_BOUND						(0.84f)		//バウンド力
@@ -261,6 +261,19 @@ void CPlayer::Update(void)
 			//ジャンプ処理
 			Jump();
 		}
+	}
+
+	//床との当たり判定
+	if (CModelSingle::Collision(this) == true)
+	{
+		//重力を0にする
+		m_move.y = 0.0f;
+		//発射していない状態なら
+		if (m_bShot == false)
+		{
+			//ジャンプ処理
+			Jump();
+		}
 		else
 		{
 			//ジャンプ力を小さくする
@@ -274,6 +287,7 @@ void CPlayer::Update(void)
 			m_move.y = m_fJump;
 		}
 	}
+
 
 	//モデルとの当たり判定
 	int nHappeningType = 0;
