@@ -41,7 +41,7 @@ public:
 	D3DXVECTOR3 GetRot(void);											//モデルの向き取得処理
 	D3DXMATRIX *GetVtxMtxWorld(void);									//ワールドマトリックス取得処理
 	void SetVtxMtxWorld(const D3DXVECTOR3 &vtxPos, const int &nCntVtx);	//ワールドマトリックス設定処理
-	void SetMtxWorldPos(const D3DXVECTOR3 &pos);						//ワールドマトリックスの位置設定処理
+	void SetMtxWorldPos(void);											//ワールドマトリックスの位置設定処理
 
 private:
 	//メンバ関数

@@ -47,6 +47,7 @@ public:
 	static int CollisionAny(CObject *pObject);					//ただの衝突判定
 	void SetPos(const D3DXVECTOR3 &pos) { m_pos = pos; }		//位置設定処理
 	D3DXVECTOR3 GetPos(void) { return m_pos; }					//位置取得処理
+	void SetMtxWorld(void);										//ワールドマトリックス設定処理
 
 private:
 	//メンバ変数

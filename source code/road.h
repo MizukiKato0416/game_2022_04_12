@@ -54,7 +54,8 @@ private:
 	void GroundInstallation(const int &happening_type, const int &installation_position);	// 地面用の設置
 	D3DXVECTOR3 m_pos;	// 位置
 	D3DXVECTOR3 m_size;	// サイズ
-	CModelSingle *m_cloud;	// 床
+	CModelSingle *m_cloud;	// 雲
+	CFloor *m_floor;	// 床
 	vector<CModelSingle*> m_happening_model;	// ハプニング用モデル
 	float m_move_speed;	// 移動量
 };

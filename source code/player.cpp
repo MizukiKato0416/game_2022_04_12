@@ -261,19 +261,6 @@ void CPlayer::Update(void)
 			//ジャンプ処理
 			Jump();
 		}
-	}
-
-	//モデルとの当たり判定
-	if (CModelSingle::Collision(this) == true)
-	{
-		//重力を0にする
-		m_move.y = 0.0f;
-		//発射していない状態なら
-		if (m_bShot == false)
-		{
-			//ジャンプ処理
-			Jump();
-		}
 		else
 		{
 			//ジャンプ力を小さくする
@@ -288,6 +275,7 @@ void CPlayer::Update(void)
 		}
 	}
 
+	
 
 	//モデルとの当たり判定
 	int nHappeningType = 0;

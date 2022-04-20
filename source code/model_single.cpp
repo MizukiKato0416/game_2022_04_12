@@ -1,6 +1,6 @@
 //================================================
 //モデル単体を出す処理
-//Author:加藤瑞葵
+//Author:KatoMizuki
 //================================================
 #include "object2D.h"
 #include "manager.h"
@@ -18,7 +18,7 @@
 //================================================
 //デフォルトコンストラクタ
 //================================================
-CModelSingle::CModelSingle(CObject::PRIORITY Priority):CObject(Priority)
+CModelSingle::CModelSingle(CObject::PRIORITY Priority) :CObject(Priority)
 {
 	m_size = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
@@ -26,7 +26,6 @@ CModelSingle::CModelSingle(CObject::PRIORITY Priority):CObject(Priority)
 	m_pParent = nullptr;
 	m_pModel = nullptr;
 	m_bCollision = false;
-	m_happeningType = HAPPENING_TYPE::NONE;
 }
 
 //================================================
@@ -53,16 +52,15 @@ HRESULT CModelSingle::Init(void)
 	//親の設定
 	m_pModel->SetParent(m_pParent);
 
+
 	//オブジェクトの種類の設定
 	SetObjType(CObject::OBJTYPE::MODEL);
 
 	//サイズを取得
 	m_size = m_pModel->GetSize();
 	SetSize(m_size);
-	CObject::SetPos(m_pos);
+	SetPos(m_pos);
 
-	//モデルのワールドマトリックス設定
-	m_pModel->SetMtxWorldPos(m_pos);
 	return S_OK;
 }
 
@@ -147,16 +145,15 @@ bool CModelSingle::SimpleCollision(CObject *pObject)
 
 	//先頭のポインタを代入
 	object = CObject::GetObject(static_cast<int>(CObject::PRIORITY::MODEL));
-	int nProprty_Size = object.size();
+	int object_size = object.size();
 
-	for (int nCnt = 0; nCnt < nProprty_Size; nCnt++)
+	for (int count_object = 0; count_object < object_size; count_object++)
 	{
-		if (object[nCnt]->GetObjType() == CObject::OBJTYPE::MODEL)
+		if (object[count_object]->GetObjType() == CObject::OBJTYPE::MODEL)
 		{
-
 			//モデルシングルにキャスト
 			CModelSingle *pModelSingle = nullptr;
-			pModelSingle = (CModelSingle*)object[nCnt];
+			pModelSingle = (CModelSingle*)object[count_object];
 
 			D3DXVECTOR3 pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);			//対象の位置
 			D3DXVECTOR3 posModel = D3DXVECTOR3(0.0f, 0.0f, 0.0f);		//モデルの位置
@@ -259,14 +256,14 @@ bool CModelSingle::Collision(CObject *pObject)
 
 	//先頭のポインタを代入
 	object = CObject::GetObject(static_cast<int>(CObject::PRIORITY::MODEL));
-	int nProprty_Size = object.size();
+	int object_size = object.size();
 
-	for (int nCnt = 0; nCnt < nProprty_Size; nCnt++)
+	for (int count_object = 0; count_object < object_size; count_object++)
 	{
-		if (object[nCnt]->GetObjType() == CObject::OBJTYPE::MODEL)
+		if (object[count_object]->GetObjType() == CObject::OBJTYPE::MODEL)
 		{
 			//pObjectをCModelSingleにキャスト
-			CModelSingle *pModelSingle = (CModelSingle*)object[nCnt];
+			CModelSingle *pModelSingle = (CModelSingle*)object[count_object];
 
 			//当たり判定をする設定なら
 			if (pModelSingle->m_bCollision == true)
@@ -392,14 +389,15 @@ bool CModelSingle::Collision(CObject *pObject)
 				}
 
 				//内積の計算結果がマイナスの時
-				if (fVecDot[0] <= 0.0f && fVecDot[1] <= 0.0f && fVecDot[2] <= 0.0f && fVecDot[3] <= 0.0f && fVecDot[4] <= 0.0f/* &&
-					fVecDotOld[4] > -FLT_EPSILON * 10000*/)
+				if (fVecDot[0] <= 0.0f && fVecDot[1] <= 0.0f && fVecDot[2] <= 0.0f && fVecDot[3] <= 0.0f && fVecDot[4] <= 0.0f &&
+					fVecDotOld[4] > -FLT_EPSILON * 10000)
 				{//上の面
 				 //押し出す位置を求める
 					D3DXVECTOR3 objectPos = pos;
 					objectPos.y = ((vecNor[4].x * vecPos[4].x) - (vecNor[4].z * vecPos[4].z)) / vecNor[4].y;
 
 					objectPos.y += pModelSingle->m_pos.y + pModelSingle->m_size.y;
+					//objectPos.y += pModelSingle->m_pos.y ;
 
 					pObject->SetPos(objectPos);
 					bLand = true;
@@ -497,14 +495,14 @@ int CModelSingle::CollisionAny(CObject *pObject)
 
 	//先頭のポインタを代入
 	object = CObject::GetObject(static_cast<int>(CObject::PRIORITY::MODEL));
-	int nProprty_Size = object.size();
+	int object_size = object.size();
 
-	for (int nCnt = 0; nCnt < nProprty_Size; nCnt++)
+	for (int count_object = 0; count_object < object_size; count_object++)
 	{
-		if (object[nCnt]->GetObjType() == CObject::OBJTYPE::MODEL)
+		if (object[count_object]->GetObjType() == CObject::OBJTYPE::MODEL)
 		{
 			//pObjectをCModelSingleにキャスト
-			CModelSingle *pModelSingle = (CModelSingle*)object[nCnt];
+			CModelSingle *pModelSingle = (CModelSingle*)object[count_object];
 
 			//当たり判定をする設定なら
 			if (pModelSingle->m_bCollision == true)
@@ -516,33 +514,15 @@ int CModelSingle::CollisionAny(CObject *pObject)
 					vtxPos[nCntVtx] = pModelSingle->m_pModel->GetVtxPos(nCntVtx);
 				}
 
-				//プレイヤーのサイズ取得
-				D3DXVECTOR3 objectSize = pObject->GetSize();
-
-				//対象の幅の分大きくする
-				vtxPos[0].x -= objectSize.x / 2.0f;
-				vtxPos[1].x += objectSize.x / 2.0f;
-				vtxPos[2].x -= objectSize.x / 2.0f;
-				vtxPos[3].x += objectSize.x / 2.0f;
-				vtxPos[4].x -= objectSize.x / 2.0f;
-				vtxPos[5].x += objectSize.x / 2.0f;
-				vtxPos[6].x -= objectSize.x / 2.0f;
-				vtxPos[7].x += objectSize.x / 2.0f;
-				vtxPos[0].z += objectSize.x / 2.0f;
-				vtxPos[1].z += objectSize.x / 2.0f;
-				vtxPos[2].z += objectSize.x / 2.0f;
-				vtxPos[3].z += objectSize.x / 2.0f;
-				vtxPos[4].z -= objectSize.x / 2.0f;
-				vtxPos[5].z -= objectSize.x / 2.0f;
-				vtxPos[6].z -= objectSize.x / 2.0f;
-				vtxPos[7].z -= objectSize.x / 2.0f;
-
 				//8頂点のワールドマトリックスを取得
 				D3DXMATRIX *pVtxMtxWorld = pModelSingle->m_pModel->GetVtxMtxWorld();
 				//8頂点の設定
 				for (int nCntVtx = 0; nCntVtx < MODEL_VTX; nCntVtx++, pVtxMtxWorld++)
 				{
-					pModelSingle->m_pModel->SetVtxMtxWorld(vtxPos[nCntVtx], nCntVtx);
+					//ワールドマトリックス設定
+					pModelSingle->SetMtxWorld();
+					//モデルの設定
+					//pModelSingle->m_pModel->SetVtxMtxWorld(vtxPos[nCntVtx], nCntVtx);
 					vtxPos[nCntVtx] = D3DXVECTOR3(pVtxMtxWorld->_41, pVtxMtxWorld->_42, pVtxMtxWorld->_43);
 				}
 
@@ -633,5 +613,34 @@ int CModelSingle::CollisionAny(CObject *pObject)
 			}
 		}
 	}
-	return 0;	//当たっていない
+	return 0;
+}
+
+//================================================
+//ワールドマトリックス設定処理
+//================================================
+void CModelSingle::SetMtxWorld(void)
+{
+	//デバイスのポインタ
+	LPDIRECT3DDEVICE9 pDevice;
+	//デバイスの取得
+	pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
+
+	D3DXMATRIX mtxRot, mtxTrans;			//計算用マトリックス
+
+	D3DXMatrixIdentity(&m_mtxWorld);		//モデルのワールドマトリックスの初期化
+
+											//モデルの向きを反映
+	D3DXMatrixRotationYawPitchRoll(&mtxRot, m_rot.y, m_rot.x, m_rot.z);
+	D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxRot);
+
+	//モデルの位置を反映
+	D3DXMatrixTranslation(&mtxTrans, m_pos.x, m_pos.y, m_pos.z);
+	D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxTrans);
+
+	//ワールドマトリックスの設定
+	pDevice->SetTransform(D3DTS_WORLD, &m_mtxWorld);
+
+	//モデルのワールドマトリックス設定
+	m_pModel->SetMtxWorldPos();
 }

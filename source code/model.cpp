@@ -705,9 +705,62 @@ void CModel::SetVtxMtxWorld(const D3DXVECTOR3 &vtxPos, const int &nCntVtx)
 //================================================
 //ワールドマトリックス設定処理
 //================================================
-void CModel::SetMtxWorldPos(const D3DXVECTOR3 & pos)
+void CModel::SetMtxWorldPos(void)
 {
-	m_mtxWorld._41 = pos.x;
-	m_mtxWorld._42 = pos.y;
-	m_mtxWorld._43 = pos.z;
+	//デバイスのポインタ
+	LPDIRECT3DDEVICE9 pDevice;
+	//デバイスの取得
+	pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
+
+	D3DXMATRIX mtxRot, mtxTrans;				//計算用マトリックス
+	D3DXMATRIX mtxParent;						//親のマトリックス
+
+	D3DXMatrixIdentity(&m_mtxWorld);			//ワールドマトリックスの初期化
+
+												//向きを反映
+	D3DXMatrixRotationYawPitchRoll(&mtxRot, m_rot.y, m_rot.x, m_rot.z);
+	D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxRot);
+
+	//位置を反映
+	D3DXMatrixTranslation(&mtxTrans, m_pos.x, m_pos.y, m_pos.z);
+	D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxTrans);
+
+	//各パーツの親のマトリックスの設定
+	if (m_pParent != nullptr)
+	{
+		mtxParent = m_pParent->GetMtx();
+	}
+	else
+	{
+		pDevice->GetTransform(D3DTS_WORLD, &mtxParent);
+	}
+
+	//算出したパーツのワールドマトリックスと親のワールドマトリックスを掛け合わせる
+	D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxParent);
+
+	//ワールドマトリックスの設定
+	pDevice->SetTransform(D3DTS_WORLD, &m_mtxWorld);
+
+	//8頂点の設定
+	for (int nCntVtx = 0; nCntVtx < MODEL_VTX; nCntVtx++)
+	{
+		D3DXMatrixIdentity(&m_vtxMtxWorld[nCntVtx]);		//ワールドマトリックスの初期化
+
+															//向きを反映
+		D3DXMatrixRotationYawPitchRoll(&mtxRot, m_vtxRot[nCntVtx].y, m_vtxRot[nCntVtx].x, m_vtxRot[nCntVtx].z);
+		D3DXMatrixMultiply(&m_vtxMtxWorld[nCntVtx], &m_vtxMtxWorld[nCntVtx], &mtxRot);
+
+		//位置を反映
+		D3DXMatrixTranslation(&mtxTrans, m_vtxPos[nCntVtx].x, m_vtxPos[nCntVtx].y, m_vtxPos[nCntVtx].z);
+		D3DXMatrixMultiply(&m_vtxMtxWorld[nCntVtx], &m_vtxMtxWorld[nCntVtx], &mtxTrans);
+
+		//親のマトリックス
+		mtxParent = m_mtxWorld;
+
+		//算出した各パーツのワールドマトリックスと親のワールドマトリックスを掛け合わせる
+		D3DXMatrixMultiply(&m_vtxMtxWorld[nCntVtx], &m_vtxMtxWorld[nCntVtx], &mtxParent);
+
+		//ワールドマトリックスの設定
+		pDevice->SetTransform(D3DTS_WORLD, &m_vtxMtxWorld[nCntVtx]);
+	}
 }
