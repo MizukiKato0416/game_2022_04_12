@@ -32,13 +32,15 @@
 #define PLAYER_JUMP_BALANCE_BALL			(13.0f)		//バランスボールのジャンプ力
 #define PLAYER_JUMP_GIRL					(20.0f)		//ロキコちゃんのジャンプ力
 #define PLAYER_JUMP_MIN						(5.0f)		//ジャンプ力最小値
-#define PLAYER_BOUND						(0.84f)		//バウンド力
+#define PLAYER_JUMP_MAX						(25.0f)		//ジャンプ力最大値
+#define PLAYER_BOUND						(0.8f)		//バウンド力
 #define PLAYER_MOVE_FORWARD_TRAMPOLINE		(20.0f)		//トランポリンの前に進む力
 #define PLAYER_MOVE_FORWARD_FAN				(40.0f)		//扇風機の前に進む力
 #define PLAYER_MOVE_FORWARD_BALANCE_BALL	(30.0f)		//バランスボールの前に進む力
 #define PLAYER_MOVE_FORWARD_GIRL			(40.0f)		//ロキコちゃんの前に進む力
 #define PLAYER_MOVE_FORWARD_SUBTRACTION		(0.991f)	//前に進む力の減算量
-#define PLAYER_MOVE_FORWARD_MIN				(1.0f)		//前に進む力の最小値
+#define PLAYER_MOVE_FORWARD_MIN				(4.0f)		//前に進む力の最小値
+#define PLAYER_MOVE_FORWARD_MIN_NOT_JUMP	(1.7f)		//ジャンプしていないときの前に進む力の最小値
 #define PLAYER_MOVE_FORWARD_MAX				(70.0f)		//前に進む力の最大値
 #define PLAYER_GRAVITY						(0.4f)		//重力の大きさ
 #define PLAYER_MOVE_SPEED					(4.0f)		//通常移動の移動量
@@ -243,9 +245,13 @@ void CPlayer::Update(void)
 				m_fMoveForward = PLAYER_MOVE_FORWARD_MIN;
 			}
 			else
-			{//ジャンプしていない状態なら
-				//0にする
-				m_fMoveForward = 0.0f;
+			{
+				//前に進む力が既定の値より小さくなったら
+				if (m_fMoveForward < PLAYER_MOVE_FORWARD_MIN_NOT_JUMP)
+				{
+					//0にする
+					m_fMoveForward = 0.0f;
+				}
 			}
 		}
 	}
@@ -311,16 +317,25 @@ void CPlayer::Update(void)
 			break;
 		}
 
-		m_fJump = fJump;
+		//ジャンプ量を設定
+		m_fJump += fJump;
+		//ジャンプ量が既定の値より大きくなったら
+		if (m_fJump > PLAYER_JUMP_MAX)
+		{
+			//最大値に設定する
+			m_fJump = PLAYER_JUMP_MAX;
+		}
 		m_move.y = m_fJump;
-		m_fMoveForward += fMoveForward;
 
+		//前に進む力を設定
+		m_fMoveForward += fMoveForward;
+		//前に進む力が既定の値より大きくなったら
 		if (m_fMoveForward >= PLAYER_MOVE_FORWARD_MAX)
 		{
+			//最大値にする
 			m_fMoveForward = PLAYER_MOVE_FORWARD_MAX;
 		}
 	}
-	
 
 	//メッシュフィールドとの当たり判定
 	//if (CMeshField::Collision(this, 100.0f) == true)
@@ -344,7 +359,13 @@ void CPlayer::Update(void)
 	//Enterキー、スタートボタンを押したら
 	if (pInputKeyboard->GetTrigger(DIK_UP) == true)
 	{
-		m_fJump = PLAYER_JUMP;
+		m_fJump += PLAYER_JUMP;
+		//ジャンプ量が既定の値より大きくなったら
+		if (m_fJump > PLAYER_JUMP_MAX)
+		{
+			//最大値に設定する
+			m_fJump = PLAYER_JUMP_MAX;
+		}
 		m_move.y = m_fJump;
 		m_fMoveForward += PLAYER_MOVE_FORWARD;
 
