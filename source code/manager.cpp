@@ -44,6 +44,7 @@ CManager::MODE CManager::m_mode = MODE::TITLE;
 CFade *CManager::m_pFade = nullptr;
 CMotionRoad *CManager::m_pMotionRoad = nullptr;
 CPlayData *CManager::m_pPlayData = nullptr;
+HWND CManager::m_hWnd = NULL;
 
 //================================================
 //デフォルトコンストラクタ
@@ -68,9 +69,6 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 {
 	//時刻で初期化
 	srand((unsigned int)time(NULL));
-
-	//マウスカーソルを消す
-	ShowCursor(false);
 
 	//レンダリングクラスの生成
 	if (m_pRenderer == nullptr)
@@ -320,9 +318,6 @@ void CManager::Uninit(void)
 //================================================
 void CManager::Update(void)
 {
-	//マウスカーソルを動かなくする
-	SetCursorPos(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f);
-
 	//キーボード
 	if (m_pInputKeyboard != nullptr)
 	{

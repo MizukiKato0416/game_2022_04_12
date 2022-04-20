@@ -5,6 +5,7 @@
 #include "game01.h"
 #include "manager.h"
 #include "input_keyboard.h"
+#include "input_mouse.h"
 #include "player.h"
 #include "meshsphere.h"
 #include "meshfield.h"
@@ -23,6 +24,8 @@
 //================================================
 //マクロ定義
 //================================================
+#define GAME01_MOUSE_VEC_ADJUSTMENT_X		(0.08f)		//引っ張ったときのベクトルを小さくする割合X
+#define GAME01_MOUSE_VEC_ADJUSTMENT_Y		(0.1f)		//引っ張ったときのベクトルを小さくする割合Y
 
 //================================================
 //静的メンバ変数宣言
@@ -36,6 +39,7 @@ CGame01::CGame01(CObject::PRIORITY Priority):CObject(Priority)
 	m_pPlayer = nullptr;
 	m_pFloor = nullptr;
 	memset(m_apRoad, NULL, sizeof(m_apRoad[GAME01_MAX_ROAD]));
+	m_mouseTriggerPos = { 0.0f, 0.0f, 0.0f };
 }
 
 //================================================
@@ -56,6 +60,9 @@ CGame01::~CGame01()
 //================================================
 HRESULT CGame01::Init(void)
 {
+	//変数の初期化
+	m_mouseTriggerPos = { 0.0f, 0.0f, 0.0f };
+
 	CObject3D *pObject3D = CObject3D::Create(D3DXVECTOR3(0.0f, 0.0f, 1000.0f), D3DXVECTOR3(4000.0f, 2000.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	pObject3D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_SKY"));
 
@@ -158,6 +165,93 @@ void CGame01::Update(void)
 			}
 		}
 	}
+	else
+	{//発射していない状態なら
+		//マウス取得処理
+		CInputMouse *pInputMouse;
+		pInputMouse = CManager::GetInstance()->GetInputMouse();
+
+		//マウスを押した瞬間
+		if (pInputMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
+		{
+			//マウスの位置取得
+			POINT mouseTriggerPos;
+			GetCursorPos(&mouseTriggerPos);
+			ScreenToClient(CManager::GetWindowHandle(), &mouseTriggerPos);
+
+			//マウスの位置を保存
+			m_mouseTriggerPos.x = (float)mouseTriggerPos.x;
+			m_mouseTriggerPos.y = (float)mouseTriggerPos.y;
+		}
+
+		//マウスを離した瞬間
+		if (pInputMouse->GetRelease(CInputMouse::MOUSE_TYPE_LEFT) == true)
+		{
+			//マウスの位置取得
+			POINT mouseReleasePos;
+			GetCursorPos(&mouseReleasePos);
+			ScreenToClient(CManager::GetWindowHandle(), &mouseReleasePos);
+
+			//マウスをクリックした位置から離した位置までのベクトルを算出
+			D3DXVECTOR3 mousePosVec = D3DXVECTOR3(m_mouseTriggerPos.x - mouseReleasePos.x, m_mouseTriggerPos.y - mouseReleasePos.y, 0.0f);
+			//ベクトルのyを逆向きにする
+			mousePosVec.y *= -1.0f;
+			//ベクトルを既定の割合小さくする
+			mousePosVec.x *= GAME01_MOUSE_VEC_ADJUSTMENT_X;
+			mousePosVec.y *= GAME01_MOUSE_VEC_ADJUSTMENT_Y;
+
+			//発射している状態にする
+			m_pPlayer->SetShot(true);
+			//ジャンプ量設定
+			m_pPlayer->SetJump(mousePosVec.y);
+			//前に進む力を設定
+			m_pPlayer->SetMoveForward(mousePosVec.x);
+		}
+	}
+
+#ifdef _DEBUG
+	//マウス取得処理
+	CInputMouse *pInputMouse;
+	pInputMouse = CManager::GetInstance()->GetInputMouse();
+
+	//マウスを押した瞬間
+	if (pInputMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
+	{
+		//マウスの位置取得
+		POINT mouseTriggerPos;
+		GetCursorPos(&mouseTriggerPos);
+		ScreenToClient(CManager::GetWindowHandle(), &mouseTriggerPos);
+
+		//マウスの位置を保存
+		m_mouseTriggerPos.x = (float)mouseTriggerPos.x;
+		m_mouseTriggerPos.y = (float)mouseTriggerPos.y;
+	}
+
+	//マウスを離した瞬間
+	if (pInputMouse->GetRelease(CInputMouse::MOUSE_TYPE_LEFT) == true)
+	{
+		//マウスの位置取得
+		POINT mouseReleasePos;
+		GetCursorPos(&mouseReleasePos);
+		ScreenToClient(CManager::GetWindowHandle(), &mouseReleasePos);
+
+		//マウスをクリックした位置から離した位置までのベクトルを算出
+		D3DXVECTOR3 mousePosVec = D3DXVECTOR3(m_mouseTriggerPos.x - mouseReleasePos.x, m_mouseTriggerPos.y - mouseReleasePos.y, 0.0f);
+		//ベクトルのyを逆向きにする
+		mousePosVec.y *= -1.0f;
+		//ベクトルを既定の割合小さくする
+		mousePosVec.x *= GAME01_MOUSE_VEC_ADJUSTMENT_X;
+		mousePosVec.y *= GAME01_MOUSE_VEC_ADJUSTMENT_Y;
+
+		//発射している状態にする
+		m_pPlayer->SetShot(true);
+		//ジャンプ量設定
+		m_pPlayer->SetJump(mousePosVec.y);
+		//前に進む力を設定
+		m_pPlayer->SetMoveForward(mousePosVec.x);
+	}
+#endif // _DEBUG
+
 
 	//キーボード取得処理
 	CInputKeyboard *pInputKeyboard;
