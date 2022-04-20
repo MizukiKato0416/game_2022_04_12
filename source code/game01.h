@@ -24,7 +24,6 @@ class CRoad;
 //================================================
 //クラスの定義
 //================================================
-//クラスの定義
 class CGame01 : public CObject
 {
 public:
@@ -42,6 +41,7 @@ private:
 	CPlayer *m_pPlayer;					//プレイヤーのポインタ
 	CFloor *m_pFloor;					//床のポインタ
 	CRoad *m_apRoad[GAME01_MAX_ROAD];	//道のポインタ
+	D3DXVECTOR3 m_mouseTriggerPos;		//マウスをクリックした瞬間の位置
 };
 
 #endif // !_GAME01_H_

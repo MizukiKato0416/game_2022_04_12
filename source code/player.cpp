@@ -32,13 +32,15 @@
 #define PLAYER_JUMP_BALANCE_BALL			(13.0f)		//バランスボールのジャンプ力
 #define PLAYER_JUMP_GIRL					(20.0f)		//ロキコちゃんのジャンプ力
 #define PLAYER_JUMP_MIN						(5.0f)		//ジャンプ力最小値
-#define PLAYER_BOUND						(0.84f)		//バウンド力
+#define PLAYER_JUMP_MAX						(25.0f)		//ジャンプ力最大値
+#define PLAYER_BOUND						(0.8f)		//バウンド力
 #define PLAYER_MOVE_FORWARD_TRAMPOLINE		(20.0f)		//トランポリンの前に進む力
 #define PLAYER_MOVE_FORWARD_FAN				(40.0f)		//扇風機の前に進む力
 #define PLAYER_MOVE_FORWARD_BALANCE_BALL	(30.0f)		//バランスボールの前に進む力
 #define PLAYER_MOVE_FORWARD_GIRL			(40.0f)		//ロキコちゃんの前に進む力
-#define PLAYER_MOVE_FORWARD_SUBTRACTION		(0.991f)	//前に進む力の減算量
-#define PLAYER_MOVE_FORWARD_MIN				(1.0f)		//前に進む力の最小値
+#define PLAYER_MOVE_FORWARD_SUBTRACTION		(0.985f)	//前に進む力の減算量
+#define PLAYER_MOVE_FORWARD_MIN				(4.0f)		//前に進む力の最小値
+#define PLAYER_MOVE_FORWARD_MIN_NOT_JUMP	(1.5f)		//ジャンプしていないときの前に進む力の最小値
 #define PLAYER_MOVE_FORWARD_MAX				(70.0f)		//前に進む力の最大値
 #define PLAYER_GRAVITY						(0.4f)		//重力の大きさ
 #define PLAYER_MOVE_SPEED					(4.0f)		//通常移動の移動量
@@ -87,6 +89,7 @@ CPlayer::~CPlayer()
 //================================================
 HRESULT CPlayer::Init(void)
 {
+	//SetFrame(3);
 	m_move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_fObjectiveRot = 0.0f;
 	m_fNumRot = 0.0f;
@@ -230,9 +233,13 @@ void CPlayer::Update(void)
 	//発射している状態なら
 	if (m_bShot == true)
 	{
-
-		//前に進む力を少なくする
-		m_fMoveForward *= PLAYER_MOVE_FORWARD_SUBTRACTION;
+		//ジャンプ力が既定の値以下になったとき
+		if (m_fJump <= PLAYER_JUMP)
+		{
+			//前に進む力を少なくする
+			m_fMoveForward *= PLAYER_MOVE_FORWARD_SUBTRACTION;
+		}
+		
 		//前に進む力が既定の値より小さくなったら
 		if (m_fMoveForward < PLAYER_MOVE_FORWARD_MIN)
 		{
@@ -243,9 +250,13 @@ void CPlayer::Update(void)
 				m_fMoveForward = PLAYER_MOVE_FORWARD_MIN;
 			}
 			else
-			{//ジャンプしていない状態なら
-				//0にする
-				m_fMoveForward = 0.0f;
+			{
+				//前に進む力が既定の値より小さくなったら
+				if (m_fMoveForward < PLAYER_MOVE_FORWARD_MIN_NOT_JUMP)
+				{
+					//0にする
+					m_fMoveForward = 0.0f;
+				}
 			}
 		}
 	}
@@ -258,21 +269,7 @@ void CPlayer::Update(void)
 		//発射していない状態なら
 		if (m_bShot == false)
 		{
-			//ジャンプ処理
-			Jump();
-		}
-	}
-
-	//床との当たり判定
-	if (CModelSingle::Collision(this) == true)
-	{
-		//重力を0にする
-		m_move.y = 0.0f;
-		//発射していない状態なら
-		if (m_bShot == false)
-		{
-			//ジャンプ処理
-			Jump();
+			
 		}
 		else
 		{
@@ -288,6 +285,7 @@ void CPlayer::Update(void)
 		}
 	}
 
+	
 
 	//モデルとの当たり判定
 	int nHappeningType = 0;
@@ -323,16 +321,25 @@ void CPlayer::Update(void)
 			break;
 		}
 
-		m_fJump = fJump;
+		//ジャンプ量を設定
+		m_fJump += fJump;
+		//ジャンプ量が既定の値より大きくなったら
+		if (m_fJump > PLAYER_JUMP_MAX)
+		{
+			//最大値に設定する
+			m_fJump = PLAYER_JUMP_MAX;
+		}
 		m_move.y = m_fJump;
-		m_fMoveForward += fMoveForward;
 
+		//前に進む力を設定
+		m_fMoveForward += fMoveForward;
+		//前に進む力が既定の値より大きくなったら
 		if (m_fMoveForward >= PLAYER_MOVE_FORWARD_MAX)
 		{
+			//最大値にする
 			m_fMoveForward = PLAYER_MOVE_FORWARD_MAX;
 		}
 	}
-	
 
 	//メッシュフィールドとの当たり判定
 	//if (CMeshField::Collision(this, 100.0f) == true)
@@ -347,28 +354,6 @@ void CPlayer::Update(void)
 	//		m_move.y -= 40.0f;
 	//	}
 	//}
-
-#ifdef _DEBUG
-	//キーボード取得処理
-	CInputKeyboard *pInputKeyboard;
-	pInputKeyboard = CManager::GetInstance()->GetInputKeyboard();
-
-	//Enterキー、スタートボタンを押したら
-	if (pInputKeyboard->GetTrigger(DIK_UP) == true)
-	{
-		m_fJump = PLAYER_JUMP;
-		m_move.y = m_fJump;
-		m_fMoveForward += PLAYER_MOVE_FORWARD;
-
-		if (m_fMoveForward >= PLAYER_MOVE_FORWARD_MAX)
-		{
-			m_fMoveForward = PLAYER_MOVE_FORWARD_MAX;
-		}
-	}
-#endif // !_DEBUG
-
-
-
 
 	//位置取得
 	pos = GetPos();
@@ -638,32 +623,6 @@ void CPlayer::Rotate(void)
 }
 
 //================================================
-//ジャンプ処理
-//================================================
-void CPlayer::Jump(void)
-{
-	//キーボード取得処理
-	CInputKeyboard *pInputKeyboard;
-	pInputKeyboard = CManager::GetInstance()->GetInputKeyboard();
-
-	//パッドD取得処理
-	CInputPadD *pInputPadD;
-	pInputPadD = CManager::GetInstance()->GetInputPadD();
-
-	if (pInputPadD->GetTrigger(CInputPadD::A) == true || pInputKeyboard->GetTrigger(DIK_SPACE) == true)	//Aボタンを押したときの処理
-	{
-		//ジャンプ量を設定
-		m_fJump = PLAYER_JUMP;
-		//移動量をジャンプ分加算
-		m_move.y = m_fJump;
-		//発射された状態にする
-		m_bShot = true;
-		//前に進む力を設定
-		m_fMoveForward = PLAYER_MOVE_FORWARD;
-	}
-}
-
-//================================================
 //プレイヤーとの当たり判定
 //================================================
 void CPlayer::Collision(CObject *&pSubjectObject, const float &fObjRadius)
@@ -730,4 +689,32 @@ bool CPlayer::CollisionOnly(CObject *&pSubjectObject, const float &fObjRadius)
 	}
 
 	return false;
+}
+
+//================================================
+//前に進む力設定処理
+//================================================
+void CPlayer::SetMoveForward(const float & fMoveForward)
+{
+	m_fMoveForward = fMoveForward;
+	//前に進む力が既定の値より大きくなったら
+	if (m_fMoveForward >= PLAYER_MOVE_FORWARD_MAX)
+	{
+		//最大値にする
+		m_fMoveForward = PLAYER_MOVE_FORWARD_MAX;
+	}
+}
+
+//================================================
+//ジャンプ力設定処理
+//================================================
+void CPlayer::SetJump(const float & fJump)
+{
+	m_fJump = fJump;
+	//ジャンプ量が既定の値より大きくなったら
+	if (m_fJump > PLAYER_JUMP_MAX)
+	{
+		//最大値に設定する
+		m_fJump = PLAYER_JUMP_MAX;
+	}
 }

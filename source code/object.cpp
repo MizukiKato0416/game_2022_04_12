@@ -79,7 +79,16 @@ void CObject::UpdateAll(void)
 			}
 			else
 			{
-				m_object[count_priolty][count_object]->Update();
+				m_object[count_priolty][count_object]->m_update_count++;
+				if (m_object[count_priolty][count_object]->m_update_count >= m_object[count_priolty][count_object]->m_update_frame)
+				{
+					m_object[count_priolty][count_object]->Update();
+					m_object[count_priolty][count_object]->m_update_count = 0;
+				}
+				else
+				{
+					m_object[count_priolty][count_object]->Update();
+				}
 			}
 		}
 	}

@@ -71,6 +71,7 @@ public:
 	static CFade *GetFade(void);						//フェード取得処理
 	static CMotionRoad *GetMotionRoad(void);			//モーションロード取得処理
 	static CPlayData *GetPlayData(void);				//プレイデータ取得処理
+	static HWND GetWindowHandle(void) { return m_hWnd; }//hwnd取得処理
 
 private:
 	//メンバ関数
@@ -95,6 +96,7 @@ private:
 	static CFade *m_pFade;								//フェードのポインタ
 	static CMotionRoad *m_pMotionRoad;					//モーションロードのポインタ
 	static CPlayData *m_pPlayData;						//プレイデータのポインタ
+	static HWND m_hWnd;									//ウィンドウハンドル
 };
 
 

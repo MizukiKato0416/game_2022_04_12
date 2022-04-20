@@ -44,6 +44,7 @@ CManager::MODE CManager::m_mode = MODE::TITLE;
 CFade *CManager::m_pFade = nullptr;
 CMotionRoad *CManager::m_pMotionRoad = nullptr;
 CPlayData *CManager::m_pPlayData = nullptr;
+HWND CManager::m_hWnd = NULL;
 
 //================================================
 //デフォルトコンストラクタ
@@ -68,9 +69,6 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 {
 	//時刻で初期化
 	srand((unsigned int)time(NULL));
-
-	//マウスカーソルを消す
-	ShowCursor(false);
 
 	//レンダリングクラスの生成
 	if (m_pRenderer == nullptr)
@@ -165,7 +163,7 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 	//ライトの生成
 	m_apLight[0] = CLight::Create(D3DXVECTOR3(-0.6f, -0.8f, 0.6f), D3DXVECTOR3(400.0f, 800.0f, -400.0f));
 	m_apLight[1] = CLight::Create(D3DXVECTOR3(0.4f, 0.4f, -0.4f), D3DXVECTOR3(-100.0f, 0.0f, 100.0f));
-	m_apLight[2] = CLight::Create(D3DXVECTOR3(0.0f, -0.6f, -0.6f), D3DXVECTOR3(100.0f, 0.0f, -100.0f));
+	m_apLight[2] = CLight::Create(D3DXVECTOR3(0.0f, -0.6f, 0.6f), D3DXVECTOR3(100.0f, 0.0f, -100.0f));
 
 	//フェードクラスの生成
 	m_pFade = CFade::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
@@ -320,9 +318,6 @@ void CManager::Uninit(void)
 //================================================
 void CManager::Update(void)
 {
-	//マウスカーソルを動かなくする
-	SetCursorPos(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f);
-
 	//キーボード
 	if (m_pInputKeyboard != nullptr)
 	{

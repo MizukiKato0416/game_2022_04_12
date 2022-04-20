@@ -43,14 +43,16 @@ public:
 	static void CPlayer::Collision(CObject *&pSubjectObject, const float &fObjRadius);		//当たり判定処理
 	bool CPlayer::CollisionOnly(CObject *&pSubjectObject, const float &fObjRadius);			//衝突判定のみの処理
 	bool GetShot(void) { return m_bShot; }													//発射取得処理
+	void SetShot(bool bShot) { m_bShot = bShot; }											//発射設定処理
 	float GetMoveForward(void) { return m_fMoveForward; }									//前に進む力取得処理
-	void GetMoveForward(const float &fMoveForward) { m_fMoveForward = fMoveForward; }		//前に進む力設定処理
+	void SetMoveForward(const float &fMoveForward);											//前に進む力設定処理
+	float GetJump(void) { return m_fJump; }													//ジャンプ力取得処理
+	void SetJump(const float &fJump);														//ジャンプ力設定処理
 
 private:
 	//メンバ関数
 	void Move(void);								//移動処理
 	void Rotate(void);								//回転処理
-	void Jump(void);								//ジャンプ処理
 
 	//メンバ変数
 	D3DXVECTOR3 m_pos;								//位置

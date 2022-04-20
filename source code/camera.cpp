@@ -346,54 +346,28 @@ void CCamera::MainCameraUpdate(void)
 	CInputPadX *pInputPadX;
 	pInputPadX = CManager::GetInstance()->GetInputPadX();
 
+	////オブジェクト情報を入れるポインタ
+	//vector<CObject*> object;
+
+	////先頭のポインタを代入
+	//object = CObject::GetObject(static_cast<int>(CObject::PRIORITY::PLAYER));
+	//int object_size = object.size();
+
+	//for (int count_object = 0; count_object < object_size; count_object++)
+	//{
+	//	if (object[count_object]->GetObjType() == CObject::OBJTYPE::PLAYER)
+	//	{
+	//		//注視点をプレイヤーに固定する
+	//		m_posR = object[count_object]->GetPos();
+	//	}
+	//}
 
 	//視点の場所を注視点を元に移動
 	m_posV.x = m_posR.x + m_fDifferVR * sinf(m_rot.x) * sinf(m_rot.y);
 	m_posV.z = m_posR.z + m_fDifferVR * sinf(m_rot.x) * cosf(m_rot.y);
 	m_posV.y = m_posR.y + m_fDifferVR * cosf(m_rot.x);
 
-	//マウス取得処理
-	CInputMouse *pInputMouse;
-	pInputMouse = CManager::GetInstance()->GetInputMouse();
-
-	//マウスの移動量取得
-	D3DXVECTOR2 mouseVelocity = pInputMouse->GetMouseVelocity();
-
-	//================================================
-	//マウスによる視点移動処理
-	//================================================
-	if (mouseVelocity.x != 0.0f)
-	{
-		m_rot.y += mouseVelocity.x * CAMERA_V__MOUSE_SPEED_Y;
-	}
-	if (mouseVelocity.y != 0.0f)
-	{
-		m_rot.x += mouseVelocity.y * CAMERA_V__MOUSE_SPEED_XZ;
-	}
-
-	//================================================
-	//右スティック処理
-	//================================================
-	if (pInputPadX->GetRightStick(CInputPadX::STICKTYPE_LEFT, m_nNum) == true ||
-		(float)pInputPadD->GetGamepad().lZ < 0.0f && m_bRotateY == false)
-	{
-		m_rot.y -= CAMERA_V_SPEED_Y;
-	}
-	else if (pInputPadX->GetRightStick(CInputPadX::STICKTYPE_RIGHT, m_nNum) == true ||
-		(float)pInputPadD->GetGamepad().lZ > 0.0f && m_bRotateY == false)
-	{
-		m_rot.y += CAMERA_V_SPEED_Y;
-	}
-	if (pInputPadX->GetRightStick(CInputPadX::STICKTYPE_UP, m_nNum) == true ||
-		(float)pInputPadD->GetGamepad().lRz < 0.0f && m_bRotateX == false)
-	{
-		m_rot.x += CAMERA_V_SPEED_XZ;
-	}
-	else if (pInputPadX->GetRightStick(CInputPadX::STICKTYPE_DOWN, m_nNum) == true ||
-		(float)pInputPadD->GetGamepad().lRz > 0.0f && m_bRotateX == false)
-	{
-		m_rot.x -= CAMERA_V_SPEED_XZ;
-	}
+	
 
 	//回転処理
 	Rotate();
