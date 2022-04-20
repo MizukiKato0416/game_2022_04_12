@@ -74,6 +74,7 @@ public:
 	void SetObjType(const OBJTYPE &obj_type) { m_obj_type = obj_type; }	// セッター
 	void SetPosOld(const D3DXVECTOR3 &pos_old) { m_pos_old = pos_old; }	// セッター
 	void SetPriority(const int &priority) { m_priority = priority; }	// セッター
+	void SetFrame(const int &frame) { m_update_frame = frame; }	// セッター
 private:
 	static vector<CObject*> m_object[(int)PRIORITY::MAX];				// オブジェクト
 	D3DXVECTOR3	m_pos;		// 位置
@@ -81,6 +82,8 @@ private:
 	D3DXVECTOR3 m_size;		// サイズ
 	OBJTYPE m_obj_type;		// オブジェクトの種類
 	int m_priority;	// 描画順
+	int m_update_frame;	// フレーム最大値
+	int m_update_count;	// フレームカウンタ
 	bool m_deth;	// 死亡フラグ
 protected:
 	void Release(void) { m_deth = true; }		// 死亡フラグ立てる
