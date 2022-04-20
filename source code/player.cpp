@@ -89,6 +89,7 @@ CPlayer::~CPlayer()
 //================================================
 HRESULT CPlayer::Init(void)
 {
+	//SetFrame(3);
 	m_move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_fObjectiveRot = 0.0f;
 	m_fNumRot = 0.0f;
