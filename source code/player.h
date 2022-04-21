@@ -40,6 +40,7 @@ public:
 	void SetModelRot(const int &nCntModel, const D3DXVECTOR3 &rot);							//モデルの向き設定処理
 	D3DXVECTOR3 GetModelRot(const int &nCntModel);											//モデルの向き取得処理
 	void SetMove(const D3DXVECTOR3 &move) { m_move = move; }								//移動量設定処理
+	D3DXVECTOR3 GetMove(void) { return m_move; }											//移動量取得処理
 	static void CPlayer::Collision(CObject *&pSubjectObject, const float &fObjRadius);		//当たり判定処理
 	bool CPlayer::CollisionOnly(CObject *&pSubjectObject, const float &fObjRadius);			//衝突判定のみの処理
 	bool GetShot(void) { return m_bShot; }													//発射取得処理
@@ -48,6 +49,8 @@ public:
 	void SetMoveForward(const float &fMoveForward);											//前に進む力設定処理
 	float GetJump(void) { return m_fJump; }													//ジャンプ力取得処理
 	void SetJump(const float &fJump);														//ジャンプ力設定処理
+	float GetBoundMove(void) { return m_fBoundMove; }										//バウンドする瞬間の移動量取得処理
+	void SetBoundMove(const float &fBoundMove) { m_fBoundMove = fBoundMove; }				//バウンドする瞬間の移動量設定処理
 
 private:
 	//メンバ関数
@@ -70,6 +73,7 @@ private:
 	bool m_bShot;									//発射したかどうか
 	float m_fJump;									//ジャンプ力
 	float m_fMoveForward;							//前に進む力
+	float m_fBoundMove;								//バウンドする瞬間の移動量
 };
 
 #endif // !_PLAYER_H_

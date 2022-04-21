@@ -12,8 +12,12 @@
 #define MAX_CAMERA					(1)									//カメラの最大数
 #define MAX_MAIN_CAMERA				(1)									//メインカメラの最大数
 #define CAMERA_DISTANCE				(500.0f)							//視点と注視点の距離
+#define CAMERA_DISTANCE_DEFAULT		(700.0f)							//デフォルトの視点と注視点の距離
+#define CAMERA_DISTANCE_MAX			(900.0f)							//最大の視点と注視点の距離
 #define CAMERA_INIT_ROT_X			(1.5f)								//カメラの向きX
 #define CAMERA_INIT_POS				(D3DXVECTOR3(0.0f, 50.0f, 0.0f))	//カメラの初期位置
+#define CAMERA_DEFAULT_POS			(D3DXVECTOR3(0.0f, 200.0f, 0.0f))	//カメラのデフォルト位置
+#define CAMERA_MAX_POS				(D3DXVECTOR3(0.0f, 350.0f, 0.0f))	//カメラの最大位置
 
 //================================================
 //クラスの定義

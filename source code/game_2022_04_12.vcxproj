@@ -164,6 +164,7 @@
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="floor.cpp" />
     <ClCompile Include="game01.cpp" />
+    <ClCompile Include="gauge.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="input_keyboard.cpp" />
     <ClCompile Include="input_mouse.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="fade.h" />
     <ClInclude Include="floor.h" />
     <ClInclude Include="game01.h" />
+    <ClInclude Include="gauge.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="input_keyboard.h" />
     <ClInclude Include="input_mouse.h" />

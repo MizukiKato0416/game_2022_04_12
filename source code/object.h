@@ -51,6 +51,7 @@ public:
 		TROPHY,				// トロフィー
 		POLYGON_3D,			//3Dポリゴン
 		SHADOW,				//影
+		GAUGE,				//ゲージ
 		MAX
 	};
 

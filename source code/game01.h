@@ -11,6 +11,7 @@
 class CPlayer;
 class CFloor;
 class CRoad;
+class CGauge;
 
 //================================================
 //マクロ定義
@@ -37,11 +38,18 @@ public:
 	void Draw(void);
 
 private:
+	void Camera(void);					//カメラの処理
+	void Road(void);					//道の処理
+	void Gauge(void);					//ゲージ処理
+	void Shot(void);					//発射処理
+
 	//メンバ変数
 	CPlayer *m_pPlayer;					//プレイヤーのポインタ
 	CFloor *m_pFloor;					//床のポインタ
 	CRoad *m_apRoad[GAME01_MAX_ROAD];	//道のポインタ
 	D3DXVECTOR3 m_mouseTriggerPos;		//マウスをクリックした瞬間の位置
+	CGauge *m_pGauge;					//発射ゲージ
+	int m_nGaugeCounter;				//ゲージが満タンの時間を設定するためのカウンター
 };
 
 #endif // !_GAME01_H_

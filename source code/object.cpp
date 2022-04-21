@@ -85,10 +85,6 @@ void CObject::UpdateAll(void)
 					m_object[count_priolty][count_object]->Update();
 					m_object[count_priolty][count_object]->m_update_count = 0;
 				}
-				else
-				{
-					m_object[count_priolty][count_object]->Update();
-				}
 			}
 		}
 	}
