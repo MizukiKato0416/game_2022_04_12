@@ -45,6 +45,7 @@ public:
 		NONE = 0,			//なし
 		EFFECT_3D,			//3Dエフェクト
 		FLOOR,				//床
+		BG,					//背景
 		PLAYER,				//プレイヤー
 		MODEL,				//モデル
 		UI,					//UI

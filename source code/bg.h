@@ -30,10 +30,8 @@ public:
 	static CBg *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const D3DXVECTOR3 &rot, D3DXVECTOR2 uv_move_speed);
 	void SetUvMove(D3DXVECTOR2 speed) { m_uv_move_speed = speed; }
 private:
-	D3DXVECTOR3 m_pos;
-	D3DXVECTOR3 m_size;
-	D3DXVECTOR3 m_rot;
 	D3DXVECTOR2 m_uv_move_speed;
+	D3DXVECTOR2 m_uv_pos;
 };
 
 #endif

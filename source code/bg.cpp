@@ -14,9 +14,9 @@
 //=============================================================================
 CBg::CBg(CObject::PRIORITY Priority) : CObject3D(Priority)
 {
-
+	m_uv_move_speed = D3DXVECTOR2(0.0f, 0.0f);
+	m_uv_pos = D3DXVECTOR2(0.0f, 0.0f);
 }
-
 
 //=============================================================================
 // デフォルトデストラクタ
@@ -31,6 +31,10 @@ CBg::~CBg()
 //=============================================================================
 HRESULT CBg::Init(void)
 {	
+	CObject3D::Init();
+
+	SetObjType(CObject::OBJTYPE::BG);
+
 	return S_OK;
 }
 
@@ -39,7 +43,7 @@ HRESULT CBg::Init(void)
 //=============================================================================
 void CBg::Uninit(void)
 {
-
+	CObject3D::Uninit();
 }
 
 //=============================================================================
@@ -47,7 +51,24 @@ void CBg::Uninit(void)
 //=============================================================================
 void CBg::Update(void)
 {
-	SetTex(m_uv_move_speed.x, m_uv_move_speed.y);
+	m_uv_pos += m_uv_move_speed;
+	SetTex(m_uv_pos.x, m_uv_pos.y);
+	if (m_uv_pos.x < 0.0f)
+	{
+		m_uv_pos.x += 1.0f;
+	}
+	else if (m_uv_pos.x > 1.0f)
+	{
+		m_uv_pos.x -= 1.0f;
+	}
+	if (m_uv_pos.y < 0.0f)
+	{
+		m_uv_pos.y += 1.0f;
+	}
+	else if (m_uv_pos.y > 1.0f)
+	{
+		m_uv_pos.y -= 1.0f;
+	}
 }
 
 //=============================================================================
@@ -55,7 +76,7 @@ void CBg::Update(void)
 //=============================================================================
 void CBg::Draw(void)
 {
-
+	CObject3D::Draw();
 }
 
 //=============================================================================
@@ -74,6 +95,7 @@ CBg *CBg::Create(const D3DXVECTOR3 & pos, const D3DXVECTOR3 & size, const D3DXVE
 			bg->m_size = size;
 			bg->m_rot = rot;
 			bg->m_uv_move_speed = uv_move_speed;
+			bg->Init();
 		}
 	}
 
