@@ -22,6 +22,7 @@
 #include "floor.h"
 #include "camera.h"
 #include "gauge.h"
+#include "bg.h"
 
 //================================================
 //ƒ}ƒNƒ’è‹`
@@ -110,6 +111,8 @@ HRESULT CGame01::Init(void)
 	m_pGauge = CGauge::Create(D3DXVECTOR3(GAUGE_SHOT_POS_X, GAUGE_SHOT_POS_Y, 0.0f),
 		                      D3DXVECTOR3(GAUGE_SHOT_SIZE_X, GAUGE_SHOT_SIZE_Y, 0.0f), GAME01_SHOT_GAUGE_MAX, 0);
 	m_pGauge->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_UI_HP_GAUGE"));
+
+	CBg::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(1000.0f, 1000.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(0.5f, 0.0f));
 
 	return S_OK;
 }

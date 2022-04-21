@@ -194,6 +194,7 @@
     <ClCompile Include="shadow.cpp" />
     <ClCompile Include="sound.cpp" />
     <ClCompile Include="road.cpp" />
+    <ClCompile Include="bg.cpp" />
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="time.cpp" />
     <ClCompile Include="title.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="floor.h" />
     <ClInclude Include="game01.h" />
     <ClInclude Include="gauge.h" />
+    <ClInclude Include="bg.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="input_keyboard.h" />
     <ClInclude Include="input_mouse.h" />
