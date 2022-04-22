@@ -24,12 +24,7 @@ public:
 	enum class EFFECT3D_TYPE
 	{
 		NONE = 0,
-		CHECK,			//チェックポイント
-		HIT,			//ヒットエフェクト
-		THUNDER,		//雷
-		FLASH,			//閃光
-		FIRE,			//炎
-		EXPLOSION,		//爆発
+		TRAJECTORY_PLAYER,		//プレイヤーの軌跡
 		MAX
 	};
 
