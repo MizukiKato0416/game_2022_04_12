@@ -35,6 +35,8 @@ HRESULT CBg::Init(void)
 
 	SetObjType(CObject::OBJTYPE::BG);
 
+	SetLighting(false);
+
 	return S_OK;
 }
 

@@ -89,108 +89,44 @@ void CEffect3D::Update(void)
 //================================================
 void CEffect3D::Draw(void)
 {
-	//オブジェクト情報を入れるポインタ
-	vector<CObject*> object;
+	//デバイスのポインタ
+	LPDIRECT3DDEVICE9 pDevice;
+	//デバイスの取得
+	pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
 
-	//先頭のポインタを代入
-	object = CObject::GetObject(static_cast<int>(CObject::PRIORITY::PLAYER));
-	int nProprty_Size = object.size();
+	//αブレンディングを加算合成に設定
+	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
 
-	for (int nCnt = 0; nCnt < nProprty_Size; nCnt++)
-	{
-		//オブジェクトの種類がプレイヤーだったら
-		if (object[nProprty_Size]->GetObjType() == CObject::OBJTYPE::PLAYER)
-		{
-			//オブジェクトの位置を取得
-			D3DXVECTOR3 posObj = object[nProprty_Size]->GetPos();
+	//ライティングを無効にする
+	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
 
-			//自身から対象のオブジェクトまでの距離を求める
-			float fRadius = sqrtf((posObj.x - m_pos.x) * (posObj.x - m_pos.x) +
-				                  (posObj.z - m_pos.z) * (posObj.z - m_pos.z));
+	//アルファテスト
+	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+	pDevice->SetRenderState(D3DRS_ALPHAREF, 50);
 
-			//デバイスのポインタ
-			LPDIRECT3DDEVICE9 pDevice;
-			//デバイスの取得
-			pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
+	//Zバッファの書き込み
+	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
 
-			if (m_type == EFFECT3D_TYPE::CHECK)
-			{
-				//求めた距離が既定の数値以下だったら
-				if (fRadius <= EFFECT3D_DRAW_DIFFERE)
-				{
-					//αブレンディングを加算合成に設定
-					pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
-					pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-					pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
+	CBillboard::Draw();
 
-					//ライティングを無効にする
-					pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
+	//Zテストを元に戻す
+	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
 
-					//アルファテスト
-					pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
-					pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
-					pDevice->SetRenderState(D3DRS_ALPHAREF, 50);
+	//ライティングを有効にする
+	pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
 
-					//Zバッファの書き込み
-					pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
+	//アルファテスト元に戻す
+	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+	pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_ALWAYS);
+	pDevice->SetRenderState(D3DRS_ALPHAREF, 0x00);
 
-					CBillboard::Draw();
-
-					//Zテストを元に戻す
-					pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
-
-					//ライティングを有効にする
-					pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
-
-					//アルファテスト元に戻す
-					pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
-					pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_ALWAYS);
-					pDevice->SetRenderState(D3DRS_ALPHAREF, 0x00);
-
-					//aブレンディングを通常に戻す
-					pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
-					pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_SRCALPHA);
-					pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-				}
-			}
-			else
-			{
-				//αブレンディングを加算合成に設定
-				pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
-				pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-				pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
-
-				//ライティングを無効にする
-				pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
-
-				//アルファテスト
-				pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
-				pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
-				pDevice->SetRenderState(D3DRS_ALPHAREF, 50);
-
-				//Zバッファの書き込み
-				pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
-
-				CBillboard::Draw();
-
-				//Zテストを元に戻す
-				pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
-
-				//ライティングを有効にする
-				pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
-
-				//アルファテスト元に戻す
-				pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
-				pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_ALWAYS);
-				pDevice->SetRenderState(D3DRS_ALPHAREF, 0x00);
-
-				//aブレンディングを通常に戻す
-				pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
-				pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_SRCALPHA);
-				pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-			}
-		}
-	}
+	//aブレンディングを通常に戻す
+	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_SRCALPHA);
+	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 }
 
 //================================================

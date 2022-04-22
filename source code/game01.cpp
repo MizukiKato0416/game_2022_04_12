@@ -27,13 +27,13 @@
 //================================================
 //マクロ定義
 //================================================
-#define GAME01_MOUSE_VEC_ADJUSTMENT_0	(0.01f)		//引っ張ったときのベクトルを小さくする割合0
-#define GAME01_MOUSE_VEC_ADJUSTMENT_1	(0.015f)	//引っ張ったときのベクトルを小さくする割合1
-#define GAME01_MOUSE_VEC_ADJUSTMENT_2	(0.02f)		//引っ張ったときのベクトルを小さくする割合2
-#define GAME01_MOUSE_VEC_ADJUSTMENT_3	(0.03f)		//引っ張ったときのベクトルを小さくする割合3
-#define GAME01_MOUSE_VEC_ADJUSTMENT_4	(0.04f)		//引っ張ったときのベクトルを小さくする割合4
-#define GAME01_MOUSE_VEC_ADJUSTMENT_5	(0.05f)		//引っ張ったときのベクトルを小さくする割合5
-#define GAME01_MOUSE_VEC_ADJUSTMENT_6	(0.06f)		//引っ張ったときのベクトルを小さくする割合6
+#define GAME01_MOUSE_VEC_ADJUSTMENT_0	(0.4f)		//引っ張ったときのベクトルを小さくする割合0
+#define GAME01_MOUSE_VEC_ADJUSTMENT_1	(0.5f)		//引っ張ったときのベクトルを小さくする割合1
+#define GAME01_MOUSE_VEC_ADJUSTMENT_2	(0.6f)		//引っ張ったときのベクトルを小さくする割合2
+#define GAME01_MOUSE_VEC_ADJUSTMENT_3	(0.7f)		//引っ張ったときのベクトルを小さくする割合3
+#define GAME01_MOUSE_VEC_ADJUSTMENT_4	(0.8f)		//引っ張ったときのベクトルを小さくする割合4
+#define GAME01_MOUSE_VEC_ADJUSTMENT_5	(0.9f)		//引っ張ったときのベクトルを小さくする割合5
+#define GAME01_MOUSE_VEC_ADJUSTMENT_6	(1.0f)		//引っ張ったときのベクトルを小さくする割合6
 #define GAME01_CAMERA_ADD_POS			(10.0f)		//カメラの位置を加算する量
 #define GAME01_CAMERA_ADD_DIFFER		(10.0f)		//カメラの視点と注視点の距離を加算する量
 #define GAME01_CAMERA_VIEW_CHANGE_MOVE	(20.0f)		//カメラを視野をDEFAULTから最大に変える境界線のプレイヤーのバウンドする瞬間の移動量
@@ -45,6 +45,11 @@
 #define GAME01_SHOT_GAUGE_CASE_2		(40)		//ショットゲージの段階2
 #define GAME01_SHOT_GAUGE_CASE_3		(60)		//ショットゲージの段階3
 #define GAME01_SHOT_GAUGE_CASE_4		(80)		//ショットゲージの段階4
+
+#ifdef _DEBUG
+#define GAME01_MOUSE_VEC_ADJUSTMENT_DEBUG	(0.08f)		//引っ張ったときのベクトルを小さくする割合デバッグ用
+#endif // !_DEBUG
+
 
 //================================================
 //静的メンバ変数宣言
@@ -85,9 +90,6 @@ HRESULT CGame01::Init(void)
 	m_mouseTriggerPos = { 0.0f, 0.0f, 0.0f };
 	m_nGaugeCounter = 0;
 
-	//CObject3D *pObject3D = CObject3D::Create(D3DXVECTOR3(0.0f, 0.0f, 1000.0f), D3DXVECTOR3(4000.0f, 2000.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	//pObject3D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_SKY"));
-
 	//スコアの生成
 	CScore *pSocre = nullptr;
 	pSocre = CScore::Create(D3DXVECTOR3(0.0f + (SCORE_POLYGON_WIDTH * MAX_SCORE_POLYGON / 2.0f), SCORE_POLYGON_HEIGHT / 2.0f, 0.0f),
@@ -112,7 +114,7 @@ HRESULT CGame01::Init(void)
 		                      D3DXVECTOR3(GAUGE_SHOT_SIZE_X, GAUGE_SHOT_SIZE_Y, 0.0f), GAME01_SHOT_GAUGE_MAX, 0);
 	m_pGauge->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_UI_HP_GAUGE"));
 
-	CBg *bg = CBg::Create(D3DXVECTOR3(0.0f, 0.0f, 1000.0f), D3DXVECTOR3(4000.0f, 2000.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(0.001f, 0.0f));
+	CBg *bg = CBg::Create(D3DXVECTOR3(0.0f, 0.0f, 1000.0f), D3DXVECTOR3(8000.0f, 4000.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(0.0f, 0.0f));
 	bg->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_SKY"));
 	//bg->SetUvMove(D3DXVECTOR2(0.5f, 0.0f));
 
@@ -423,7 +425,7 @@ void CGame01::Shot(void)
 			//ベクトルのyを逆向きにする
 			mousePosVec.y *= -1.0f;
 			//ベクトルを既定の割合小さくする
-			mousePosVec *= GAME01_MOUSE_VEC_ADJUSTMENT_6;
+			mousePosVec *= GAME01_MOUSE_VEC_ADJUSTMENT_DEBUG;
 
 			//発射している状態にする
 			m_pPlayer->SetShot(true);
@@ -464,10 +466,12 @@ void CGame01::Shot(void)
 			GetCursorPos(&mouseReleasePos);
 			ScreenToClient(CManager::GetWindowHandle(), &mouseReleasePos);
 
-			//マウスをクリックした位置から離した位置までのベクトルを算出
-			D3DXVECTOR3 mousePosVec = D3DXVECTOR3(m_mouseTriggerPos.x - mouseReleasePos.x, m_mouseTriggerPos.y - mouseReleasePos.y, 0.0f);
+			//マウスをクリックした場所から離した場所の角度を算出
+			float fRot = atan2f(m_mouseTriggerPos.y - mouseReleasePos.y, m_mouseTriggerPos.x - mouseReleasePos.x);
+			//プレイヤーの移動ベクトルを求める
+			D3DXVECTOR3 moveVec = D3DXVECTOR3(cosf(fRot) * PLAYER_SHOT_MOVE, sinf(fRot) * PLAYER_SHOT_MOVE, 0.0f);
 			//ベクトルのyを逆向きにする
-			mousePosVec.y *= -1.0f;
+			moveVec.y *= -1.0f;
 
 			float fmoseVecAdjustment = 0.0f;
 			//ゲージの量によってベクトルを小さくする割合を変える
@@ -501,14 +505,14 @@ void CGame01::Shot(void)
 			}
 
 			//ベクトルを既定の割合小さくする
-			mousePosVec *= fmoseVecAdjustment;
+			moveVec *= fmoseVecAdjustment;
 
 			//発射している状態にする
 			m_pPlayer->SetShot(true);
 			//ジャンプ量設定
-			m_pPlayer->SetJump(mousePosVec.y);
+			m_pPlayer->SetJump(moveVec.y);
 			//前に進む力を設定
-			m_pPlayer->SetMoveForward(mousePosVec.x);
+			m_pPlayer->SetMoveForward(moveVec.x);
 		}
 	}
 }
