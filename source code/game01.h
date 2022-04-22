@@ -12,11 +12,13 @@ class CPlayer;
 class CFloor;
 class CRoad;
 class CGauge;
+class CBg;
 
 //================================================
 //マクロ定義
 //================================================
 #define GAME01_MAX_ROAD		(2)		//道の最大数
+#define GAME01_MAX_BG		(3)		//背景の最大数
 
 //========================================================
 //構造体の定義
@@ -50,6 +52,7 @@ private:
 	D3DXVECTOR3 m_mouseTriggerPos;		//マウスをクリックした瞬間の位置
 	CGauge *m_pGauge;					//発射ゲージ
 	int m_nGaugeCounter;				//ゲージが満タンの時間を設定するためのカウンター
+	CBg *m_pBg[GAME01_MAX_BG];			//背景のポインタ
 };
 
 #endif // !_GAME01_H_
