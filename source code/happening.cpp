@@ -33,8 +33,6 @@ CHappenig::~CHappenig()
 //=============================================================================
 HRESULT CHappenig::Init(void)
 {
-	CObject::Init();
-
 	SetObjType(CObject::OBJTYPE::HAPPENING);
 
 	return S_OK;

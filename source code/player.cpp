@@ -22,6 +22,7 @@
 #include "billboard.h"
 #include "ui.h"
 #include "shadow.h"
+#include "sparkle.h"
 
 //================================================
 //マクロ定義
@@ -34,17 +35,18 @@
 #define PLAYER_JUMP_MIN						(5.0f)		//ジャンプ力最小値
 #define PLAYER_JUMP_MAX						(25.0f)		//ジャンプ力最大値
 #define PLAYER_BOUND						(0.8f)		//バウンド力
-#define PLAYER_MOVE_FORWARD_TRAMPOLINE		(20.0f)		//トランポリンの前に進む力
-#define PLAYER_MOVE_FORWARD_FAN				(40.0f)		//扇風機の前に進む力
-#define PLAYER_MOVE_FORWARD_BALANCE_BALL	(30.0f)		//バランスボールの前に進む力
-#define PLAYER_MOVE_FORWARD_GIRL			(40.0f)		//ロキコちゃんの前に進む力
+#define PLAYER_MOVE_FORWARD_TRAMPOLINE		(15.0f)		//トランポリンの前に進む力
+#define PLAYER_MOVE_FORWARD_FAN				(30.0f)		//扇風機の前に進む力
+#define PLAYER_MOVE_FORWARD_BALANCE_BALL	(20.0f)		//バランスボールの前に進む力
+#define PLAYER_MOVE_FORWARD_GIRL			(30.0f)		//ロキコちゃんの前に進む力
 #define PLAYER_MOVE_FORWARD_SUBTRACTION		(0.985f)	//前に進む力の減算量
 #define PLAYER_MOVE_FORWARD_MIN				(4.0f)		//前に進む力の最小値
 #define PLAYER_MOVE_FORWARD_MIN_NOT_JUMP	(1.5f)		//ジャンプしていないときの前に進む力の最小値
-#define PLAYER_MOVE_FORWARD_MAX				(70.0f)		//前に進む力の最大値
+#define PLAYER_MOVE_FORWARD_MAX				(40.0f)		//前に進む力の最大値
 #define PLAYER_GRAVITY						(0.4f)		//重力の大きさ
 #define PLAYER_MOVE_SPEED					(4.0f)		//通常移動の移動量
 #define PLAYER_SIZE							(10.0f)		//プレイヤーのサイズ調整値
+#define PLAYER_SPARKLE_NUM					(3)			//軌道エフェクトの数
 
 //================================================
 //静的メンバ変数宣言
@@ -70,6 +72,7 @@ CPlayer::CPlayer(CObject::PRIORITY Priority):CObject(Priority)
 	m_fJump = 0.0f;
 	m_fMoveForward = 0.0f;
 	m_fBoundMove = 0.0f;
+	m_pSparkle = nullptr;
 }
 
 //================================================
@@ -98,6 +101,7 @@ HRESULT CPlayer::Init(void)
 	m_fJump = 0.0f;
 	m_fMoveForward = 0.0f;
 	m_fBoundMove = 0.0f;
+	m_pSparkle = nullptr;
 
 	//モデルの生成
 	//textファイル読み込み
@@ -206,8 +210,6 @@ void CPlayer::Uninit(void)
 //================================================
 void CPlayer::Update(void)
 {
-	
-
 	//位置取得
 	D3DXVECTOR3 pos = GetPos();
 
@@ -278,6 +280,13 @@ void CPlayer::Update(void)
 				}
 			}
 		}
+
+		//サイズを保存
+		float fSize = SPARKLE_SIZE_RAND;
+		//軌道エフェクトの生成
+		m_pSparkle = CSparkle::Create(m_pos, D3DXVECTOR3(SPARKLE_SIZE_RAND, SPARKLE_SIZE_RAND, 0.0f), D3DXVECTOR3(-m_fMoveForward, 0.0f, 0.0f),
+			                          PLAYER_SPARKLE_NUM);
+		m_pSparkle->SetMove(D3DXVECTOR3(-m_fMoveForward, 0.0f, 0.0f));
 	}
 
 	//床との当たり判定

@@ -22,9 +22,9 @@ NAME = TEX_TYPE_DUNGEON_WALL
 PAS = data/TEXTURE/piller_01.jpg
 NAME = TEX_TYPE_DUNGEON_PILLER
 
-//メッシュ軌道1
-PAS = data/TEXTURE/trajectory_01.png
-NAME = TEX_TYPE_MESH_TRAJECTORY_01
+//キラキラエフェクト
+PAS = data/TEXTURE/effect_sparkle.png
+NAME = TEX_TYPE_EFFECT_SPARKLE
 
 //メッシュ軌道2
 PAS = data/TEXTURE/trajectory_02.png

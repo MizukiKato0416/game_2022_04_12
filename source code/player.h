@@ -9,6 +9,7 @@
 //前方宣言
 class CModel;
 class CMotionPlayer;
+class CSparkle;
 
 //================================================
 //マクロ定義
@@ -74,6 +75,7 @@ private:
 	float m_fJump;									//ジャンプ力
 	float m_fMoveForward;							//前に進む力
 	float m_fBoundMove;								//バウンドする瞬間の移動量
+	CSparkle *m_pSparkle;							//軌道エフェクト
 };
 
 #endif // !_PLAYER_H_
