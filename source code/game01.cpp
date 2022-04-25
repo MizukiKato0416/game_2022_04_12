@@ -117,7 +117,6 @@ HRESULT CGame01::Init(void)
 
 	m_pBg[0] = CBg::Create(D3DXVECTOR3(0.0f, 0.0f, 1000.0f), D3DXVECTOR3(8000.0f, 4000.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(0.0f, 0.0f));
 	m_pBg[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_SKY"));
-	//m_pBg[0]->SetUvMove(D3DXVECTOR2(0.5f, 0.0f));
 
 	return S_OK;
 }
@@ -162,6 +161,8 @@ void CGame01::Update(void)
 			//前に進む力を既定の倍率大きくする
 			fMoveForward *= GAME01_SCORE_MAGNIFICATION;
 		}
+
+		
 
 		//スコアをプレイヤーが前に進む力分加算
 		CManager::GetInstance()->GetPlayData()->GetScorePoint()->AddScore((int)fMoveForward);
