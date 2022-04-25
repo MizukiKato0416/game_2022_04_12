@@ -63,6 +63,7 @@ CGame01::CGame01(CObject::PRIORITY Priority):CObject(Priority)
 	m_pPlayer = nullptr;
 	m_pFloor = nullptr;
 	memset(m_apRoad, NULL, sizeof(m_apRoad[GAME01_MAX_ROAD]));
+	memset(m_pBg, NULL, sizeof(m_pBg[GAME01_MAX_BG]));
 	m_mouseTriggerPos = { 0.0f, 0.0f, 0.0f };
 	m_pGauge = nullptr;
 	m_nGaugeCounter = 0;
@@ -114,9 +115,8 @@ HRESULT CGame01::Init(void)
 		                      D3DXVECTOR3(GAUGE_SHOT_SIZE_X, GAUGE_SHOT_SIZE_Y, 0.0f), GAME01_SHOT_GAUGE_MAX, 0);
 	m_pGauge->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_UI_HP_GAUGE"));
 
-	CBg *bg = CBg::Create(D3DXVECTOR3(0.0f, 0.0f, 1000.0f), D3DXVECTOR3(8000.0f, 4000.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(0.0f, 0.0f));
-	bg->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_SKY"));
-	//bg->SetUvMove(D3DXVECTOR2(0.5f, 0.0f));
+	m_pBg[0] = CBg::Create(D3DXVECTOR3(0.0f, 0.0f, 1000.0f), D3DXVECTOR3(8000.0f, 4000.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(0.0f, 0.0f));
+	m_pBg[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_SKY"));
 
 	return S_OK;
 }
@@ -161,6 +161,8 @@ void CGame01::Update(void)
 			//前に進む力を既定の倍率大きくする
 			fMoveForward *= GAME01_SCORE_MAGNIFICATION;
 		}
+
+		
 
 		//スコアをプレイヤーが前に進む力分加算
 		CManager::GetInstance()->GetPlayData()->GetScorePoint()->AddScore((int)fMoveForward);

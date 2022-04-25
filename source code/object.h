@@ -27,6 +27,7 @@ public:
 		NONE = 0,			//なし
 		PLAYER,				//プレイヤー
 		MODEL,				//モデル
+		HAPPENING,			//ハプニング
 		POLYGON_3D,			//3Dポリゴン
 		SHADOW,				//影
 		MESH_FIELD,			//メッシュフィールド
@@ -48,6 +49,7 @@ public:
 		BG,					//背景
 		PLAYER,				//プレイヤー
 		MODEL,				//モデル
+		HAPPENING,			//ハプニング
 		UI,					//UI
 		TROPHY,				// トロフィー
 		POLYGON_3D,			//3Dポリゴン
