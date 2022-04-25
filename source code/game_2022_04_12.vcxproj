@@ -165,6 +165,7 @@
     <ClCompile Include="floor.cpp" />
     <ClCompile Include="game01.cpp" />
     <ClCompile Include="gauge.cpp" />
+    <ClCompile Include="happening.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="input_keyboard.cpp" />
     <ClCompile Include="input_mouse.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="game01.h" />
     <ClInclude Include="gauge.h" />
     <ClInclude Include="bg.h" />
+    <ClInclude Include="happening.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="input_keyboard.h" />
     <ClInclude Include="input_mouse.h" />
