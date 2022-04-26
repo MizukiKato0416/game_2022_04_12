@@ -13,8 +13,6 @@
 #include "model_single.h"
 #include "manager.h"
 #include "texture.h"
-#include "happening.h"
-#include "starring.h"
 
 //=============================================================================
 // デフォルトコンストラクタ
@@ -40,7 +38,7 @@ HRESULT CRoad::Init(void)
 	m_floor = CFloor::Create(m_pos, m_size, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	m_floor->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
 	m_cloud = CModelSingle::Create(D3DXVECTOR3(m_pos.x, m_pos.y - 1500.0f, m_pos.z + 500.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f),
-		                           CXload::X_TYPE_CLOUD, NULL, false);
+		                           CXload::X_TYPE_CLOUD, NULL, false, CModelSingle::HAPPENING_TYPE::NONE);
 
 	for (int count_candidate = 0; count_candidate < (int)CANDIDATES_PLACE::MAX; count_candidate++)
 	{
@@ -164,40 +162,38 @@ CRoad *CRoad::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const floa
 //================================================
 void CRoad::SkyInstallation(const int &happening_type)
 {
-	switch ((CHappenig::HAPPENING_TYPE)happening_type)
+	switch ((CModelSingle::HAPPENING_TYPE)happening_type)
 	{
-	case CHappenig::HAPPENING_TYPE::STARRING:
-		m_happening_model.push_back(CStarring::Create(D3DXVECTOR3(m_pos.x + SKY_CANDIDATES_POS_X, m_pos.y + SKY_CANDIDATES_POS_Y, m_pos.z),
-													  D3DXVECTOR3(0.0f, 0.0f, 0.0f)));
+	case CModelSingle::HAPPENING_TYPE::STARRING:
+		m_happening_model.push_back(CModelSingle::Create(D3DXVECTOR3(m_pos.x + SKY_CANDIDATES_POS_X, m_pos.y + DRONUD_CANDIDATES_POSX_01, m_pos.z),
+			D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_STARRING, NULL, true, (CModelSingle::HAPPENING_TYPE)happening_type));
 		break;
 	default:
-		m_happening_model.push_back(CStarring::Create(D3DXVECTOR3(m_pos.x + SKY_CANDIDATES_POS_X, m_pos.y + SKY_CANDIDATES_POS_Y, m_pos.z),
-			D3DXVECTOR3(0.0f, 0.0f, 0.0f)));
 		break;
 	}
 }
 
 void CRoad::GroundInstallation(const int &happening_type, const int &installation_position)
 {
-	/*switch ((CHappenig::HAPPENING_TYPE)happening_type)
+	switch ((CModelSingle::HAPPENING_TYPE)happening_type)
 	{
-	case CHappenig::HAPPENING_TYPE::TRAMPOLINE:
+	case CModelSingle::HAPPENING_TYPE::TRAMPOLINE:
 		m_happening_model.push_back(CModelSingle::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y - 1.0f, m_pos.z),
 			                        D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_TRAMPLINE, NULL, true, (CModelSingle::HAPPENING_TYPE)happening_type));
 		break;
-	case CHappenig::HAPPENING_TYPE::FAN:
+	case CModelSingle::HAPPENING_TYPE::FAN:
 		m_happening_model.push_back(CModelSingle::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y - 1.0f, m_pos.z),
 			                        D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_FAN, NULL, true, (CModelSingle::HAPPENING_TYPE)happening_type));
 		break;
-	case CHappenig::HAPPENING_TYPE::REDBULL:
+	case CModelSingle::HAPPENING_TYPE::REDBULL:
 		m_happening_model.push_back(CModelSingle::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y - 1.0f, m_pos.z),
 			                        D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_REDBULL, NULL, true, (CModelSingle::HAPPENING_TYPE)happening_type));
 		break;
-	case CHappenig::HAPPENING_TYPE::GIRL:
+	case CModelSingle::HAPPENING_TYPE::GIRL:
 		m_happening_model.push_back(CModelSingle::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y - 1.0f, m_pos.z),
 			                        D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_A, NULL, true, (CModelSingle::HAPPENING_TYPE)happening_type));
 		break;
 	default:
 		break;
-	}*/
+	}
 }
