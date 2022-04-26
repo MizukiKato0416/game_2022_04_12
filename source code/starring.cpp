@@ -8,7 +8,7 @@
 // マクロ定義
 //=============================================================================
 #define STARRING_ROTATION_X (0.01f)	// 回転
-#define STARRING_JUMP_POW (4.0f)	// ジャンプ力
+#define STARRING_JUMP_POW (15.0f)	// ジャンプ力
 #define STARRING_FORWORD_POW (35.0f)	// 進力
 
 //=============================================================================
@@ -78,6 +78,9 @@ void CStarring::Update(void)
 				CPlayer *player = static_cast<CPlayer*>(object[count_object]);
 
 				player->SetJump(STARRING_JUMP_POW);
+
+				D3DXVECTOR3 move = player->GetMove();
+				//player->SetMove(D3DXVECTOR3(move.x, move.y + 0.5f, move.z));
 				player->SetMoveForward(STARRING_FORWORD_POW);
 			}
 		}

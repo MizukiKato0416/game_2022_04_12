@@ -46,7 +46,7 @@ HRESULT CRoad::Init(void)
 	{
 		random_device randomdev;
 		mt19937 mt(randomdev());
-		uniform_int_distribution<> randomangle(4, 4);
+		uniform_int_distribution<> randomangle(0, 9);
 		int happening_type = randomangle(mt);
 
 		switch ((CANDIDATES_PLACE)count_candidate)
