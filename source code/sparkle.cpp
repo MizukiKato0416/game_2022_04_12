@@ -10,7 +10,7 @@
 //================================================
 //マクロ定義
 //================================================
-#define SPARKLE_POS_X_RAND			(float (rand() % 1))			//エフェクトを出す位置Xのランダム値
+#define SPARKLE_POS_X_RAND			(float (rand() % 100))			//エフェクトを出す位置Xのランダム値
 #define SPARKLE_POS_Y_RAND			(float (rand() % 40))			//エフェクトを出す位置Yのランダム値
 #define SPARKLE_SIZE_SUBTRACTION	(2.0f)							//サイズ減算量
 

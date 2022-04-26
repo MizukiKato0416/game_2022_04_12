@@ -45,6 +45,16 @@
 #define GAME01_SHOT_GAUGE_CASE_2		(40)		//ショットゲージの段階2
 #define GAME01_SHOT_GAUGE_CASE_3		(60)		//ショットゲージの段階3
 #define GAME01_SHOT_GAUGE_CASE_4		(80)		//ショットゲージの段階4
+#define GAME01_BG_SIZE_ADJUSTMENT		(3.0f)		//背景の大きくする割合
+#define GAME01_BG_POS_Z					(1000.0f)	//背景の位置Z
+#define GAME01_BG_POS_Y					(300.0f)	//背景の位置Y
+#define GAME01_BG_1_MAGNIFICATION		(0.00004f)	//背景1が前に進む力を背景の移動にする際の倍率
+#define GAME01_BG_2_MAGNIFICATION		(0.00006f)	//背景2が前に進む力を背景の移動にする際の倍率
+#define GAME01_BG_3_MAGNIFICATION		(0.00008f)	//背景3が前に進む力を背景の移動にする際の倍率
+#define GAME01_BG_1_MOVE_INIT			(0.00006f)	//背景1の初期移動量
+#define GAME01_BG_2_MOVE_INIT			(0.00008f)	//背景2の初期移動量
+#define GAME01_BG_3_MOVE_INIT			(0.0001f)	//背景3の初期移動量
+
 
 #ifdef _DEBUG
 #define GAME01_MOUSE_VEC_ADJUSTMENT_DEBUG	(0.08f)		//引っ張ったときのベクトルを小さくする割合デバッグ用
@@ -115,8 +125,24 @@ HRESULT CGame01::Init(void)
 		                      D3DXVECTOR3(GAUGE_SHOT_SIZE_X, GAUGE_SHOT_SIZE_Y, 0.0f), GAME01_SHOT_GAUGE_MAX, 0);
 	m_pGauge->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_UI_HP_GAUGE"));
 
-	m_pBg[0] = CBg::Create(D3DXVECTOR3(0.0f, 0.0f, 1000.0f), D3DXVECTOR3(8000.0f, 4000.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(0.0f, 0.0f));
+	//背景1の生成
+	m_pBg[0] = CBg::Create(D3DXVECTOR3(0.0f, GAME01_BG_POS_Y, GAME01_BG_POS_Z),
+		                   D3DXVECTOR3(SCREEN_WIDTH * GAME01_BG_SIZE_ADJUSTMENT, SCREEN_HEIGHT * GAME01_BG_SIZE_ADJUSTMENT, 0.0f),
+		                   D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(GAME01_BG_1_MOVE_INIT, 0.0f));
 	m_pBg[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_SKY_01"));
+
+	//背景2の生成
+	m_pBg[1] = CBg::Create(D3DXVECTOR3(0.0f, GAME01_BG_POS_Y, GAME01_BG_POS_Z),
+		                   D3DXVECTOR3(SCREEN_WIDTH * GAME01_BG_SIZE_ADJUSTMENT, SCREEN_HEIGHT * GAME01_BG_SIZE_ADJUSTMENT, 0.0f),
+		                   D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(GAME01_BG_2_MOVE_INIT, 0.0f));
+	m_pBg[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_SKY_02"));
+
+	//背景3の生成
+	m_pBg[2] = CBg::Create(D3DXVECTOR3(0.0f, GAME01_BG_POS_Y, GAME01_BG_POS_Z),
+		                   D3DXVECTOR3(SCREEN_WIDTH * GAME01_BG_SIZE_ADJUSTMENT, SCREEN_HEIGHT * GAME01_BG_SIZE_ADJUSTMENT, 0.0f),
+		                   D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(GAME01_BG_3_MOVE_INIT, 0.0f));
+	m_pBg[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_SKY_03"));
+
 
 	return S_OK;
 }
@@ -148,24 +174,28 @@ void CGame01::Update(void)
 		Road();
 
 		//プレイヤーが前に進む力を取得
-		float fMoveForward = m_pPlayer->GetMoveForward();
+		float fScoreMoveForward = m_pPlayer->GetMoveForward();
 
 		//前に進む力が負の数だったら
-		if (fMoveForward < 0.0f)
+		if (fScoreMoveForward < 0.0f)
 		{
 			//0にする
-			fMoveForward = 0.0f;
+			fScoreMoveForward = 0.0f;
 		}
-		else if(fMoveForward > 0.0f)
+		else if(fScoreMoveForward > 0.0f)
 		{//前に進む力が正の数だったら
 			//前に進む力を既定の倍率大きくする
-			fMoveForward *= GAME01_SCORE_MAGNIFICATION;
+			fScoreMoveForward *= GAME01_SCORE_MAGNIFICATION;
 		}
 
+		//背景のUV座標をプレイヤーが前に進む力分移動させる
+		m_pBg[0]->SetUvMove(D3DXVECTOR2(GAME01_BG_1_MOVE_INIT + m_pPlayer->GetMoveForward() * GAME01_BG_1_MAGNIFICATION, 0.0f));
+		m_pBg[1]->SetUvMove(D3DXVECTOR2(GAME01_BG_2_MOVE_INIT + m_pPlayer->GetMoveForward() * GAME01_BG_2_MAGNIFICATION, 0.0f));
+		m_pBg[2]->SetUvMove(D3DXVECTOR2(GAME01_BG_3_MOVE_INIT + m_pPlayer->GetMoveForward() * GAME01_BG_3_MAGNIFICATION, 0.0f));
 		
 
 		//スコアをプレイヤーが前に進む力分加算
-		CManager::GetInstance()->GetPlayData()->GetScorePoint()->AddScore((int)fMoveForward);
+		CManager::GetInstance()->GetPlayData()->GetScorePoint()->AddScore((int)fScoreMoveForward);
 	}
 	else
 	{//発射していなかったら
