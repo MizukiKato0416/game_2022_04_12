@@ -34,8 +34,6 @@ CHappenig::~CHappenig()
 //=============================================================================
 HRESULT CHappenig::Init(void)
 {
-	SetObjType(CObject::OBJTYPE::HAPPENING);
-
 	return S_OK;
 }
 
@@ -176,6 +174,5 @@ bool CHappenig::HitPlayer(void)
 			}
 		}
 	}
-
 	return false;
 }
