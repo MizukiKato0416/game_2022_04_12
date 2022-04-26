@@ -116,7 +116,7 @@ HRESULT CGame01::Init(void)
 	m_pGauge->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_UI_HP_GAUGE"));
 
 	m_pBg[0] = CBg::Create(D3DXVECTOR3(0.0f, 0.0f, 1000.0f), D3DXVECTOR3(8000.0f, 4000.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(0.0f, 0.0f));
-	m_pBg[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_SKY"));
+	m_pBg[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_SKY_01"));
 
 	return S_OK;
 }
