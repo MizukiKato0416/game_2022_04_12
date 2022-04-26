@@ -6,13 +6,15 @@
 #include "effect3D.h"
 #include "manager.h"
 #include "texture.h"
+#include "game01.h"
+#include "player.h"
 
 //================================================
 //マクロ定義
 //================================================
-#define SPARKLE_POS_X_RAND			(float (rand() % 100))			//エフェクトを出す位置Xのランダム値
+#define SPARKLE_POS_X_RAND			(float (rand() % 60 + -30))		//エフェクトを出す位置Xのランダム値
 #define SPARKLE_POS_Y_RAND			(float (rand() % 40))			//エフェクトを出す位置Yのランダム値
-#define SPARKLE_SIZE_SUBTRACTION	(2.0f)							//サイズ減算量
+#define SPARKLE_SIZE_SUBTRACTION	(0.6f)							//サイズ減算量
 
 //================================================
 //静的メンバ変数宣言
@@ -57,6 +59,7 @@ HRESULT CSparkle::Init()
 			                                    m_size, D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f), CEffect3D::EFFECT3D_TYPE::TRAJECTORY_PLAYER));
 		//テクスチャ設定
 		m_pEffect3D[nCnt]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_EFFECT_SPARKLE"));
+		m_pEffect3D[nCnt]->SetAlphaBlendSubtraction((bool)(rand() % 2));
 	}
 
 	//位置とサイズを設定
@@ -87,6 +90,25 @@ void CSparkle::Update(void)
 			//位置とサイズを取得
 			D3DXVECTOR3 pos = m_pEffect3D[nCnt]->GetPos();
 			D3DXVECTOR3 size = m_pEffect3D[nCnt]->GetSize();
+
+			//オブジェクト情報を入れるポインタ
+			vector<CObject*> object;
+
+			//先頭のポインタを代入
+			object = CObject::GetObject(static_cast<int>(CObject::PRIORITY::PLAYER));
+			int object_size = object.size();
+
+			for (int count_object = 0; count_object < object_size; count_object++)
+			{
+				if (object[count_object]->GetObjType() == CObject::OBJTYPE::PLAYER)
+				{
+					//プレイヤーの型にキャスト
+					CPlayer *pPlayer = (CPlayer*)object[count_object];
+
+					//プレイヤーが前に進む力を取得
+					m_move.x = -pPlayer->GetMoveForward();
+				}
+			}
 
 			//移動量を加算
 			pos += m_move;

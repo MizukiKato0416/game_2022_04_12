@@ -34,6 +34,7 @@ public:
 	void SetPos(const D3DXVECTOR3 &pos) { m_pos = pos; }	// セッター
 	void SetRot(const D3DXVECTOR3 &rot) { m_rot = rot; }	// セッター
 	void SetModel(CModelSingle *model) { m_model = model; }	// セッター
+	bool HitPlayer(void);									//プレイヤーとの当たり判定
 private:
 	CModelSingle *m_model;	// モデル
 	D3DXVECTOR3 m_pos;	// 位置

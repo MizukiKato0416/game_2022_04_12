@@ -24,6 +24,7 @@ CEffect3D::CEffect3D(CObject::PRIORITY Priority) : CBillboard(Priority)
 {
 	m_type = EFFECT3D_TYPE::NONE;
 	m_pControl = nullptr;
+	m_bAlphaBlendSubtraction = false;
 }
 
 //================================================
@@ -43,6 +44,9 @@ CEffect3D::~CEffect3D()
 //================================================
 HRESULT CEffect3D::Init(void)
 {
+	//変数初期化
+	m_bAlphaBlendSubtraction = false;
+
 	CBillboard::Init();
 
 	//オブジェクトの種類を設定
@@ -94,10 +98,20 @@ void CEffect3D::Draw(void)
 	//デバイスの取得
 	pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();
 
-	//αブレンディングを加算合成に設定
-	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
-	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
+	if (m_bAlphaBlendSubtraction == false)
+	{
+		//αブレンディングを加算合成に設定
+		pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+		pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+		pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
+	}
+	else
+	{
+		//減算合成の設定
+		pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_REVSUBTRACT);
+		pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+		pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
+	}
 
 	//ライティングを無効にする
 	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
@@ -123,10 +137,20 @@ void CEffect3D::Draw(void)
 	pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_ALWAYS);
 	pDevice->SetRenderState(D3DRS_ALPHAREF, 0x00);
 
-	//aブレンディングを通常に戻す
-	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
-	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_SRCALPHA);
-	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+	if (m_bAlphaBlendSubtraction == false)
+	{
+		//aブレンディングを通常に戻す
+		pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+		pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_SRCALPHA);
+		pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+	}
+	else
+	{
+		//減算合成から通常の合成に戻す
+		pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+		pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+		pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+	}
 }
 
 //================================================

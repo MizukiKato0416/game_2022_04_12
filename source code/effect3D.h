@@ -38,9 +38,13 @@ public:
 	void Draw(void);
 	static CEffect3D *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const D3DXCOLOR &col, const EFFECT3D_TYPE &type);
 
+	//減算合成設定処理
+	void SetAlphaBlendSubtraction(bool bAlphaBlendSubtraction) { m_bAlphaBlendSubtraction = bAlphaBlendSubtraction; }
+
 private:
-	EFFECT3D_TYPE m_type;		//エフェクトの種類
-	CControl *m_pControl;		//コントロールクラスのポインタ
+	EFFECT3D_TYPE m_type;			//エフェクトの種類
+	CControl *m_pControl;			//コントロールクラスのポインタ
+	bool m_bAlphaBlendSubtraction;	//減算合成するかどうか
 };
 
 #endif // !_EFFECT3D_H_

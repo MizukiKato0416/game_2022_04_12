@@ -49,6 +49,8 @@ public:
 	void SetPos(const D3DXVECTOR3 &pos) { m_pos = pos; }		//位置設定処理
 	D3DXVECTOR3 GetPos(void) { return m_pos; }					//位置取得処理
 	void SetMtxWorld(void);										//ワールドマトリックス設定処理
+	bool GetColl(void) { return m_bCollision; }					//当たり判定取得処理
+	CModel *GetModel(void) { return m_pModel; }					//モデル取得処理
 
 private:
 	//メンバ変数
