@@ -29,7 +29,8 @@ public:
 		NONE = 0,		// 無し
 		TRAMPOLINE,		// トランポリン
 		FAN,			// 扇風機
-		BALANCE_BALL,	// バランスボール
+		REDBULL,		// レッドブル
+		STARRING,		// 六芒星
 		GIRL,			// ロキ子
 		MAX,			// 総数
 	};

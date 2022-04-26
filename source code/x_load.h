@@ -26,6 +26,11 @@ public:
 		X_TYPE_PLAYER_LEG_L,					//プレイヤーの左足
 		X_TYPE_A,								//プレイヤーの右足
 		X_TYPE_CLOUD,							//雲
+		X_TYPE_TRAMPLINE,						//トランポリン
+		X_TYPE_FAN,								//扇風機
+		X_TYPE_AIRPLANE,						//飛行機
+		X_TYPE_STARRING,						//六芒星
+		X_TYPE_REDBULL,							//レッドブル
 		X_TYPE_MAX								//最大数
 	} X_TYPE;
 

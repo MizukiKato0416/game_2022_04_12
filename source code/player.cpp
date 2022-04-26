@@ -333,7 +333,7 @@ void CPlayer::Update(void)
 			fJump = PLAYER_JUMP_FAN;
 			fMoveForward = PLAYER_MOVE_FORWARD_FAN;
 			break;
-		case (int)CModelSingle::HAPPENING_TYPE::BALANCE_BALL:
+		case (int)CModelSingle::HAPPENING_TYPE::REDBULL:
 			fJump = PLAYER_JUMP_BALANCE_BALL;
 			fMoveForward = PLAYER_MOVE_FORWARD_BALANCE_BALL;
 			break;

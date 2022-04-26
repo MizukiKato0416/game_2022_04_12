@@ -49,10 +49,10 @@ HRESULT CRoad::Init(void)
 		switch ((CANDIDATES_PLACE)count_candidate)
 		{
 		case CANDIDATES_PLACE::CANDIDATES_00:
-			GroundInstallation(happening_type, CANDIDATES_POS_00);
+			GroundInstallation(happening_type, DRONUD_CANDIDATES_POSX_00);
 			break;
 		case CANDIDATES_PLACE::CANDIDATES_01:
-			GroundInstallation(happening_type, CANDIDATES_POS_01);
+			GroundInstallation(happening_type, DRONUD_CANDIDATES_POSX_01);
 			break;
 		case CANDIDATES_PLACE::CANDIDATES_02:
 			SkyInstallation(happening_type);
@@ -163,6 +163,10 @@ void CRoad::SkyInstallation(const int &happening_type)
 {
 	switch ((CModelSingle::HAPPENING_TYPE)happening_type)
 	{
+	case CModelSingle::HAPPENING_TYPE::STARRING:
+		m_happening_model.push_back(CModelSingle::Create(D3DXVECTOR3(m_pos.x + SKY_CANDIDATES_POS_X, m_pos.y + DRONUD_CANDIDATES_POSX_01, m_pos.z),
+			D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_STARRING, NULL, true, (CModelSingle::HAPPENING_TYPE)happening_type));
+		break;
 	default:
 		break;
 	}
@@ -174,15 +178,15 @@ void CRoad::GroundInstallation(const int &happening_type, const int &installatio
 	{
 	case CModelSingle::HAPPENING_TYPE::TRAMPOLINE:
 		m_happening_model.push_back(CModelSingle::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y - 1.0f, m_pos.z),
-			                        D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_A, NULL, true, (CModelSingle::HAPPENING_TYPE)happening_type));
+			                        D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_TRAMPLINE, NULL, true, (CModelSingle::HAPPENING_TYPE)happening_type));
 		break;
 	case CModelSingle::HAPPENING_TYPE::FAN:
 		m_happening_model.push_back(CModelSingle::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y - 1.0f, m_pos.z),
-			                        D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_A, NULL, true, (CModelSingle::HAPPENING_TYPE)happening_type));
+			                        D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_FAN, NULL, true, (CModelSingle::HAPPENING_TYPE)happening_type));
 		break;
-	case CModelSingle::HAPPENING_TYPE::BALANCE_BALL:
+	case CModelSingle::HAPPENING_TYPE::REDBULL:
 		m_happening_model.push_back(CModelSingle::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y - 1.0f, m_pos.z),
-			                        D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_A, NULL, true, (CModelSingle::HAPPENING_TYPE)happening_type));
+			                        D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_REDBULL, NULL, true, (CModelSingle::HAPPENING_TYPE)happening_type));
 		break;
 	case CModelSingle::HAPPENING_TYPE::GIRL:
 		m_happening_model.push_back(CModelSingle::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y - 1.0f, m_pos.z),
