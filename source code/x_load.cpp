@@ -59,6 +59,26 @@ void CXload::Init(void)
 	//雲
 	D3DXLoadMeshFromX("data/MODEL/stage/cloud.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
 		&m_apBuffMat[X_TYPE_CLOUD], NULL, &m_aNumMat[X_TYPE_CLOUD], &m_apMesh[X_TYPE_CLOUD]);
+
+	//トランポリン
+	D3DXLoadMeshFromX("data/MODEL/stage/trampoline.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
+		&m_apBuffMat[X_TYPE_TRAMPLINE], NULL, &m_aNumMat[X_TYPE_TRAMPLINE], &m_apMesh[X_TYPE_TRAMPLINE]);
+
+	//扇風機
+	D3DXLoadMeshFromX("data/MODEL/stage/fan.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
+		&m_apBuffMat[X_TYPE_FAN], NULL, &m_aNumMat[X_TYPE_FAN], &m_apMesh[X_TYPE_FAN]);
+
+	//飛行機
+	D3DXLoadMeshFromX("data/MODEL/stage/airplane.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
+		&m_apBuffMat[X_TYPE_AIRPLANE], NULL, &m_aNumMat[X_TYPE_AIRPLANE], &m_apMesh[X_TYPE_AIRPLANE]);
+
+	//六芒星
+	D3DXLoadMeshFromX("data/MODEL/stage/starring.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
+		&m_apBuffMat[X_TYPE_STARRING], NULL, &m_aNumMat[X_TYPE_STARRING], &m_apMesh[X_TYPE_STARRING]);
+
+	//レッドブル
+	D3DXLoadMeshFromX("data/MODEL/stage/redbull.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
+		&m_apBuffMat[X_TYPE_REDBULL], NULL, &m_aNumMat[X_TYPE_REDBULL], &m_apMesh[X_TYPE_REDBULL]);
 }	
 
 //=============================================================================
