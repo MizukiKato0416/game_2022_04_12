@@ -119,12 +119,12 @@ void CRoad::Update(void)
 
 	for (int mdoel_sount = 0; mdoel_sount < model_size; mdoel_sount++)
 	{
-		D3DXVECTOR3 pos = m_happening_model[mdoel_sount]->GetPos();
-		D3DXVECTOR3 size = m_happening_model[mdoel_sount]->GetSize();
+		D3DXVECTOR3 pos = m_happening_model[mdoel_sount]->GetModel()->GetPos();
+		D3DXVECTOR3 size = m_happening_model[mdoel_sount]->GetModel()->GetSize();
 
 		pos.x += m_move_speed;
 
-		m_happening_model[mdoel_sount]->SetPos(pos);
+		m_happening_model[mdoel_sount]->GetModel()->SetPos(pos);
 	}
 }
 
@@ -162,6 +162,7 @@ CRoad *CRoad::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const floa
 //================================================
 void CRoad::SkyInstallation(const int &happening_type)
 {
+<<<<<<< HEAD
 	switch ((CModelSingle::HAPPENING_TYPE)happening_type)
 	{
 	case CModelSingle::HAPPENING_TYPE::STARRING:
@@ -169,6 +170,19 @@ void CRoad::SkyInstallation(const int &happening_type)
 			D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_STARRING, NULL, true, (CModelSingle::HAPPENING_TYPE)happening_type));
 		break;
 	default:
+=======
+	
+
+	switch ((CHappenig::HAPPENING_TYPE)happening_type)
+	{
+	case CHappenig::HAPPENING_TYPE::STARRING:
+		m_happening_model.push_back(CStarring::Create(D3DXVECTOR3(m_pos.x + SKY_CANDIDATES_POS_X, m_pos.y + SKY_CANDIDATES_POS_Y, m_pos.z),
+													  D3DXVECTOR3(0.0f, 0.0f, 0.0f)));
+		
+		break;
+	default:
+		
+>>>>>>> d37962f116bb26153927eb7b2c0ee16702386eb0
 		break;
 	}
 }

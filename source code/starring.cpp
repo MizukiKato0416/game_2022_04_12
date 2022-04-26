@@ -52,7 +52,6 @@ HRESULT CStarring::Init(void)
 void CStarring::Uninit(void)
 {
 	CHappenig::Uninit();
-	Release();
 }
 
 //=============================================================================
