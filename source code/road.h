@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-z
-=======
->>>>>>> d37962f116bb26153927eb7b2c0ee16702386eb0
 //=============================================================================
 //
 // rsoad処理 [road.h]
@@ -22,7 +18,7 @@ z
 #define DRONUD_CANDIDATES_POSX_00 (-500)// 地面モデルX候補位置
 #define DRONUD_CANDIDATES_POSX_01 (500)	// 地面モデルX候補位置
 #define SKY_CANDIDATES_POS_X (500)		// 空モデルX位置
-#define SKY_CANDIDATES_POS_Y (150)		// 空モデルY位置
+#define SKY_CANDIDATES_POS_Y (350)		// 空モデルY位置
 
 //*****************************************************************************
 // 前方宣言
