@@ -18,13 +18,14 @@
 #define DRONUD_CANDIDATES_POSX_00 (-500)// 地面モデルX候補位置
 #define DRONUD_CANDIDATES_POSX_01 (500)	// 地面モデルX候補位置
 #define SKY_CANDIDATES_POS_X (500)		// 空モデルX位置
-#define SKY_CANDIDATES_POS_Y (200)		// 空モデルY位置
+#define SKY_CANDIDATES_POS_Y (150)		// 空モデルY位置
 
 //*****************************************************************************
 // 前方宣言
 //*****************************************************************************
 class CFloor;
 class CModelSingle;
+class CHappenig;
 
 //*****************************************************************************
 // クラス定義
@@ -58,7 +59,7 @@ private:
 	D3DXVECTOR3 m_size;	// サイズ
 	CModelSingle *m_cloud;	// 雲
 	CFloor *m_floor;	// 床
-	vector<CModelSingle*> m_happening_model;	// ハプニング用モデル
+	vector<CHappenig*> m_happening_model;	// ハプニング用モデル
 	float m_move_speed;	// 移動量
 };
 

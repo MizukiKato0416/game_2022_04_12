@@ -24,38 +24,39 @@ public:
 	//---------------------------
 	enum class PRIORITY
 	{
-		NONE = 0,			//なし
-		PLAYER,				//プレイヤー
-		MODEL,				//モデル
-		HAPPENING,			//ハプニング
-		POLYGON_3D,			//3Dポリゴン
-		SHADOW,				//影
-		MESH_FIELD,			//メッシュフィールド
-		ROAD,				//ステージ
-		EFFECT3D,			//パーティクル
-		UI,					//UI
-		RANKING,			//ランキング
-		MASK,				//マスク
-		PAUSE,				//ポーズ
-		FADE,				//フェード
+		NONE = 0,			// なし
+		PLAYER,				// プレイヤー
+		MODEL,				// モデル
+		HAPPENING,			// ハプニング
+		POLYGON_3D,			// 3Dポリゴン
+		SHADOW,				// 影
+		MESH_FIELD,			// メッシュフィールド
+		ROAD,				// ステージ
+		EFFECT3D,			// パーティクル
+		UI,					// UI
+		RANKING,			// ランキング
+		MASK,				// マスク
+		PAUSE,				// ポーズ
+		FADE,				// フェード
 		MAX
 	};
 
 	enum class OBJTYPE
 	{
-		NONE = 0,			//なし
-		EFFECT_3D,			//3Dエフェクト
-		FLOOR,				//床
-		BG,					//背景
-		PLAYER,				//プレイヤー
-		MODEL,				//モデル
-		HAPPENING,			//ハプニング
-		UI,					//UI
+		NONE = 0,			// なし
+		POLYGON_3D,			// 3Dポリゴン
+		FLOOR,				// 床
+		BG,					// 背景
+		EFFECT_3D,			// 3Dエフェクト
+		SPARKLE,			// キラキラエフェクト
+		MODEL,				// モデル
+		PLAYER,				// プレイヤー
+		HAPPENING,			// ハプニング
+		STAR_RING,			// スターリング
+		UI,					// UI
 		TROPHY,				// トロフィー
-		POLYGON_3D,			//3Dポリゴン
-		SHADOW,				//影
-		GAUGE,				//ゲージ
-		SPARKLE,			//キラキラエフェクト
+		SHADOW,				// 影
+		GAUGE,				// ゲージ
 		MAX
 	};
 

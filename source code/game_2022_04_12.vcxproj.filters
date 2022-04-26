@@ -16,6 +16,12 @@
     <Filter Include="data">
       <UniqueIdentifier>{a0e43056-ca29-4b5f-8aff-1a26ec080517}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\ハプニング">
+      <UniqueIdentifier>{43c8cee5-8288-4c54-a556-1a615ac646d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\ハプニング">
+      <UniqueIdentifier>{945c9721-1ba8-4ca4-a97f-84832eafe864}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="billboard.cpp">
@@ -138,9 +144,6 @@
     <ClCompile Include="x_load.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="road.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="time.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -150,11 +153,17 @@
     <ClCompile Include="bg.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="happening.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="sparkle.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="happening.cpp">
+      <Filter>ソース ファイル\ハプニング</Filter>
+    </ClCompile>
+    <ClCompile Include="starring.cpp">
+      <Filter>ソース ファイル\ハプニング</Filter>
+    </ClCompile>
+    <ClCompile Include="road.cpp">
+      <Filter>ソース ファイル\ハプニング</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -281,20 +290,23 @@
     <ClInclude Include="x_load.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="road.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="gauge.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="bg.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="happening.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="sparkle.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="happening.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
+    </ClInclude>
+    <ClInclude Include="starring.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
+    </ClInclude>
+    <ClInclude Include="road.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
