@@ -53,11 +53,11 @@ void CXload::Init(void)
 		&m_apBuffMat[X_TYPE_PLAYER_LEG_L], NULL, &m_aNumMat[X_TYPE_PLAYER_LEG_L], &m_apMesh[X_TYPE_PLAYER_LEG_L]);
 
 	//ÉvÉåÉCÉÑÅ[ÇÃç∂ë´
-	D3DXLoadMeshFromX("data/MODEL/a.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
+	D3DXLoadMeshFromX("data/MODEL/stage/a.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
 		&m_apBuffMat[X_TYPE_A], NULL, &m_aNumMat[X_TYPE_A], &m_apMesh[X_TYPE_A]);
 
 	//â_
-	D3DXLoadMeshFromX("data/MODEL/Test_cloud.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
+	D3DXLoadMeshFromX("data/MODEL/stage/cloud.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
 		&m_apBuffMat[X_TYPE_CLOUD], NULL, &m_aNumMat[X_TYPE_CLOUD], &m_apMesh[X_TYPE_CLOUD]);
 }	
 
