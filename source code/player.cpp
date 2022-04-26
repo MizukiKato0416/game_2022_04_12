@@ -323,8 +323,7 @@ void CPlayer::Update(void)
 		float fJump = 0.0f;
 		//前に進む量用変数
 		float fMoveForward = 0.0f;
-
-		//返り値によって何に当たったのかを判断してそれぞれの処理を実行
+		/*//返り値によって何に当たったのかを判断してそれぞれの処理を実行
 		switch (nHappeningType)
 		{
 		case (int)CModelSingle::HAPPENING_TYPE::TRAMPOLINE:
@@ -345,7 +344,7 @@ void CPlayer::Update(void)
 			break;
 		default:
 			break;
-		}
+		}*/
 
 		//ジャンプ量を設定
 		m_fJump += fJump;
