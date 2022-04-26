@@ -35,6 +35,8 @@ public:
 	static int CollisionAny(CObject *pObject);					//ただの衝突判定
 	void SetPos(const D3DXVECTOR3 &pos) { m_pos = pos; }		//位置設定処理
 	D3DXVECTOR3 GetPos(void) { return m_pos; }					//位置取得処理
+	void SetRot(const D3DXVECTOR3 &rot) { m_rot = rot; }		//回転設定処理
+	D3DXVECTOR3 GetRot(void) { return m_rot; }					//回転取得処理
 	void SetMtxWorld(void);										//ワールドマトリックス設定処理
 	bool GetColl(void) { return m_bCollision; }					//当たり判定取得処理
 	CModel *GetModel(void) { return m_pModel; }					//モデル取得処理

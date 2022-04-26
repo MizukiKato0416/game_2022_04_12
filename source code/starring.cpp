@@ -7,9 +7,9 @@
 //=============================================================================
 // マクロ定義
 //=============================================================================
-#define STARRING_ROTATION_X (0.01f)	// 回転
-#define STARRING_JUMP_POW (15.0f)	// ジャンプ力
-#define STARRING_FORWORD_POW (35.0f)	// 進力
+#define STARRING_ROTATION_X		(0.1f)		// 回転
+#define STARRING_JUMP_POW		(15.0f)		// ジャンプ力
+#define STARRING_FORWORD_POW	(35.0f)		// 進力
 
 //=============================================================================
 // インクルード
@@ -23,7 +23,7 @@
 //=============================================================================
 CStarring::CStarring(CObject::PRIORITY Priority) : CHappenig(Priority)
 {
-
+	m_bRot = false;
 }
 
 //=============================================================================
@@ -42,6 +42,7 @@ HRESULT CStarring::Init(void)
 	CHappenig::Init();
 	CHappenig::SetModel(CModelSingle::Create(m_pos, m_rot, CXload::X_TYPE_STARRING, NULL, true));
 	CObject::SetObjType(CObject::OBJTYPE::STAR_RING);
+	m_bRot = false;
 
 	return S_OK;
 }
@@ -62,7 +63,8 @@ void CStarring::Update(void)
 	CHappenig::Update();
 	if (CHappenig::HitPlayer() == true)
 	{
-		m_rot.x += STARRING_ROTATION_X;
+		m_bRot = true;
+
 		//オブジェクト情報を入れるポインタ
 		vector<CObject*> object;
 
@@ -78,12 +80,16 @@ void CStarring::Update(void)
 				CPlayer *player = static_cast<CPlayer*>(object[count_object]);
 
 				player->SetJump(STARRING_JUMP_POW);
-
-				D3DXVECTOR3 move = player->GetMove();
-				//player->SetMove(D3DXVECTOR3(move.x, move.y + 0.5f, move.z));
 				player->SetMoveForward(STARRING_FORWORD_POW);
 			}
 		}
+	}
+
+	if (m_bRot == true)
+	{
+		m_rot = GetModel()->GetRot();
+		m_rot.x += STARRING_ROTATION_X;
+		GetModel()->SetRot(m_rot);
 	}
 }
 

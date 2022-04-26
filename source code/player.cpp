@@ -47,6 +47,7 @@
 #define PLAYER_MOVE_SPEED					(4.0f)		//通常移動の移動量
 #define PLAYER_SIZE							(10.0f)		//プレイヤーのサイズ調整値
 #define PLAYER_SPARKLE_NUM					(3)			//軌道エフェクトの数
+#define PLAYER_ROTATE						(-0.4f)		//プレイヤーの回転値
 
 //================================================
 //静的メンバ変数宣言
@@ -259,6 +260,13 @@ void CPlayer::Update(void)
 				{
 					//0にする
 					m_fMoveForward = 0.0f;
+
+					//モーションが着地ではなかったら
+					if (m_pMotionPlayer->GetMotion() != CMotionRoad::MOTION_PLAYER_TYPE_DIVE_LAND)
+					{
+						//着地モーションにする
+						m_pMotionPlayer->SetMotion(CMotionRoad::MOTION_PLAYER_TYPE_DIVE_LAND, this);
+					}
 				}
 			}
 		}
@@ -277,6 +285,13 @@ void CPlayer::Update(void)
 				{
 					//0にする
 					m_fMoveForward = 0.0f;
+
+					//モーションが着地ではなかったら
+					if (m_pMotionPlayer->GetMotion() != CMotionRoad::MOTION_PLAYER_TYPE_DIVE_LAND)
+					{
+						//着地モーションにする
+						m_pMotionPlayer->SetMotion(CMotionRoad::MOTION_PLAYER_TYPE_DIVE_LAND, this);
+					}
 				}
 			}
 		}
@@ -284,6 +299,29 @@ void CPlayer::Update(void)
 		//止まっていなかったら
 		if (m_fMoveForward != 0.0f)
 		{
+			//ジャンプ力が0より大きかったら
+			if (m_fJump > 0.0f)
+			{
+				//プレイヤーを回転させる
+				m_rot.x += PLAYER_ROTATE;
+			}
+			else
+			{
+				//回転値が0じゃなかったら
+				if (m_rot.x != 0.0f)
+				{
+					//回転値を0にする
+					m_rot.x = 0.0f;
+				}
+
+				//モーションがダイブではなかったら
+				if (m_pMotionPlayer->GetMotion() != CMotionRoad::MOTION_PLAYER_TYPE_DIVE)
+				{
+					//着地モーションにする
+					m_pMotionPlayer->SetMotion(CMotionRoad::MOTION_PLAYER_TYPE_DIVE, this);
+				}
+			}
+
 			//軌道エフェクトの生成
 			m_pSparkle = CSparkle::Create(m_pos, D3DXVECTOR3(SPARKLE_SIZE_RAND, SPARKLE_SIZE_RAND, 0.0f), D3DXVECTOR3(-m_fMoveForward, 0.0f, 0.0f),
 		                                  PLAYER_SPARKLE_NUM);

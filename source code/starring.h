@@ -31,6 +31,7 @@ public:
 private:
 	D3DXVECTOR3 m_pos;	// ˆÊ’u
 	D3DXVECTOR3 m_rot;	// ‰ñ“]
+	bool m_bRot;		//‰ñ“]‚·‚é‚©‚Ç‚¤‚©
 };
 
 #endif
