@@ -102,6 +102,7 @@ void CSparkle::Update(void)
 					//è¡Ç∑
 					m_pEffect3D[nCnt]->Uninit();
 					m_pEffect3D[nCnt] = nullptr;
+					m_pEffect3D.erase(m_pEffect3D.begin() + nCnt);
 				}
 			}
 			else
@@ -110,6 +111,12 @@ void CSparkle::Update(void)
 				m_pEffect3D[nCnt]->SetPos(pos, size);
 			}
 		}
+	}
+
+	//ÉTÉCÉYÇ™0Ç…Ç»Ç¡ÇΩÇÁ
+	if ((int)m_pEffect3D.size() == 0)
+	{
+		Uninit();
 	}
 }
 

@@ -281,12 +281,14 @@ void CPlayer::Update(void)
 			}
 		}
 
-		//サイズを保存
-		float fSize = SPARKLE_SIZE_RAND;
-		//軌道エフェクトの生成
-		m_pSparkle = CSparkle::Create(m_pos, D3DXVECTOR3(SPARKLE_SIZE_RAND, SPARKLE_SIZE_RAND, 0.0f), D3DXVECTOR3(-m_fMoveForward, 0.0f, 0.0f),
-			                          PLAYER_SPARKLE_NUM);
-		m_pSparkle->SetMove(D3DXVECTOR3(-m_fMoveForward, 0.0f, 0.0f));
+		//止まっていなかったら
+		if (m_fMoveForward != 0.0f)
+		{
+			//軌道エフェクトの生成
+			m_pSparkle = CSparkle::Create(m_pos, D3DXVECTOR3(SPARKLE_SIZE_RAND, SPARKLE_SIZE_RAND, 0.0f), D3DXVECTOR3(-m_fMoveForward, 0.0f, 0.0f),
+		                                  PLAYER_SPARKLE_NUM);
+			m_pSparkle->SetMove(D3DXVECTOR3(-m_fMoveForward, 0.0f, 0.0f));
+		}
 	}
 
 	//床との当たり判定
