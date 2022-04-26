@@ -34,6 +34,8 @@ CHappenig::~CHappenig()
 //=============================================================================
 HRESULT CHappenig::Init(void)
 {
+	SetPos(m_pos);
+
 	return S_OK;
 }
 

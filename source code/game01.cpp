@@ -23,6 +23,7 @@
 #include "camera.h"
 #include "gauge.h"
 #include "bg.h"
+#include "starring.h"
 
 //================================================
 //ƒ}ƒNƒ’è‹`
@@ -142,7 +143,7 @@ HRESULT CGame01::Init(void)
 		                   D3DXVECTOR3(SCREEN_WIDTH * GAME01_BG_SIZE_ADJUSTMENT, SCREEN_HEIGHT * GAME01_BG_SIZE_ADJUSTMENT, 0.0f),
 		                   D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(GAME01_BG_3_MOVE_INIT, 0.0f));
 	m_pBg[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_SKY_03"));
-
+	
 
 	return S_OK;
 }
