@@ -21,19 +21,6 @@ class CModel;
 class CModelSingle : public CObject
 {
 public:
-	//---------------------------
-	// 列挙型
-	//---------------------------
-	enum class HAPPENING_TYPE
-	{
-		NONE = 0,		// 無し
-		TRAMPOLINE,		// トランポリン
-		FAN,			// 扇風機
-		REDBULL,		// レッドブル
-		STARRING,		// 六芒星
-		GIRL,			// ロキ子
-		MAX,			// 総数
-	};
 	//メンバ関数
 	CModelSingle(CObject::PRIORITY Priority = CObject::PRIORITY::MODEL);	//コンストラクタ
 	~CModelSingle();														//デストラクタ
@@ -42,7 +29,7 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	static CModelSingle *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const CXload::X_TYPE &type, CModel *pParent, const bool &Collision, HAPPENING_TYPE happeningType);
+	static CModelSingle *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const CXload::X_TYPE &type, CModel *pParent, const bool &Collision);
 	static bool SimpleCollision(CObject *pObject);				//回転させたらダメな当たり判定
 	static bool Collision(CObject *pObject);					//y軸を回転させていい当たり判定
 	static int CollisionAny(CObject *pObject);					//ただの衝突判定
@@ -63,7 +50,6 @@ private:
 	CModel *m_pParent;					//親モデルへのポインタ
 	CXload::X_TYPE m_type;				//出すモデルの種類
 	bool m_bCollision;					//当たり判定をするかどうか
-	HAPPENING_TYPE m_happeningType;		//ハプニングのタイプ
 };
 
 #endif // !_MODEL_SINGLE_H_

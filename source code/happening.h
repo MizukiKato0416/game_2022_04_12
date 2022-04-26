@@ -25,6 +25,20 @@ class CModelSingle;
 class CHappenig : public CObject
 {
 public:
+	//---------------------------
+	// 列挙型
+	//---------------------------
+	enum class HAPPENING_TYPE
+	{
+		NONE = 0,		// 無し
+		TRAMPOLINE,		// トランポリン
+		FAN,			// 扇風機
+		REDBULL,		// レッドブル
+		STARRING,		// 六芒星
+		GIRL,			// ロキ子
+		MAX,			// 総数
+	};
+
 	CHappenig(CObject::PRIORITY Priority = CObject::PRIORITY::HAPPENING);	// デフォルトコンストラクタ
 	~CHappenig();	// デフォルトデストラクタ
 	HRESULT Init(void);	// 初期化

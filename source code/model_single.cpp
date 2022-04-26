@@ -112,7 +112,7 @@ void CModelSingle::Draw(void)
 //================================================
 //生成処理
 //================================================
-CModelSingle *CModelSingle::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const CXload::X_TYPE &type, CModel *pParent, const bool &Collision, HAPPENING_TYPE happeningType)
+CModelSingle *CModelSingle::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const CXload::X_TYPE &type, CModel *pParent, const bool &Collision)
 {
 	//インスタンスの生成
 	CModelSingle *pModelSingle = nullptr;
@@ -126,7 +126,6 @@ CModelSingle *CModelSingle::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &ro
 			pModelSingle->m_type = type;
 			pModelSingle->m_pParent = pParent;
 			pModelSingle->m_pos = pos;
-			pModelSingle->m_happeningType = happeningType;
 			pModelSingle->Init();
 		}
 	}
@@ -589,26 +588,7 @@ int CModelSingle::CollisionAny(CObject *pObject)
 				if (fVecDot[0] <= 0.0f && fVecDot[1] <= 0.0f && fVecDot[2] <= 0.0f &&
 					fVecDot[3] <= 0.0f && fVecDot[4] <= 0.0f && fVecDot[5] <= 0.0f)
 				{
-					//モデルのタイプによって返り値を変える
-					switch (pModelSingle->m_happeningType)
-					{
-					case CModelSingle::HAPPENING_TYPE::NONE:
-						break;
-					case CModelSingle::HAPPENING_TYPE::TRAMPOLINE:
-						return (int)CModelSingle::HAPPENING_TYPE::TRAMPOLINE;
-						break;
-					case CModelSingle::HAPPENING_TYPE::FAN:
-						return (int)CModelSingle::HAPPENING_TYPE::FAN;
-						break;
-					case CModelSingle::HAPPENING_TYPE::REDBULL:
-						return (int)CModelSingle::HAPPENING_TYPE::REDBULL;
-						break;
-					case CModelSingle::HAPPENING_TYPE::GIRL:
-						return (int)CModelSingle::HAPPENING_TYPE::GIRL;
-						break;
-					default:
-						break;
-					}
+					
 				}
 			}
 		}
