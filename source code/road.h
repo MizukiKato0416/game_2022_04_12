@@ -15,8 +15,10 @@
 //================================================
 //マクロ定義
 //================================================
-#define CANDIDATES_POS_00 (-500)	// 候補位置
-#define CANDIDATES_POS_01 (500)	// 候補位置
+#define DRONUD_CANDIDATES_POSX_00 (-500)// 地面モデルX候補位置
+#define DRONUD_CANDIDATES_POSX_01 (500)	// 地面モデルX候補位置
+#define SKY_CANDIDATES_POS_X (500)		// 空モデルX位置
+#define SKY_CANDIDATES_POS_Y (200)		// 空モデルY位置
 
 //*****************************************************************************
 // 前方宣言

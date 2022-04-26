@@ -600,8 +600,8 @@ int CModelSingle::CollisionAny(CObject *pObject)
 					case CModelSingle::HAPPENING_TYPE::FAN:
 						return (int)CModelSingle::HAPPENING_TYPE::FAN;
 						break;
-					case CModelSingle::HAPPENING_TYPE::BALANCE_BALL:
-						return (int)CModelSingle::HAPPENING_TYPE::BALANCE_BALL;
+					case CModelSingle::HAPPENING_TYPE::REDBULL:
+						return (int)CModelSingle::HAPPENING_TYPE::REDBULL;
 						break;
 					case CModelSingle::HAPPENING_TYPE::GIRL:
 						return (int)CModelSingle::HAPPENING_TYPE::GIRL;
