@@ -70,6 +70,7 @@ CPlayer::CPlayer(CObject::PRIORITY Priority):CObject(Priority)
 	m_fMoveForward = 0.0f;
 	m_fBoundMove = 0.0f;
 	m_pSparkle = nullptr;
+	m_bObjParent = false;
 }
 
 //================================================
@@ -99,6 +100,7 @@ HRESULT CPlayer::Init(void)
 	m_fMoveForward = 0.0f;
 	m_fBoundMove = 0.0f;
 	m_pSparkle = nullptr;
+	m_bObjParent = false;
 
 	//モデルの生成
 	//textファイル読み込み
@@ -412,9 +414,6 @@ void CPlayer::Update(void)
 //================================================
 void CPlayer::Draw(void)
 {
-	//位置取得処理
-	D3DXVECTOR3 pos = GetPos();
-
 	//デバイスのポインタ
 	LPDIRECT3DDEVICE9 pDevice;
 	//デバイスの取得
@@ -424,13 +423,35 @@ void CPlayer::Draw(void)
 
 	D3DXMatrixIdentity(&m_mtxWorld);		//プレイヤーのワールドマトリックスの初期化
 
+	D3DXVECTOR3 pos, rot;
+
+	//親子関係がつけられていたら
+	if (m_bObjParent == true)
+	{
+		pos = { 0.0f, 0.0f, 0.0f };
+		rot = { 0.0f, 0.0f, 0.0f };
+	}
+	else
+	{//つけられていなかったら
+		pos = m_pos;
+		rot = m_rot;
+	}
+
 	//プレイヤーの向きを反映
-	D3DXMatrixRotationYawPitchRoll(&mtxRot, m_rot.y, m_rot.x, m_rot.z);
+	D3DXMatrixRotationYawPitchRoll(&mtxRot, rot.y, rot.x, rot.z);
 	D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxRot);
 
 	//プレイヤーの位置を反映
-	D3DXMatrixTranslation(&mtxTrans, m_pos.x, m_pos.y, m_pos.z);
+	D3DXMatrixTranslation(&mtxTrans, pos.x, pos.y, pos.z);
 	D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxTrans);
+
+	if (m_bObjParent == true)
+	{
+		D3DXMATRIX mtxParent = *m_mtxWorldParent;
+
+		//算出したパーツのワールドマトリックスと親のワールドマトリックスを掛け合わせる
+		D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxParent);
+	}
 
 	//ワールドマトリックスの設定
 	pDevice->SetTransform(D3DTS_WORLD, &m_mtxWorld);

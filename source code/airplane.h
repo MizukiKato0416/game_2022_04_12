@@ -31,11 +31,14 @@ public:
 	void Draw(void);
 	static CAirplane *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot);
 
-
+	bool GetHitPlayer(void) { return m_bHitPlayer; }						//プレイヤーに当たったかどうか取得処理
+	void SetHitPlayer(bool bHitPlayer) { m_bHitPlayer = bHitPlayer; }		//プレイヤーに当たったかどうか取得処理
 
 private:
 	D3DXVECTOR3 m_pos;						//位置
 	D3DXVECTOR3 m_rot;						//向き
+	bool m_bHitPlayer;						//プレイヤーと当たったかどうか
+	int m_nMoveCounter;						//進んでいる時間のカウンター
 };
 
 #endif // !_AIRPLANE_H_

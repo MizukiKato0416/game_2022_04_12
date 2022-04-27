@@ -29,6 +29,7 @@ CModel::CModel()
 	m_vtxMin = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_vtxMax = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_pParent = nullptr;
+	m_bObjParent = false;
 
 	for (int nCntVtx = 0; nCntVtx < MODEL_VTX; nCntVtx++)
 	{
@@ -54,6 +55,9 @@ CModel::~CModel()
 //================================================
 HRESULT CModel::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, CXload::X_TYPE type)
 {
+	//変数初期化
+	m_bObjParent = false;
+
 	m_vtxMin = D3DXVECTOR3(100000.0f, 100000.0f, 100000.0f);
 	m_vtxMax = D3DXVECTOR3(-100000.0f, -100000.0f, -100000.0f);
 
@@ -241,15 +245,23 @@ void CModel::Draw(void)
 	//現在のマテリアルを保存
 	pDevice->GetMaterial(&matDef);
 
-	//各パーツの親のマトリックスの設定
-	if (m_pParent != nullptr)
+	if (m_bObjParent == false)
 	{
-		mtxParent = m_pParent->GetMtx();
+		//各パーツの親のマトリックスの設定
+		if (m_pParent != nullptr)
+		{
+			mtxParent = m_pParent->GetMtx();
+		}
+		else
+		{
+			pDevice->GetTransform(D3DTS_WORLD, &mtxParent);
+		}
 	}
 	else
 	{
-		pDevice->GetTransform(D3DTS_WORLD, &mtxParent);
+		mtxParent = *m_mtxWorldParent;
 	}
+	
 
 	//算出したパーツのワールドマトリックスと親のワールドマトリックスを掛け合わせる
 	D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxParent);

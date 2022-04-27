@@ -95,11 +95,30 @@ void CRoad::Uninit(void)
 	{
 		if (m_happening_model[model_count] != nullptr)
 		{
-			m_happening_model[model_count]->Uninit();
-			m_happening_model[model_count] = NULL;
-			m_happening_model.erase(m_happening_model.begin() + model_count);
-			model_size = m_happening_model.size();
-			model_count--;
+			//オブジェクトタイプが飛行機の時
+			if (m_happening_model[model_count]->GetObjType() == CObject::OBJTYPE::AIR_PLANE)
+			{
+				//飛行機型にキャスト
+				CAirplane *pAirplane = (CAirplane*)m_happening_model[model_count];
+
+				//プレイヤーに当たっていない状態なら
+				if (pAirplane->GetHitPlayer() == false)
+				{
+					m_happening_model[model_count]->Uninit();
+					m_happening_model[model_count] = NULL;
+					m_happening_model.erase(m_happening_model.begin() + model_count);
+					model_size = m_happening_model.size();
+					model_count--;
+				}
+			}
+			else
+			{
+				m_happening_model[model_count]->Uninit();
+				m_happening_model[model_count] = NULL;
+				m_happening_model.erase(m_happening_model.begin() + model_count);
+				model_size = m_happening_model.size();
+				model_count--;
+			}
 		}
 	}
 	Release();
