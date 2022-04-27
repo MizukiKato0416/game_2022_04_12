@@ -40,6 +40,8 @@ public:
 	void SetMtxWorld(void);										//ワールドマトリックス設定処理
 	bool GetColl(void) { return m_bCollision; }					//当たり判定取得処理
 	CModel *GetModel(void) { return m_pModel; }					//モデル取得処理
+	void SetParent(CModel *pParent) { m_pParent = pParent; }	//親設定処理
+	CModel *GetParent(void) { return m_pParent; }				//親取得処理
 
 private:
 	//メンバ変数

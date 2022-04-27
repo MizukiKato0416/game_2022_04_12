@@ -165,6 +165,9 @@
     <ClCompile Include="road.cpp">
       <Filter>ソース ファイル\ハプニング</Filter>
     </ClCompile>
+    <ClCompile Include="airplane.cpp">
+      <Filter>ソース ファイル\ハプニング</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="billboard.h">
@@ -306,6 +309,9 @@
       <Filter>ヘッダー ファイル\ハプニング</Filter>
     </ClInclude>
     <ClInclude Include="road.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
+    </ClInclude>
+    <ClInclude Include="airplane.h">
       <Filter>ヘッダー ファイル\ハプニング</Filter>
     </ClInclude>
   </ItemGroup>
