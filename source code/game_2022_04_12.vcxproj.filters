@@ -320,6 +320,18 @@
     <ClInclude Include="road.h">
       <Filter>ヘッダー ファイル\ハプニング</Filter>
     </ClInclude>
+    <ClInclude Include="trampoline.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
+    </ClInclude>
+    <ClInclude Include="airplane.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
+    </ClInclude>
+    <ClInclude Include="redbull.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
+    </ClInclude>
+    <ClInclude Include="fan.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="data\trophy_frag.txt">

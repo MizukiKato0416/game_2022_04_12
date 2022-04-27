@@ -16,6 +16,7 @@
 #include "trampoline.h"
 #include "fan.h"
 #include "redbull.h"
+#include "airplane.h"
 
 //=============================================================================
 // デフォルトコンストラクタ
@@ -170,6 +171,10 @@ void CRoad::SkyInstallation(const int &happening_type)
 	case CHappenig::HAPPENING_TYPE::STARRING:
 		m_happening_model.push_back(CStarring::Create(D3DXVECTOR3(m_pos.x + SKY_CANDIDATES_POS_X, m_pos.y + SKY_CANDIDATES_POS_Y, m_pos.z),
 													  D3DXVECTOR3(0.0f, 0.0f, 0.0f)));
+		break;
+	case CHappenig::HAPPENING_TYPE::AIRPLANE:
+		m_happening_model.push_back(CAirplane::Create(D3DXVECTOR3(m_pos.x + SKY_CANDIDATES_POS_X, m_pos.y + SKY_CANDIDATES_POS_Y, m_pos.z),
+			D3DXVECTOR3(0.0f, 0.0f, 0.0f)));
 		break;
 	default:
 		break;

@@ -35,6 +35,7 @@ public:
 		FAN,			// 扇風機
 		REDBULL,		// レッドブル
 		STARRING,		// 六芒星
+		AIRPLANE,		// 飛行機
 		GIRL,			// ロキ子
 		MAX,			// 総数
 	};
