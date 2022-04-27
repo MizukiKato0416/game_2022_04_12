@@ -1,11 +1,11 @@
 //=============================================================================
 //
-// スターリングクラス処理 [starring.h]
+// トランポリンクラス処理 [trampoline.h]
 // Author : 羽鳥太一
 //
 //=============================================================================
-#ifndef _STARRING_H_
-#define _STARRING_H_
+#ifndef _TRAMPOLINE_H_
+#define _TRAMPOLINE_H_
 
 //*****************************************************************************
 // ヘッダファイルのインクルード
@@ -15,20 +15,19 @@
 //*****************************************************************************
 // クラス定義
 //*****************************************************************************
-class CStarring : public CHappenig
+class CTrampoline : public CHappenig
 {
 public:
-	CStarring(CObject::PRIORITY Priority = CObject::PRIORITY::HAPPENING);	// デフォルトコンストラクタ
-	~CStarring();	// デフォルトデストラクタ
+	CTrampoline(CObject::PRIORITY Priority = CObject::PRIORITY::HAPPENING);	// デフォルトコンストラクタ
+	~CTrampoline();	// デフォルトデストラクタ
 	HRESULT Init(void);	// 初期化
 	void Uninit(void);	// 終了
 	void Update(void);	// 更新
 	void Draw(void);	// 描画
-	static CStarring *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot);
+	static CTrampoline *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot);
 private:
 	D3DXVECTOR3 m_pos;	// 位置
 	D3DXVECTOR3 m_rot;	// 回転
-	bool m_bRot;		//回転するかどうか
 };
 
 #endif

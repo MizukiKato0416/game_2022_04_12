@@ -164,6 +164,7 @@
     <ClCompile Include="control_ui_subtract_alpha.cpp" />
     <ClCompile Include="effect3D.cpp" />
     <ClCompile Include="fade.cpp" />
+    <ClCompile Include="fan.cpp" />
     <ClCompile Include="floor.cpp" />
     <ClCompile Include="game01.cpp" />
     <ClCompile Include="gauge.cpp" />
@@ -191,6 +192,7 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="play_data.cpp" />
     <ClCompile Include="ranking.cpp" />
+    <ClCompile Include="redbull.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="result.cpp" />
     <ClCompile Include="score.cpp" />
@@ -203,6 +205,7 @@
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="time.cpp" />
     <ClCompile Include="title.cpp" />
+    <ClCompile Include="trampoline.cpp" />
     <ClCompile Include="ui.cpp" />
     <ClCompile Include="x_load.cpp" />
   </ItemGroup>
@@ -214,6 +217,7 @@
     <ClInclude Include="control_ui_subtract_alpha.h" />
     <ClInclude Include="effect3D.h" />
     <ClInclude Include="fade.h" />
+    <ClInclude Include="fan.h" />
     <ClInclude Include="floor.h" />
     <ClInclude Include="game01.h" />
     <ClInclude Include="gauge.h" />
@@ -242,6 +246,7 @@
     <ClInclude Include="player.h" />
     <ClInclude Include="play_data.h" />
     <ClInclude Include="ranking.h" />
+    <ClInclude Include="redbull.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="result.h" />
     <ClInclude Include="score.h" />
@@ -253,6 +258,7 @@
     <ClInclude Include="texture.h" />
     <ClInclude Include="time.h" />
     <ClInclude Include="title.h" />
+    <ClInclude Include="trampoline.h" />
     <ClInclude Include="ui.h" />
     <ClInclude Include="x_load.h" />
   </ItemGroup>

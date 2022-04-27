@@ -28,16 +28,12 @@
 //マクロ定義
 //================================================
 #define PLAYER_JUMP							(12.0f)		//ジャンプ力
-#define PLAYER_JUMP_TRAMPOLINE				(17.0f)		//トランポリンのジャンプ力
-#define PLAYER_JUMP_FAN						(7.0f)		//扇風機のジャンプ力
 #define PLAYER_JUMP_BALANCE_BALL			(12.0f)		//バランスボールのジャンプ力
 #define PLAYER_JUMP_GIRL					(17.0f)		//ロキコちゃんのジャンプ力
 #define PLAYER_JUMP_MIN						(5.0f)		//ジャンプ力最小値
 #define PLAYER_JUMP_MAX						(25.0f)		//ジャンプ力最大値
 #define PLAYER_BOUND						(0.8f)		//バウンド力
 #define PLAYER_MOVE_FORWARD_TRAMPOLINE		(15.0f)		//トランポリンの前に進む力
-#define PLAYER_MOVE_FORWARD_FAN				(30.0f)		//扇風機の前に進む力
-#define PLAYER_MOVE_FORWARD_BALANCE_BALL	(20.0f)		//バランスボールの前に進む力
 #define PLAYER_MOVE_FORWARD_GIRL			(30.0f)		//ロキコちゃんの前に進む力
 #define PLAYER_MOVE_FORWARD_SUBTRACTION		(0.985f)	//前に進む力の減算量
 #define PLAYER_MOVE_FORWARD_MIN				(4.0f)		//前に進む力の最小値
