@@ -46,21 +46,26 @@ HRESULT CRoad::Init(void)
 
 	for (int count_candidate = 0; count_candidate < (int)CANDIDATES_PLACE::MAX; count_candidate++)
 	{
-		random_device randomdev;
-		mt19937 mt(randomdev());
-		uniform_int_distribution<> randomangle(0, 9);
-		int happening_type = randomangle(mt);
+		random_device ground_randomdev;
+		mt19937 ground_mt(ground_randomdev());
+		uniform_int_distribution<> ground_randomangle(0, 9);
+		int groind_happening_type = ground_randomangle(ground_mt);
+
+		random_device sky_randomdev;
+		mt19937 sky_mt(sky_randomdev());
+		uniform_int_distribution<> sky_randomangle(0, 6);
+		int sky_happening_type = sky_randomangle(sky_mt);
 
 		switch ((CANDIDATES_PLACE)count_candidate)
 		{
 		case CANDIDATES_PLACE::CANDIDATES_00:
-			GroundInstallation(happening_type, DRONUD_CANDIDATES_POSX_00);
+			GroundInstallation(groind_happening_type, DRONUD_CANDIDATES_POSX_00);
 			break;
 		case CANDIDATES_PLACE::CANDIDATES_01:
-			GroundInstallation(happening_type, DRONUD_CANDIDATES_POSX_01);
+			GroundInstallation(groind_happening_type, DRONUD_CANDIDATES_POSX_01);
 			break;
 		case CANDIDATES_PLACE::CANDIDATES_02:
-			SkyInstallation(happening_type);
+			SkyInstallation(sky_happening_type);
 			break;
 		default:
 			break;
