@@ -165,6 +165,15 @@
     <ClCompile Include="road.cpp">
       <Filter>ソース ファイル\ハプニング</Filter>
     </ClCompile>
+    <ClCompile Include="trampoline.cpp">
+      <Filter>ソース ファイル\ハプニング</Filter>
+    </ClCompile>
+    <ClCompile Include="fan.cpp">
+      <Filter>ソース ファイル\ハプニング</Filter>
+    </ClCompile>
+    <ClCompile Include="redbull.cpp">
+      <Filter>ソース ファイル\ハプニング</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="billboard.h">
@@ -306,6 +315,15 @@
       <Filter>ヘッダー ファイル\ハプニング</Filter>
     </ClInclude>
     <ClInclude Include="road.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
+    </ClInclude>
+    <ClInclude Include="trampoline.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
+    </ClInclude>
+    <ClInclude Include="fan.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
+    </ClInclude>
+    <ClInclude Include="redbull.h">
       <Filter>ヘッダー ファイル\ハプニング</Filter>
     </ClInclude>
   </ItemGroup>

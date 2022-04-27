@@ -11,10 +11,11 @@
 #include "road.h"
 #include "floor.h"
 #include "model_single.h"
-#include "happening.h"
 #include "manager.h"
-#include "texture.h"
 #include "starring.h"
+#include "trampoline.h"
+#include "fan.h"
+#include "redbull.h"
 
 //=============================================================================
 // デフォルトコンストラクタ
@@ -177,25 +178,22 @@ void CRoad::SkyInstallation(const int &happening_type)
 
 void CRoad::GroundInstallation(const int &happening_type, const int &installation_position)
 {
-	/*switch ((CModelSingle::HAPPENING_TYPE)happening_type)
+	switch ((CHappenig::HAPPENING_TYPE)happening_type)
 	{
-	case CModelSingle::HAPPENING_TYPE::TRAMPOLINE:
-		m_happening_model.push_back(CModelSingle::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y - 1.0f, m_pos.z),
-			                        D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_TRAMPLINE, NULL, true, (CModelSingle::HAPPENING_TYPE)happening_type));
+	case CHappenig::HAPPENING_TYPE::TRAMPOLINE:
+		m_happening_model.push_back(CTrampoline::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y - 1.0f, m_pos.z), D3DXVECTOR3(0.0f, 0.0f, 0.0f)));
 		break;
-	case CModelSingle::HAPPENING_TYPE::FAN:
-		m_happening_model.push_back(CModelSingle::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y - 1.0f, m_pos.z),
-			                        D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_FAN, NULL, true, (CModelSingle::HAPPENING_TYPE)happening_type));
+	case CHappenig::HAPPENING_TYPE::FAN:
+		m_happening_model.push_back(CFan::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y - 1.0f, m_pos.z), D3DXVECTOR3(0.0f, 0.0f, 0.0f)));
 		break;
-	case CModelSingle::HAPPENING_TYPE::REDBULL:
-		m_happening_model.push_back(CModelSingle::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y - 1.0f, m_pos.z),
-			                        D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_REDBULL, NULL, true, (CModelSingle::HAPPENING_TYPE)happening_type));
+	case CHappenig::HAPPENING_TYPE::REDBULL:
+		m_happening_model.push_back(CRedbull::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y - 1.0f, m_pos.z), D3DXVECTOR3(0.0f, 0.0f, 0.0f)));
 		break;
-	case CModelSingle::HAPPENING_TYPE::GIRL:
+	/*case CHappenig::HAPPENING_TYPE::GIRL:
 		m_happening_model.push_back(CModelSingle::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y - 1.0f, m_pos.z),
 			                        D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_A, NULL, true, (CModelSingle::HAPPENING_TYPE)happening_type));
-		break;
+		break;*/
 	default:
 		break;
-	}*/
+	}
 }

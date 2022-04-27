@@ -53,6 +53,10 @@ public:
 		PLAYER,				// プレイヤー
 		HAPPENING,			// ハプニング
 		STAR_RING,			// スターリング
+		FAN,				// 扇風機
+		TRAMPOLINE,			// トランポリン
+		AIR_PLANE,			// 飛行機
+		REDBULL,			// redbull
 		UI,					// UI
 		TROPHY,				// トロフィー
 		SHADOW,				// 影
