@@ -45,7 +45,7 @@ HRESULT CAirplane::Init()
 	CHappenig::SetModel(CModelSingle::Create(m_pos, m_rot, CXload::X_TYPE_AIRPLANE, NULL, true));
 
 	//オブジェクトの種類を設定
-	SetObjType(CObject::OBJTYPE::SPARKLE);
+	SetObjType(CObject::OBJTYPE::AIR_PLANE);
 
 	//位置を設定
 	SetPos(m_pos);
