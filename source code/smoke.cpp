@@ -80,10 +80,13 @@ void CSmoke::Update(void)
 	D3DXCOLOR col = m_pEffect3D->GetCol();
 	//ƒ¿’l‚ðŠù’è‚Ì’l‚¸‚ÂŒ¸‚ç‚·
 	col.a -= m_fSubtractAlpha;
+	//col = D3DXCOLOR(0.5f, 0.5f, 0.5f, col.a);
 	//0ˆÈ‰º‚É‚È‚Á‚½‚ç
 	if (col.a <= 0.0f)
 	{
 		//Á‚·
+		m_pEffect3D->Uninit();
+		m_pEffect3D = nullptr;
 		Uninit();
 		return;
 	}

@@ -71,6 +71,7 @@ CPlayer::CPlayer(CObject::PRIORITY Priority):CObject(Priority)
 	m_fBoundMove = 0.0f;
 	m_pSparkle = nullptr;
 	m_bObjParent = false;
+	m_bSparkle = false;
 }
 
 //================================================
@@ -101,6 +102,7 @@ HRESULT CPlayer::Init(void)
 	m_fBoundMove = 0.0f;
 	m_pSparkle = nullptr;
 	m_bObjParent = false;
+	m_bSparkle = true;
 
 	//モデルの生成
 	//textファイル読み込み
@@ -320,10 +322,14 @@ void CPlayer::Update(void)
 				}
 			}
 
-			//軌道エフェクトの生成
-			m_pSparkle = CSparkle::Create(m_pos, D3DXVECTOR3(SPARKLE_SIZE_RAND, SPARKLE_SIZE_RAND, 0.0f), D3DXVECTOR3(-m_fMoveForward, 0.0f, 0.0f),
-		                                  PLAYER_SPARKLE_NUM);
-			m_pSparkle->SetMove(D3DXVECTOR3(-m_fMoveForward, 0.0f, 0.0f));
+			//軌道エフェクトを出す状態なら
+			if (m_bSparkle == true)
+			{
+				//軌道エフェクトの生成
+				m_pSparkle = CSparkle::Create(m_pos, D3DXVECTOR3(SPARKLE_SIZE_RAND, SPARKLE_SIZE_RAND, 0.0f), D3DXVECTOR3(-m_fMoveForward, 0.0f, 0.0f),
+				                              PLAYER_SPARKLE_NUM);
+				m_pSparkle->SetMove(D3DXVECTOR3(-m_fMoveForward, 0.0f, 0.0f));
+			}
 		}
 	}
 

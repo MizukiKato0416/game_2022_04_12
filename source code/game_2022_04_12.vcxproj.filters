@@ -16,381 +16,333 @@
     <Filter Include="data">
       <UniqueIdentifier>{a0e43056-ca29-4b5f-8aff-1a26ec080517}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\基底クラス">
-      <UniqueIdentifier>{45760b2f-6ead-4856-93ad-b8ee9bc28a4c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\基底クラス\オブジェクト">
-      <UniqueIdentifier>{30ea2a23-fad2-47ce-b922-0552bf72ed9a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\基底クラス\ハプニング">
-      <UniqueIdentifier>{945c9721-1ba8-4ca4-a97f-84832eafe864}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\基底クラス\オブジェクト\3D">
-      <UniqueIdentifier>{e087e5b0-fc6b-4b07-9158-4e874a3e29b6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\基底クラス\オブジェクト\2D">
-      <UniqueIdentifier>{e8968435-6d84-4e98-8be6-87cef2c6b5e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\基底クラス\オブジェクト\ビルボード">
-      <UniqueIdentifier>{a759d60c-bf9d-4c3c-bff9-5a3895fd2422}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\シーンクラス">
-      <UniqueIdentifier>{11b3b4a7-4ad0-4f49-b566-b9719eb18675}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\基底クラス\インプット">
-      <UniqueIdentifier>{bdc4c49a-320d-4cee-8fa4-191b85e0b87e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\基底クラス\オブジェクト\メッシュ">
-      <UniqueIdentifier>{cee06b4e-0744-4fae-94cf-5c41c5385388}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\基底クラス\オブジェクト\ビルボード\エフェクト">
-      <UniqueIdentifier>{d58cfe6a-03bc-4cdf-add0-a4580fe6414e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\基底クラス">
-      <UniqueIdentifier>{43ae844c-8d12-4a6f-b14d-5331da7565a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\基底クラス\ハプニング">
+    <Filter Include="ヘッダー ファイル\ハプニング">
       <UniqueIdentifier>{43c8cee5-8288-4c54-a556-1a615ac646d4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\基底クラス\インプット">
-      <UniqueIdentifier>{c1374fd2-c39b-48b1-9002-97f16c08cda1}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\ハプニング">
+      <UniqueIdentifier>{945c9721-1ba8-4ca4-a97f-84832eafe864}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\基底クラス\オブジェクト">
-      <UniqueIdentifier>{8ea3b6f3-3e4f-4143-9476-df9d5437aed9}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\effect">
+      <UniqueIdentifier>{d58cfe6a-03bc-4cdf-add0-a4580fe6414e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\基底クラス\オブジェクト\2D">
-      <UniqueIdentifier>{433e0d11-29a3-4d7e-9f03-4b5b34ecce4e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\基底クラス\オブジェクト\3D">
-      <UniqueIdentifier>{e77d51d0-8b5a-4341-85f1-df1fa9a0b748}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\基底クラス\オブジェクト\ビルボード">
-      <UniqueIdentifier>{03a5cf34-8964-4eb1-b00d-5929136f9704}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\基底クラス\オブジェクト\ビルボード\エフェクト">
+    <Filter Include="ヘッダー ファイル\effect">
       <UniqueIdentifier>{f2f8728c-1354-48cf-bb56-ef8a05f8abec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\シーンクラス">
-      <UniqueIdentifier>{638407ea-030d-42a5-bffb-f0e39b338aa7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\基底クラス\オブジェクト\メッシュ">
-      <UniqueIdentifier>{5664195e-694a-4b75-a07c-0a0625876122}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="happening.cpp">
-      <Filter>ソース ファイル\基底クラス\ハプニング</Filter>
-    </ClCompile>
-    <ClCompile Include="starring.cpp">
-      <Filter>ソース ファイル\基底クラス\ハプニング</Filter>
-    </ClCompile>
-    <ClCompile Include="road.cpp">
-      <Filter>ソース ファイル\基底クラス\ハプニング</Filter>
-    </ClCompile>
-    <ClCompile Include="trampoline.cpp">
-      <Filter>ソース ファイル\基底クラス\ハプニング</Filter>
-    </ClCompile>
-    <ClCompile Include="fan.cpp">
-      <Filter>ソース ファイル\基底クラス\ハプニング</Filter>
-    </ClCompile>
-    <ClCompile Include="redbull.cpp">
-      <Filter>ソース ファイル\基底クラス\ハプニング</Filter>
-    </ClCompile>
-    <ClCompile Include="airplane.cpp">
-      <Filter>ソース ファイル\基底クラス\ハプニング</Filter>
-    </ClCompile>
-    <ClCompile Include="effect3D.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト\ビルボード\エフェクト</Filter>
-    </ClCompile>
-    <ClCompile Include="sparkle.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト\ビルボード\エフェクト</Filter>
-    </ClCompile>
-    <ClCompile Include="smoke.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト\ビルボード\エフェクト</Filter>
-    </ClCompile>
-    <ClCompile Include="object.cpp">
-      <Filter>ソース ファイル\基底クラス</Filter>
-    </ClCompile>
-    <ClCompile Include="input.cpp">
-      <Filter>ソース ファイル\基底クラス</Filter>
+    <ClCompile Include="billboard.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="camera.cpp">
-      <Filter>ソース ファイル\基底クラス</Filter>
-    </ClCompile>
-    <ClCompile Include="manager.cpp">
-      <Filter>ソース ファイル\基底クラス</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル\基底クラス</Filter>
-    </ClCompile>
-    <ClCompile Include="light.cpp">
-      <Filter>ソース ファイル\基底クラス</Filter>
-    </ClCompile>
-    <ClCompile Include="bg.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="floor.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="fade.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="game01.cpp">
-      <Filter>ソース ファイル\シーンクラス</Filter>
-    </ClCompile>
-    <ClCompile Include="result.cpp">
-      <Filter>ソース ファイル\シーンクラス</Filter>
-    </ClCompile>
-    <ClCompile Include="title.cpp">
-      <Filter>ソース ファイル\シーンクラス</Filter>
-    </ClCompile>
-    <ClCompile Include="input_keyboard.cpp">
-      <Filter>ソース ファイル\基底クラス\インプット</Filter>
-    </ClCompile>
-    <ClCompile Include="input_mouse.cpp">
-      <Filter>ソース ファイル\基底クラス\インプット</Filter>
-    </ClCompile>
-    <ClCompile Include="input_pad_d.cpp">
-      <Filter>ソース ファイル\基底クラス\インプット</Filter>
-    </ClCompile>
-    <ClCompile Include="input_pad_x.cpp">
-      <Filter>ソース ファイル\基底クラス\インプット</Filter>
-    </ClCompile>
-    <ClCompile Include="model.cpp">
-      <Filter>ソース ファイル\基底クラス</Filter>
-    </ClCompile>
-    <ClCompile Include="meshfield.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト\メッシュ</Filter>
-    </ClCompile>
-    <ClCompile Include="meshsphere.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト\メッシュ</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="control.cpp">
-      <Filter>ソース ファイル\基底クラス</Filter>
-    </ClCompile>
-    <ClCompile Include="gauge.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="menu.cpp">
-      <Filter>ソース ファイル\シーンクラス</Filter>
-    </ClCompile>
-    <ClCompile Include="number.cpp">
-      <Filter>ソース ファイル\基底クラス</Filter>
-    </ClCompile>
-    <ClCompile Include="pause.cpp">
-      <Filter>ソース ファイル\シーンクラス</Filter>
-    </ClCompile>
-    <ClCompile Include="play_data.cpp">
-      <Filter>ソース ファイル\基底クラス</Filter>
-    </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト</Filter>
-    </ClCompile>
-    <ClCompile Include="ranking.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト</Filter>
-    </ClCompile>
-    <ClCompile Include="billboard.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト\ビルボード</Filter>
-    </ClCompile>
-    <ClCompile Include="object2D.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="object3D.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="model_single.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="control_ui_subtract_alpha.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="motion_road.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト</Filter>
+    <ClCompile Include="fade.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="floor.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="game01.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="input_keyboard.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="input_mouse.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="input_pad_d.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="input_pad_x.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="light.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="manager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="meshfield.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="meshsphere.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="model.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="model_single.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="motion_player.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト</Filter>
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="motion_road.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="number.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="object.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="object2D.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="object3D.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="pause.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="play_data.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ranking.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="renderer.cpp">
-      <Filter>ソース ファイル\基底クラス</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="texture.cpp">
-      <Filter>ソース ファイル\基底クラス</Filter>
-    </ClCompile>
-    <ClCompile Include="x_load.cpp">
-      <Filter>ソース ファイル\基底クラス</Filter>
-    </ClCompile>
-    <ClCompile Include="ui.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="time.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト</Filter>
+    <ClCompile Include="result.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="score.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="shadow.cpp">
-      <Filter>ソース ファイル\基底クラス\オブジェクト\3D</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="sound.cpp">
-      <Filter>ソース ファイル\基底クラス</Filter>
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="texture.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="title.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ui.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="x_load.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="time.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="gauge.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="bg.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="happening.cpp">
+      <Filter>ソース ファイル\ハプニング</Filter>
+    </ClCompile>
+    <ClCompile Include="starring.cpp">
+      <Filter>ソース ファイル\ハプニング</Filter>
+    </ClCompile>
+    <ClCompile Include="road.cpp">
+      <Filter>ソース ファイル\ハプニング</Filter>
+    </ClCompile>
+    <ClCompile Include="trampoline.cpp">
+      <Filter>ソース ファイル\ハプニング</Filter>
+    </ClCompile>
+    <ClCompile Include="fan.cpp">
+      <Filter>ソース ファイル\ハプニング</Filter>
+    </ClCompile>
+    <ClCompile Include="redbull.cpp">
+      <Filter>ソース ファイル\ハプニング</Filter>
+    </ClCompile>
+    <ClCompile Include="airplane.cpp">
+      <Filter>ソース ファイル\ハプニング</Filter>
+    </ClCompile>
+    <ClCompile Include="effect3D.cpp">
+      <Filter>ソース ファイル\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="sparkle.cpp">
+      <Filter>ソース ファイル\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="smoke.cpp">
+      <Filter>ソース ファイル\effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="happening.h">
-      <Filter>ヘッダー ファイル\基底クラス\ハプニング</Filter>
-    </ClInclude>
-    <ClInclude Include="starring.h">
-      <Filter>ヘッダー ファイル\基底クラス\ハプニング</Filter>
-    </ClInclude>
-    <ClInclude Include="road.h">
-      <Filter>ヘッダー ファイル\基底クラス\ハプニング</Filter>
-    </ClInclude>
-    <ClInclude Include="trampoline.h">
-      <Filter>ヘッダー ファイル\基底クラス\ハプニング</Filter>
-    </ClInclude>
-    <ClInclude Include="airplane.h">
-      <Filter>ヘッダー ファイル\基底クラス\ハプニング</Filter>
-    </ClInclude>
-    <ClInclude Include="redbull.h">
-      <Filter>ヘッダー ファイル\基底クラス\ハプニング</Filter>
-    </ClInclude>
-    <ClInclude Include="fan.h">
-      <Filter>ヘッダー ファイル\基底クラス\ハプニング</Filter>
-    </ClInclude>
-    <ClInclude Include="effect3D.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト\ビルボード\エフェクト</Filter>
-    </ClInclude>
-    <ClInclude Include="sparkle.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト\ビルボード\エフェクト</Filter>
-    </ClInclude>
-    <ClInclude Include="smoke.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト\ビルボード\エフェクト</Filter>
-    </ClInclude>
-    <ClInclude Include="game01.h">
-      <Filter>ヘッダー ファイル\シーンクラス</Filter>
-    </ClInclude>
-    <ClInclude Include="result.h">
-      <Filter>ヘッダー ファイル\シーンクラス</Filter>
-    </ClInclude>
-    <ClInclude Include="title.h">
-      <Filter>ヘッダー ファイル\シーンクラス</Filter>
-    </ClInclude>
-    <ClInclude Include="pause.h">
-      <Filter>ヘッダー ファイル\シーンクラス</Filter>
-    </ClInclude>
-    <ClInclude Include="input_keyboard.h">
-      <Filter>ヘッダー ファイル\基底クラス\インプット</Filter>
-    </ClInclude>
-    <ClInclude Include="input_mouse.h">
-      <Filter>ヘッダー ファイル\基底クラス\インプット</Filter>
-    </ClInclude>
-    <ClInclude Include="input_pad_d.h">
-      <Filter>ヘッダー ファイル\基底クラス\インプット</Filter>
-    </ClInclude>
-    <ClInclude Include="input_pad_x.h">
-      <Filter>ヘッダー ファイル\基底クラス\インプット</Filter>
-    </ClInclude>
-    <ClInclude Include="meshfield.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト\メッシュ</Filter>
-    </ClInclude>
-    <ClInclude Include="meshsphere.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト\メッシュ</Filter>
-    </ClInclude>
-    <ClInclude Include="input.h">
-      <Filter>ヘッダー ファイル\基底クラス</Filter>
-    </ClInclude>
     <ClInclude Include="billboard.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト\ビルボード</Filter>
-    </ClInclude>
-    <ClInclude Include="fade.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="gauge.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="object2D.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="ui.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="bg.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="object3D.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="floor.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト\3D</Filter>
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="camera.h">
-      <Filter>ヘッダー ファイル\基底クラス</Filter>
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="control.h">
-      <Filter>ヘッダー ファイル\基底クラス</Filter>
-    </ClInclude>
-    <ClInclude Include="light.h">
-      <Filter>ヘッダー ファイル\基底クラス</Filter>
-    </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>ヘッダー ファイル\基底クラス</Filter>
-    </ClInclude>
-    <ClInclude Include="manager.h">
-      <Filter>ヘッダー ファイル\基底クラス</Filter>
-    </ClInclude>
-    <ClInclude Include="shadow.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="menu.h">
-      <Filter>ヘッダー ファイル\シーンクラス</Filter>
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="control_ui_subtract_alpha.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト</Filter>
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="model_single.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト</Filter>
+    <ClInclude Include="fade.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="motion_player.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト</Filter>
+    <ClInclude Include="floor.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="motion_road.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト</Filter>
+    <ClInclude Include="game01.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト</Filter>
+    <ClInclude Include="input.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="input_keyboard.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="input_mouse.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="input_pad_d.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="input_pad_x.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="light.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="manager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="meshfield.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="meshsphere.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="model.h">
-      <Filter>ヘッダー ファイル\基底クラス</Filter>
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ranking.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト</Filter>
+    <ClInclude Include="model_single.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="score.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト</Filter>
+    <ClInclude Include="motion_player.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="time.h">
-      <Filter>ヘッダー ファイル\基底クラス\オブジェクト</Filter>
+    <ClInclude Include="motion_road.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="number.h">
-      <Filter>ヘッダー ファイル\基底クラス</Filter>
-    </ClInclude>
-    <ClInclude Include="play_data.h">
-      <Filter>ヘッダー ファイル\基底クラス</Filter>
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="object.h">
-      <Filter>ヘッダー ファイル\基底クラス</Filter>
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="object2D.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="object3D.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="pause.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="play_data.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ranking.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="renderer.h">
-      <Filter>ヘッダー ファイル\基底クラス</Filter>
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="result.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="score.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="shadow.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="sound.h">
-      <Filter>ヘッダー ファイル\基底クラス</Filter>
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="texture.h">
-      <Filter>ヘッダー ファイル\基底クラス</Filter>
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="time.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="title.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ui.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="x_load.h">
-      <Filter>ヘッダー ファイル\基底クラス</Filter>
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="gauge.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="bg.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="happening.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
+    </ClInclude>
+    <ClInclude Include="starring.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
+    </ClInclude>
+    <ClInclude Include="road.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
+    </ClInclude>
+    <ClInclude Include="trampoline.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
+    </ClInclude>
+    <ClInclude Include="airplane.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
+    </ClInclude>
+    <ClInclude Include="redbull.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
+    </ClInclude>
+    <ClInclude Include="fan.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
+    </ClInclude>
+    <ClInclude Include="effect3D.h">
+      <Filter>ヘッダー ファイル\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="sparkle.h">
+      <Filter>ヘッダー ファイル\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="smoke.h">
+      <Filter>ヘッダー ファイル\effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

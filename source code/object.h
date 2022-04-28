@@ -62,6 +62,7 @@ public:
 		SHADOW,				// âe
 		GAUGE,				// ÉQÅ[ÉW
 		SMOKE,				// âå
+		AIRPLANE_CLOUD,		// îÚçsã@â_
 		MAX
 	};
 

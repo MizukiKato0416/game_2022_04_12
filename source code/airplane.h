@@ -9,11 +9,13 @@
 
 //前方宣言
 class CEffect3D;
+class CSmoke;
 
 //================================================
 //マクロ定義
 //================================================
 #define AIRPLANE_INIT_ROT_Y		(-D3DX_PI / 4.0f)		//生成時の向き
+#define AIRPLANE_SMOKE_NUM		(3)						//飛行機雲を出す量
 
 //================================================
 //クラスの定義
@@ -40,6 +42,7 @@ private:
 	D3DXVECTOR3 m_rot;						//向き
 	bool m_bHitPlayer;						//プレイヤーと当たったかどうか
 	int m_nMoveCounter;						//進んでいる時間のカウンター
+	vector<CSmoke*> m_pSmoke;				//飛行機雲のポインタ
 };
 
 #endif // !_AIRPLANE_H_

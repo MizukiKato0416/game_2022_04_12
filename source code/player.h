@@ -58,6 +58,8 @@ public:
 	bool GetObjParent(void) { return m_bObjParent; }										//オブジェクトとの親子関係取得処理
 	D3DXMATRIX *GetMtxParent(void) { return m_mtxWorldParent; }								//ワールドマトリックス取得処理
 	void SetMtxParent(D3DXMATRIX *mtx) { m_mtxWorldParent = mtx; }							//ワールドマトリックス設定処理
+	bool GetSparkle(void) { return m_bSparkle; }											//軌道エフェクト取得処理
+	void SetSparkle(const bool bSparkle) { m_bSparkle = bSparkle; }							//軌道エフェクト設定処理
 
 private:
 	//メンバ関数
@@ -84,6 +86,7 @@ private:
 	CSparkle *m_pSparkle;							//軌道エフェクト
 	D3DXMATRIX *m_mtxWorldParent;					//親のワールドマトリックス
 	bool m_bObjParent;								//モデル以外との親子関係をつけるかどうか
+	bool m_bSparkle;								//軌道エフェクトを出すかどうか
 };
 
 #endif // !_PLAYER_H_

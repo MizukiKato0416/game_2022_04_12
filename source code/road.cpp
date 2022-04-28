@@ -19,6 +19,12 @@
 #include "airplane.h"
 
 //=============================================================================
+// マクロ定義
+//=============================================================================
+#define ROAD_GROUND_HAPPEN_PROBABILITY (9)
+#define ROAD_SKY_HAPPEN_PROBABILITY (6)
+
+//=============================================================================
 // デフォルトコンストラクタ
 //=============================================================================
 CRoad::CRoad(CObject::PRIORITY priorty) : CObject(priorty)
@@ -48,12 +54,12 @@ HRESULT CRoad::Init(void)
 	{
 		random_device ground_randomdev;
 		mt19937 ground_mt(ground_randomdev());
-		uniform_int_distribution<> ground_randomangle(0, 9);
+		uniform_int_distribution<> ground_randomangle(0, ROAD_GROUND_HAPPEN_PROBABILITY);
 		int groind_happening_type = ground_randomangle(ground_mt);
 
 		random_device sky_randomdev;
 		mt19937 sky_mt(sky_randomdev());
-		uniform_int_distribution<> sky_randomangle(0, 6);
+		uniform_int_distribution<> sky_randomangle(0, ROAD_SKY_HAPPEN_PROBABILITY);
 		int sky_happening_type = sky_randomangle(sky_mt);
 
 		switch ((CANDIDATES_PLACE)count_candidate)
