@@ -42,7 +42,7 @@ public:
 	void AddTime(const int &nValue);
 	void SetTime(const int &nTime);
 	int GetTime(void);
-	CNumber *GetNumber(int nNumber);
+	CNumber *GetNumber(const int nNumber);
 
 	static CTime *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const int &nStartTime);
 

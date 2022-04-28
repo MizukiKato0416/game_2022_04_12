@@ -153,7 +153,7 @@ void CSparkle::Draw(void)
 //================================================
 //生成処理
 //================================================
-CSparkle* CSparkle::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXVECTOR3 move, int nNumEffect)
+CSparkle* CSparkle::Create(const D3DXVECTOR3 pos, const D3DXVECTOR3 size, const D3DXVECTOR3 move, const int nNumEffect)
 {
 	//インスタンスの生成
 	CSparkle *pSparkle = nullptr;

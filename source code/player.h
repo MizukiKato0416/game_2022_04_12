@@ -38,7 +38,7 @@ public:
 	void SetModelPos(const int &nCntModel, const D3DXVECTOR3 &pos);							//モデルの位置設定処理
 	D3DXVECTOR3 GetModelPos(const int &nCntModel);											//モデルの位置取得処理
 	D3DXVECTOR3 GetRot(void) { return m_rot; }												//プレイヤーの向き取得処理
-	void SetRot(D3DXVECTOR3 &rot) { m_rot = rot; }											//プレイヤーの向き設定処理
+	void SetRot(const D3DXVECTOR3 &rot) { m_rot = rot; }									//プレイヤーの向き設定処理
 	void SetModelRot(const int &nCntModel, const D3DXVECTOR3 &rot);							//モデルの向き設定処理
 	D3DXVECTOR3 GetModelRot(const int &nCntModel);											//モデルの向き取得処理
 	void SetMove(const D3DXVECTOR3 &move) { m_move = move; }								//移動量設定処理
@@ -46,7 +46,7 @@ public:
 	static void CPlayer::Collision(CObject *&pSubjectObject, const float &fObjRadius);		//当たり判定処理
 	bool CPlayer::CollisionOnly(CObject *&pSubjectObject, const float &fObjRadius);			//衝突判定のみの処理
 	bool GetShot(void) { return m_bShot; }													//発射取得処理
-	void SetShot(bool bShot) { m_bShot = bShot; }											//発射設定処理
+	void SetShot(const bool bShot) { m_bShot = bShot; }										//発射設定処理
 	float GetMoveForward(void) { return m_fMoveForward; }									//前に進む力取得処理
 	void SetMoveForward(const float &fMoveForward);											//前に進む力設定処理
 	float GetJump(void) { return m_fJump; }													//ジャンプ力取得処理
@@ -54,7 +54,7 @@ public:
 	float GetBoundMove(void) { return m_fBoundMove; }										//バウンドする瞬間の移動量取得処理
 	void SetBoundMove(const float &fBoundMove) { m_fBoundMove = fBoundMove; }				//バウンドする瞬間の移動量設定処理
 	D3DXMATRIX *GetMtx(void) { return &m_mtxWorld; }										//ワールドマトリックス取得処理
-	void SetObjParent(bool bObjeParent) { m_bObjParent = bObjeParent; }						//オブジェクトとの親子関係設定処理
+	void SetObjParent(const bool bObjeParent) { m_bObjParent = bObjeParent; }				//オブジェクトとの親子関係設定処理
 	bool GetObjParent(void) { return m_bObjParent; }										//オブジェクトとの親子関係取得処理
 	D3DXMATRIX *GetMtxParent(void) { return m_mtxWorldParent; }								//ワールドマトリックス取得処理
 	void SetMtxParent(D3DXMATRIX *mtx) { m_mtxWorldParent = mtx; }							//ワールドマトリックス設定処理

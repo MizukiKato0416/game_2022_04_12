@@ -25,6 +25,7 @@ public:
 	{
 		NONE = 0,
 		TRAJECTORY_PLAYER,		//プレイヤーの軌跡
+		SMOKE,					//煙
 		MAX
 	};
 
@@ -39,7 +40,11 @@ public:
 	static CEffect3D *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const D3DXCOLOR &col, const EFFECT3D_TYPE &type);
 
 	//減算合成設定処理
-	void SetAlphaBlendSubtraction(bool bAlphaBlendSubtraction) { m_bAlphaBlendSubtraction = bAlphaBlendSubtraction; }
+	void SetAlphaBlendSubtraction(const bool bAlphaBlendSubtraction) { m_bAlphaBlendSubtraction = bAlphaBlendSubtraction; }
+	//向き設定処理
+	void SetRot(const D3DXVECTOR3 rot) { CBillboard::SetRot(rot); }
+	//向き取得処理
+	D3DXVECTOR3 SetRot(void) { return CBillboard::GetRot(); }
 
 private:
 	EFFECT3D_TYPE m_type;			//エフェクトの種類

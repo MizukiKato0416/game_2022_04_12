@@ -31,7 +31,7 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	static CGauge *Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, int nMaxNum, int nNum);
+	static CGauge *Create(const D3DXVECTOR3 pos, const D3DXVECTOR3 size, const int nMaxNum, const int nNum);
 
 	void AddGauge(int nNum);					//ゲージ増減処理
 	void SetGauge(int nNum);					//ゲージ設定処理

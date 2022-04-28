@@ -61,6 +61,7 @@ public:
 		TROPHY,				// トロフィー
 		SHADOW,				// 影
 		GAUGE,				// ゲージ
+		SMOKE,				// 煙
 		MAX
 	};
 

@@ -49,17 +49,17 @@ public:
 	//ビューマトリックス取得処理
 	D3DXMATRIX GetViewMtx(void) { return m_mtxView; }
 	//視点と注視点の距離加算処理
-	void AddDiffer(float fAddDiffer) { m_fDifferVR += fAddDiffer; }
+	void AddDiffer(const float fAddDiffer) { m_fDifferVR += fAddDiffer; }
 	//視点と注視点の距離設定処理
-	void SetDiffer(float fDiffer) { m_fDifferVR = fDiffer; }
+	void SetDiffer(const float fDiffer) { m_fDifferVR = fDiffer; }
 	//視点と注視点の距離取得処理
 	float GetDiffer(void) { return m_fDifferVR; }
 	//目的の向き設定処理
-	void SetRotAsk(D3DXVECTOR3 rotAsk) { m_rotAsk = rotAsk; }
+	void SetRotAsk(const D3DXVECTOR3 rotAsk) { m_rotAsk = rotAsk; }
 	//カメラをX軸回転させるかどうか設定処理
-	void SetRotateX(bool bRotateX) { m_bRotateX = bRotateX; }
+	void SetRotateX(const bool bRotateX) { m_bRotateX = bRotateX; }
 	//カメラをY軸回転させるかどうか設定処理
-	void SetRotateY(bool bRotateY) { m_bRotateY = bRotateY; }
+	void SetRotateY(const bool bRotateY) { m_bRotateY = bRotateY; }
 
 private:
 	//メンバ関数

@@ -145,14 +145,33 @@ void CRoad::Update(void)
 	m_cloud->SetPos(cloudPos);
 	
 
-	for (int mdoel_sount = 0; mdoel_sount < model_size; mdoel_sount++)
+	for (int model_count = 0; model_count < model_size; model_count++)
 	{
-		D3DXVECTOR3 pos = m_happening_model[mdoel_sount]->GetModel()->GetPos();
-		D3DXVECTOR3 size = m_happening_model[mdoel_sount]->GetModel()->GetSize();
 
-		pos.x += m_move_speed;
+		//オブジェクトタイプが飛行機の時
+		if (m_happening_model[model_count]->GetObjType() == CObject::OBJTYPE::AIR_PLANE)
+		{
+			//飛行機型にキャスト
+			CAirplane *pAirplane = (CAirplane*)m_happening_model[model_count];
 
-		m_happening_model[mdoel_sount]->GetModel()->SetPos(pos);
+			//プレイヤーに当たっていない状態なら
+			if (pAirplane->GetHitPlayer() == false)
+			{
+				D3DXVECTOR3 pos = m_happening_model[model_count]->GetModel()->GetPos();
+
+				pos.x += m_move_speed;
+
+				m_happening_model[model_count]->GetModel()->SetPos(pos);
+			}
+		}
+		else
+		{
+			D3DXVECTOR3 pos = m_happening_model[model_count]->GetModel()->GetPos();
+
+			pos.x += m_move_speed;
+
+			m_happening_model[model_count]->GetModel()->SetPos(pos);
+		}
 	}
 }
 
@@ -198,7 +217,7 @@ void CRoad::SkyInstallation(const int &happening_type)
 		break;
 	case CHappenig::HAPPENING_TYPE::AIRPLANE:
 		m_happening_model.push_back(CAirplane::Create(D3DXVECTOR3(m_pos.x + SKY_CANDIDATES_POS_X, m_pos.y + SKY_CANDIDATES_POS_Y, m_pos.z),
-			D3DXVECTOR3(0.0f, 0.0f, 0.0f)));
+			                                          D3DXVECTOR3(0.0f, AIRPLANE_INIT_ROT_Y, 0.0f)));
 		break;
 	default:
 		break;

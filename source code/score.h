@@ -36,7 +36,7 @@ public:
 	void SetScore(const int &nScore);
 	void AddScore(const int &nValue);
 	int GetScore(void);
-	CNumber *GetNumber(int nNumber);
+	CNumber *GetNumber(const int nNumber);
 
 	static CScore *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size);
 

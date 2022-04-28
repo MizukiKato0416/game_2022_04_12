@@ -13,6 +13,7 @@ class CEffect3D;
 //================================================
 //マクロ定義
 //================================================
+#define AIRPLANE_INIT_ROT_Y		(-D3DX_PI / 4.0f)		//生成時の向き
 
 //================================================
 //クラスの定義
@@ -31,8 +32,8 @@ public:
 	void Draw(void);
 	static CAirplane *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot);
 
-	bool GetHitPlayer(void) { return m_bHitPlayer; }						//プレイヤーに当たったかどうか取得処理
-	void SetHitPlayer(bool bHitPlayer) { m_bHitPlayer = bHitPlayer; }		//プレイヤーに当たったかどうか取得処理
+	bool GetHitPlayer(void) { return m_bHitPlayer; }							//プレイヤーに当たったかどうか取得処理
+	void SetHitPlayer(const bool bHitPlayer) { m_bHitPlayer = bHitPlayer; }		//プレイヤーに当たったかどうか取得処理
 
 private:
 	D3DXVECTOR3 m_pos;						//位置

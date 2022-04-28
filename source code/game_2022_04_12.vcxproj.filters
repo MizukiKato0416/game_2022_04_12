@@ -22,44 +22,17 @@
     <Filter Include="ソース ファイル\ハプニング">
       <UniqueIdentifier>{945c9721-1ba8-4ca4-a97f-84832eafe864}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\インプット">
-      <UniqueIdentifier>{57d4c56d-8e90-47b7-8dc9-2c11d3c210d4}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\effect">
+      <UniqueIdentifier>{d58cfe6a-03bc-4cdf-add0-a4580fe6414e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\インプット">
-      <UniqueIdentifier>{6fec48e9-8102-4481-b00d-5a783719fda8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\オブジェクト">
-      <UniqueIdentifier>{fa74f619-26db-457a-993b-8b2c2bf0d558}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\オブジェクト">
-      <UniqueIdentifier>{2fbec907-7f12-4498-aea1-3d3704c84d97}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\メッシュ">
-      <UniqueIdentifier>{8df63296-0e9d-4a6f-ba76-c34c50088623}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\メッシュ">
-      <UniqueIdentifier>{89f367fb-db9e-4db9-8c92-7b0c668d5e68}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\オブジェクト\ビルボード">
-      <UniqueIdentifier>{46d92451-f4b9-48f0-96cd-707845bf0c1d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\オブジェクト\オブジェクト2D">
-      <UniqueIdentifier>{8dd2093d-cf59-4708-bb78-e44713d8ff46}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\オブジェクト\オブジェクト3D">
-      <UniqueIdentifier>{9dd67820-69dc-4a47-b4a9-5584588af37e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\オブジェクト\オブジェクト2D">
-      <UniqueIdentifier>{4efc6a09-a812-4b5e-960a-f7d40d38960c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\オブジェクト\オブジェクト3D">
-      <UniqueIdentifier>{0eb937a6-61dd-4db4-a6c5-17150b4eef4a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\オブジェクト\ビルボード">
-      <UniqueIdentifier>{3cfeae1c-f649-416a-9b82-6cfa83be7e58}</UniqueIdentifier>
+    <Filter Include="ヘッダー ファイル\effect">
+      <UniqueIdentifier>{f2f8728c-1354-48cf-bb56-ef8a05f8abec}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="billboard.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
     <ClCompile Include="camera.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -69,7 +42,28 @@
     <ClCompile Include="control_ui_subtract_alpha.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="fade.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="floor.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
     <ClCompile Include="game01.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="input_keyboard.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="input_mouse.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="input_pad_d.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="input_pad_x.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="light.cpp">
@@ -82,6 +76,12 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="menu.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="meshfield.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="meshsphere.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="model.cpp">
@@ -97,6 +97,15 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="number.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="object.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="object2D.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="object3D.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="pause.cpp">
@@ -120,6 +129,9 @@
     <ClCompile Include="score.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="shadow.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
     <ClCompile Include="sound.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -129,13 +141,19 @@
     <ClCompile Include="title.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="ui.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
     <ClCompile Include="x_load.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="time.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="sparkle.cpp">
+    <ClCompile Include="gauge.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="bg.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="happening.cpp">
@@ -159,62 +177,20 @@
     <ClCompile Include="airplane.cpp">
       <Filter>ソース ファイル\ハプニング</Filter>
     </ClCompile>
-    <ClCompile Include="input_keyboard.cpp">
-      <Filter>ソース ファイル\インプット</Filter>
-    </ClCompile>
-    <ClCompile Include="input_mouse.cpp">
-      <Filter>ソース ファイル\インプット</Filter>
-    </ClCompile>
-    <ClCompile Include="input_pad_d.cpp">
-      <Filter>ソース ファイル\インプット</Filter>
-    </ClCompile>
-    <ClCompile Include="input_pad_x.cpp">
-      <Filter>ソース ファイル\インプット</Filter>
-    </ClCompile>
-    <ClCompile Include="input.cpp">
-      <Filter>ソース ファイル\インプット</Filter>
-    </ClCompile>
-    <ClCompile Include="object.cpp">
-      <Filter>ソース ファイル\オブジェクト</Filter>
-    </ClCompile>
-    <ClCompile Include="object2D.cpp">
-      <Filter>ソース ファイル\オブジェクト</Filter>
-    </ClCompile>
-    <ClCompile Include="object3D.cpp">
-      <Filter>ソース ファイル\オブジェクト</Filter>
-    </ClCompile>
-    <ClCompile Include="meshfield.cpp">
-      <Filter>ソース ファイル\メッシュ</Filter>
-    </ClCompile>
-    <ClCompile Include="meshsphere.cpp">
-      <Filter>ソース ファイル\メッシュ</Filter>
-    </ClCompile>
-    <ClCompile Include="bg.cpp">
-      <Filter>ソース ファイル\オブジェクト\オブジェクト3D</Filter>
-    </ClCompile>
-    <ClCompile Include="billboard.cpp">
-      <Filter>ソース ファイル\オブジェクト</Filter>
-    </ClCompile>
     <ClCompile Include="effect3D.cpp">
-      <Filter>ソース ファイル\オブジェクト\ビルボード</Filter>
+      <Filter>ソース ファイル\effect</Filter>
     </ClCompile>
-    <ClCompile Include="fade.cpp">
-      <Filter>ソース ファイル\オブジェクト\オブジェクト2D</Filter>
+    <ClCompile Include="sparkle.cpp">
+      <Filter>ソース ファイル\effect</Filter>
     </ClCompile>
-    <ClCompile Include="floor.cpp">
-      <Filter>ソース ファイル\オブジェクト\オブジェクト3D</Filter>
-    </ClCompile>
-    <ClCompile Include="ui.cpp">
-      <Filter>ソース ファイル\オブジェクト\オブジェクト2D</Filter>
-    </ClCompile>
-    <ClCompile Include="gauge.cpp">
-      <Filter>ソース ファイル\オブジェクト\オブジェクト2D</Filter>
-    </ClCompile>
-    <ClCompile Include="shadow.cpp">
-      <Filter>ソース ファイル\オブジェクト\オブジェクト3D</Filter>
+    <ClCompile Include="smoke.cpp">
+      <Filter>ソース ファイル\effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="billboard.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
     <ClInclude Include="camera.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -224,7 +200,28 @@
     <ClInclude Include="control_ui_subtract_alpha.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="fade.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="floor.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
     <ClInclude Include="game01.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="input_keyboard.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="input_mouse.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="input_pad_d.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="input_pad_x.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="light.h">
@@ -237,6 +234,12 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="menu.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="meshfield.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="meshsphere.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="model.h">
@@ -252,6 +255,15 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="number.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="object.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="object2D.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="object3D.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="pause.h">
@@ -275,6 +287,9 @@
     <ClInclude Include="score.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="shadow.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
     <ClInclude Include="sound.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -287,10 +302,16 @@
     <ClInclude Include="title.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="ui.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
     <ClInclude Include="x_load.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="sparkle.h">
+    <ClInclude Include="gauge.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="bg.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="happening.h">
@@ -314,59 +335,14 @@
     <ClInclude Include="fan.h">
       <Filter>ヘッダー ファイル\ハプニング</Filter>
     </ClInclude>
-    <ClInclude Include="input_keyboard.h">
-      <Filter>ヘッダー ファイル\インプット</Filter>
-    </ClInclude>
-    <ClInclude Include="input.h">
-      <Filter>ヘッダー ファイル\インプット</Filter>
-    </ClInclude>
-    <ClInclude Include="input_mouse.h">
-      <Filter>ヘッダー ファイル\インプット</Filter>
-    </ClInclude>
-    <ClInclude Include="input_pad_d.h">
-      <Filter>ヘッダー ファイル\インプット</Filter>
-    </ClInclude>
-    <ClInclude Include="input_pad_x.h">
-      <Filter>ヘッダー ファイル\インプット</Filter>
-    </ClInclude>
-    <ClInclude Include="object.h">
-      <Filter>ヘッダー ファイル\オブジェクト</Filter>
-    </ClInclude>
-    <ClInclude Include="object3D.h">
-      <Filter>ヘッダー ファイル\オブジェクト</Filter>
-    </ClInclude>
-    <ClInclude Include="meshfield.h">
-      <Filter>ヘッダー ファイル\メッシュ</Filter>
-    </ClInclude>
-    <ClInclude Include="meshsphere.h">
-      <Filter>ヘッダー ファイル\メッシュ</Filter>
-    </ClInclude>
     <ClInclude Include="effect3D.h">
-      <Filter>ヘッダー ファイル\オブジェクト\ビルボード</Filter>
+      <Filter>ヘッダー ファイル\effect</Filter>
     </ClInclude>
-    <ClInclude Include="fade.h">
-      <Filter>ヘッダー ファイル\オブジェクト\オブジェクト2D</Filter>
+    <ClInclude Include="sparkle.h">
+      <Filter>ヘッダー ファイル\effect</Filter>
     </ClInclude>
-    <ClInclude Include="billboard.h">
-      <Filter>ヘッダー ファイル\オブジェクト</Filter>
-    </ClInclude>
-    <ClInclude Include="object2D.h">
-      <Filter>ヘッダー ファイル\オブジェクト</Filter>
-    </ClInclude>
-    <ClInclude Include="floor.h">
-      <Filter>ヘッダー ファイル\オブジェクト\オブジェクト3D</Filter>
-    </ClInclude>
-    <ClInclude Include="ui.h">
-      <Filter>ヘッダー ファイル\オブジェクト\オブジェクト2D</Filter>
-    </ClInclude>
-    <ClInclude Include="shadow.h">
-      <Filter>ヘッダー ファイル\オブジェクト\オブジェクト3D</Filter>
-    </ClInclude>
-    <ClInclude Include="gauge.h">
-      <Filter>ヘッダー ファイル\オブジェクト\オブジェクト2D</Filter>
-    </ClInclude>
-    <ClInclude Include="bg.h">
-      <Filter>ヘッダー ファイル\オブジェクト\オブジェクト3D</Filter>
+    <ClInclude Include="smoke.h">
+      <Filter>ヘッダー ファイル\effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

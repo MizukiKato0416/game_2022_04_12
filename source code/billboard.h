@@ -49,6 +49,8 @@ public:
 	void SetAlphaBlend(const bool &bAlphaBlend);					//加算合成設定処理
 	void SetAlphaTest(const bool &bAlphaTest);						//αアテスト設定処理
 	void SetLighting(const bool &bLighting);						//ライティング設定処理
+	void SetRot(const D3DXVECTOR3 &rot) { m_rot = rot; }			//向き設定処理
+	D3DXVECTOR3 GetRot(void) { return m_rot; }						//向き取得処理
 
 private:
 

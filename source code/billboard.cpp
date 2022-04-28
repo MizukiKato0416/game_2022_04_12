@@ -165,7 +165,12 @@ void CBillboard::Draw(void)
 
 	D3DXMATRIX mtxView;						//ビューマトリックス
 	D3DXMATRIX mtxTrans;					//計算用マトリックス
+	D3DXMATRIX mtxRot;						//回転計算用マトリックス
 	D3DXMatrixIdentity(&m_mtxWorld);		//ワールドマトリックスの初期化
+
+	//向きを反映
+	D3DXMatrixRotationYawPitchRoll(&mtxRot, m_rot.y, m_rot.x, m_rot.z);
+	D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxRot);
 
 	//ビューマトリックスを取得
 	pDevice->GetTransform(D3DTS_VIEW, &mtxView);

@@ -30,24 +30,24 @@ public:
 	void Update(void);
 	void Draw(void);
 	static CModel *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot, const CXload::X_TYPE &type);
-	void SetParent(CModel *pModel);											//親設定処理
-	CModel *GetParent(void) { return m_pParent; }							//親取得処理
-	D3DXMATRIX GetMtx(void);												//ワールドマトリックス取得処理
-	void SetMtx(D3DXMATRIX &mtx) { m_mtxWorld = mtx; }						//ワールドマトリックス設定処理
-	D3DXMATRIX *GetMtxParent(void) { return m_mtxWorldParent; }				//ワールドマトリックス取得処理
-	void SetMtxParent(D3DXMATRIX *mtx) { m_mtxWorldParent = mtx; }			//ワールドマトリックス設定処理
-	D3DXMATRIX *GetMtxPoint(void) { return &m_mtxWorld; }					//ワールドマトリックス取得処理
-	D3DXVECTOR3 GetSize(void);												//サイズ取得処理
-	void SetPos(const D3DXVECTOR3 &pos);									//モデルの位置設定処理
-	D3DXVECTOR3 GetPos(void);												//モデルの位置取得処理
-	D3DXVECTOR3 GetVtxPos(const int &nCntVtx);								//モデルの頂点位置取得処理
-	void SetRot(const D3DXVECTOR3 &rot);									//モデルの向き設定処理
-	D3DXVECTOR3 GetRot(void);												//モデルの向き取得処理
-	D3DXMATRIX *GetVtxMtxWorld(void);										//ワールドマトリックス取得処理
-	void SetVtxMtxWorld(const D3DXVECTOR3 &vtxPos, const int &nCntVtx);		//ワールドマトリックス設定処理
-	void SetMtxWorldPos(void);												//ワールドマトリックスの位置設定処理
-	void SetObjParent(bool bObjeParent) { m_bObjParent = bObjeParent; }		//オブジェクトとの親子関係設定処理
-	bool GetObjParent(void) { return m_bObjParent; }						//オブジェクトとの親子関係取得処理
+	void SetParent(CModel *pModel);													//親設定処理
+	CModel *GetParent(void) { return m_pParent; }									//親取得処理
+	D3DXMATRIX GetMtx(void);														//ワールドマトリックス取得処理
+	void SetMtx(const D3DXMATRIX &mtx) { m_mtxWorld = mtx; }						//ワールドマトリックス設定処理
+	D3DXMATRIX *GetMtxParent(void) { return m_mtxWorldParent; }						//ワールドマトリックス取得処理
+	void SetMtxParent(D3DXMATRIX *mtx) { m_mtxWorldParent = mtx; }					//ワールドマトリックス設定処理
+	D3DXMATRIX *GetMtxPoint(void) { return &m_mtxWorld; }							//ワールドマトリックス取得処理
+	D3DXVECTOR3 GetSize(void);														//サイズ取得処理
+	void SetPos(const D3DXVECTOR3 &pos);											//モデルの位置設定処理
+	D3DXVECTOR3 GetPos(void);														//モデルの位置取得処理
+	D3DXVECTOR3 GetVtxPos(const int &nCntVtx);										//モデルの頂点位置取得処理
+	void SetRot(const D3DXVECTOR3 &rot);											//モデルの向き設定処理
+	D3DXVECTOR3 GetRot(void);														//モデルの向き取得処理
+	D3DXMATRIX *GetVtxMtxWorld(void);												//ワールドマトリックス取得処理
+	void SetVtxMtxWorld(const D3DXVECTOR3 &vtxPos, const int &nCntVtx);				//ワールドマトリックス設定処理
+	void SetMtxWorldPos(void);														//ワールドマトリックスの位置設定処理
+	void SetObjParent(const bool bObjeParent) { m_bObjParent = bObjeParent; }		//オブジェクトとの親子関係設定処理
+	bool GetObjParent(void) { return m_bObjParent; }								//オブジェクトとの親子関係取得処理
 
 private:
 	//メンバ関数

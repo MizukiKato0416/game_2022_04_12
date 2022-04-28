@@ -30,9 +30,9 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	static CSparkle *Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXVECTOR3 move, int nNumEffect);
+	static CSparkle *Create(const D3DXVECTOR3 pos, const D3DXVECTOR3 size, const D3DXVECTOR3 move, const int nNumEffect);
 
-	void SetMove(D3DXVECTOR3 move) { m_move = move; }	//ˆÚ“®—Êİ’èˆ—
+	void SetMove(const D3DXVECTOR3 move) { m_move = move; }	//ˆÚ“®—Êİ’èˆ—
 
 private:
 	D3DXVECTOR3 m_move;						//ˆÚ“®—Ê

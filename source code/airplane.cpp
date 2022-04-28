@@ -6,11 +6,17 @@
 #include "model_single.h"
 #include "model.h"
 #include "player.h"
+#include "smoke.h"
 
 //================================================
 //マクロ定義
 //================================================
-#define AIRPLANE_MOVE_COUNT		(180)			//前に進む時間
+#define AIRPLANE_MOVE_COUNT			(180)								//前に進む時間
+#define AIRPLANE_MOVE_FORWARD		(30.0f)								//前に進む力
+#define AIRPLANE_PLAYER_JUMP		(25.0f)								//ジャンプ力
+#define AIRPLANE_MOVE				(10.0f)								//飛行機が飛んでいくときの移動量
+#define AIRPLANE_UNINIT_POS			(1000.0f)							//飛行機を消す位置
+#define AIRPLANE_SMOKE_ROT_RAND		(float (rand() % 629 + -314) / 100)	//回転する際の方向を決めるためのランダム値
 
 //================================================
 //静的メンバ変数宣言
@@ -99,6 +105,9 @@ void CAirplane::Update(void)
 						//プレイヤーの型にキャスト
 						CPlayer *pPlayer = static_cast<CPlayer*>(object[count_object]);
 
+						//モデルの回転を0にする
+						GetModel()->GetModel()->SetRot(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+
 						//親子関係をつける
 						GetModel()->GetModel()->SetObjParent(true);
 						GetModel()->GetModel()->SetMtxParent(pPlayer->GetMtx());
@@ -128,7 +137,7 @@ void CAirplane::Update(void)
 						}
 
 						//前に進む力を設定
-						pPlayer->SetMoveForward(40.0f);
+						pPlayer->SetMoveForward(AIRPLANE_MOVE_FORWARD);
 					}
 				}
 			}
@@ -154,43 +163,77 @@ void CAirplane::Update(void)
 				//カウンターを加算
 				m_nMoveCounter++;
 
-				//既定の値より大きくなったら
-				if (m_nMoveCounter > AIRPLANE_MOVE_COUNT)
-				{
-					//ジャンプ力を設定
-					pPlayer->SetJump(30.0f);
-					//消す
-					Uninit();
-					return;
-				}
+				//前に進む力を設定
+				pPlayer->SetMoveForward(AIRPLANE_MOVE_FORWARD);
 
 				//モデルの位置を取得
 				D3DXVECTOR3 modelPos = GetModel()->GetPos();
-				//プレイヤーの位置を取得
-				D3DXVECTOR3 playerPos = pPlayer->GetPos();
-				//プレイヤーの向きを取得
-				D3DXVECTOR3 playerRot = pPlayer->GetRot();
-				//プレイヤーの移動量を取得
-				D3DXVECTOR3 playerMove = pPlayer->GetMove();
 
-				//プレイヤーの高さをモデルの高さにする
-				playerPos.y = modelPos.y;
-				//位置を設定
-				pPlayer->SetPos(playerPos);
+				//飛行機雲を出す
+				/*CSmoke::Create(modelPos, D3DXVECTOR3(20.0f, 20.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, AIRPLANE_SMOKE_ROT_RAND),
+					           D3DXVECTOR3(-9.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.1f), D3DXVECTOR3(0.8f, 0.8f, 0.0f), 0.04f);*/
 
-				//回転していたら
-				if (playerRot.x != 0.0f)
+				//既定の値より大きくなったら
+				if (m_nMoveCounter > AIRPLANE_MOVE_COUNT)
 				{
-					//0にする
-					playerRot.x = 0.0f;
-					//向きを設定
-					pPlayer->SetRot(playerRot);
-				}
+					//親子関係がついているなら
+					if (GetModel()->GetModel()->GetObjParent() == true)
+					{
+						//親子関係を離す
+						GetModel()->GetModel()->SetObjParent(false);
 
-				//重力を0にする
-				playerMove.y = 0.0f;
-				//移動量を設定
-				pPlayer->SetMove(playerMove);
+						//ジャンプ力を設定
+						pPlayer->SetJump(AIRPLANE_PLAYER_JUMP);
+
+						//モデルの回転を元に戻す
+						GetModel()->GetModel()->SetRot(D3DXVECTOR3(0.0f, AIRPLANE_INIT_ROT_Y, 0.0f));
+					}
+					
+					//既定の値分前に進ませる
+					modelPos.x += AIRPLANE_MOVE;
+					modelPos.y += 3.0f;
+
+					//既定の値より大きくなったら
+					if (modelPos.x > AIRPLANE_UNINIT_POS)
+					{
+						//消す
+						Uninit();
+						return;
+					}
+					else
+					{
+						//モデルの位置を設定
+						GetModel()->SetPos(modelPos);
+					}
+				}
+				else
+				{
+					//プレイヤーの位置を取得
+					D3DXVECTOR3 playerPos = pPlayer->GetPos();
+					//プレイヤーの向きを取得
+					D3DXVECTOR3 playerRot = pPlayer->GetRot();
+					//プレイヤーの移動量を取得
+					D3DXVECTOR3 playerMove = pPlayer->GetMove();
+
+					//プレイヤーの高さをモデルの高さにする
+					playerPos.y = modelPos.y;
+					//位置を設定
+					pPlayer->SetPos(playerPos);
+
+					//回転していたら
+					if (playerRot.x != 0.0f)
+					{
+						//0にする
+						playerRot.x = 0.0f;
+						//向きを設定
+						pPlayer->SetRot(playerRot);
+					}
+
+					//重力を0にする
+					playerMove.y = 0.0f;
+					//移動量を設定
+					pPlayer->SetMove(playerMove);
+				}
 			}
 		}
 	}
