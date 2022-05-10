@@ -16,6 +16,7 @@ class CSparkle;
 //================================================
 #define MAX_PLAYER_MODEL					(5)			//モデルの数
 #define PLAYER_SHOT_MOVE					(40.0f)		//プレイヤーが前に進むスピード
+#define PLAYER_ROTATE						(-0.4f)		//プレイヤーの回転値
 
 //================================================
 //クラスの定義
@@ -60,6 +61,8 @@ public:
 	void SetMtxParent(D3DXMATRIX *mtx) { m_mtxWorldParent = mtx; }							//ワールドマトリックス設定処理
 	bool GetSparkle(void) { return m_bSparkle; }											//軌道エフェクト取得処理
 	void SetSparkle(const bool bSparkle) { m_bSparkle = bSparkle; }							//軌道エフェクト設定処理
+	float GetRotSpeed(void) { return m_fRotSpeed; }											//回転させるスピード取得処理
+	void SetRotSpeed(const float &fRotSpeed) { m_fRotSpeed = fRotSpeed; }					//回転させるスピード設定処理
 
 private:
 	//メンバ関数
@@ -87,6 +90,7 @@ private:
 	D3DXMATRIX *m_mtxWorldParent;					//親のワールドマトリックス
 	bool m_bObjParent;								//モデル以外との親子関係をつけるかどうか
 	bool m_bSparkle;								//軌道エフェクトを出すかどうか
+	float m_fRotSpeed;								//回転させるスピード
 };
 
 #endif // !_PLAYER_H_

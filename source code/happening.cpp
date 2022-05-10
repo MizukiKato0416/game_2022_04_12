@@ -10,6 +10,15 @@
 #include "happening.h"
 #include "model_single.h"
 #include "model.h"
+#include "camera.h"
+#include "manager.h"
+
+//=============================================================================
+// マクロ定義
+//=============================================================================
+#define HAPPENING_ADD_CAMERA_POS		(20.0f)		//カメラの位置を移動させる量
+#define HAPPENING_ADD_CAMERA_DIFFER		(-40.0f)	//カメラの視点と注視点の距離を増やす量
+#define HAPPENING_ZOOM_CAMERA_DIFFER	(400.0f)	//ズーム時のカメラの視点と注視点の距離
 
 //=============================================================================
 // デフォルトコンストラクタ
@@ -177,4 +186,66 @@ bool CHappenig::HitPlayer(void)
 		}
 	}
 	return false;
+}
+
+//=============================================================================
+//カメラがプレイヤーをズームする
+//=============================================================================
+void CHappenig::SetCameraZoom(void)
+{
+	//カメラのポインタ配列1番目のアドレス取得
+	CCamera** pCameraAddress = CManager::GetInstance()->GetCamera();
+	//cameraの取得
+	CCamera* pCamera = &**pCameraAddress;
+
+	//オブジェクト情報を入れるポインタ
+	vector<CObject*> object;
+
+	//先頭のポインタを代入
+	object = CObject::GetObject(static_cast<int>(CObject::PRIORITY::PLAYER));
+	int object_size = object.size();
+
+	for (int count_object = 0; count_object < object_size; count_object++)
+	{
+		//プレイヤーだった時
+		if (object[count_object]->GetObjType() == CObject::OBJTYPE::PLAYER)
+		{
+			//プレイヤーの位置を取得
+			D3DXVECTOR3 playerPos = object[count_object]->GetPos();
+			//注視点を取得
+			D3DXVECTOR3 cameraPosR = pCamera->GetPosR();
+			//差を求める
+			D3DXVECTOR3 posDiffer = cameraPosR - playerPos;
+
+			if (posDiffer.y > 0.0f)
+			{
+				cameraPosR.y -= HAPPENING_ADD_CAMERA_POS;
+			}
+			else if (posDiffer.y < 0.0f)
+			{
+				cameraPosR.y += HAPPENING_ADD_CAMERA_POS;
+			}
+
+			if (posDiffer.y > -HAPPENING_ADD_CAMERA_POS && posDiffer.y < HAPPENING_ADD_CAMERA_POS)
+			{
+				cameraPosR.y = playerPos.y;
+			}
+
+			//注視点をプレイヤーの位置に設定
+			pCamera->SetPosR(cameraPosR);
+
+			//既定の値よりも大きいとき
+			if (pCamera->GetDiffer() > HAPPENING_ZOOM_CAMERA_DIFFER)
+			{
+				//カメラの視点と注視点の距離を狭くする
+				pCamera->AddDiffer(HAPPENING_ADD_CAMERA_DIFFER);
+				//規定値よりも小さくなったら
+				if (pCamera->GetDiffer() < HAPPENING_ZOOM_CAMERA_DIFFER)
+				{
+					//カメラの視点と注視点の距離を設定
+					pCamera->SetDiffer(400.0f);
+				}
+			}
+		}
+	}
 }

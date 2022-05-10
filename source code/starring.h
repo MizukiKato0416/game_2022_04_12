@@ -29,6 +29,7 @@ private:
 	D3DXVECTOR3 m_pos;	// ˆÊ’u
 	D3DXVECTOR3 m_rot;	// ‰ñ“]
 	bool m_bRot;		//‰ñ“]‚·‚é‚©‚Ç‚¤‚©
+	int m_nCntSlow;		//ƒXƒ[‚É‚·‚éŽžŠÔ
 };
 
 #endif

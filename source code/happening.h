@@ -51,6 +51,7 @@ public:
 	void SetModel(CModelSingle *model) { m_model = model; }	// セッター
 	CModelSingle *GetModel(void) { return m_model; }		// ゲッター
 	bool HitPlayer(void);									//プレイヤーとの当たり判定
+	void SetCameraZoom(void);								//カメラがプレイヤーをズームする
 private:
 	CModelSingle *m_model;	// モデル
 	D3DXVECTOR3 m_pos;	// 位置

@@ -1,7 +1,7 @@
 //=============================================================================
 //
 // スターリング処理 [starring.cpp]
-// Author : 羽鳥太一
+// Author : 加藤瑞葵
 //
 //=============================================================================
 //=============================================================================
@@ -14,9 +14,15 @@
 //=============================================================================
 // マクロ定義
 //=============================================================================
-#define STARRING_ROTATION_X		(0.1f)		// 回転
-#define STARRING_JUMP_POW		(15.0f)		// ジャンプ力
-#define STARRING_FORWORD_POW	(35.0f)		// 進力
+#define STARRING_ROTATION_X			(0.1f)		// 回転
+#define STARRING_PLAYER_ROTATION_X	(-0.1f)		// プレイヤーの回転
+#define STARRING_ROTATION_X_SLOW	(0.02f)		// スロー時の回転
+#define STARRING_JUMP_POW			(20.0f)		// ジャンプ力
+#define STARRING_FORWORD_POW		(35.0f)		// 進力
+#define STARRING_SLOW_PLAYER_MOVE_Y	(0.2f)		// スロー時の移動量Y
+#define STARRING_PLAYER_MOVE_Y		(8.0f)		// 飛ばすときの移動量Y
+#define STARRING_SLOW_FORWORD_POW	(0.3f)		// スロー時の進力
+#define STARRING_SLOW_COUNT			(30)		// スローにする時間
 
 //=============================================================================
 // デフォルトコンストラクタ
@@ -24,6 +30,7 @@
 CStarring::CStarring(CObject::PRIORITY Priority) : CHappenig(Priority)
 {
 	m_bRot = false;
+	m_nCntSlow = 0;
 }
 
 //=============================================================================
@@ -40,9 +47,15 @@ CStarring::~CStarring()
 HRESULT CStarring::Init(void)
 {
 	CHappenig::Init();
+
+	//モデルの生成
 	CHappenig::SetModel(CModelSingle::Create(m_pos, m_rot, CXload::X_TYPE_STARRING, NULL, true));
+	//種類の設定
 	CObject::SetObjType(CObject::OBJTYPE::STAR_RING);
+
+	//変数初期化
 	m_bRot = false;
+	m_nCntSlow = 0;
 
 	return S_OK;
 }
@@ -61,9 +74,26 @@ void CStarring::Uninit(void)
 void CStarring::Update(void)
 {
 	CHappenig::Update();
+
+	//プレイヤーに当たったら
 	if (CHappenig::HitPlayer() == true)
 	{
-		m_bRot = true;
+		//回転していない状態なら
+		if (m_bRot == false)
+		{
+			//回転させる
+			m_bRot = true;
+		}
+	}
+
+	//回転している状態なら
+	if (m_bRot == true)
+	{
+		//カウンターを加算
+		m_nCntSlow++;
+
+		//向きを取得
+		m_rot = GetModel()->GetRot();
 
 		//オブジェクト情報を入れるポインタ
 		vector<CObject*> object;
@@ -77,18 +107,60 @@ void CStarring::Update(void)
 			//プレイヤーだった時
 			if (object[count_object]->GetObjType() == CObject::OBJTYPE::PLAYER)
 			{
+				//プレイヤーにキャスト
 				CPlayer *player = static_cast<CPlayer*>(object[count_object]);
 
-				player->SetJump(STARRING_JUMP_POW);
-				player->SetMoveForward(STARRING_FORWORD_POW);
+				if (m_nCntSlow < STARRING_SLOW_COUNT)
+				{
+					//カメラズーム処理
+					SetCameraZoom();
+
+					//移動量設定
+					player->SetMove(D3DXVECTOR3(0.0f, STARRING_SLOW_PLAYER_MOVE_Y, 0.0f));
+					//前に進む力設定
+					player->SetMoveForward(STARRING_SLOW_FORWORD_POW);
+					//回る量設定
+					player->SetRotSpeed(STARRING_PLAYER_ROTATION_X);
+
+					//軌道エフェクトが出ているなら
+					if (player->GetSparkle() == true)
+					{
+						//軌道エフェクトを消す
+						player->SetSparkle(false);
+					}
+
+					//回転させる
+					m_rot.x += STARRING_ROTATION_X_SLOW;
+				}
+				else if(m_nCntSlow == STARRING_SLOW_COUNT)
+				{
+					//回転させる
+					m_rot.x += STARRING_ROTATION_X;
+
+					//ジャンプ量設定
+					player->SetJump(STARRING_JUMP_POW);
+					//前に進む力を設定
+					player->SetMoveForward(STARRING_FORWORD_POW);
+					//移動量設定
+					player->SetMove(D3DXVECTOR3(0.0f, STARRING_PLAYER_MOVE_Y, 0.0f));
+					//回転のスピードを設定
+					player->SetRotSpeed(PLAYER_ROTATE);
+
+					//軌道エフェクトが出てないなら
+					if (player->GetSparkle() == false)
+					{
+						//軌道エフェクトを出す
+						player->SetSparkle(true);
+					}
+				}
+				else
+				{
+					//回転させる
+					m_rot.x += STARRING_ROTATION_X;
+				}
 			}
 		}
-	}
-
-	if (m_bRot == true)
-	{
-		m_rot = GetModel()->GetRot();
-		m_rot.x += STARRING_ROTATION_X;
+		//向きを設定
 		GetModel()->SetRot(m_rot);
 	}
 }

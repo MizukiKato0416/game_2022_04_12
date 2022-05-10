@@ -28,6 +28,8 @@ public:
 private:
 	D3DXVECTOR3 m_pos;	// 位置
 	D3DXVECTOR3 m_rot;	// 回転
+	int m_nCntSlow;		//スローになる時間カウント用
+	bool m_bHitPlayer;	//プレイヤーに当たったかどうか
 };
 
 #endif

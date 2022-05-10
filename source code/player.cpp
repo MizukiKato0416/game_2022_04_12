@@ -43,7 +43,6 @@
 #define PLAYER_MOVE_SPEED					(4.0f)		//通常移動の移動量
 #define PLAYER_SIZE							(10.0f)		//プレイヤーのサイズ調整値
 #define PLAYER_SPARKLE_NUM					(3)			//軌道エフェクトの数
-#define PLAYER_ROTATE						(-0.4f)		//プレイヤーの回転値
 
 //================================================
 //静的メンバ変数宣言
@@ -69,6 +68,7 @@ CPlayer::CPlayer(CObject::PRIORITY Priority):CObject(Priority)
 	m_fJump = 0.0f;
 	m_fMoveForward = 0.0f;
 	m_fBoundMove = 0.0f;
+	m_fRotSpeed = 0.0f;
 	m_pSparkle = nullptr;
 	m_bObjParent = false;
 	m_bSparkle = false;
@@ -103,6 +103,7 @@ HRESULT CPlayer::Init(void)
 	m_pSparkle = nullptr;
 	m_bObjParent = false;
 	m_bSparkle = true;
+	m_fRotSpeed = PLAYER_ROTATE;
 
 	//モデルの生成
 	//textファイル読み込み
@@ -303,7 +304,7 @@ void CPlayer::Update(void)
 			if (m_fJump > 0.0f)
 			{
 				//プレイヤーを回転させる
-				m_rot.x += PLAYER_ROTATE;
+				m_rot.x += m_fRotSpeed;
 			}
 			else
 			{
@@ -352,61 +353,6 @@ void CPlayer::Update(void)
 			m_move.y = m_fJump;
 			//バウンドする瞬間の移動量を設定
 			m_fBoundMove = m_move.y;
-		}
-	}
-
-	//モデルとの当たり判定
-	int nHappeningType = 0;
-	nHappeningType = CModelSingle::CollisionAny(this);
-	//当たっているなら
-	if (nHappeningType != 0)
-	{
-		//ジャンプ量用変数
-		float fJump = 0.0f;
-		//前に進む量用変数
-		float fMoveForward = 0.0f;
-		/*//返り値によって何に当たったのかを判断してそれぞれの処理を実行
-		switch (nHappeningType)
-		{
-		case (int)CModelSingle::HAPPENING_TYPE::TRAMPOLINE:
-			fJump = PLAYER_JUMP_TRAMPOLINE;
-			fMoveForward = PLAYER_MOVE_FORWARD_TRAMPOLINE;
-			break;
-		case (int)CModelSingle::HAPPENING_TYPE::FAN:
-			fJump = PLAYER_JUMP_FAN;
-			fMoveForward = PLAYER_MOVE_FORWARD_FAN;
-			break;
-		case (int)CModelSingle::HAPPENING_TYPE::REDBULL:
-			fJump = PLAYER_JUMP_BALANCE_BALL;
-			fMoveForward = PLAYER_MOVE_FORWARD_BALANCE_BALL;
-			break;
-		case (int)CModelSingle::HAPPENING_TYPE::GIRL:
-			fJump = PLAYER_JUMP_GIRL;
-			fMoveForward = PLAYER_MOVE_FORWARD_GIRL;
-			break;
-		default:
-			break;
-		}*/
-
-		//ジャンプ量を設定
-		m_fJump += fJump;
-		//ジャンプ量が既定の値より大きくなったら
-		if (m_fJump > PLAYER_JUMP_MAX)
-		{
-			//最大値に設定する
-			m_fJump = PLAYER_JUMP_MAX;
-		}
-		m_move.y = m_fJump;
-		//バウンドする瞬間の移動量を設定
-		m_fBoundMove = m_move.y;
-
-		//前に進む力を設定
-		m_fMoveForward += fMoveForward;
-		//前に進む力が既定の値より大きくなったら
-		if (m_fMoveForward >= PLAYER_MOVE_FORWARD_MAX)
-		{
-			//最大値にする
-			m_fMoveForward = PLAYER_MOVE_FORWARD_MAX;
 		}
 	}
 
