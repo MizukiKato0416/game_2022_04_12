@@ -8,6 +8,10 @@
 #include "number.h"
 #include "score.h"
 
+//前方宣言
+class CTcpClient;
+class CCommunicationData;
+
 //================================================
 //マクロ定義
 //================================================
@@ -40,6 +44,8 @@ public:
 
 private:
 	CScore *m_apScore[MAX_RANKING];			//スコアのポインタ
+	CTcpClient *m_pCommu;					//通信用
+	CCommunicationData *m_pCommuData;		//通信データ
 	int m_nScore[MAX_SCORE_DATA];			//スコア
 	int m_nNowScore;						//今回のスコア
 	D3DCOLORVALUE	m_col;					//カラー

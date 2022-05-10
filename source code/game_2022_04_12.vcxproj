@@ -160,6 +160,7 @@
     <ClCompile Include="airplane.cpp" />
     <ClCompile Include="billboard.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="communicationdata.cpp" />
     <ClCompile Include="control.cpp" />
     <ClCompile Include="control_ui_subtract_alpha.cpp" />
     <ClCompile Include="effect3D.cpp" />
@@ -203,6 +204,7 @@
     <ClCompile Include="bg.cpp" />
     <ClCompile Include="sparkle.cpp" />
     <ClCompile Include="starring.cpp" />
+    <ClCompile Include="tcp_client.cpp" />
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="thorn.cpp" />
     <ClCompile Include="time.cpp" />
@@ -215,6 +217,7 @@
     <ClInclude Include="airplane.h" />
     <ClInclude Include="billboard.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="communicationdata.h" />
     <ClInclude Include="control.h" />
     <ClInclude Include="control_ui_subtract_alpha.h" />
     <ClInclude Include="effect3D.h" />
@@ -258,6 +261,7 @@
     <ClInclude Include="road.h" />
     <ClInclude Include="sparkle.h" />
     <ClInclude Include="starring.h" />
+    <ClInclude Include="tcp_client.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="thorn.h" />
     <ClInclude Include="time.h" />

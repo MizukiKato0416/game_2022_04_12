@@ -186,6 +186,12 @@
     <ClCompile Include="smoke.cpp">
       <Filter>ソース ファイル\effect</Filter>
     </ClCompile>
+    <ClCompile Include="tcp_client.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="communicationdata.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
     <ClCompile Include="thorn.cpp">
       <Filter>ソース ファイル\ハプニング</Filter>
     </ClCompile>
@@ -346,9 +352,6 @@
     </ClInclude>
     <ClInclude Include="smoke.h">
       <Filter>ヘッダー ファイル\effect</Filter>
-    </ClInclude>
-    <ClInclude Include="thorn.h">
-      <Filter>ヘッダー ファイル\ハプニング</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
