@@ -160,6 +160,7 @@
     <ClCompile Include="airplane.cpp" />
     <ClCompile Include="billboard.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="communicationdata.cpp" />
     <ClCompile Include="control.cpp" />
     <ClCompile Include="control_ui_subtract_alpha.cpp" />
     <ClCompile Include="effect3D.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="airplane.h" />
     <ClInclude Include="billboard.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="communicationdata.h" />
     <ClInclude Include="control.h" />
     <ClInclude Include="control_ui_subtract_alpha.h" />
     <ClInclude Include="effect3D.h" />

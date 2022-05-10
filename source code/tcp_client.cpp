@@ -10,6 +10,7 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
 #include <winsock2.h>
+#include <iostream>
 #include "tcp_client.h"
 
 //-------------------------------
@@ -47,7 +48,7 @@ bool CTcpClient::Init(void)
 		cout << "‰Šú‰»‚ÉŽ¸”s‚µ‚Ü‚µ‚½" << endl;
 	}
 
-	pFile = fopen("data/Txtdata/severdata.txt", "r");
+	pFile = fopen("data/severdata.txt", "r");
 
 	if (pFile != NULL)
 	{

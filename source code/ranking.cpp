@@ -12,6 +12,13 @@
 #include "play_data.h"
 #include "number.h"
 #include "result.h"
+#include "tcp_client.h"
+#include "communicationdata.h"
+
+//================================================
+//マクロ定義
+//================================================
+#define MAX_COMMUDATA	(64)	//文字列の最大値
 
 //================================================
 //静的メンバ変数宣言
@@ -22,6 +29,8 @@
 //================================================
 CRanking::CRanking(CObject::PRIORITY Priority) :CObject(Priority)
 {
+	m_pCommu = new CTcpClient;
+	m_pCommuData = new CCommunicationData;
 	for (int nCntRanking = 0; nCntRanking < MAX_SCORE_DATA; nCntRanking++)
 	{
 		m_nScore[nCntRanking] = 0;
@@ -54,63 +63,35 @@ HRESULT CRanking::Init(void)
 		m_apScore[nCntRanking] = CScore::Create(D3DXVECTOR3((m_pos.x), (float)(SCREEN_HEIGHT / (MAX_RANKING + 1)) * nCntRanking + (float)(SCREEN_HEIGHT / (MAX_RANKING + 1)), 0.0f),
 											    m_size);
 	}
+	CCommunicationData::COMMUNICATION_DATA *pData = m_pCommuData->GetCommuData();
+	int nScore = CManager::GetPlayData()->GetScore();
+	char Send_Data[MAX_COMMUDATA];
+	char recv_data[MAX_COMMUDATA];
 
-	//ロード処理
-	FILE *pFile;
-	pFile = fopen("data/ranking.txt", "r");
-	if (pFile != NULL)
+	m_pCommu->Init();
+
+	if (m_pCommu->Connect())
 	{
+		memcpy(&Send_Data, &nScore, sizeof(nScore));
+		m_pCommu->Send(&Send_Data[0], sizeof(int));
+
+		m_pCommu->Recv(&recv_data[0], sizeof(CCommunicationData::COMMUNICATION_DATA::ranking));
+		memcpy(&pData->ranking, recv_data, sizeof(CCommunicationData::COMMUNICATION_DATA::ranking));
+
+		//スコアの設定
 		for (int nCntRanking = 0; nCntRanking < MAX_RANKING; nCntRanking++)
 		{
-			fscanf(pFile, "%d", &m_nScore[nCntRanking]);
+			m_apScore[nCntRanking]->SetScore(pData->ranking[nCntRanking]);
 		}
 	}
 	else
 	{
-		printf("ファイルが開けませんでした\n");
-	}
-	fclose(pFile);
-
-	//プレイデータに保存してある今回のスコアを変数に保存
-	m_nScore[MAX_SCORE_DATA - 1] = CManager::GetInstance()->GetPlayData()->GetScore() - CManager::GetInstance()->GetPlayData()->GetTime() * 100;
-	m_nNowScore = CManager::GetInstance()->GetPlayData()->GetScore() - CManager::GetInstance()->GetPlayData()->GetTime() * 100;
-
-
-	//ソート
-	for (int nCntRanking = 0; nCntRanking < MAX_SCORE_DATA; nCntRanking++)
-	{
-		for (int nCntRanking2 = 0; nCntRanking2 < MAX_SCORE_DATA - 1; nCntRanking2++)
-		{
-			//昇順で並べる
-			if ((m_nScore[nCntRanking2] < m_nScore[nCntRanking2 + 1] && m_nScore[nCntRanking2 + 1] != 0) || m_nScore[nCntRanking2] == 0)
-			{
-				int nScore = m_nScore[nCntRanking2];
-				m_nScore[nCntRanking2] = m_nScore[nCntRanking2 + 1];
-				m_nScore[nCntRanking2 + 1] = nScore;
-			}
-		}
-	}
-
-	//スコアの設定
-	for (int nCntRanking = 0; nCntRanking < MAX_RANKING; nCntRanking++)
-	{
-		m_apScore[nCntRanking]->SetScore(m_nScore[nCntRanking]);
-	}
-
-	//セーブ処理
-	pFile = fopen("data/ranking.txt", "w");
-	if (pFile != NULL)
-	{
+		//スコアの設定
 		for (int nCntRanking = 0; nCntRanking < MAX_RANKING; nCntRanking++)
 		{
-			fprintf(pFile, "%d\n", m_apScore[nCntRanking]->GetScore());
+			m_apScore[nCntRanking]->SetScore(0);
 		}
 	}
-	else
-	{
-		printf("ファイルが開けませんでした\n");
-	}
-	fclose(pFile);
 
 	//カラーの設定
 	m_col = {255.0f, 255.0f, 255.0f, 255.0f};
@@ -123,6 +104,7 @@ HRESULT CRanking::Init(void)
 //================================================
 void CRanking::Uninit(void)
 {
+	m_pCommu->Uninit();
 	Release();
 }
 
