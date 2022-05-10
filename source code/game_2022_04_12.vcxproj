@@ -204,6 +204,7 @@
     <ClCompile Include="sparkle.cpp" />
     <ClCompile Include="starring.cpp" />
     <ClCompile Include="texture.cpp" />
+    <ClCompile Include="thorn.cpp" />
     <ClCompile Include="time.cpp" />
     <ClCompile Include="title.cpp" />
     <ClCompile Include="trampoline.cpp" />
@@ -258,6 +259,7 @@
     <ClInclude Include="sparkle.h" />
     <ClInclude Include="starring.h" />
     <ClInclude Include="texture.h" />
+    <ClInclude Include="thorn.h" />
     <ClInclude Include="time.h" />
     <ClInclude Include="title.h" />
     <ClInclude Include="trampoline.h" />

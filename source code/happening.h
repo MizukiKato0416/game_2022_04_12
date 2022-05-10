@@ -36,7 +36,7 @@ public:
 		REDBULL,		// レッドブル
 		STARRING,		// 六芒星
 		AIRPLANE,		// 飛行機
-		GIRL,			// ロキ子
+		THORN,			// 棘
 		MAX,			// 総数
 	};
 

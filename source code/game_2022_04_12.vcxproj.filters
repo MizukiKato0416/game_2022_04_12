@@ -186,6 +186,9 @@
     <ClCompile Include="smoke.cpp">
       <Filter>ソース ファイル\effect</Filter>
     </ClCompile>
+    <ClCompile Include="thorn.cpp">
+      <Filter>ソース ファイル\ハプニング</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="billboard.h">
@@ -343,6 +346,9 @@
     </ClInclude>
     <ClInclude Include="smoke.h">
       <Filter>ヘッダー ファイル\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="thorn.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

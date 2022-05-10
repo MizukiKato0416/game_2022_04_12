@@ -63,6 +63,7 @@ public:
 		GAUGE,				// ゲージ
 		SMOKE,				// 煙
 		AIRPLANE_CLOUD,		// 飛行機雲
+		THORN,				// 棘
 		MAX
 	};
 

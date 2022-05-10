@@ -1,11 +1,11 @@
 //=============================================================================
 //
-// スターリングクラス処理 [starring.h]
+// 棘処理 [thorn.h]
 // Author : 加藤瑞葵
 //
 //=============================================================================
-#ifndef _STARRING_H_
-#define _STARRING_H_
+#ifndef _THORN_H_
+#define _THORN_H_
 
 //*****************************************************************************
 // ヘッダファイルのインクルード
@@ -15,21 +15,21 @@
 //*****************************************************************************
 // クラス定義
 //*****************************************************************************
-class CStarring : public CHappenig
+class CThorn : public CHappenig
 {
 public:
-	CStarring(CObject::PRIORITY Priority = CObject::PRIORITY::HAPPENING);	// デフォルトコンストラクタ
-	~CStarring();	// デフォルトデストラクタ
+	CThorn(CObject::PRIORITY Priority = CObject::PRIORITY::HAPPENING);	// デフォルトコンストラクタ
+	~CThorn();	// デフォルトデストラクタ
 	HRESULT Init(void);	// 初期化
 	void Uninit(void);	// 終了
 	void Update(void);	// 更新
 	void Draw(void);	// 描画
-	static CStarring *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot);
+	static CThorn *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot);
 private:
 	D3DXVECTOR3 m_pos;	// 位置
 	D3DXVECTOR3 m_rot;	// 回転
-	bool m_bRot;		//回転するかどうか
-	int m_nCntSlow;		//スローにする時間
+	int m_nCntSlow;		//スローになる時間カウント用
+	bool m_bHitPlayer;	//プレイヤーに当たったかどうか
 };
 
 #endif
