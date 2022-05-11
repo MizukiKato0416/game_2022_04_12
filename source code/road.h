@@ -12,14 +12,6 @@
 //*****************************************************************************
 #include "object.h"
 
-//================================================
-//マクロ定義
-//================================================
-#define DRONUD_CANDIDATES_POSX_00 (-500)// 地面モデルX候補位置
-#define DRONUD_CANDIDATES_POSX_01 (500)	// 地面モデルX候補位置
-#define SKY_CANDIDATES_POS_X (500)		// 空モデルX位置
-#define SKY_CANDIDATES_POS_Y (350)		// 空モデルY位置
-
 //*****************************************************************************
 // 前方宣言
 //*****************************************************************************
@@ -41,6 +33,9 @@ public:
 		CANDIDATES_00 = 0,	// 候補1
 		CANDIDATES_01,	// 候補2
 		CANDIDATES_02,	// 候補3
+		CANDIDATES_03,	// 候補4
+		CANDIDATES_04,	// 候補5
+		CANDIDATES_05,	// 候補5
 		MAX	// 総数
 	};
 	CRoad(CObject::PRIORITY priorty = PRIORITY::ROAD);	// デフォルトコンストラクタ
@@ -53,7 +48,7 @@ public:
 	void SetSpeed(const float &move_speed) { m_move_speed = move_speed; }	// セッター
 	float GetSpeed(void) { return m_move_speed; }	// ゲッダー
 private:
-	void SkyInstallation(const int &happening_type);	// 空用の設置
+	void SkyInstallation(const int &happening_type, const int &installation_position_x, const int &installation_position_y);	// 空用の設置
 	void GroundInstallation(const int &happening_type, const int &installation_position);	// 地面用の設置
 	D3DXVECTOR3 m_pos;	// 位置
 	D3DXVECTOR3 m_size;	// サイズ

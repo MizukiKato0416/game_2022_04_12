@@ -10,16 +10,19 @@
 #include "fan.h"
 #include "player.h"
 #include "model_single.h"
+#include "wind.h"
 
 //=============================================================================
 // マクロ定義
 //=============================================================================
-#define FAN_JUMP_POW			(25.0f)		// ジャンプ力
-#define FAN_FORWORD_POW			(20.0f)		// 進力
-#define FAN_PLAYER_ROTATION_X	(-0.1f)		// プレイヤーの回転
-#define FAN_SLOW_PLAYER_MOVE_Y	(0.2f)		// スロー時の移動量Y
-#define FAN_SLOW_FORWORD_POW	(0.3f)		// スロー時の進力
-#define FAN_SLOW_COUNT			(30)		// スローにする時間
+#define FAN_JUMP_POW					(25.0f)									// ジャンプ力
+#define FAN_FORWORD_POW					(20.0f)									// 進力
+#define FAN_PLAYER_ROTATION_X			(-0.1f)									// プレイヤーの回転
+#define FAN_SLOW_PLAYER_MOVE_Y			(0.2f)									// スロー時の移動量Y
+#define FAN_SLOW_FORWORD_POW			(0.3f)									// スロー時の進力
+#define FAN_SLOW_COUNT					(30)									// スローにする時間
+#define FAN_WIND_EFFECT_SIZE			(D3DXVECTOR3(200.0f, 300.0f, 0.0f))		// 風エフェクトのサイズ
+
 
 //=============================================================================
 // デフォルトコンストラクタ
@@ -28,6 +31,7 @@ CFan::CFan(CObject::PRIORITY Priority) : CHappenig(Priority)
 {
 	m_bHitPlayer = false;
 	m_nCntSlow = 0;
+	memset(m_apWind, NULL, sizeof(m_apWind[FAN_MAX_WIND_EFFECT]));
 }
 
 //=============================================================================
@@ -47,6 +51,13 @@ HRESULT CFan::Init(void)
 	CHappenig::SetModel(CModelSingle::Create(m_pos, m_rot, CXload::X_TYPE_FAN, NULL, true));
 	CObject::SetObjType(CObject::OBJTYPE::FAN);
 
+	//風の生成
+	for (int nCntWind = 0; nCntWind < FAN_MAX_WIND_EFFECT; nCntWind++)
+	{
+		m_apWind[nCntWind] = CWind::Create(D3DXVECTOR3(m_pos.x, m_pos.y + FAN_WIND_EFFECT_SIZE.y / 2.0f, m_pos.z),
+			                               FAN_WIND_EFFECT_SIZE, int(0 + WIND_MAX_PATTERN / 2.0f * nCntWind));
+	}
+
 	//変数初期化
 	m_bHitPlayer = false;
 	m_nCntSlow = 0;
@@ -60,6 +71,15 @@ HRESULT CFan::Init(void)
 void CFan::Uninit(void)
 {
 	CHappenig::Uninit();
+
+	for (int nCntWind = 0; nCntWind < FAN_MAX_WIND_EFFECT; nCntWind++)
+	{
+		if (m_apWind[nCntWind] != nullptr)
+		{
+			m_apWind[nCntWind]->Uninit();
+			m_apWind[nCntWind] = nullptr;
+		}
+	}
 }
 
 //=============================================================================
@@ -68,15 +88,32 @@ void CFan::Uninit(void)
 void CFan::Update(void)
 {
 	CHappenig::Update();
+
+	for (int nCntWind = 0; nCntWind < FAN_MAX_WIND_EFFECT; nCntWind++)
+	{
+		//風エフェクトの位置とサイズを取得
+		D3DXVECTOR3 windPos = m_apWind[nCntWind]->GetPos();
+		D3DXVECTOR3 windSize = m_apWind[nCntWind]->GetSize();
+
+		//風エフェクトの位置をファンの位置と同じにする
+		windPos.x = GetModel()->GetPos().x;
+
+		//風の位置を設定
+		m_apWind[nCntWind]->SetPos(windPos, windSize);
+	}
+
+
+	//プレイヤーに当たったら
 	if (CHappenig::HitPlayer() == true)
 	{
+		//プレイヤーに当たった状態にする
 		if (m_bHitPlayer == false)
 		{
 			m_bHitPlayer = true;
 		}
 	}
 
-
+	//プレイヤーに当たった状態なら
 	if (m_bHitPlayer == true)
 	{
 		//カウンターを加算

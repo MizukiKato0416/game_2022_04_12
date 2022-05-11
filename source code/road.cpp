@@ -22,8 +22,18 @@
 //=============================================================================
 // マクロ定義
 //=============================================================================
-#define ROAD_GROUND_HAPPEN_PROBABILITY (9)
-#define ROAD_SKY_HAPPEN_PROBABILITY (6)
+#define ROAD_GROUND_HAPPEN_PROBABILITY	(9)			// 設置モデルの確率
+#define ROAD_SKY_HAPPEN_PROBABILITY		(6)			// 設置モデルの確率
+#define ROAD_AIRPLANE_PROBABILITY		(6)			// 飛行機の確率
+#define GRONUD_CANDIDATES_POSX_00		(-500)		// 地面モデルX候補位置
+#define GRONUD_CANDIDATES_POSX_01		(500)		// 地面モデルX候補位置
+#define GRONUD_CANDIDATES_POSX_02		(0)			// 地面モデルX候補位置
+#define SKY_CANDIDATES_POS_X_00			(500)		// 空モデルX位置
+#define SKY_CANDIDATES_POS_Y_00			(350)		// 空モデルY位置
+#define SKY_CANDIDATES_POS_X_01			(-500)		// 空モデルX位置
+#define SKY_CANDIDATES_POS_Y_01			(350)		// 空モデルY位置
+#define SKY_CANDIDATES_POS_X_02			(500)		// 空モデルX位置
+#define SKY_CANDIDATES_POS_Y_03			(250)		// 空モデルY位置
 
 //=============================================================================
 // デフォルトコンストラクタ
@@ -66,13 +76,22 @@ HRESULT CRoad::Init(void)
 		switch ((CANDIDATES_PLACE)count_candidate)
 		{
 		case CANDIDATES_PLACE::CANDIDATES_00:
-			GroundInstallation(groind_happening_type, DRONUD_CANDIDATES_POSX_00);
+			GroundInstallation(groind_happening_type, GRONUD_CANDIDATES_POSX_00);
 			break;
 		case CANDIDATES_PLACE::CANDIDATES_01:
-			GroundInstallation(groind_happening_type, DRONUD_CANDIDATES_POSX_01);
+			GroundInstallation(groind_happening_type, GRONUD_CANDIDATES_POSX_01);
 			break;
 		case CANDIDATES_PLACE::CANDIDATES_02:
-			SkyInstallation(sky_happening_type);
+			GroundInstallation(groind_happening_type, GRONUD_CANDIDATES_POSX_02);
+			break;
+		case CANDIDATES_PLACE::CANDIDATES_03:
+			SkyInstallation(sky_happening_type, SKY_CANDIDATES_POS_X_01, SKY_CANDIDATES_POS_Y_01);
+			break;
+		case CANDIDATES_PLACE::CANDIDATES_04:
+			SkyInstallation(sky_happening_type, SKY_CANDIDATES_POS_X_02, SKY_CANDIDATES_POS_X_02);
+			break;
+		case CANDIDATES_PLACE::CANDIDATES_05:
+			SkyInstallation(sky_happening_type, SKY_CANDIDATES_POS_X_02, SKY_CANDIDATES_POS_X_02);
 			break;
 		default:
 			break;
@@ -214,20 +233,31 @@ CRoad *CRoad::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const floa
 //================================================
 //設置処理
 //================================================
-void CRoad::SkyInstallation(const int &happening_type)
+void CRoad::SkyInstallation(const int &happening_type, const int &installation_position_x, const int &installation_position_y)
 {
+	random_device sky_randomdev;
+	mt19937 sky_mt(sky_randomdev());
+	uniform_int_distribution<> sky_randomangle(0, ROAD_AIRPLANE_PROBABILITY);
+	int airplane_probability = sky_randomangle(sky_mt);
+
 	switch ((CHappenig::HAPPENING_TYPE)happening_type)
 	{
 	case CHappenig::HAPPENING_TYPE::STARRING:
-		m_happening_model.push_back(CStarring::Create(D3DXVECTOR3(m_pos.x + SKY_CANDIDATES_POS_X, m_pos.y + SKY_CANDIDATES_POS_Y, m_pos.z),
+		m_happening_model.push_back(CStarring::Create(D3DXVECTOR3(m_pos.x + installation_position_x, m_pos.y + installation_position_y, m_pos.z),
 													  D3DXVECTOR3(0.0f, 0.0f, 0.0f)));
 		break;
 	case CHappenig::HAPPENING_TYPE::AIRPLANE:
-		m_happening_model.push_back(CAirplane::Create(D3DXVECTOR3(m_pos.x + SKY_CANDIDATES_POS_X, m_pos.y + SKY_CANDIDATES_POS_Y, m_pos.z),
-			                                          D3DXVECTOR3(0.0f, AIRPLANE_INIT_ROT_Y, 0.0f)));
+		switch (airplane_probability)
+		{
+		case 0:
+			m_happening_model.push_back(CAirplane::Create(D3DXVECTOR3(m_pos.x + installation_position_x, m_pos.y + installation_position_y, m_pos.z),
+														  D3DXVECTOR3(0.0f, AIRPLANE_INIT_ROT_Y, 0.0f)));
+		default:
+			break;
+		}
 		break;
 	case CHappenig::HAPPENING_TYPE::THORN:
-		m_happening_model.push_back(CThorn::Create(D3DXVECTOR3(m_pos.x + SKY_CANDIDATES_POS_X, m_pos.y + SKY_CANDIDATES_POS_Y, m_pos.z),
+		m_happening_model.push_back(CThorn::Create(D3DXVECTOR3(m_pos.x + installation_position_x, m_pos.y + installation_position_y, m_pos.z),
 			                        D3DXVECTOR3(0.0f, 0.0f, 0.0f)));
 		break;
 	default:

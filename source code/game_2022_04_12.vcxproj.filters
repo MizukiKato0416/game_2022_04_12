@@ -195,6 +195,9 @@
     <ClCompile Include="thorn.cpp">
       <Filter>ソース ファイル\ハプニング</Filter>
     </ClCompile>
+    <ClCompile Include="wind.cpp">
+      <Filter>ソース ファイル\effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="billboard.h">
@@ -351,6 +354,18 @@
       <Filter>ヘッダー ファイル\effect</Filter>
     </ClInclude>
     <ClInclude Include="smoke.h">
+      <Filter>ヘッダー ファイル\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="communicationdata.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="tcp_client.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="thorn.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="wind.h">
       <Filter>ヘッダー ファイル\effect</Filter>
     </ClInclude>
   </ItemGroup>

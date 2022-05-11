@@ -61,7 +61,7 @@ HRESULT CBillboard::Init(void)
 	m_mode = BILLBOARD_MODE::NORMAL;
 	m_bCulling = true;
 	m_bAlphaBlend = false;
-	m_bAlphaTest = false;
+	m_bAlphaTest = true;
 	m_bLighting = true;
 
 	//位置・サイズ設定処理
