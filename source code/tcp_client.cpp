@@ -103,7 +103,7 @@ bool CTcpClient::Connect(void)
 	struct sockaddr_in addr;
 
 	addr.sin_family = AF_INET;	// どの通信か
-	addr.sin_port = htons(m_nPort);	// ポート番号
+	addr.sin_port = htons((u_short)m_nPort);	// ポート番号
 	addr.sin_addr.S_un.S_addr = inet_addr(m_Ip.c_str());
 
 	//------------------------

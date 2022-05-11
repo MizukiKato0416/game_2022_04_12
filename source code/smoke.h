@@ -29,8 +29,8 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	static CSmoke *Create(const D3DXVECTOR3 pos, const D3DXVECTOR3 size, const D3DXVECTOR3 rot, const D3DXVECTOR3 move, const D3DXVECTOR3 addRot,
-		                  const D3DXVECTOR3 addSize, const float fSubtractAlpha);
+	static CSmoke *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const D3DXVECTOR3 &rot, const D3DXVECTOR3 &move, const D3DXVECTOR3 &addRot,
+		                  const D3DXVECTOR3 &addSize, const float &fSubtractAlpha);
 	//ˆÚ“®—Êİ’èˆ—
 	void SetMove(const D3DXVECTOR3 move) { m_move = move; }
 	//ˆÚ“®—Êæ“¾ˆ—

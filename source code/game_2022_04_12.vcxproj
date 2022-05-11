@@ -211,6 +211,7 @@
     <ClCompile Include="title.cpp" />
     <ClCompile Include="trampoline.cpp" />
     <ClCompile Include="ui.cpp" />
+    <ClCompile Include="wind.cpp" />
     <ClCompile Include="x_load.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -268,6 +269,7 @@
     <ClInclude Include="title.h" />
     <ClInclude Include="trampoline.h" />
     <ClInclude Include="ui.h" />
+    <ClInclude Include="wind.h" />
     <ClInclude Include="x_load.h" />
   </ItemGroup>
   <ItemGroup>

@@ -62,6 +62,7 @@ public:
 		SHADOW,				// 影
 		GAUGE,				// ゲージ
 		SMOKE,				// 煙
+		WIND,				// 風
 		AIRPLANE_CLOUD,		// 飛行機雲
 		THORN,				// 棘
 		MAX

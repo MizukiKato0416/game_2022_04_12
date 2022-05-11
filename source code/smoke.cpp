@@ -136,8 +136,8 @@ void CSmoke::Draw(void)
 //================================================
 //生成処理
 //================================================
-CSmoke* CSmoke::Create(const D3DXVECTOR3 pos, const D3DXVECTOR3 size, const D3DXVECTOR3 rot, const D3DXVECTOR3 move, const D3DXVECTOR3 addRot,
-	                   const D3DXVECTOR3 addSize, const float fSubtractAlpha)
+CSmoke* CSmoke::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const D3DXVECTOR3 &rot, const D3DXVECTOR3 &move, const D3DXVECTOR3 &addRot,
+	                   const D3DXVECTOR3 &addSize, const float &fSubtractAlpha)
 {
 	//インスタンスの生成
 	CSmoke *pSmoke = nullptr;
