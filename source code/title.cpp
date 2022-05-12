@@ -1,21 +1,22 @@
-//================================================
-//タイトル処理
-//Author:加藤瑞葵
-//================================================
+//=============================================================================
+//
+// トロフィールー処理 [trophy.cpp]
+// Author : 羽鳥太一
+//
+//=============================================================================
+//=============================================================================
+// インクルード
+//=============================================================================
 #include "title.h"
 #include "manager.h"
-#include "input_keyboard.h"
-#include "input_pad_d.h"
-#include "fade.h"
-#include "manager.h"
-#include "texture.h"
-#include "ui.h"
+#include "object2D.h"
 #include "play_data.h"
-#include "model_single.h"
+#include "input_mouse.h"
+#include "fade.h"
 
-//================================================
-//マクロ定義
-//================================================
+//=============================================================================
+// マクロ定義
+//=============================================================================
 #define TITLE_TO_RESULT_COUNT		(600)				//リザルトに行くまでの時間
 #define TITLE_LOGO_SIZE_X			(366.0f)			//タイトルロゴのサイズX
 #define TITLE_LOGO_SIZE_Y			(420.0f)			//タイトルロゴのサイズY
@@ -23,132 +24,139 @@
 #define TITLE_PRESS_START_SIZE_Y	(84.0f)				//PRESS START UIのサイズY
 #define TITLE_PRESS_START_POS_Y		(600.0f)			//PRESS START UIの位置Y
 
-//================================================
-//静的メンバ変数宣言
-//================================================
-
-//================================================
-//デフォルトコンストラクタ
-//================================================
+//=============================================================================
+// デフォルトコンストラクタ
+//=============================================================================
 CTitle::CTitle(CObject::PRIORITY Priority):CObject(Priority)
 {
-	m_nTitleCounter = 0;
+	
 }
 
-//================================================
-//オーバーロードされたコンストラクタ
-//================================================
-
-
-//================================================
-//デストラクタ
-//================================================
+//=============================================================================
+// デフォルトデストラクタ
+//=============================================================================
 CTitle::~CTitle()
 {
 
 }
 
-//================================================
-//初期化処理
-//================================================
+//=============================================================================
+// 初期化処理
+//=============================================================================
 HRESULT CTitle::Init(void)
 {
-	/*for (int count_trophy_size = 0; count_trophy_size < (int)CModelSingle::HAPPENING_TYPE::MAX - 1; count_trophy_size++)
-	{
-		vector<bool> trophy_flag = CManager::GetPlayData()->GetFlag();
+	CObject2D *pObject2D[2];
+	pObject2D[0] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+	pObject2D[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_BG"));
+	pObject2D[1] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, 0.0f + 200.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH * 0.9, SCREEN_HEIGHT * 0.3, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+	pObject2D[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_TITLE_LOGO"));
+	m_click = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+	m_click->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_CLICK"));
+	m_button.push_back(CObject2D::Create(D3DXVECTOR3(0.0f + 300.0f, SCREEN_HEIGHT - 200.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2.2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
+	m_button.push_back(CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, SCREEN_HEIGHT - 200.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2.2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
+	m_button.push_back(CObject2D::Create(D3DXVECTOR3(0.0f + 300.0f, SCREEN_HEIGHT - 200.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2.2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
+	m_button.push_back(CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, SCREEN_HEIGHT - 200.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2.2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
+	m_button[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_FRAME"));
+	m_button[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_FRAME"));
+	m_button[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_START"));
+	m_button[3]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_TROPHY"));
+	m_fade_flag = true;
 
-		if (trophy_flag[count_trophy_size])
-		{
-			CObject2D *pObject2D = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 4.0f) + (250.0f * count_trophy_size), SCREEN_HEIGHT / 4.0f, 0.0f),
-													 D3DXVECTOR3(200.0f, 200.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-			pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_TITLE"));
-		}
-		else
-		{
-			CObject2D *pObject2D = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 4.0f) + (250.0f * count_trophy_size), SCREEN_HEIGHT / 4.0f, 0.0f),
-													 D3DXVECTOR3(200.0f, 200.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-			pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_TITLE_LOGO"));
-		}
-	}*/
-
-	//タイトル背景の生成
-	/*CObject2D *pObject2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
-											 D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-	pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_TITLE"));
-
-	//タイトルロゴの生成
-	CObject2D *pObject2DTitleLogo = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
-													  D3DXVECTOR3(TITLE_LOGO_SIZE_X, TITLE_LOGO_SIZE_Y, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-	pObject2DTitleLogo->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_TITLE_LOGO"));
-
-	m_nTitleCounter = 0;*/
 	return S_OK;
 }
 
-//================================================
-//終了処理
-//================================================
+//=============================================================================
+// 終了処理
+//=============================================================================
 void CTitle::Uninit(void)
 {
 	//オブジェクトの破棄
 	Release();
 }
 
-//================================================
-//更新処理
-//================================================
+//=============================================================================
+// 更新処理
+//=============================================================================
 void CTitle::Update(void)
 {
-	//キーボード取得処理
-	CInputKeyboard *pInputKeyboard;
-	pInputKeyboard = CManager::GetInstance()->GetInputKeyboard();
+	CFade *fade;
+	CInputMouse *mouse;
+	D3DXVECTOR3 pos[2];
+	D3DXVECTOR3 size[2];
+	POINT point;
+	HWND hwnd;
+	pos[0] = m_button[0]->GetPos();
+	size[0] = m_button[0]->GetSize();
+	pos[1] = m_button[1]->GetPos();
+	size[1] = m_button[2]->GetSize();
+	hwnd = CManager::GetWindowHandle();
+	fade = CManager::GetFade();
+	mouse = CManager::GetInputMouse();
+	GetCursorPos(&point);
+	ScreenToClient(hwnd, &point);
 
-	//パッドD取得処理
-	CInputPadD *pInputPadD;
-	pInputPadD = CManager::GetInstance()->GetInputPadD();
-
-	//Enterキー、スタートボタンを押したら
-	if (pInputKeyboard->GetTrigger(DIK_RETURN) == true || pInputPadD->GetPress(CInputPadD::START) == true)
+	if (pos[0].x - size[0].x / 2.0f <= point.x &&
+		pos[0].x + size[0].x / 2.0f >= point.x &&
+		pos[0].y - size[0].y / 2.0f <= point.y &&
+		pos[0].y + size[0].y / 2.0f >= point.y)
 	{
-		//フェード取得処理
-		CFade *pFade;
-
-		pFade = CManager::GetInstance()->GetFade();
-
-		if (pFade->GetFade() == CFade::FADE_NONE)
+		m_button[0]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
+		m_button[2]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
+		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 		{
-			pFade->SetFade(CManager::MODE::MENU);
+			fade->SetFade(CManager::MODE::GAME01);
 		}
 	}
-
-	if (m_nTitleCounter % 90 == 0 || m_nTitleCounter == 0)
+	else
 	{
-		CUi::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, TITLE_PRESS_START_POS_Y, 0.0f),
-			        D3DXVECTOR3(TITLE_PRESS_START_SIZE_X, TITLE_PRESS_START_SIZE_Y, 0.0f), static_cast<int>(CObject::PRIORITY::UI), CUi::TYPE::PRESS_START);
+		m_button[0]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		m_button[2]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 
-	//カウンターを増やす
-	m_nTitleCounter++;
-	
-
-	if (m_nTitleCounter >= TITLE_TO_RESULT_COUNT)
+	if (pos[1].x - size[1].x / 2.0f <= point.x &&
+		pos[1].x + size[1].x / 2.0f >= point.x &&
+		pos[1].y - size[1].y / 2.0f <= point.y &&
+		pos[1].y + size[1].y / 2.0f >= point.y)
 	{
-		m_nTitleCounter = 0;
-		//フェード取得処理
-		CFade *pFade;
-		pFade = CManager::GetInstance()->GetFade();
-
-		//リザルトに遷移
-		if (pFade->GetFade() == CFade::FADE_NONE)
+		m_button[1]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
+		m_button[3]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
+		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 		{
-			pFade->SetFade(CManager::MODE::RESULT);
+			fade->SetFade(CManager::MODE::TROPHY);
 		}
+	}
+	else
+	{
+		m_button[1]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		m_button[3]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+	}
+
+	D3DXCOLOR col = m_click->GetCol();
+
+	if (col.a >= 1.0f)
+	{
+		m_fade_flag = true;
+	}
+	else if (col.a <= 0.0f)
+	{
+		m_fade_flag = false;
+	}
+
+	if (m_fade_flag == true)
+	{
+		col.a -= 0.01f;
+		m_click->SetCol(col);
+	}
+	else
+	{
+		col.a += 0.01f;
+		m_click->SetCol(col);
 	}
 }
 
-//================================================
-//描画処理
-//================================================
+//=============================================================================
+// 描画処理
+//=============================================================================
 void CTitle::Draw(void)
 {
 	
