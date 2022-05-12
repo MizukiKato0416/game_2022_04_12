@@ -4,7 +4,7 @@
 //==================================================
 
 //テクスチャ最大数
-TEX_NUM = 20
+TEX_NUM = 36
 
 //ダンジョンの壁
 PAS = data/TEXTURE/wall_01.jpg
@@ -85,3 +85,67 @@ NAME = TEX_TYPE_EFFECT_WIND
 //レッドブル
 PAS = data/TEXTURE/redbull.png
 NAME = TEX_TYPE_REDBULL
+
+//戻るボタン
+PAS = data/TEXTURE/arrow.png
+NAME = TEX_TYPE_BUCK
+
+//TROPHY
+PAS = data/TEXTURE/Trophy.png
+NAME = TEX_TYPE_TROPHY
+
+//枠組み
+PAS = data/TEXTURE/frame_Trophy.png
+NAME = TEX_TYPE_TROPHY_FRAME
+
+//BG
+PAS = data/TEXTURE/Bg.png
+NAME = TEX_TYPE_BG
+
+//飛行機アイコン表
+PAS = data/TEXTURE/Trophy_Airplane.png
+NAME = TEX_TYPE_ICON_SIRPLANE_00
+
+//飛行機アイコン裏
+PAS = data/TEXTURE/Trophy_airplane_Black.png
+NAME = TEX_TYPE_ICON_SIRPLANE_01
+
+//扇風機アイコン表
+PAS = data/TEXTURE/Trophy_fan.png
+NAME = TEX_TYPE_ICON_FAN_00
+
+//扇風機アイコン裏
+PAS = data/TEXTURE/Trophy_fan_Black.png
+NAME = TEX_TYPE_ICON_FAN_01
+
+//レッドブルアイコン表
+PAS = data/TEXTURE/Trophy_redbull.png
+NAME = TEX_TYPE_ICON_REDBULL_00
+
+//レッドブルアイコン裏
+PAS = data/TEXTURE/Trophy_redbull_Black.png
+NAME = TEX_TYPE_ICON_REDBULL_01
+
+//スターリングアイコン表
+PAS = data/TEXTURE/Trophy_starring.png
+NAME = TEX_TYPE_ICON_STARRING_00
+
+//スターリングアイコン裏
+PAS = data/TEXTURE/Trophy_starring_Black.png
+NAME = TEX_TYPE_ICON_STARRING_01
+
+//とげアイコン表
+PAS = data/TEXTURE/Trophy_thorn.png
+NAME = TEX_TYPE_ICON_THORN_00
+
+//とげアイコン裏
+PAS = data/TEXTURE/Trophy_thorn_Black.png
+NAME = TEX_TYPE_ICON_THORN_01
+
+//トランポリンアイコン表
+PAS = data/TEXTURE/Trophy_trampoline.png
+NAME = TEX_TYPE_ICON_TRAMPOLINE_00
+
+//トランポリンアイコン裏
+PAS = data/TEXTURE/Trophy_trampoline_Black.png
+NAME = TEX_TYPE_ICON_TRAMPOLINE_01

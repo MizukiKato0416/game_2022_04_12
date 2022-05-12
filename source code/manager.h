@@ -23,6 +23,7 @@ class CResult;
 class CFade;
 class CMotionRoad;
 class CPlayData;
+class CTrophy;
 
 //================================================
 //マクロ定義
@@ -40,7 +41,7 @@ public:
 	{
 		TITLE = 0,		//タイトル
 		MENU,			//メニュー
-		TUTORIAL,		//チュートリアル
+		TROPHY,		//トロフィールーム
 		GAME01,			//ゲーム01
 		RESULT,			//リザルト
 		MAX
@@ -63,6 +64,7 @@ public:
 	static CCamera** GetCamera(void);					//カメラ取得処理
 	static CXload *GetXload(void);						//xファイル読み込み取得処理
 	static CTitle *GetTitle(void);						//タイトル取得処理
+	static CTrophy *GetTrophy(void);					//トロフィールーム取得処理
 	static CMenu *GetMenu(void);						//メニュー取得処理
 	static CGame01 *GetGame01(void);					//ゲーム01取得処理
 	static CResult *GetResult(void);					//リザルト取得処理
@@ -89,6 +91,7 @@ private:
 	static CCamera* m_apCamera[MAX_CAMERA];				//カメラのポインタ
 	static CXload *m_pXload;							//xファイル読み込みのポインタ
 	static CTitle *m_pTitle;							//タイトルのポインタ
+	static CTrophy *m_pTrophy;							//トロフィールのポインタ
 	static CMenu *m_pMenu;								//タイトルのポインタ
 	static CGame01 *m_pGame01;							//ゲーム01のポインタ
 	static CResult *m_pResult;							//リザルトのポインタ
