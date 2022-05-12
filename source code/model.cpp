@@ -352,7 +352,7 @@ D3DXMATRIX CModel::GetMtx(void)
 }
 
 //================================================
-//サイズ取得処理処理
+//サイズ取得処理
 //================================================
 D3DXVECTOR3 CModel::GetSize(void)
 {
@@ -656,6 +656,13 @@ D3DXVECTOR3 CModel::GetVtxPos(const int &nCntVtx)
 	return m_vtxPos[nCntVtx];
 }
 
+//================================================
+//モデルの頂点位置設定処理
+//================================================
+void CModel::SetVtxPos(const int & nCntVtx, const D3DXVECTOR3 &pos)
+{
+	m_vtxPos[nCntVtx] = pos;
+}
 
 //================================================
 //モデルの向き設定処理

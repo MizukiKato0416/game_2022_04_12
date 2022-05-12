@@ -230,7 +230,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "C:\\Users\\student\\Pictures\\Photokako-total-mosaic-BwMtGveDh5Bay2YG.png";
+    "data/TEXTURE/redbull.png";
    }
   }
  }

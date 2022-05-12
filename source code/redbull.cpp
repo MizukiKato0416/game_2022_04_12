@@ -14,7 +14,7 @@
 //=============================================================================
 // マクロ定義
 //=============================================================================
-#define REDBULL_JUMP_POW			(12.0f)		// ジャンプ力
+#define REDBULL_JUMP_POW			(11.0f)		// ジャンプ力
 #define REDBULL_FORWORD_POW			(40.0f)		// 進力
 #define REDBULL_PLAYER_ROTATION_X	(-0.1f)		// プレイヤーの回転
 #define REDBULL_SLOW_PLAYER_MOVE_Y	(0.2f)		// スロー時の移動量Y

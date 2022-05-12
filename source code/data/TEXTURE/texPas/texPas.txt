@@ -4,7 +4,7 @@
 //==================================================
 
 //テクスチャ最大数
-TEX_NUM = 18
+TEX_NUM = 19
 
 //ダンジョンの壁
 PAS = data/TEXTURE/wall_01.jpg
@@ -77,3 +77,7 @@ NAME = TEX_TYPE_EFFECT_SMOKE
 //風エフェクト
 PAS = data/TEXTURE/effect_wind.png
 NAME = TEX_TYPE_EFFECT_WIND
+
+//レッドブル
+PAS = data/TEXTURE/redbull.png
+NAME = TEX_TYPE_REDBULL

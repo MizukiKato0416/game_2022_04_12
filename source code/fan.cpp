@@ -11,18 +11,19 @@
 #include "player.h"
 #include "model_single.h"
 #include "wind.h"
+#include "model.h"
 
 //=============================================================================
 // マクロ定義
 //=============================================================================
-#define FAN_JUMP_POW					(25.0f)									// ジャンプ力
-#define FAN_FORWORD_POW					(20.0f)									// 進力
+#define FAN_JUMP_POW					(22.0f)									// ジャンプ力
+#define FAN_FORWORD_POW					(15.0f)									// 進力
 #define FAN_PLAYER_ROTATION_X			(-0.1f)									// プレイヤーの回転
 #define FAN_SLOW_PLAYER_MOVE_Y			(0.2f)									// スロー時の移動量Y
 #define FAN_SLOW_FORWORD_POW			(0.3f)									// スロー時の進力
 #define FAN_SLOW_COUNT					(30)									// スローにする時間
 #define FAN_WIND_EFFECT_SIZE			(D3DXVECTOR3(200.0f, 300.0f, 0.0f))		// 風エフェクトのサイズ
-
+#define FAN_ROTATE_SPEED				(0.5f)									// ファンの回転速度
 
 //=============================================================================
 // デフォルトコンストラクタ
@@ -61,6 +62,27 @@ HRESULT CFan::Init(void)
 	//変数初期化
 	m_bHitPlayer = false;
 	m_nCntSlow = 0;
+
+	
+
+	//モデルの上頂点の位置を取得
+	D3DXVECTOR3 vtxPos[4];
+	vtxPos[0] = GetModel()->GetModel()->GetVtxPos(0);
+	vtxPos[1] = GetModel()->GetModel()->GetVtxPos(1);
+	vtxPos[2] = GetModel()->GetModel()->GetVtxPos(4);
+	vtxPos[3] = GetModel()->GetModel()->GetVtxPos(5);
+	
+	//モデルのサイズYを風のエフェクトのサイズの3分の2引き延ばす
+	vtxPos[0].y += FAN_WIND_EFFECT_SIZE.y / 3.0f * 2.0f;
+	vtxPos[1].y += FAN_WIND_EFFECT_SIZE.y / 3.0f * 2.0f;
+	vtxPos[2].y += FAN_WIND_EFFECT_SIZE.y / 3.0f * 2.0f;
+	vtxPos[3].y += FAN_WIND_EFFECT_SIZE.y / 3.0f * 2.0f;
+
+	//サイズを設定
+	GetModel()->GetModel()->SetVtxPos(0, vtxPos[0]);
+	GetModel()->GetModel()->SetVtxPos(1, vtxPos[1]);
+	GetModel()->GetModel()->SetVtxPos(4, vtxPos[2]);
+	GetModel()->GetModel()->SetVtxPos(5, vtxPos[3]);
 
 	return S_OK;
 }
@@ -102,6 +124,12 @@ void CFan::Update(void)
 		m_apWind[nCntWind]->SetPos(windPos, windSize);
 	}
 
+	//向きを取得
+	m_rot = GetModel()->GetRot();
+	//回転させる
+	m_rot.y += FAN_ROTATE_SPEED;
+	//向きを設定
+	GetModel()->SetRot(m_rot);
 
 	//プレイヤーに当たったら
 	if (CHappenig::HitPlayer() == true)
