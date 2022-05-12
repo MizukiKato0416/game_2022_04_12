@@ -28,12 +28,12 @@
 #define GRONUD_CANDIDATES_POSX_00		(-500)		// 地面モデルX候補位置
 #define GRONUD_CANDIDATES_POSX_01		(500)		// 地面モデルX候補位置
 #define GRONUD_CANDIDATES_POSX_02		(0)			// 地面モデルX候補位置
-#define SKY_CANDIDATES_POS_X_00			(500)		// 空モデルX位置
-#define SKY_CANDIDATES_POS_Y_00			(350)		// 空モデルY位置
-#define SKY_CANDIDATES_POS_X_01			(-500)		// 空モデルX位置
-#define SKY_CANDIDATES_POS_Y_01			(350)		// 空モデルY位置
-#define SKY_CANDIDATES_POS_X_02			(500)		// 空モデルX位置
-#define SKY_CANDIDATES_POS_Y_03			(250)		// 空モデルY位置
+#define SKY_CANDIDATES_POS_X_00			(500)		// 空モデルX候補位置
+#define SKY_CANDIDATES_POS_Y_00			(350)		// 空モデルY候補位置
+#define SKY_CANDIDATES_POS_X_01			(-500)		// 空モデルX候補位置
+#define SKY_CANDIDATES_POS_Y_01			(350)		// 空モデルY候補位置
+#define SKY_CANDIDATES_POS_X_02			(500)		// 空モデルX候補位置
+#define SKY_CANDIDATES_POS_Y_02			(250)		// 空モデルY候補位置
 
 //=============================================================================
 // デフォルトコンストラクタ
@@ -85,13 +85,13 @@ HRESULT CRoad::Init(void)
 			GroundInstallation(groind_happening_type, GRONUD_CANDIDATES_POSX_02);
 			break;
 		case CANDIDATES_PLACE::CANDIDATES_03:
-			SkyInstallation(sky_happening_type, SKY_CANDIDATES_POS_X_01, SKY_CANDIDATES_POS_Y_01);
+			SkyInstallation(sky_happening_type, SKY_CANDIDATES_POS_X_00, SKY_CANDIDATES_POS_Y_00);
 			break;
 		case CANDIDATES_PLACE::CANDIDATES_04:
-			SkyInstallation(sky_happening_type, SKY_CANDIDATES_POS_X_02, SKY_CANDIDATES_POS_X_02);
+			SkyInstallation(sky_happening_type, SKY_CANDIDATES_POS_X_01, SKY_CANDIDATES_POS_Y_01);
 			break;
 		case CANDIDATES_PLACE::CANDIDATES_05:
-			SkyInstallation(sky_happening_type, SKY_CANDIDATES_POS_X_02, SKY_CANDIDATES_POS_X_02);
+			SkyInstallation(sky_happening_type, SKY_CANDIDATES_POS_X_02, SKY_CANDIDATES_POS_Y_02);
 			break;
 		default:
 			break;
