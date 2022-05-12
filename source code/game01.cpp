@@ -28,33 +28,34 @@
 //================================================
 //マクロ定義
 //================================================
-#define GAME01_MOUSE_VEC_ADJUSTMENT_0	(0.4f)		//引っ張ったときのベクトルを小さくする割合0
-#define GAME01_MOUSE_VEC_ADJUSTMENT_1	(0.5f)		//引っ張ったときのベクトルを小さくする割合1
-#define GAME01_MOUSE_VEC_ADJUSTMENT_2	(0.6f)		//引っ張ったときのベクトルを小さくする割合2
-#define GAME01_MOUSE_VEC_ADJUSTMENT_3	(0.7f)		//引っ張ったときのベクトルを小さくする割合3
-#define GAME01_MOUSE_VEC_ADJUSTMENT_4	(0.8f)		//引っ張ったときのベクトルを小さくする割合4
-#define GAME01_MOUSE_VEC_ADJUSTMENT_5	(0.9f)		//引っ張ったときのベクトルを小さくする割合5
-#define GAME01_MOUSE_VEC_ADJUSTMENT_6	(1.0f)		//引っ張ったときのベクトルを小さくする割合6
-#define GAME01_CAMERA_ADD_POS			(10.0f)		//カメラの位置を加算する量
-#define GAME01_CAMERA_ADD_DIFFER		(10.0f)		//カメラの視点と注視点の距離を加算する量
-#define GAME01_CAMERA_VIEW_CHANGE_MOVE	(20.0f)		//カメラを視野をDEFAULTから最大に変える境界線のプレイヤーのバウンドする瞬間の移動量
-#define GAME01_SCORE_MAGNIFICATION		(10.0f)		//プレイヤーが前に進む力をスコアにする際の倍率
-#define GAME01_SHOT_GAUGE_MAX			(100)		//ショットゲージの最大値
-#define GAME01_SHOT_GAUGE_ADD			(2)			//ショットゲージを増やす量
-#define GAME01_SHOT_GAUGE_COUNTER_MAX	(10)		//ショットゲージが最大までたまっている状態の時間
-#define GAME01_SHOT_GAUGE_CASE_1		(20)		//ショットゲージの段階1
-#define GAME01_SHOT_GAUGE_CASE_2		(40)		//ショットゲージの段階2
-#define GAME01_SHOT_GAUGE_CASE_3		(60)		//ショットゲージの段階3
-#define GAME01_SHOT_GAUGE_CASE_4		(80)		//ショットゲージの段階4
-#define GAME01_BG_SIZE_ADJUSTMENT		(3.0f)		//背景の大きくする割合
-#define GAME01_BG_POS_Z					(1000.0f)	//背景の位置Z
-#define GAME01_BG_POS_Y					(300.0f)	//背景の位置Y
-#define GAME01_BG_1_MAGNIFICATION		(0.00004f)	//背景1が前に進む力を背景の移動にする際の倍率
-#define GAME01_BG_2_MAGNIFICATION		(0.00006f)	//背景2が前に進む力を背景の移動にする際の倍率
-#define GAME01_BG_3_MAGNIFICATION		(0.00008f)	//背景3が前に進む力を背景の移動にする際の倍率
-#define GAME01_BG_1_MOVE_INIT			(0.00006f)	//背景1の初期移動量
-#define GAME01_BG_2_MOVE_INIT			(0.00008f)	//背景2の初期移動量
-#define GAME01_BG_3_MOVE_INIT			(0.0001f)	//背景3の初期移動量
+#define GAME01_MOUSE_VEC_ADJUSTMENT_0		(0.4f)		//引っ張ったときのベクトルを小さくする割合0
+#define GAME01_MOUSE_VEC_ADJUSTMENT_1		(0.5f)		//引っ張ったときのベクトルを小さくする割合1
+#define GAME01_MOUSE_VEC_ADJUSTMENT_2		(0.6f)		//引っ張ったときのベクトルを小さくする割合2
+#define GAME01_MOUSE_VEC_ADJUSTMENT_3		(0.7f)		//引っ張ったときのベクトルを小さくする割合3
+#define GAME01_MOUSE_VEC_ADJUSTMENT_4		(0.8f)		//引っ張ったときのベクトルを小さくする割合4
+#define GAME01_MOUSE_VEC_ADJUSTMENT_5		(0.9f)		//引っ張ったときのベクトルを小さくする割合5
+#define GAME01_MOUSE_VEC_ADJUSTMENT_6		(1.0f)		//引っ張ったときのベクトルを小さくする割合6
+#define GAME01_CAMERA_ADD_POS				(10.0f)		//カメラの位置を加算する量
+#define GAME01_CAMERA_ADD_DIFFER			(10.0f)		//カメラの視点と注視点の距離を加算する量
+#define GAME01_CAMERA_VIEW_CHANGE_MOVE		(20.0f)		//カメラを視野をDEFAULTから最大に変える境界線のプレイヤーのバウンドする瞬間の移動量
+#define GAME01_SCORE_MAGNIFICATION			(10.0f)		//プレイヤーが前に進む力をスコアにする際の倍率
+#define GAME01_SHOT_GAUGE_MAX				(100)		//ショットゲージの最大値
+#define GAME01_SHOT_GAUGE_ADD				(2)			//ショットゲージを増やす量
+#define GAME01_SHOT_GAUGE_COUNTER_MAX		(10)		//ショットゲージが最大までたまっている状態の時間
+#define GAME01_SHOT_GAUGE_CASE_1			(20)		//ショットゲージの段階1
+#define GAME01_SHOT_GAUGE_CASE_2			(40)		//ショットゲージの段階2
+#define GAME01_SHOT_GAUGE_CASE_3			(60)		//ショットゲージの段階3
+#define GAME01_SHOT_GAUGE_CASE_4			(80)		//ショットゲージの段階4
+#define GAME01_SHOT_GAUGE_SUBTRACT_ALPHA	(0.02f)		//ショットゲージを薄くする量
+#define GAME01_BG_SIZE_ADJUSTMENT			(3.0f)		//背景の大きくする割合
+#define GAME01_BG_POS_Z						(1000.0f)	//背景の位置Z
+#define GAME01_BG_POS_Y						(300.0f)	//背景の位置Y
+#define GAME01_BG_1_MAGNIFICATION			(0.00004f)	//背景1が前に進む力を背景の移動にする際の倍率
+#define GAME01_BG_2_MAGNIFICATION			(0.00006f)	//背景2が前に進む力を背景の移動にする際の倍率
+#define GAME01_BG_3_MAGNIFICATION			(0.00008f)	//背景3が前に進む力を背景の移動にする際の倍率
+#define GAME01_BG_1_MOVE_INIT				(0.00006f)	//背景1の初期移動量
+#define GAME01_BG_2_MOVE_INIT				(0.00008f)	//背景2の初期移動量
+#define GAME01_BG_3_MOVE_INIT				(0.0001f)	//背景3の初期移動量
 
 
 #ifdef _DEBUG
@@ -174,6 +175,12 @@ void CGame01::Update(void)
 	//発射したら
 	if (m_pPlayer->GetShot() == true)
 	{
+		if (m_pGaugeFrame != nullptr && m_pGauge != nullptr)
+		{
+			//ゲージを消す処理
+			UninitGauge();
+		}
+
 		//カメラの処理
 		Camera();
 
@@ -423,6 +430,41 @@ void CGame01::Gauge(void)
 			//ゲージを0にする
 			m_pGauge->SetGauge(0);
 		}
+	}
+}
+
+//================================================
+//ゲージを消す処理
+//================================================
+void CGame01::UninitGauge(void)
+{
+	//ゲージとそのフレームの色取得
+	D3DXCOLOR gaugeFrameCol = m_pGaugeFrame->GetCol();
+	D3DXCOLOR gaugeCol = m_pGauge->GetCol();
+
+	//ゲージとそのフレームを徐々に薄くする
+	gaugeFrameCol.a -= GAME01_SHOT_GAUGE_SUBTRACT_ALPHA;
+	gaugeCol.a -= GAME01_SHOT_GAUGE_SUBTRACT_ALPHA;
+
+	//見えなくなったら
+	if (gaugeFrameCol.a <= 0.0f || gaugeCol.a <= 0.0f)
+	{
+		//0にする
+		gaugeFrameCol.a = 0.0f;
+		gaugeCol.a = 0.0f;
+
+		//消す
+		m_pGaugeFrame->Uninit();
+		m_pGauge->Uninit();
+
+		m_pGaugeFrame = nullptr;
+		m_pGauge = nullptr;
+	}
+	else
+	{
+		//色の設定
+		m_pGaugeFrame->SetCol(gaugeFrameCol);
+		m_pGauge->SetCol(gaugeCol);
 	}
 }
 

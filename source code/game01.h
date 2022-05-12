@@ -44,6 +44,7 @@ private:
 	void Camera(void);					//カメラの処理
 	void Road(void);					//道の処理
 	void Gauge(void);					//ゲージ処理
+	void UninitGauge(void);				//ゲージを消す処理
 	void Shot(void);					//発射処理
 
 	//メンバ変数

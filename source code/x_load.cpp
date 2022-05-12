@@ -79,6 +79,14 @@ void CXload::Init(void)
 	//レッドブル
 	D3DXLoadMeshFromX("data/MODEL/stage/redbull.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
 		&m_apBuffMat[X_TYPE_REDBULL], NULL, &m_aNumMat[X_TYPE_REDBULL], &m_apMesh[X_TYPE_REDBULL]);
+
+	//スタート地点
+	D3DXLoadMeshFromX("data/MODEL/stage/start.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
+		&m_apBuffMat[X_TYPE_START], NULL, &m_aNumMat[X_TYPE_START], &m_apMesh[X_TYPE_START]);
+
+	//ロケット
+	D3DXLoadMeshFromX("data/MODEL/stage/rocket.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
+		&m_apBuffMat[X_TYPE_ROCKET], NULL, &m_aNumMat[X_TYPE_ROCKET], &m_apMesh[X_TYPE_ROCKET]);
 }	
 
 //=============================================================================

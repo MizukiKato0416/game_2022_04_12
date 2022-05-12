@@ -196,6 +196,7 @@
     <ClCompile Include="redbull.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="result.cpp" />
+    <ClCompile Include="rocket.cpp" />
     <ClCompile Include="score.cpp" />
     <ClCompile Include="shadow.cpp" />
     <ClCompile Include="smoke.cpp" />
@@ -256,6 +257,7 @@
     <ClInclude Include="redbull.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="result.h" />
+    <ClInclude Include="rocket.h" />
     <ClInclude Include="score.h" />
     <ClInclude Include="shadow.h" />
     <ClInclude Include="smoke.h" />
