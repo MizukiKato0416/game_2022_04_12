@@ -64,32 +64,32 @@ HRESULT CTrophy::Init(void)
 			switch (count_trophy_size)
 			{
 			case 0:
-				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / SCREEN_DIVISION_Y_COUNT, 0.0f),
+				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT, 0.0f),
 					D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				pIcon->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_ICON_SIRPLANE_00"));
 				break;
 			case 1:
-				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / SCREEN_DIVISION_Y_COUNT, 0.0f),
+				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT, 0.0f),
 					D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				pIcon->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_ICON_FAN_00"));
 				break;
 			case 2:
-				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / SCREEN_DIVISION_Y_COUNT, 0.0f),
+				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT, 0.0f),
 					D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				pIcon->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_ICON_REDBULL_00"));
 				break;
 			case 3:
-				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / SCREEN_DIVISION_Y_COUNT, 0.0f),
+				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT, 0.0f),
 					D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				pIcon->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_ICON_STARRING_00"));
 				break;
 			case 4:
-				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / SCREEN_DIVISION_Y_COUNT, 0.0f),
+				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT, 0.0f),
 					D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				pIcon->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_ICON_THORN_00"));
 				break;
 			case 5:
-				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / SCREEN_DIVISION_Y_COUNT, 0.0f),
+				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT, 0.0f),
 					D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				pIcon->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_ICON_TRAMPOLINE_00"));
 				break;
@@ -104,32 +104,32 @@ HRESULT CTrophy::Init(void)
 			switch (count_trophy_size)
 			{
 			case 0:
-				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / SCREEN_DIVISION_Y_COUNT, 0.0f),
+				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT, 0.0f),
 					D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				pIcon->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_ICON_SIRPLANE_01"));
 				break;
 			case 1:
-				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / SCREEN_DIVISION_Y_COUNT, 0.0f),
+				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT, 0.0f),
 					D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				pIcon->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_ICON_FAN_01"));
 				break;
 			case 2:
-				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / SCREEN_DIVISION_Y_COUNT, 0.0f),
+				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT, 0.0f),
 					D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				pIcon->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_ICON_REDBULL_01"));
 				break;
 			case 3:
-				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / SCREEN_DIVISION_Y_COUNT, 0.0f),
+				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT, 0.0f),
 					D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				pIcon->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_ICON_STARRING_01"));
 				break;
 			case 4:
-				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / SCREEN_DIVISION_Y_COUNT, 0.0f),
+				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT, 0.0f),
 					D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				pIcon->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_ICON_THORN_01"));
 				break;
 			case 5:
-				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / SCREEN_DIVISION_Y_COUNT, 0.0f),
+				pIcon = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_trophy_size), SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT, 0.0f),
 					D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				pIcon->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_ICON_TRAMPOLINE_01"));
 				break;
