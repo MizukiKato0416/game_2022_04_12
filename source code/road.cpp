@@ -28,11 +28,11 @@
 #define GRONUD_CANDIDATES_POSX_00		(-500)		// 地面モデルX候補位置
 #define GRONUD_CANDIDATES_POSX_01		(500)		// 地面モデルX候補位置
 #define GRONUD_CANDIDATES_POSX_02		(0)			// 地面モデルX候補位置
-#define SKY_CANDIDATES_POS_X_00			(500)		// 空モデルX候補位置
+#define SKY_CANDIDATES_POS_X_00			(250)		// 空モデルX候補位置
 #define SKY_CANDIDATES_POS_Y_00			(350)		// 空モデルY候補位置
-#define SKY_CANDIDATES_POS_X_01			(-500)		// 空モデルX候補位置
+#define SKY_CANDIDATES_POS_X_01			(-250)		// 空モデルX候補位置
 #define SKY_CANDIDATES_POS_Y_01			(350)		// 空モデルY候補位置
-#define SKY_CANDIDATES_POS_X_02			(500)		// 空モデルX候補位置
+#define SKY_CANDIDATES_POS_X_02			(0)		// 空モデルX候補位置
 #define SKY_CANDIDATES_POS_Y_02			(250)		// 空モデルY候補位置
 
 //=============================================================================
