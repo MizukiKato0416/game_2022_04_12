@@ -41,6 +41,7 @@ public:
 	void SetPos(const D3DXVECTOR3 &pos);											//モデルの位置設定処理
 	D3DXVECTOR3 GetPos(void);														//モデルの位置取得処理
 	D3DXVECTOR3 GetVtxPos(const int &nCntVtx);										//モデルの頂点位置取得処理
+	void SetVtxPos(const int &nCntVtx, const D3DXVECTOR3 &pos);						//モデルの頂点位置設定処理
 	void SetRot(const D3DXVECTOR3 &rot);											//モデルの向き設定処理
 	D3DXVECTOR3 GetRot(void);														//モデルの向き取得処理
 	D3DXMATRIX *GetVtxMtxWorld(void);												//ワールドマトリックス取得処理

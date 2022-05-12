@@ -22,6 +22,7 @@
 #include "motion_road.h"
 #include "play_data.h"
 #include "pause.h"
+#include "trophy.h"
 
 //================================================
 //静的メンバ変数宣言
@@ -37,6 +38,7 @@ CLight *CManager::m_apLight[MAX_LIGHT] = { nullptr };
 CTexture *CManager::m_pTexture = nullptr;
 CXload *CManager::m_pXload = nullptr;
 CTitle *CManager::m_pTitle = nullptr;
+CTrophy *CManager::m_pTrophy = nullptr;
 CMenu *CManager::m_pMenu = nullptr;
 CGame01 *CManager::m_pGame01 = nullptr;
 CResult *CManager::m_pResult = nullptr;
@@ -69,6 +71,8 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 {
 	//時刻で初期化
 	srand((unsigned int)time(NULL));
+
+	m_hWnd = hWnd;
 
 	//レンダリングクラスの生成
 	if (m_pRenderer == nullptr)
@@ -168,7 +172,7 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 	//フェードクラスの生成
 	m_pFade = CFade::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
 							D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f),
-							MODE::TITLE);
+							MODE::TROPHY);
 
 	return S_OK;
 }
@@ -466,6 +470,14 @@ CTitle* CManager::GetTitle(void)
 }
 
 //=============================================================================
+// trophy取得処理
+//=============================================================================
+CTrophy* CManager::GetTrophy(void)
+{
+	return m_pTrophy;
+}
+
+//=============================================================================
 // menu取得処理
 //=============================================================================
 CMenu* CManager::GetMenu(void)
@@ -515,6 +527,27 @@ void CManager::SetMode(MODE mode)
 
 			m_pTitle->Uninit();
 			m_pTitle = nullptr;
+		}
+		break;
+	case MODE::TROPHY:
+		if (m_pTrophy != nullptr)
+		{
+			//カメラの破棄
+			for (int nCntCamera = 0; nCntCamera < MAX_CAMERA; nCntCamera++)
+			{
+				if (m_apCamera[nCntCamera] != nullptr)
+				{
+					//終了処理
+					m_apCamera[nCntCamera]->Uninit();
+
+					//メモリの開放
+					delete m_apCamera[nCntCamera];
+					m_apCamera[nCntCamera] = nullptr;
+				}
+			}
+
+			m_pTrophy->Uninit();
+			m_pTrophy = nullptr;
 		}
 		break;
 	case MODE::MENU:
@@ -606,6 +639,26 @@ void CManager::SetMode(MODE mode)
 				}
 
 				m_pTitle->Init();
+			}
+		}
+		break;
+	case MODE::TROPHY:
+		//タイトルクラスの生成
+		if (m_pTrophy == nullptr)
+		{
+			m_pTrophy = new CTrophy;
+			if (m_pTrophy != nullptr)
+			{
+				//メインカメラの生成
+				for (int nCntCamera = 0; nCntCamera < MAX_MAIN_CAMERA; nCntCamera++)
+				{
+					m_apCamera[nCntCamera] = CCamera::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(CAMERA_INIT_ROT_X, D3DX_PI, 0.0f),
+						(float)(SCREEN_WIDTH / MAX_MAIN_CAMERA * nCntCamera), 0.0f,
+						(float)(SCREEN_WIDTH / MAX_MAIN_CAMERA), (float)SCREEN_HEIGHT);
+					m_apCamera[nCntCamera]->SetNum(nCntCamera);
+				}
+
+				m_pTrophy->Init();
 			}
 		}
 		break;

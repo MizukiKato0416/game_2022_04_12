@@ -10,7 +10,8 @@
 //================================================
 //マクロ定義
 //================================================
-#define WIND_MAX_COUNTER	(5)	//アニメーションが切り替わるまでのカウンター
+#define WIND_MAX_COUNTER	(3)									//アニメーションが切り替わるまでのカウンター
+#define WIND_COLOR			(D3DXCOLOR(0.2f, 1.0f, 0.4f, 1.0f))	//色
 
 //================================================
 //静的メンバ変数宣言
@@ -52,10 +53,19 @@ HRESULT CWind::Init()
 	//オブジェクトの種類を設定
 	SetObjType(CObject::OBJTYPE::WIND);
 
+
+	//アニメーションが最後まで行ったら
+	if (m_nInitTexAnimNum >= WIND_MAX_PATTERN)
+	{
+		//最初に戻す
+		m_nInitTexAnimNum = 0;
+	}
+
 	//アニメーションを設定
 	SetTex(m_nInitTexAnimNum, WIND_MAX_PATTERN);
-	//SetAlphaBlendSubtraction(true);
-	SetAlphaBlend(false);
+
+	//色を設定
+	SetCol(WIND_COLOR);
 
 	return S_OK;
 }

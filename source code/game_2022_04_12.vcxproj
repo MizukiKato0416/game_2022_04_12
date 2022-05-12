@@ -210,6 +210,7 @@
     <ClCompile Include="time.cpp" />
     <ClCompile Include="title.cpp" />
     <ClCompile Include="trampoline.cpp" />
+    <ClCompile Include="trophy.cpp" />
     <ClCompile Include="ui.cpp" />
     <ClCompile Include="wind.cpp" />
     <ClCompile Include="x_load.cpp" />
@@ -268,6 +269,7 @@
     <ClInclude Include="time.h" />
     <ClInclude Include="title.h" />
     <ClInclude Include="trampoline.h" />
+    <ClInclude Include="trophy.h" />
     <ClInclude Include="ui.h" />
     <ClInclude Include="wind.h" />
     <ClInclude Include="x_load.h" />

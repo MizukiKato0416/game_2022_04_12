@@ -34,7 +34,8 @@ public:
 	CScore *GetScorePoint(void) { return m_pScore; }								//スコアのポインタ取得処理
 	void SetTime(const int &nTime) { m_nTime = nTime; }								//時間の設定
 	int GetTime(void) { return m_nTime; }											//時間の取得
-	vector<bool> GetFlag(void) { return m_trophy_flag; }	// ゲッダー
+	vector<bool> GetFlag(void) { return m_trophy_flag; }		// セッター
+	void SetFlag(vector<bool> frag) { m_trophy_flag = frag; }	// セッター
 
 private:
 	//メンバ変数

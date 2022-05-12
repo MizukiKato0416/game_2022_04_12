@@ -12,9 +12,9 @@
 //マクロ定義
 //================================================
 #define GAUGE_SHOT_POS_X	(SCREEN_WIDTH / 2.0f - GAUGE_SHOT_SIZE_X / 2.0f)	//ショットゲージの位置X
-#define GAUGE_SHOT_POS_Y	(100.0f)											//ショットゲージの位置Y
-#define GAUGE_SHOT_SIZE_X	(600.0f)											//ショットゲージのサイズX
-#define GAUGE_SHOT_SIZE_Y	(50.0f)												//ショットゲージのサイズY
+#define GAUGE_SHOT_POS_Y	(33.0f + GAUGE_SHOT_SIZE_Y / 2.0f)					//ショットゲージの位置Y
+#define GAUGE_SHOT_SIZE_X	(608.0f)											//ショットゲージのサイズX
+#define GAUGE_SHOT_SIZE_Y	(29.0f)												//ショットゲージのサイズY
 
 //================================================
 //クラスの定義

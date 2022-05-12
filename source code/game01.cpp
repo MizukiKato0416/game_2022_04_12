@@ -11,6 +11,7 @@
 #include "meshfield.h"
 #include "texture.h"
 #include "object3D.h"
+#include "object2D.h"
 #include "fade.h"
 #include "model_single.h"
 #include "play_data.h"
@@ -23,7 +24,6 @@
 #include "camera.h"
 #include "gauge.h"
 #include "bg.h"
-#include "starring.h"
 
 //================================================
 //マクロ定義
@@ -78,6 +78,7 @@ CGame01::CGame01(CObject::PRIORITY Priority):CObject(Priority)
 	m_mouseTriggerPos = { 0.0f, 0.0f, 0.0f };
 	m_pGauge = nullptr;
 	m_nGaugeCounter = 0;
+	m_pGaugeFrame = nullptr;
 }
 
 //================================================
@@ -121,10 +122,15 @@ HRESULT CGame01::Init(void)
 	//最初の道の生成
 	m_apRoad[0] = CRoad::Create(D3DXVECTOR3(FLOOR_SIZE.x, 0.0f, 0.0f), FLOOR_SIZE, 0.0f);
 
+	//ゲージのフレーム生成
+	m_pGaugeFrame = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f),
+		                              static_cast<int>(CObject::PRIORITY::UI));
+	m_pGaugeFrame->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_UI_GAUGE_FRAME"));
+
 	//ショットゲージの生成
 	m_pGauge = CGauge::Create(D3DXVECTOR3(GAUGE_SHOT_POS_X, GAUGE_SHOT_POS_Y, 0.0f),
 		                      D3DXVECTOR3(GAUGE_SHOT_SIZE_X, GAUGE_SHOT_SIZE_Y, 0.0f), GAME01_SHOT_GAUGE_MAX, 0);
-	m_pGauge->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_UI_HP_GAUGE"));
+	m_pGauge->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_UI_GAUGE"));
 
 	//背景1の生成
 	m_pBg[0] = CBg::Create(D3DXVECTOR3(0.0f, GAME01_BG_POS_Y, GAME01_BG_POS_Z),
