@@ -24,7 +24,7 @@
 //=============================================================================
 #define ROAD_GROUND_HAPPEN_PROBABILITY	(9)			// 設置モデルの確率
 #define ROAD_SKY_HAPPEN_PROBABILITY		(6)			// 設置モデルの確率
-#define ROAD_AIRPLANE_PROBABILITY		(6)			// 飛行機の確率
+#define ROAD_AIRPLANE_PROBABILITY		(7)			// 飛行機の確率
 #define GRONUD_CANDIDATES_POSX_00		(-500)		// 地面モデルX候補位置
 #define GRONUD_CANDIDATES_POSX_01		(500)		// 地面モデルX候補位置
 #define GRONUD_CANDIDATES_POSX_02		(700)		// 地面モデルX候補位置
@@ -250,6 +250,9 @@ void CRoad::SkyInstallation(const int &happening_type, const int &installation_p
 		switch (airplane_probability)
 		{
 		case 0:
+			m_happening_model.push_back(CAirplane::Create(D3DXVECTOR3(m_pos.x + installation_position_x, m_pos.y + installation_position_y, m_pos.z),
+														  D3DXVECTOR3(0.0f, AIRPLANE_INIT_ROT_Y, 0.0f)));
+		case 1:
 			m_happening_model.push_back(CAirplane::Create(D3DXVECTOR3(m_pos.x + installation_position_x, m_pos.y + installation_position_y, m_pos.z),
 														  D3DXVECTOR3(0.0f, AIRPLANE_INIT_ROT_Y, 0.0f)));
 		default:
