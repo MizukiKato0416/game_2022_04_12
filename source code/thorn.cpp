@@ -19,7 +19,7 @@
 #define THORN_PLAYER_ROTATION_X		(-0.1f)		// プレイヤーの回転
 #define THORN_SLOW_PLAYER_MOVE_Y	(0.2f)		// スロー時の移動量Y
 #define THORN_SLOW_FORWORD_POW		(0.3f)		// スロー時の進力
-#define THORN_SLOW_COUNT			(30)		// スローにする時間
+#define THORN_SLOW_COUNT			(5)			// スローにする時間
 
 //=============================================================================
 // デフォルトコンストラクタ
@@ -103,21 +103,21 @@ void CThorn::Update(void)
 				if (m_nCntSlow < THORN_SLOW_COUNT)
 				{
 					//カメラズーム処理
-					SetCameraZoom();
+					//SetCameraZoom();
 
 					//移動量設定
 					player->SetMove(D3DXVECTOR3(0.0f, THORN_SLOW_PLAYER_MOVE_Y, 0.0f));
 					//前に進む力設定
 					player->SetMoveForward(THORN_SLOW_FORWORD_POW);
 					//回る量設定
-					player->SetRotSpeed(THORN_PLAYER_ROTATION_X);
+					//player->SetRotSpeed(THORN_PLAYER_ROTATION_X);
 
-					//軌道エフェクトが出ているなら
-					if (player->GetSparkle() == true)
-					{
-						//軌道エフェクトを消す
-						player->SetSparkle(false);
-					}
+					////軌道エフェクトが出ているなら
+					//if (player->GetSparkle() == true)
+					//{
+					//	//軌道エフェクトを消す
+					//	player->SetSparkle(false);
+					//}
 				}
 				else if (m_nCntSlow == THORN_SLOW_COUNT)
 				{
@@ -128,14 +128,14 @@ void CThorn::Update(void)
 					//バウンドする瞬間の移動量を設定
 					player->SetBoundMove(player->GetJump());
 					//回転のスピードを設定
-					player->SetRotSpeed(PLAYER_ROTATE);
+					//player->SetRotSpeed(PLAYER_ROTATE);
 
-					//軌道エフェクトが出てないなら
-					if (player->GetSparkle() == false)
-					{
-						//軌道エフェクトを出す
-						player->SetSparkle(true);
-					}
+					////軌道エフェクトが出てないなら
+					//if (player->GetSparkle() == false)
+					//{
+					//	//軌道エフェクトを出す
+					//	player->SetSparkle(true);
+					//}
 				}
 			}
 		}

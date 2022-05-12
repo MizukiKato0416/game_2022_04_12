@@ -4,7 +4,7 @@
 //==================================================
 
 //テクスチャ最大数
-TEX_NUM = 19
+TEX_NUM = 20
 
 //ダンジョンの壁
 PAS = data/TEXTURE/wall_01.jpg
@@ -18,9 +18,13 @@ NAME = TEX_TYPE_EFFECT_SPARKLE
 PAS = data/TEXTURE/effect000.jpg
 NAME = TEX_TYPE_EFFECT_3D
 
-//HPのゲージ
-PAS = data/TEXTURE/ui_hp.png
-NAME = TEX_TYPE_UI_HP_GAUGE
+//ゲージ
+PAS = data/TEXTURE/gauge.png
+NAME = TEX_TYPE_UI_GAUGE
+
+//ゲージのフレーム
+PAS = data/TEXTURE/gauge_frame.png
+NAME = TEX_TYPE_UI_GAUGE_FRAME
 
 //タイトル
 PAS = data/TEXTURE/title.jpg

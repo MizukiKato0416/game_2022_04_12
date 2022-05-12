@@ -25,12 +25,12 @@
 #define ROAD_GROUND_HAPPEN_PROBABILITY	(9)			// 設置モデルの確率
 #define ROAD_SKY_HAPPEN_PROBABILITY		(6)			// 設置モデルの確率
 #define ROAD_AIRPLANE_PROBABILITY		(7)			// 飛行機の確率
-#define GRONUD_CANDIDATES_POSX_00		(-500)		// 地面モデルX候補位置
-#define GRONUD_CANDIDATES_POSX_01		(500)		// 地面モデルX候補位置
+#define GRONUD_CANDIDATES_POSX_00		(-550)		// 地面モデルX候補位置
+#define GRONUD_CANDIDATES_POSX_01		(400)		// 地面モデルX候補位置
 #define GRONUD_CANDIDATES_POSX_02		(700)		// 地面モデルX候補位置
-#define SKY_CANDIDATES_POS_X_00			(250)		// 空モデルX候補位置
+#define SKY_CANDIDATES_POS_X_00			(550)		// 空モデルX候補位置
 #define SKY_CANDIDATES_POS_Y_00			(350)		// 空モデルY候補位置
-#define SKY_CANDIDATES_POS_X_01			(-250)		// 空モデルX候補位置
+#define SKY_CANDIDATES_POS_X_01			(-400)		// 空モデルX候補位置
 #define SKY_CANDIDATES_POS_Y_01			(350)		// 空モデルY候補位置
 #define SKY_CANDIDATES_POS_X_02			(0)			// 空モデルX候補位置
 #define SKY_CANDIDATES_POS_Y_02			(250)		// 空モデルY候補位置

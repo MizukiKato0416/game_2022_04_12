@@ -13,6 +13,7 @@ class CFloor;
 class CRoad;
 class CGauge;
 class CBg;
+class CObject2D;
 
 //================================================
 //マクロ定義
@@ -51,6 +52,7 @@ private:
 	CRoad *m_apRoad[GAME01_MAX_ROAD];	//道のポインタ
 	D3DXVECTOR3 m_mouseTriggerPos;		//マウスをクリックした瞬間の位置
 	CGauge *m_pGauge;					//発射ゲージ
+	CObject2D *m_pGaugeFrame;			//ゲージのフレーム
 	int m_nGaugeCounter;				//ゲージが満タンの時間を設定するためのカウンター
 	CBg *m_pBg[GAME01_MAX_BG];			//背景のポインタ
 };
