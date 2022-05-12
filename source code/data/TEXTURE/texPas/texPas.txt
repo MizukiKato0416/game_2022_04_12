@@ -4,7 +4,7 @@
 //==================================================
 
 //テクスチャ最大数
-TEX_NUM = 36
+TEX_NUM = 38
 
 //ダンジョンの壁
 PAS = data/TEXTURE/wall_01.jpg
@@ -31,7 +31,7 @@ PAS = data/TEXTURE/title.jpg
 NAME = TEX_TYPE_TITLE
 
 //タイトルロゴ
-PAS = data/TEXTURE/title_logo.png
+PAS = data/TEXTURE/Title.png
 NAME = TEX_TYPE_TITLE_LOGO
 
 //PRESS START
@@ -149,3 +149,11 @@ NAME = TEX_TYPE_ICON_TRAMPOLINE_00
 //トランポリンアイコン裏
 PAS = data/TEXTURE/Trophy_trampoline_Black.png
 NAME = TEX_TYPE_ICON_TRAMPOLINE_01
+
+//Click
+PAS = data/TEXTURE/Click.png
+NAME = TEX_TYPE_CLICK
+
+//frame
+PAS = data/TEXTURE/frame.png
+NAME = TEX_TYPE_FRAME
