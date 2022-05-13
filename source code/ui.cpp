@@ -102,7 +102,7 @@ CUi* CUi::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const int &nPr
 			switch (type)
 			{
 			case TYPE::PRESS_START:
-				pUi->m_pTexture = CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_PRESS_START");
+				pUi->m_pTexture = CManager::GetInstance()->GetTexture()->GetTexture("press_start.png");
 				pUi->m_pControl = CControlUiSubtractAlpha::Create(pUi, UI_PRESS_START_SUBTRACT_ALPHA, UI_PRESS_START_DELAY);
 			default:
 				break;

@@ -160,7 +160,7 @@ CShadow* CShadow::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, CObjec
 			pShadow->m_size = size;
 			pShadow->m_pObject = pObject;
 			pShadow->Init();
-			pShadow->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_EFFECT_3D"));
+			pShadow->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("effect000.jpg"));
 		}
 	}
 	return pShadow;

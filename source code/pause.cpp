@@ -98,16 +98,16 @@ void CPause::Update(void)
 			//ÉtÉåÅ[ÉÄÇçÏê¨
 			m_pObject2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
 										    D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), static_cast<int>(CObject::PRIORITY::PAUSE));
-			m_pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_PAUSE"));
+			m_pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("pause_flame.png"));
 
 			//UIÇçÏê¨
 			m_apObject2D[0] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, PAUSE_START_POS_Y, 0.0f),
 		                                        D3DXVECTOR3(MENU_UI_START_SIZE_X * 0.8f, MENU_UI_START_SIZE_Y * 0.8f, 0.0f), static_cast<int>(CObject::PRIORITY::PAUSE));
-			m_apObject2D[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_START"));
+			m_apObject2D[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
 
 			m_apObject2D[1] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, PAUSE_EXIT_POS_Y, 0.0f),
 		                                     D3DXVECTOR3(MENU_UI_EXIT_SIZE_X* 0.8f, MENU_UI_EXIT_SIZE_Y * 0.8f, 0.0f), static_cast<int>(CObject::PRIORITY::PAUSE));
-			m_apObject2D[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_EXIT"));
+			m_apObject2D[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("exit.png"));
 
 			//êFÇÃê›íË
 			m_apObject2D[0]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));

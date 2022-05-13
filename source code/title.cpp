@@ -47,19 +47,19 @@ HRESULT CTitle::Init(void)
 {
 	CObject2D *pObject2D[2];
 	pObject2D[0] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-	pObject2D[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_BG"));
+	pObject2D[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Bg.png"));
 	pObject2D[1] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, 0.0f + 200.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH * 0.9, SCREEN_HEIGHT * 0.3, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-	pObject2D[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_TITLE_LOGO"));
+	pObject2D[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Title.png"));
 	m_click = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-	m_click->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_CLICK"));
+	m_click->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Click.png"));
 	m_button.push_back(CObject2D::Create(D3DXVECTOR3(0.0f + 300.0f, SCREEN_HEIGHT - 200.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2.2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
 	m_button.push_back(CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, SCREEN_HEIGHT - 200.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2.2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
 	m_button.push_back(CObject2D::Create(D3DXVECTOR3(0.0f + 300.0f, SCREEN_HEIGHT - 200.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2.2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
 	m_button.push_back(CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, SCREEN_HEIGHT - 200.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2.2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
-	m_button[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_FRAME"));
-	m_button[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_FRAME"));
-	m_button[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_START"));
-	m_button[3]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_TROPHY"));
+	m_button[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("frame.png"));
+	m_button[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("frame.png"));
+	m_button[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
+	m_button[3]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Trophy.png"));
 	m_fade_flag = true;
 
 	return S_OK;

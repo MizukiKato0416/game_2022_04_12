@@ -3,16 +3,21 @@
 //Author:加藤瑞葵
 //=============================================================================
 #define _CRT_SECURE_NO_WARNINGS
+#pragma warning( disable : 4592)
 #include <stdio.h>
 #include "texture.h"
 #include "renderer.h"
 #include "manager.h"
 
+namespace file = experimental::filesystem;
+using file::recursive_directory_iterator;
+
 //================================================
 //静的メンバ変数宣言
 //================================================
-std::vector<LPDIRECT3DTEXTURE9> CTexture::m_apTexture = {};
-std::vector<std::string> CTexture::m_aPas;
+vector<LPDIRECT3DTEXTURE9> CTexture::m_apTexture = {};
+vector<string> CTexture::m_aPas;
+pair<vector<string>, vector<string>> CTexture::m_File_Name_Pas;
 map<string, int> CTexture::m_texType;
 int CTexture::m_nNumTex = 0;
 
@@ -40,7 +45,7 @@ void CTexture::Init(void)
 	LPDIRECT3DDEVICE9 pDevice; //デバイスのポインタ
 	pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();	//デバイスを取得する
 
-	//textファイル読み込み
+	/*//textファイル読み込み
 	FILE *pFile = fopen("data/TEXTURE/texPas/texPas.txt", "r");
 	if (pFile != NULL)
 	{
@@ -83,9 +88,30 @@ void CTexture::Init(void)
 	{
 		printf("ファイルが開けませんでした\n");
 	}
-	fclose(pFile);
+	fclose(pFile);*/
 
-	for (int nCntTex = 0; nCntTex < m_nNumTex; nCntTex++)
+	int nCount = 0;
+
+	for (const auto &file : recursive_directory_iterator("data/TEXTURE/"))
+	{
+		m_File_Name_Pas.first.push_back(file.path().string());
+		m_File_Name_Pas.second.push_back(file.path().string());
+
+		if (m_File_Name_Pas.second[nCount].find("data\\TEXTURE\\") != string::npos)
+		{
+			for (int count_erase = 0; count_erase < 13; count_erase++)
+			{
+				m_File_Name_Pas.second[nCount].erase(m_File_Name_Pas.second[nCount].begin());
+			}
+		}
+		m_texType[m_File_Name_Pas.second[nCount]] = nCount;
+		nCount++;
+	}
+
+	m_aPas = m_File_Name_Pas.first;
+
+	int nNumTex = m_File_Name_Pas.first.size();
+	for (int nCntTex = 0; nCntTex < nNumTex; nCntTex++)
 	{
 		LPDIRECT3DTEXTURE9 pTexBuffer = NULL;
 		//テクスチャの生成
@@ -102,7 +128,8 @@ void CTexture::Init(void)
 //=============================================================================
 void CTexture::Uninit(void)
 {
-	for (int nCntTexture = 0; nCntTexture < m_nNumTex; nCntTexture++)
+	int nNumTex = m_File_Name_Pas.first.size();
+	for (int nCntTexture = 0; nCntTexture < nNumTex; nCntTexture++)
 	{
 		//テクスチャの破棄
 		if (m_apTexture[nCntTexture] != NULL)

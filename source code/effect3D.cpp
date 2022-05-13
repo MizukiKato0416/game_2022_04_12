@@ -175,10 +175,10 @@ CEffect3D* CEffect3D::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, co
 			switch (pEffect3D->m_type)
 			{
 			case EFFECT3D_TYPE::NONE:
-				pEffect3D->m_pTexture = CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_EFFECT_3D");
+				pEffect3D->m_pTexture = CManager::GetInstance()->GetTexture()->GetTexture("effect000.jpg");
 				break;
 			default:
-				pEffect3D->m_pTexture = CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_EFFECT_3D");
+				pEffect3D->m_pTexture = CManager::GetInstance()->GetTexture()->GetTexture("effect000.jpg");
 				break;
 			}
 			pEffect3D->SetCol(col);

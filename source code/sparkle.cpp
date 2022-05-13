@@ -58,7 +58,7 @@ HRESULT CSparkle::Init()
 		m_pEffect3D.push_back(CEffect3D::Create(D3DXVECTOR3(m_pos.x - SPARKLE_POS_X_RAND, m_pos.y + SPARKLE_POS_Y_RAND, m_pos.z),
 			                                    m_size, D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f), CEffect3D::EFFECT3D_TYPE::TRAJECTORY_PLAYER));
 		//テクスチャ設定
-		m_pEffect3D[nCnt]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_EFFECT_SPARKLE"));
+		m_pEffect3D[nCnt]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("effect_sparkle.png"));
 		m_pEffect3D[nCnt]->SetAlphaBlendSubtraction((bool)(rand() % 2));
 	}
 
