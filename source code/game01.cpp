@@ -680,6 +680,12 @@ void CGame01::ShotUi(void)
 		{
 			//発射している状態にする
 			m_pPlayer->SetShot(true);
+
+			//前に進む力がマイナスの場合はジャンプしないようにする
+			if (m_shotMoveVec.x < 0.0f)
+			{
+				m_shotMoveVec.y = 0.0f;
+			}
 			//ジャンプ量設定
 			m_pPlayer->SetJump(m_shotMoveVec.y);
 			//前に進む力を設定

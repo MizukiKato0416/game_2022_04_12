@@ -126,12 +126,6 @@ void CRocket::Update(void)
 						//プレイヤーの向きを取得
 						D3DXVECTOR3 playerRot = pPlayer->GetRot();
 
-						//モデルの位置を0にする
-						modelPos = { 0.0f, 0.0f, 0.0f };
-
-						//モデルの位置を設定
-						GetModel()->GetModel()->SetPos(modelPos);
-
 						//プレイヤーの高さをモデルの高さにする
 						playerPos.y = modelPos.y;
 						//位置を設定
@@ -145,6 +139,12 @@ void CRocket::Update(void)
 							//向きを設定
 							pPlayer->SetRot(playerRot);
 						}
+
+						//モデルの位置を0にする
+						modelPos = { 0.0f, 0.0f, 0.0f };
+
+						//モデルの位置を設定
+						GetModel()->GetModel()->SetPos(modelPos);
 
 						//前に進む力を設定
 						pPlayer->SetMoveForward(0.0f);
