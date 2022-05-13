@@ -65,6 +65,7 @@
 #define GAME01_SHOT_UI_UNINIT_COUNTER			(30)		//発射用UIを消し始める時間
 #define GAME01_SHOT_UI_SUBTRACT_ALPHA			(0.06f)		//発射用UIのα値減算量
 #define GAME01_SHOT_UI_MOVE_Y					(-0.8f)		//発射用UIの移動量Y
+#define GAME01_ARROW_UI_SUBTRACT_ALPHA			(0.06f)		//矢印UIのα値減算量
 
 
 #ifdef _DEBUG
@@ -93,6 +94,7 @@ CGame01::CGame01(CObject::PRIORITY Priority):CObject(Priority)
 	m_pRocket = nullptr;
 	m_pShotUi = nullptr;
 	m_bReleaseMouse = false;
+	m_pArrow = nullptr;
 }
 
 //================================================
@@ -119,6 +121,7 @@ HRESULT CGame01::Init(void)
 	m_nGaugeCounter = 0;
 	m_pShotUi = nullptr;
 	m_bReleaseMouse = false;
+	m_pArrow = nullptr;
 
 	//スコアの生成
 	CScore *pSocre = nullptr;
@@ -168,7 +171,7 @@ HRESULT CGame01::Init(void)
 	m_pBg[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("sky_03.png"));
 	
 	//ロケットの生成
-	m_pRocket = CRocket::Create(D3DXVECTOR3(-500.0f, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	m_pRocket = CRocket::Create(D3DXVECTOR3(-800.0f, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
 	return S_OK;
 }
@@ -197,6 +200,12 @@ void CGame01::Update(void)
 		{
 			//ゲージを消す処理
 			UninitGauge();
+		}
+
+		if (m_pArrow != nullptr)
+		{
+			//矢印を消す処理
+			UninitArrow();
 		}
 
 		//カメラの処理
@@ -490,6 +499,34 @@ void CGame01::UninitGauge(void)
 }
 
 //================================================
+//矢印を消す処理
+//================================================
+void CGame01::UninitArrow(void)
+{
+	//色取得
+	D3DXCOLOR arrowCol = m_pArrow->GetCol();
+
+	//徐々に薄くする
+	arrowCol.a -= GAME01_ARROW_UI_SUBTRACT_ALPHA;
+
+	//見えなくなったら
+	if (arrowCol.a <= 0.0f)
+	{
+		//0にする
+		arrowCol.a = 0.0f;
+
+		//消す
+		m_pArrow->Uninit();
+		m_pArrow = nullptr;
+	}
+	else
+	{
+		//色の設定
+		m_pArrow->SetCol(arrowCol);
+	}
+}
+
+//================================================
 //発射処理
 //================================================
 void CGame01::Shot(void)
@@ -558,7 +595,48 @@ void CGame01::Shot(void)
 			//マウスの位置を保存
 			m_mouseTriggerPos.x = (float)mouseTriggerPos.x;
 			m_mouseTriggerPos.y = (float)mouseTriggerPos.y;
+
+			//矢印UIを生成
+			m_pArrow = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f), D3DXVECTOR3(200.0f, 200.0f, 0.0f),
+				                         static_cast<int>(CObject::PRIORITY::UI));
+			m_pArrow->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("arrow01.png"));
+
+			m_pGaugeFrame->SetPriority(static_cast<int>(CObject::PRIORITY::UI));
+			m_pGauge->SetPriority(static_cast<int>(CObject::PRIORITY::UI));
 		}
+
+		//矢印が生成されていたら
+		if (m_pArrow != nullptr)
+		{
+			//マウスの位置取得
+			POINT mousePos;
+			GetCursorPos(&mousePos);
+			ScreenToClient(CManager::GetWindowHandle(), &mousePos);
+
+			//サイズを取得
+			D3DXVECTOR3 size = D3DXVECTOR3(200.0f, 200.0f, 0.0f);
+
+			//マウスをクリックした場所から現在の場所の距離を求める
+			D3DXVECTOR2 differ = D3DXVECTOR3(mousePos.x - m_mouseTriggerPos.x, mousePos.y - m_mouseTriggerPos.y, 0.0f);
+
+			//サイズXを距離によって増減させる
+			size.x += sqrtf(differ.x * differ.x + differ.y * differ.y);
+
+			//既定の値以下になったら
+			if (size.x <= 100.0f)
+			{
+				//既定の値にする
+				size.x = 100.0f;
+			}
+
+			//マウスをクリックした場所から離した場所の角度を算出
+			float fRot = atan2f(differ.y, differ.x);
+
+			//角度によって矢印を回転させる
+			m_pArrow->SetPos(m_pArrow->GetPos(), size, -fRot + D3DX_PI);
+		}
+
+
 
 		//マウスを離した瞬間
 		if (pInputMouse->GetRelease(CInputMouse::MOUSE_TYPE_LEFT) == true)

@@ -107,3 +107,26 @@ void CObject::DrawAll(void)
 		}
 	}
 }
+
+//================================================
+//プライオリティ設定処理
+//================================================
+void CObject::SetPriority(const int &nPriority)
+{
+	//次のオブジェクト情報を入れるポインタ
+	CObject *pObject = nullptr;
+	pObject = this;
+
+	m_object[nPriority].push_back(this);
+
+	int object_size = m_object[nPriority].size();
+	for (int count_object = 0; count_object < object_size; count_object++)
+	{
+		if (m_object[nPriority][count_object] == this)
+		{
+			m_object[nPriority].erase(m_object[nPriority].begin() + count_object);
+			object_size = m_object[nPriority].size();
+			break;
+		}
+	}
+}

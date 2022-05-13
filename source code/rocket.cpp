@@ -32,7 +32,6 @@ CRocket::CRocket(CObject::PRIORITY Priority) :CHappenig(Priority)
 	m_pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_bHitPlayer = false;
-	m_nMoveCounter = 0;
 	m_pSmoke.clear();
 }
 
@@ -55,7 +54,6 @@ HRESULT CRocket::Init()
 {
 	//変数初期化
 	m_bHitPlayer = false;
-	m_nMoveCounter = 0;
 	m_pSmoke.clear();
 
 	CHappenig::Init();
@@ -169,9 +167,6 @@ void CRocket::Update(void)
 			{
 				//プレイヤーの型にキャスト
 				CPlayer *pPlayer = static_cast<CPlayer*>(object[count_object]);
-
-				//カウンターを加算
-				m_nMoveCounter++;
 
 				//前に進む力を設定
 				pPlayer->SetMoveForward(0.0f);

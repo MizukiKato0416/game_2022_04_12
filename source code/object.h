@@ -86,8 +86,8 @@ public:
 	void SetPos(const D3DXVECTOR3 &pos) { m_pos = pos; }				// セッター
 	void SetSize(const D3DXVECTOR3 &size) { m_size = size; }			// セッター
 	void SetObjType(const OBJTYPE &obj_type) { m_obj_type = obj_type; }	// セッター
+	void SetPriority(const int &nPriority);								//プライオリティ設定処理
 	void SetPosOld(const D3DXVECTOR3 &pos_old) { m_pos_old = pos_old; }	// セッター
-	void SetPriority(const int &priority) { m_priority = priority; }	// セッター
 	void SetFrame(const int &frame) { m_update_frame = frame; }	// セッター
 private:
 	static vector<CObject*> m_object[(int)PRIORITY::MAX];				// オブジェクト

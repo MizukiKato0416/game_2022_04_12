@@ -46,6 +46,7 @@ private:
 	void Road(void);					//道の処理
 	void Gauge(void);					//ゲージ処理
 	void UninitGauge(void);				//ゲージを消す処理
+	void UninitArrow(void);				//矢印を消す処理
 	void Shot(void);					//発射処理
 	void ShotUi(void);					//発射UI処理
 	void Rocket(void);					//ロケットの処理
@@ -63,7 +64,8 @@ private:
 	int m_nShotUiCounter;				//発射した際のUI用カウンター
 	CObject2D *m_pShotUi;				//発射した際のUI
 	D3DXVECTOR3 m_shotMoveVec;			//発射するときの移動量ベクトル
-	bool m_bReleaseMouse;				//マウスを離したかどうか		
+	bool m_bReleaseMouse;				//マウスを離したかどうか
+	CObject2D *m_pArrow;				//矢印UIのポインタ
 };
 
 #endif // !_GAME01_H_

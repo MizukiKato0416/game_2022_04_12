@@ -41,7 +41,6 @@ private:
 	D3DXVECTOR3 m_pos;						//位置
 	D3DXVECTOR3 m_rot;						//向き
 	bool m_bHitPlayer;						//プレイヤーと当たったかどうか
-	int m_nMoveCounter;						//進んでいる時間のカウンター
 	vector<CSmoke*> m_pSmoke;				//雲のポインタ
 };
 
