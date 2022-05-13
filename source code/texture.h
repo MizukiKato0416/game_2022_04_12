@@ -22,16 +22,16 @@ public:
 	~CTexture();					//デストラクタ
 	static void Init(void);															// テクスチャの生成
 	static void Uninit(void);														// 終了
-	static LPDIRECT3DTEXTURE9 GetTexture(const string &texType) { m_apTexture[m_texType[texType]]; }	// テクスチャの割り当て
-	static LPDIRECT3DTEXTURE9 GetTexture(const int &nCnt) { return m_apTexture[nCnt]; }	// テクスチャの割り当て
-	static string GetPas(const int &nCntTex) { return m_aPas[nCntTex]; }			// テクスチャのパス取得処理
-	static int GetNum(void) { return m_nNumTex; }									// テクスチャの総数取得処理
+	static LPDIRECT3DTEXTURE9 GetTexture(const string &texType) { return m_texture[m_tex_type[texType]]; }	// テクスチャの割り当て
+	static LPDIRECT3DTEXTURE9 GetTexture(const int &nCnt) { return m_texture[nCnt]; }	// テクスチャの割り当て
+	static string GetPas(const int &nCntTex) { return m_pas[nCntTex]; }				// テクスチャのパス取得処理
+	static int GetNum(void) { return m_num_tex; }									// テクスチャの総数取得処理
 private:
-	static vector<LPDIRECT3DTEXTURE9> m_apTexture;		// テクスチャ
-	static vector<string>	m_aPas;						// テクスチャのパス
-	static pair<vector<string>, vector<string>> m_File_Name_Pas;	// パスと名前の読み込み
-	static map<string, int> m_texType;					// テクスチャの種類
-	static int m_nNumTex;								// テクスチャの総数
+	static vector<LPDIRECT3DTEXTURE9> m_texture;		// テクスチャ
+	static vector<string> m_pas;						// テクスチャのパス
+	static pair<vector<string>, vector<string>> m_file_name_pas;	// パスと名前の読み込み
+	static map<string, int> m_tex_type;					// テクスチャの種類
+	static int m_num_tex;								// テクスチャの総数
 };
 
 #endif
