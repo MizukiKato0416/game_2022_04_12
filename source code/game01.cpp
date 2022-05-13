@@ -142,30 +142,30 @@ HRESULT CGame01::Init(void)
 	//ゲージのフレーム生成
 	m_pGaugeFrame = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f),
 		                              static_cast<int>(CObject::PRIORITY::UI));
-	m_pGaugeFrame->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_UI_GAUGE_FRAME"));
+	m_pGaugeFrame->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("gauge_frame.png"));
 
 	//ショットゲージの生成
 	m_pGauge = CGauge::Create(D3DXVECTOR3(GAUGE_SHOT_POS_X, GAUGE_SHOT_POS_Y, 0.0f),
 		                      D3DXVECTOR3(GAUGE_SHOT_SIZE_X, GAUGE_SHOT_SIZE_Y, 0.0f), GAME01_SHOT_GAUGE_MAX, 0);
-	m_pGauge->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_UI_GAUGE"));
+	m_pGauge->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("gauge.png"));
 
 	//背景1の生成
 	m_pBg[0] = CBg::Create(D3DXVECTOR3(0.0f, GAME01_BG_POS_Y, GAME01_BG_POS_Z),
 		                   D3DXVECTOR3(SCREEN_WIDTH * GAME01_BG_SIZE_ADJUSTMENT, SCREEN_HEIGHT * GAME01_BG_SIZE_ADJUSTMENT, 0.0f),
 		                   D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(GAME01_BG_1_MOVE_INIT, 0.0f));
-	m_pBg[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_SKY_01"));
+	m_pBg[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("sky_01.png"));
 
 	//背景2の生成
 	m_pBg[1] = CBg::Create(D3DXVECTOR3(0.0f, GAME01_BG_POS_Y, GAME01_BG_POS_Z),
 		                   D3DXVECTOR3(SCREEN_WIDTH * GAME01_BG_SIZE_ADJUSTMENT, SCREEN_HEIGHT * GAME01_BG_SIZE_ADJUSTMENT, 0.0f),
 		                   D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(GAME01_BG_2_MOVE_INIT, 0.0f));
-	m_pBg[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_SKY_02"));
+	m_pBg[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("sky_02.png"));
 
 	//背景3の生成
 	m_pBg[2] = CBg::Create(D3DXVECTOR3(0.0f, GAME01_BG_POS_Y, GAME01_BG_POS_Z),
 		                   D3DXVECTOR3(SCREEN_WIDTH * GAME01_BG_SIZE_ADJUSTMENT, SCREEN_HEIGHT * GAME01_BG_SIZE_ADJUSTMENT, 0.0f),
 		                   D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(GAME01_BG_3_MOVE_INIT, 0.0f));
-	m_pBg[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_SKY_03"));
+	m_pBg[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("sky_03.png"));
 	
 	//ロケットの生成
 	m_pRocket = CRocket::Create(D3DXVECTOR3(-500.0f, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
@@ -587,7 +587,7 @@ void CGame01::Shot(void)
 				//UIの生成
 				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
 					                          static_cast<int>(CObject::PRIORITY::UI));
-				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_START"));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
 			}
 			else if (m_pGauge->GetGauge() > 0 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_1)
 			{//0より大きくて既定の値以下の時
@@ -596,7 +596,7 @@ void CGame01::Shot(void)
 				//UIの生成
 				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
 					                          static_cast<int>(CObject::PRIORITY::UI));
-				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_START"));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_1 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_2)
 			{//既定の値より大きくて既定の値以下の時
@@ -605,7 +605,7 @@ void CGame01::Shot(void)
 				//UIの生成
 				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
 					                          static_cast<int>(CObject::PRIORITY::UI));
-				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_START"));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_2 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_3)
 			{//既定の値より大きくて既定の値以下の時
@@ -614,7 +614,7 @@ void CGame01::Shot(void)
 				//UIの生成
 				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
 					                          static_cast<int>(CObject::PRIORITY::UI));
-				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_START"));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_3 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_4)
 			{//既定の値より大きくて既定の値以下の時
@@ -623,7 +623,7 @@ void CGame01::Shot(void)
 				//UIの生成
 				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
 					                          static_cast<int>(CObject::PRIORITY::UI));
-				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_START"));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_4 && m_pGauge->GetGauge() < m_pGauge->GetMaxNum())
 			{//既定の値より大きくて最大より小さいの時
@@ -632,7 +632,7 @@ void CGame01::Shot(void)
 				//UIの生成
 				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
 					                          static_cast<int>(CObject::PRIORITY::UI));
-				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_START"));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
 			}
 			else if (m_pGauge->GetGauge() == m_pGauge->GetMaxNum())
 			{//最大値の時
@@ -641,7 +641,7 @@ void CGame01::Shot(void)
 				//UIの生成
 				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
 					                          static_cast<int>(CObject::PRIORITY::UI));
-				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_START"));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
 			}
 
 			//ベクトルを既定の割合小さくする

@@ -58,20 +58,20 @@ HRESULT CMenu::Init(void)
 	//îwåiÇÃê∂ê¨
 	CObject2D *pObject2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f), 
 											 D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-	pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_MENU"));
+	pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("menu.jpg"));
 
 	//UIÇÃê∂ê¨
 	m_apObject2D[0] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / (float)CMenu::SELECT_MENU_TYPE::SELECT_MENU_TYPE_MAX, 0.0f),
 		                                     D3DXVECTOR3(MENU_UI_TUTORIAL_SIZE_X, MENU_UI_TUTORIAL_SIZE_Y, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-	m_apObject2D[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_TUTORIAL"));
+	m_apObject2D[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("tutorial.png"));
 
 	m_apObject2D[1] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / (float)CMenu::SELECT_MENU_TYPE::SELECT_MENU_TYPE_MAX * 2.0f, 0.0f),
 		                                     D3DXVECTOR3(MENU_UI_START_SIZE_X, MENU_UI_START_SIZE_Y, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-	m_apObject2D[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_START"));
+	m_apObject2D[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
 
 	m_apObject2D[2] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / (float)CMenu::SELECT_MENU_TYPE::SELECT_MENU_TYPE_MAX * 3.0f, 0.0f),
 		                                     D3DXVECTOR3(MENU_UI_EXIT_SIZE_X, MENU_UI_EXIT_SIZE_Y, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-	m_apObject2D[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_EXIT"));
+	m_apObject2D[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("exit.png"));
 
 	//ëIëÇ≥ÇÍÇƒÇ¢ÇÈÇ∆Ç´ÇÕêFÇîZÇ≠ÇµÇƒëIëÇ≥ÇÍÇƒÇ¢Ç»Ç¢Ç∆Ç´ÇÕîñÇ≠Ç∑ÇÈ
 	if (m_nSelect == SELECT_MENU_TYPE_TUTORIAL)

@@ -134,7 +134,7 @@ CWind* CWind::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const int 
 			pWind->m_size = size;
 			pWind->m_nInitTexAnimNum = nInitTexAnimNum;
 			pWind->Init();
-			pWind->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_EFFECT_WIND"));
+			pWind->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("effect_wind.png"));
 		}
 	}
 	return pWind;

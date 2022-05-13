@@ -52,7 +52,7 @@ HRESULT CSmoke::Init()
 	
 	//エフェクトの生成
 	m_pEffect3D = CEffect3D::Create(m_pos, m_size, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f), CEffect3D::EFFECT3D_TYPE::SMOKE);
-	m_pEffect3D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_EFFECT_SMOKE"));
+	m_pEffect3D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("effect_smoke.jpg"));
 	m_pEffect3D->SetRot(m_rot);
 
 	//位置とサイズを設定
