@@ -17,18 +17,18 @@ using file::recursive_directory_iterator;
 //=============================================================================
 // 静的メンバ変数宣言
 //=============================================================================
-vector<LPDIRECT3DTEXTURE9> CTexture::m_apTexture = {};
-vector<string> CTexture::m_aPas;
-pair<vector<string>, vector<string>> CTexture::m_File_Name_Pas;
-map<string, int> CTexture::m_texType;
-int CTexture::m_nNumTex;
+vector<LPDIRECT3DTEXTURE9> CTexture::m_texture = {};
+vector<string> CTexture::m_pas;
+pair<vector<string>, vector<string>> CTexture::m_file_name_pas;
+map<string, int> CTexture::m_tex_type;
+int CTexture::m_num_tex;
 
 //=============================================================================
 // コンストラクタ
 //=============================================================================
 CTexture::CTexture()
 {
-	m_texType.clear();
+	m_tex_type.clear();
 }
 
 //=============================================================================
@@ -50,32 +50,32 @@ void CTexture::Init(void)
 
 	for (const auto &file : recursive_directory_iterator("data/TEXTURE/"))
 	{
-		m_File_Name_Pas.first.push_back(file.path().string());
-		m_File_Name_Pas.second.push_back(file.path().string());
+		m_file_name_pas.first.push_back(file.path().string());
+		m_file_name_pas.second.push_back(file.path().string());
 
-		if (m_File_Name_Pas.second[nCount].find("data\\TEXTURE\\") != string::npos)
+		if (m_file_name_pas.second[nCount].find("data\\TEXTURE\\") != string::npos)
 		{
 			for (int count_erase = 0; count_erase < 13; count_erase++)
 			{
-				m_File_Name_Pas.second[nCount].erase(m_File_Name_Pas.second[nCount].begin());
+				m_file_name_pas.second[nCount].erase(m_file_name_pas.second[nCount].begin());
 			}
 		}
-		m_texType[m_File_Name_Pas.second[nCount]] = nCount;
+		m_tex_type[m_file_name_pas.second[nCount]] = nCount;
 		nCount++;
 	}
 
-	m_aPas = m_File_Name_Pas.first;
-	m_nNumTex = m_File_Name_Pas.first.size();
+	m_pas = m_file_name_pas.first;
+	m_num_tex = m_file_name_pas.first.size();
 
-	for (int nCntTex = 0; nCntTex < m_nNumTex; nCntTex++)
+	for (int nCntTex = 0; nCntTex < m_num_tex; nCntTex++)
 	{
 		LPDIRECT3DTEXTURE9 pTexBuffer = NULL;
 		//テクスチャの生成
 		D3DXCreateTextureFromFile(pDevice,
-			m_aPas[nCntTex].c_str(),
+			m_pas[nCntTex].c_str(),
 			&pTexBuffer);
 
-		m_apTexture.push_back(pTexBuffer);
+		m_texture.push_back(pTexBuffer);
 	}
 }
 
@@ -84,13 +84,13 @@ void CTexture::Init(void)
 //=============================================================================
 void CTexture::Uninit(void)
 {
-	for (int nCntTexture = 0; nCntTexture < m_nNumTex; nCntTexture++)
+	for (int nCntTexture = 0; nCntTexture < m_num_tex; nCntTexture++)
 	{
 		//テクスチャの破棄
-		if (m_apTexture[nCntTexture] != NULL)
+		if (m_texture[nCntTexture] != NULL)
 		{
-			m_apTexture[nCntTexture]->Release();
-			m_apTexture[nCntTexture] = NULL;
+			m_texture[nCntTexture]->Release();
+			m_texture[nCntTexture] = NULL;
 		}
 	}
 }
