@@ -1,6 +1,8 @@
 //=============================================================================
-//テクスチャ処理
-//Author:加藤瑞葵
+//
+// テクスチャ処理 [texture.h]
+// Author : 羽鳥太一
+//
 //=============================================================================
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning( disable : 4592)
@@ -12,17 +14,17 @@
 namespace file = experimental::filesystem;
 using file::recursive_directory_iterator;
 
-//================================================
-//静的メンバ変数宣言
-//================================================
+//=============================================================================
+// 静的メンバ変数宣言
+//=============================================================================
 vector<LPDIRECT3DTEXTURE9> CTexture::m_apTexture = {};
 vector<string> CTexture::m_aPas;
 pair<vector<string>, vector<string>> CTexture::m_File_Name_Pas;
 map<string, int> CTexture::m_texType;
-int CTexture::m_nNumTex = 0;
+int CTexture::m_nNumTex;
 
 //=============================================================================
-//コンストラクタ
+// コンストラクタ
 //=============================================================================
 CTexture::CTexture()
 {
@@ -30,7 +32,7 @@ CTexture::CTexture()
 }
 
 //=============================================================================
-//デストラクタ
+// デストラクタ
 //=============================================================================
 CTexture::~CTexture()
 {
@@ -38,59 +40,13 @@ CTexture::~CTexture()
 }
 
 //=============================================================================
-//テクスチャの生成
+// テクスチャの生成
 //=============================================================================
 void CTexture::Init(void)
 {
 	LPDIRECT3DDEVICE9 pDevice; //デバイスのポインタ
-	pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();	//デバイスを取得する
-
-	/*//textファイル読み込み
-	FILE *pFile = fopen("data/TEXTURE/texPas/texPas.txt", "r");
-	if (pFile != NULL)
-	{
-		char cString[128];
-		//一行ずつ保存
-		while (fgets(cString, 128, pFile) != NULL)
-		{
-			//文字列を保存
-			fscanf(pFile, "%s", cString);
-			//文字列の中にTEX_NUMがあったら
-			if (strncmp("TEX_NUM", cString, 8) == 0)
-			{
-				//テクスチャ最大数読み込み
-				fscanf(pFile, "%*s%d", &m_nNumTex);
-
-				int nNum = 0;
-				//一行ずつ保存
-				while (fgets(cString, 128, pFile) != NULL)
-				{
-					//文字列を保存
-					fscanf(pFile, "%s", cString);
-					//文字列の中にPASがあったら
-					if (strncmp("PAS", cString, 4) == 0)
-					{
-						//パスの取得
-						fscanf(pFile, "%*s%s", &cString[0]);
-						m_aPas.push_back(&cString[0]);
-
-						//名前の取得
-						fscanf(pFile, "%*s%*s%s", cString);
-						//名前と数の割り当て
-						m_texType[cString] = nNum;
-						nNum++;
-					}
-				}
-			}
-		}
-	}
-	else
-	{
-		printf("ファイルが開けませんでした\n");
-	}
-	fclose(pFile);*/
-
 	int nCount = 0;
+	pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();	//デバイスを取得する
 
 	for (const auto &file : recursive_directory_iterator("data/TEXTURE/"))
 	{
@@ -109,9 +65,9 @@ void CTexture::Init(void)
 	}
 
 	m_aPas = m_File_Name_Pas.first;
+	m_nNumTex = m_File_Name_Pas.first.size();
 
-	int nNumTex = m_File_Name_Pas.first.size();
-	for (int nCntTex = 0; nCntTex < nNumTex; nCntTex++)
+	for (int nCntTex = 0; nCntTex < m_nNumTex; nCntTex++)
 	{
 		LPDIRECT3DTEXTURE9 pTexBuffer = NULL;
 		//テクスチャの生成
@@ -124,12 +80,11 @@ void CTexture::Init(void)
 }
 
 //=============================================================================
-//終了
+// 終了
 //=============================================================================
 void CTexture::Uninit(void)
 {
-	int nNumTex = m_File_Name_Pas.first.size();
-	for (int nCntTexture = 0; nCntTexture < nNumTex; nCntTexture++)
+	for (int nCntTexture = 0; nCntTexture < m_nNumTex; nCntTexture++)
 	{
 		//テクスチャの破棄
 		if (m_apTexture[nCntTexture] != NULL)
@@ -138,12 +93,4 @@ void CTexture::Uninit(void)
 			m_apTexture[nCntTexture] = NULL;
 		}
 	}
-}
-
-//=============================================================================
-//テクスチャ割り当て
-//=============================================================================
-LPDIRECT3DTEXTURE9 CTexture::GetTexture(const std::string &texType)
-{
-	return m_apTexture[m_texType[texType]];
 }
