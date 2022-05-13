@@ -14,6 +14,7 @@ class CRoad;
 class CGauge;
 class CBg;
 class CObject2D;
+class CRocket;
 
 //================================================
 //マクロ定義
@@ -46,6 +47,8 @@ private:
 	void Gauge(void);					//ゲージ処理
 	void UninitGauge(void);				//ゲージを消す処理
 	void Shot(void);					//発射処理
+	void ShotUi(void);					//発射UI処理
+	void Rocket(void);					//ロケットの処理
 
 	//メンバ変数
 	CPlayer *m_pPlayer;					//プレイヤーのポインタ
@@ -56,6 +59,11 @@ private:
 	CObject2D *m_pGaugeFrame;			//ゲージのフレーム
 	int m_nGaugeCounter;				//ゲージが満タンの時間を設定するためのカウンター
 	CBg *m_pBg[GAME01_MAX_BG];			//背景のポインタ
+	CRocket *m_pRocket;					//ロケットのポインタ
+	int m_nShotUiCounter;				//発射した際のUI用カウンター
+	CObject2D *m_pShotUi;				//発射した際のUI
+	D3DXVECTOR3 m_shotMoveVec;			//発射するときの移動量ベクトル
+	bool m_bReleaseMouse;				//マウスを離したかどうか		
 };
 
 #endif // !_GAME01_H_

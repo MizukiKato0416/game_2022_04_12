@@ -11,21 +11,14 @@
 //================================================
 //マクロ定義
 //================================================
-#define ROCKET_MOVE_COUNT			(180)								//前に進む時間
-#define ROCKET_MOVE_FORWARD			(30.0f)								//前に進む力
-#define ROCKET_PLAYER_MOVE_FORWARD	(20.0f)								//プレイヤーの前に進む力
-#define ROCKET_PLAYER_JUMP			(20.0f)								//ジャンプ力
-#define ROCKET_MOVE					(10.0f)								//飛んでいくときの移動量
-#define ROCKET_UNINIT_POS			(1000.0f)							//消す位置
 #define ROCKET_SMOKE_ROT_RAND		(float (rand() % 629 + -314) / 100)	//回転する際の方向を決めるためのランダム値
-#define ROCKET_SMOKE_POS_X_RAND		(float (rand() % 41 + 10))			//ロケット雲の位置Xのランダム値
-#define ROCKET_SMOKE_POS_Y_RAND		(float (rand() % 20 + -10))			//ロケット雲の位置Yのランダム値
+#define ROCKET_SMOKE_POS_X_RAND		(float (rand() % 20 + -10))			//ロケット雲の位置Xのランダム値
+#define ROCKET_SMOKE_POS_Y_RAND		(30.0f)								//ロケット雲の位置Yのランダム値
 #define ROCKET_SMOKE_SIZE			(D3DXVECTOR3 (20.0f, 20.0f, 0.0f))	//ロケット雲のサイズ
-#define ROCKET_SMOKE_MOVE_1			(0.2f)								//ロケット雲の移動する際の割合
-#define ROCKET_SMOKE_MOVE_2			(0.8f)								//ロケット雲の移動する際の割合
 #define ROCKET_SMOKE_ADD_ROTATE		(0.2f)								//ロケット雲の回転加算値
-#define ROCKET_SMOKE_ADD_SIZE		(D3DXVECTOR3 (0.4f, 0.4f, 0.0f))	//ロケット雲のサイズ加算値
-#define ROCKET_SMOKE_SUBTRACT_ALPHA	(0.0055f)							//ロケット雲のα値減算値
+#define ROCKET_SMOKE_ADD_SIZE		(D3DXVECTOR3 (0.7f, 0.7f, 0.0f))	//ロケット雲のサイズ加算値
+#define ROCKET_SMOKE_SUBTRACT_ALPHA	(0.004f)							//ロケット雲のα値減算値
+#define ROCKET_MOVE_Y				(6.0f)								//ロケットの移動量
 
 //================================================
 //静的メンバ変数宣言
@@ -133,6 +126,12 @@ void CRocket::Update(void)
 						//プレイヤーの向きを取得
 						D3DXVECTOR3 playerRot = pPlayer->GetRot();
 
+						//モデルの位置を0にする
+						modelPos = { 0.0f, 0.0f, 0.0f };
+
+						//モデルの位置を設定
+						GetModel()->GetModel()->SetPos(modelPos);
+
 						//プレイヤーの高さをモデルの高さにする
 						playerPos.y = modelPos.y;
 						//位置を設定
@@ -148,7 +147,7 @@ void CRocket::Update(void)
 						}
 
 						//前に進む力を設定
-						pPlayer->SetMoveForward(ROCKET_MOVE_FORWARD);
+						pPlayer->SetMoveForward(0.0f);
 					}
 				}
 			}
@@ -175,21 +174,23 @@ void CRocket::Update(void)
 				m_nMoveCounter++;
 
 				//前に進む力を設定
-				pPlayer->SetMoveForward(ROCKET_MOVE_FORWARD);
+				pPlayer->SetMoveForward(0.0f);
 
 				//モデルの位置を取得
-				D3DXVECTOR3 modelPos = GetModel()->GetPos();
+				D3DXMATRIX modelMtx = GetModel()->GetModel()->GetMtx();
 
-				//飛行機雲を出す
+				//煙を出す
 				for (int nCnt = 0; nCnt < ROCKET_SMOKE_NUM; nCnt++)
 				{
-					m_pSmoke.push_back(CSmoke::Create(D3DXVECTOR3(modelPos.x + -ROCKET_SMOKE_POS_X_RAND, modelPos.y + ROCKET_SMOKE_POS_Y_RAND, modelPos.z),
+					m_pSmoke.push_back(CSmoke::Create(D3DXVECTOR3(modelMtx._41 + ROCKET_SMOKE_POS_X_RAND, modelMtx._42 + ROCKET_SMOKE_POS_Y_RAND, modelMtx._43),
 						                              ROCKET_SMOKE_SIZE, D3DXVECTOR3(0.0f, 0.0f, ROCKET_SMOKE_ROT_RAND),
-						                              D3DXVECTOR3(-pPlayer->GetMoveForward() * ROCKET_SMOKE_MOVE_1, 0.0f, 0.0f),
+						                              D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 						                              D3DXVECTOR3(0.0f, 0.0f, ROCKET_SMOKE_ADD_ROTATE),
 						                              ROCKET_SMOKE_ADD_SIZE, ROCKET_SMOKE_SUBTRACT_ALPHA));
-					
 				}
+
+				//プレイヤーの移動量を設定
+				pPlayer->SetMove(D3DXVECTOR3(0.0f, ROCKET_MOVE_Y, 0.0f));
 
 				int nSize = m_pSmoke.size();
 				for (int nCntSmoke = 0; nCntSmoke < nSize; nCntSmoke++)
@@ -202,94 +203,6 @@ void CRocket::Update(void)
 						nCntSmoke--;
 						nSize--;
 					}
-					else
-					{//破棄するフラグがたっていなかったら
-						//飛行機雲の移動量を設定
-						m_pSmoke[nCntSmoke]->SetMove(D3DXVECTOR3(-pPlayer->GetMoveForward() * ROCKET_SMOKE_MOVE_1, 0.0f, 0.0f));
-					}
-				}
-
-				//既定の値より大きくなったら
-				if (m_nMoveCounter > ROCKET_MOVE_COUNT)
-				{
-					for (int nCntSmoke = 0; nCntSmoke < nSize; nCntSmoke++)
-					{
-						//飛行機雲の移動量を設定
-						m_pSmoke[nCntSmoke]->SetMove(D3DXVECTOR3(-pPlayer->GetMoveForward() * ROCKET_SMOKE_MOVE_2, 0.0f, 0.0f));
-					}
-
-
-					//親子関係がついているなら
-					if (GetModel()->GetModel()->GetObjParent() == true)
-					{
-						//親子関係を離す
-						GetModel()->GetModel()->SetObjParent(false);
-
-						//ジャンプ力を設定
-						pPlayer->SetJump(ROCKET_PLAYER_JUMP);
-
-						//モデルの回転を元に戻す
-						GetModel()->GetModel()->SetRot(D3DXVECTOR3(0.0f, ROCKET_INIT_ROT_Y, 0.0f));
-
-						//軌道エフェクトをつける
-						pPlayer->SetSparkle(true);
-
-						//前に進む力を設定
-						pPlayer->SetMoveForward(ROCKET_PLAYER_MOVE_FORWARD);
-					}
-					
-					//既定の値分前に進ませる
-					modelPos.x += ROCKET_MOVE;
-					modelPos.y += 3.0f;
-
-					//既定の値より大きくなったら
-					if (modelPos.x > ROCKET_UNINIT_POS)
-					{
-						//消す
-						Uninit();
-						return;
-					}
-					else
-					{
-						//モデルの位置を設定
-						GetModel()->SetPos(modelPos);
-					}
-				}
-				else
-				{
-					//プレイヤーの位置を取得
-					D3DXVECTOR3 playerPos = pPlayer->GetPos();
-					//プレイヤーの向きを取得
-					D3DXVECTOR3 playerRot = pPlayer->GetRot();
-					//プレイヤーの移動量を取得
-					D3DXVECTOR3 playerMove = pPlayer->GetMove();
-
-					//プレイヤーの高さをモデルの高さにする
-					playerPos.y = modelPos.y;
-					//位置を設定
-					pPlayer->SetPos(playerPos);
-
-					//回転していたら
-					if (playerRot.x != 0.0f)
-					{
-						//0にする
-						playerRot.x = 0.0f;
-						//向きを設定
-						pPlayer->SetRot(playerRot);
-					}
-
-					//重力を0にする
-					playerMove.y = 0.0f;
-					//移動量を設定
-					pPlayer->SetMove(playerMove);
-
-					//軌道エフェクトが出ているなら
-					if (pPlayer->GetSparkle() == true)
-					{
-						//軌道エフェクトを消す
-						pPlayer->SetSparkle(false);
-					}
-					
 				}
 			}
 		}

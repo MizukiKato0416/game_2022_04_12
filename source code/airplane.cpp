@@ -18,7 +18,7 @@
 #define AIRPLANE_MOVE					(10.0f)								//飛行機が飛んでいくときの移動量
 #define AIRPLANE_UNINIT_POS				(1000.0f)							//飛行機を消す位置
 #define AIRPLANE_SMOKE_ROT_RAND			(float (rand() % 629 + -314) / 100)	//回転する際の方向を決めるためのランダム値
-#define AIRPLANE_SMOKE_POS_X_RAND		(float (rand() % 41 + 10))			//飛行機雲の位置Xのランダム値
+#define AIRPLANE_SMOKE_POS_X_RAND		(-5.0f)							//飛行機雲の位置X
 #define AIRPLANE_SMOKE_POS_Y_RAND		(float (rand() % 20 + -10))			//飛行機雲の位置Yのランダム値
 #define AIRPLANE_SMOKE_SIZE				(D3DXVECTOR3 (20.0f, 20.0f, 0.0f))	//飛行機雲のサイズ
 #define AIRPLANE_SMOKE_MOVE_1			(0.2f)								//飛行機雲の移動する際の割合
@@ -183,7 +183,7 @@ void CAirplane::Update(void)
 				//飛行機雲を出す
 				for (int nCnt = 0; nCnt < AIRPLANE_SMOKE_NUM; nCnt++)
 				{
-					m_pSmoke.push_back(CSmoke::Create(D3DXVECTOR3(modelPos.x + -AIRPLANE_SMOKE_POS_X_RAND, modelPos.y + AIRPLANE_SMOKE_POS_Y_RAND, modelPos.z),
+					m_pSmoke.push_back(CSmoke::Create(D3DXVECTOR3(modelPos.x + AIRPLANE_SMOKE_POS_X_RAND, modelPos.y + AIRPLANE_SMOKE_POS_Y_RAND, modelPos.z),
 						                              AIRPLANE_SMOKE_SIZE, D3DXVECTOR3(0.0f, 0.0f, AIRPLANE_SMOKE_ROT_RAND),
 						                              D3DXVECTOR3(-pPlayer->GetMoveForward() * AIRPLANE_SMOKE_MOVE_1, 0.0f, 0.0f),
 						                              D3DXVECTOR3(0.0f, 0.0f, AIRPLANE_SMOKE_ADD_ROTATE),

@@ -24,38 +24,47 @@
 #include "camera.h"
 #include "gauge.h"
 #include "bg.h"
+#include "rocket.h"
+#include "model.h"
 
 //================================================
 //マクロ定義
 //================================================
-#define GAME01_MOUSE_VEC_ADJUSTMENT_0		(0.4f)		//引っ張ったときのベクトルを小さくする割合0
-#define GAME01_MOUSE_VEC_ADJUSTMENT_1		(0.5f)		//引っ張ったときのベクトルを小さくする割合1
-#define GAME01_MOUSE_VEC_ADJUSTMENT_2		(0.6f)		//引っ張ったときのベクトルを小さくする割合2
-#define GAME01_MOUSE_VEC_ADJUSTMENT_3		(0.7f)		//引っ張ったときのベクトルを小さくする割合3
-#define GAME01_MOUSE_VEC_ADJUSTMENT_4		(0.8f)		//引っ張ったときのベクトルを小さくする割合4
-#define GAME01_MOUSE_VEC_ADJUSTMENT_5		(0.9f)		//引っ張ったときのベクトルを小さくする割合5
-#define GAME01_MOUSE_VEC_ADJUSTMENT_6		(1.0f)		//引っ張ったときのベクトルを小さくする割合6
-#define GAME01_CAMERA_ADD_POS				(10.0f)		//カメラの位置を加算する量
-#define GAME01_CAMERA_ADD_DIFFER			(10.0f)		//カメラの視点と注視点の距離を加算する量
-#define GAME01_CAMERA_VIEW_CHANGE_MOVE		(20.0f)		//カメラを視野をDEFAULTから最大に変える境界線のプレイヤーのバウンドする瞬間の移動量
-#define GAME01_SCORE_MAGNIFICATION			(10.0f)		//プレイヤーが前に進む力をスコアにする際の倍率
-#define GAME01_SHOT_GAUGE_MAX				(100)		//ショットゲージの最大値
-#define GAME01_SHOT_GAUGE_ADD				(2)			//ショットゲージを増やす量
-#define GAME01_SHOT_GAUGE_COUNTER_MAX		(10)		//ショットゲージが最大までたまっている状態の時間
-#define GAME01_SHOT_GAUGE_CASE_1			(20)		//ショットゲージの段階1
-#define GAME01_SHOT_GAUGE_CASE_2			(40)		//ショットゲージの段階2
-#define GAME01_SHOT_GAUGE_CASE_3			(60)		//ショットゲージの段階3
-#define GAME01_SHOT_GAUGE_CASE_4			(80)		//ショットゲージの段階4
-#define GAME01_SHOT_GAUGE_SUBTRACT_ALPHA	(0.02f)		//ショットゲージを薄くする量
-#define GAME01_BG_SIZE_ADJUSTMENT			(3.0f)		//背景の大きくする割合
-#define GAME01_BG_POS_Z						(1000.0f)	//背景の位置Z
-#define GAME01_BG_POS_Y						(300.0f)	//背景の位置Y
-#define GAME01_BG_1_MAGNIFICATION			(0.00004f)	//背景1が前に進む力を背景の移動にする際の倍率
-#define GAME01_BG_2_MAGNIFICATION			(0.00006f)	//背景2が前に進む力を背景の移動にする際の倍率
-#define GAME01_BG_3_MAGNIFICATION			(0.00008f)	//背景3が前に進む力を背景の移動にする際の倍率
-#define GAME01_BG_1_MOVE_INIT				(0.00006f)	//背景1の初期移動量
-#define GAME01_BG_2_MOVE_INIT				(0.00008f)	//背景2の初期移動量
-#define GAME01_BG_3_MOVE_INIT				(0.0001f)	//背景3の初期移動量
+#define GAME01_MOUSE_VEC_ADJUSTMENT_0			(0.4f)		//引っ張ったときのベクトルを小さくする割合0
+#define GAME01_MOUSE_VEC_ADJUSTMENT_1			(0.5f)		//引っ張ったときのベクトルを小さくする割合1
+#define GAME01_MOUSE_VEC_ADJUSTMENT_2			(0.6f)		//引っ張ったときのベクトルを小さくする割合2
+#define GAME01_MOUSE_VEC_ADJUSTMENT_3			(0.7f)		//引っ張ったときのベクトルを小さくする割合3
+#define GAME01_MOUSE_VEC_ADJUSTMENT_4			(0.8f)		//引っ張ったときのベクトルを小さくする割合4
+#define GAME01_MOUSE_VEC_ADJUSTMENT_5			(0.9f)		//引っ張ったときのベクトルを小さくする割合5
+#define GAME01_MOUSE_VEC_ADJUSTMENT_6			(1.0f)		//引っ張ったときのベクトルを小さくする割合6
+#define GAME01_CAMERA_ADD_POS					(10.0f)		//カメラの位置を加算する量
+#define GAME01_CAMERA_ADD_DIFFER				(10.0f)		//カメラの視点と注視点の距離を加算する量
+#define GAME01_CAMERA_VIEW_CHANGE_MOVE			(20.0f)		//カメラを視野をDEFAULTから最大に変える境界線のプレイヤーのバウンドする瞬間の移動量
+#define GAME01_SCORE_MAGNIFICATION				(10.0f)		//プレイヤーが前に進む力をスコアにする際の倍率
+#define GAME01_SHOT_GAUGE_MAX					(100)		//ショットゲージの最大値
+#define GAME01_SHOT_GAUGE_ADD					(2)			//ショットゲージを増やす量
+#define GAME01_SHOT_GAUGE_COUNTER_MAX			(10)		//ショットゲージが最大までたまっている状態の時間
+#define GAME01_SHOT_GAUGE_CASE_1				(20)		//ショットゲージの段階1
+#define GAME01_SHOT_GAUGE_CASE_2				(40)		//ショットゲージの段階2
+#define GAME01_SHOT_GAUGE_CASE_3				(60)		//ショットゲージの段階3
+#define GAME01_SHOT_GAUGE_CASE_4				(80)		//ショットゲージの段階4
+#define GAME01_SHOT_GAUGE_SUBTRACT_ALPHA		(0.02f)		//ショットゲージを薄くする量
+#define GAME01_BG_SIZE_ADJUSTMENT				(3.0f)		//背景の大きくする割合
+#define GAME01_BG_POS_Z							(1000.0f)	//背景の位置Z
+#define GAME01_BG_POS_Y							(300.0f)	//背景の位置Y
+#define GAME01_BG_1_MAGNIFICATION				(0.00004f)	//背景1が前に進む力を背景の移動にする際の倍率
+#define GAME01_BG_2_MAGNIFICATION				(0.00006f)	//背景2が前に進む力を背景の移動にする際の倍率
+#define GAME01_BG_3_MAGNIFICATION				(0.00008f)	//背景3が前に進む力を背景の移動にする際の倍率
+#define GAME01_BG_1_MOVE_INIT					(0.00006f)	//背景1の初期移動量
+#define GAME01_BG_2_MOVE_INIT					(0.00008f)	//背景2の初期移動量
+#define GAME01_BG_3_MOVE_INIT					(0.0001f)	//背景3の初期移動量
+#define GAME01_SHOT_UI_ADD_SIZE_COUNTER			(9)			//発射用UIのサイズを大きくする時間
+#define GAME01_SHOT_UI_ADD_SIZE					(1.02f)		//発射用UIのサイズを大きくする割合
+#define GAME01_SHOT_UI_SUBTRACT_SIZE_COUNTER	(18)		//発射用UIのサイズを小さくする時間
+#define GAME01_SHOT_UI_SUBTRACT_SIZE			(0.98f)		//発射用UIのサイズを小さくする割合
+#define GAME01_SHOT_UI_UNINIT_COUNTER			(30)		//発射用UIを消し始める時間
+#define GAME01_SHOT_UI_SUBTRACT_ALPHA			(0.06f)		//発射用UIのα値減算量
+#define GAME01_SHOT_UI_MOVE_Y					(-0.8f)		//発射用UIの移動量Y
 
 
 #ifdef _DEBUG
@@ -77,9 +86,13 @@ CGame01::CGame01(CObject::PRIORITY Priority):CObject(Priority)
 	memset(m_apRoad, NULL, sizeof(m_apRoad[GAME01_MAX_ROAD]));
 	memset(m_pBg, NULL, sizeof(m_pBg[GAME01_MAX_BG]));
 	m_mouseTriggerPos = { 0.0f, 0.0f, 0.0f };
+	m_shotMoveVec = { 0.0f, 0.0f, 0.0f };
 	m_pGauge = nullptr;
 	m_nGaugeCounter = 0;
 	m_pGaugeFrame = nullptr;
+	m_pRocket = nullptr;
+	m_pShotUi = nullptr;
+	m_bReleaseMouse = false;
 }
 
 //================================================
@@ -102,7 +115,10 @@ HRESULT CGame01::Init(void)
 {
 	//変数の初期化
 	m_mouseTriggerPos = { 0.0f, 0.0f, 0.0f };
+	m_shotMoveVec = { 0.0f, 0.0f, 0.0f };
 	m_nGaugeCounter = 0;
+	m_pShotUi = nullptr;
+	m_bReleaseMouse = false;
 
 	//スコアの生成
 	CScore *pSocre = nullptr;
@@ -151,6 +167,8 @@ HRESULT CGame01::Init(void)
 		                   D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(GAME01_BG_3_MOVE_INIT, 0.0f));
 	m_pBg[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_SKY_03"));
 	
+	//ロケットの生成
+	m_pRocket = CRocket::Create(D3DXVECTOR3(-500.0f, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
 	return S_OK;
 }
@@ -187,6 +205,9 @@ void CGame01::Update(void)
 		//道の処理
 		Road();
 
+		//ロケットの処理
+		Rocket();
+
 		//プレイヤーが前に進む力を取得
 		float fScoreMoveForward = m_pPlayer->GetMoveForward();
 
@@ -211,8 +232,8 @@ void CGame01::Update(void)
 		//スコアをプレイヤーが前に進む力分加算
 		CManager::GetInstance()->GetPlayData()->GetScorePoint()->AddScore((int)fScoreMoveForward);
 	}
-	else
-	{//発射していなかったら
+	else if(m_pPlayer->GetShot() == false && m_bReleaseMouse == false)
+	{//発射していなかったら且つマウスを離していないとき
 		//ゲージ処理
 		Gauge();
 	}
@@ -520,7 +541,7 @@ void CGame01::Shot(void)
 	}
 #endif // !_DEBUG
 
-	if (m_pPlayer->GetShot() == false)
+	if (m_pPlayer->GetShot() == false && m_bReleaseMouse == false)
 	{//発射していない状態なら
 		//マウス取得処理
 		CInputMouse *pInputMouse;
@@ -542,6 +563,9 @@ void CGame01::Shot(void)
 		//マウスを離した瞬間
 		if (pInputMouse->GetRelease(CInputMouse::MOUSE_TYPE_LEFT) == true)
 		{
+			//マウスを離した状態のフラグを立てる
+			m_bReleaseMouse = true;
+
 			//マウスの位置取得
 			POINT mouseReleasePos;
 			GetCursorPos(&mouseReleasePos);
@@ -550,50 +574,173 @@ void CGame01::Shot(void)
 			//マウスをクリックした場所から離した場所の角度を算出
 			float fRot = atan2f(m_mouseTriggerPos.y - mouseReleasePos.y, m_mouseTriggerPos.x - mouseReleasePos.x);
 			//プレイヤーの移動ベクトルを求める
-			D3DXVECTOR3 moveVec = D3DXVECTOR3(cosf(fRot) * PLAYER_SHOT_MOVE, sinf(fRot) * PLAYER_SHOT_MOVE, 0.0f);
+			m_shotMoveVec = D3DXVECTOR3(cosf(fRot) * PLAYER_SHOT_MOVE, sinf(fRot) * PLAYER_SHOT_MOVE, 0.0f);
 			//ベクトルのyを逆向きにする
-			moveVec.y *= -1.0f;
+			m_shotMoveVec.y *= -1.0f;
 
 			float fmoseVecAdjustment = 0.0f;
 			//ゲージの量によってベクトルを小さくする割合を変える
 			if (m_pGauge->GetGauge() == 0)
 			{//0の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_0;
+
+				//UIの生成
+				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
+					                          static_cast<int>(CObject::PRIORITY::UI));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_START"));
 			}
 			else if (m_pGauge->GetGauge() > 0 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_1)
 			{//0より大きくて既定の値以下の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_1;
+				
+				//UIの生成
+				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
+					                          static_cast<int>(CObject::PRIORITY::UI));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_START"));
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_1 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_2)
 			{//既定の値より大きくて既定の値以下の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_2;
+				
+				//UIの生成
+				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
+					                          static_cast<int>(CObject::PRIORITY::UI));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_START"));
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_2 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_3)
 			{//既定の値より大きくて既定の値以下の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_3;
+				
+				//UIの生成
+				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
+					                          static_cast<int>(CObject::PRIORITY::UI));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_START"));
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_3 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_4)
 			{//既定の値より大きくて既定の値以下の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_4;
+				
+				//UIの生成
+				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
+					                          static_cast<int>(CObject::PRIORITY::UI));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_START"));
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_4 && m_pGauge->GetGauge() < m_pGauge->GetMaxNum())
 			{//既定の値より大きくて最大より小さいの時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_5;
+				
+				//UIの生成
+				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
+					                          static_cast<int>(CObject::PRIORITY::UI));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_START"));
 			}
 			else if (m_pGauge->GetGauge() == m_pGauge->GetMaxNum())
 			{//最大値の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_6;
+				
+				//UIの生成
+				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
+					                          static_cast<int>(CObject::PRIORITY::UI));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("TEX_TYPE_START"));
 			}
 
 			//ベクトルを既定の割合小さくする
-			moveVec *= fmoseVecAdjustment;
+			m_shotMoveVec *= fmoseVecAdjustment;
+		}
+	}
+	else if (m_bReleaseMouse == true && m_pShotUi != nullptr)
+	{//マウスを離した状態且つ発射用UIが消えていなかったら
+		//発射UI処理
+		ShotUi();
+	}
+}
 
+//================================================
+//発射UI処理
+//================================================
+void CGame01::ShotUi(void)
+{
+	//カウンターを加算
+	m_nShotUiCounter++;
+
+	//サイズを取得
+	D3DXVECTOR3 size = m_pShotUi->GetSize();
+	//位置を取得
+	D3DXVECTOR3 pos = m_pShotUi->GetPos();
+
+	//既定の値より大きくなったら
+	if (m_nShotUiCounter > GAME01_SHOT_UI_UNINIT_COUNTER)
+	{
+		//色を取得
+		D3DXCOLOR col = m_pShotUi->GetCol();
+		//薄くする
+		col.a -= GAME01_SHOT_UI_SUBTRACT_ALPHA;
+		//見えなくなったら
+		if (col.a <= 0.0f)
+		{
 			//発射している状態にする
 			m_pPlayer->SetShot(true);
 			//ジャンプ量設定
-			m_pPlayer->SetJump(moveVec.y);
+			m_pPlayer->SetJump(m_shotMoveVec.y);
 			//前に進む力を設定
-			m_pPlayer->SetMoveForward(moveVec.x);
+			m_pPlayer->SetMoveForward(m_shotMoveVec.x);
+
+			if (m_pShotUi != nullptr)
+			{
+				//消す
+				m_pShotUi->Uninit();
+				m_pShotUi = nullptr;
+				return;
+			}
+		}
+		else
+		{
+			//色を設定
+			m_pShotUi->SetCol(col);
+		}
+		
+		//位置Yを既定の値動かす
+		pos.y += GAME01_SHOT_UI_MOVE_Y;
+	}
+	else if(m_nShotUiCounter <= GAME01_SHOT_UI_ADD_SIZE_COUNTER)
+	{
+		//サイズを既定の割合ずつ大きくする
+		size *= GAME01_SHOT_UI_ADD_SIZE;
+
+	}
+	else if (m_nShotUiCounter > GAME01_SHOT_UI_ADD_SIZE_COUNTER && m_nShotUiCounter <= GAME01_SHOT_UI_SUBTRACT_SIZE_COUNTER)
+	{
+		//サイズを既定の割合ずつ小さくする
+		size *= GAME01_SHOT_UI_SUBTRACT_SIZE;
+	}
+
+	//位置とサイズを設定
+	m_pShotUi->SetPos(pos, size);
+}
+
+//================================================
+//ロケットの処理
+//================================================
+void CGame01::Rocket(void)
+{
+	//ロケットが消えていなかったら
+	if (m_pRocket != nullptr)
+	{
+		//床が消えてなかったら且つプレイヤーと当たっていなかったら
+		if (m_pFloor != nullptr && m_pRocket->GetHitPlayer() == false)
+		{
+			//位置を取得
+			D3DXVECTOR3 rocketPos = m_pRocket->GetModel()->GetModel()->GetPos();
+			//位置Xを移動させる
+			rocketPos.x += -m_pPlayer->GetMoveForward();
+			//位置設定
+			m_pRocket->GetModel()->GetModel()->SetPos(rocketPos);
+		}
+		else if (m_pFloor == nullptr)
+		{//床が消えてたら
+			//ロケットを消す
+			m_pRocket->Uninit();
+			m_pRocket = nullptr;
 		}
 	}
 }
