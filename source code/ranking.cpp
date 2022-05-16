@@ -18,7 +18,8 @@
 //================================================
 //マクロ定義
 //================================================
-#define MAX_COMMUDATA	(64)	//文字列の最大値
+#define MAX_COMMUDATA	(64)		//文字列の最大値
+#define RANKING_SIZE_Y	(500.0f)	//ランキングの幅Y
 
 //================================================
 //静的メンバ変数宣言
@@ -60,7 +61,7 @@ HRESULT CRanking::Init(void)
 	//スコアの生成
 	for (int nCntRanking = 0; nCntRanking < MAX_RANKING; nCntRanking++)
 	{
-		m_apScore[nCntRanking] = CScore::Create(D3DXVECTOR3((m_pos.x), (float)(SCREEN_HEIGHT / (MAX_RANKING + 1)) * nCntRanking + (float)(SCREEN_HEIGHT / (MAX_RANKING + 1)), 0.0f),
+		m_apScore[nCntRanking] = CScore::Create(D3DXVECTOR3((m_pos.x), m_pos.y + ((float)(RANKING_SIZE_Y / (MAX_RANKING + 1)) * nCntRanking + (float)(RANKING_SIZE_Y / (MAX_RANKING + 1))), 0.0f),
 											    m_size);
 	}
 	CCommunicationData::COMMUNICATION_DATA *pData = m_pCommuData->GetCommuData();
