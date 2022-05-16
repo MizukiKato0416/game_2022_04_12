@@ -114,6 +114,8 @@ void CRocket::Update(void)
 						{
 							//取得させる
 							flag[(int)CTrophy::TROPHY::ROCKET] = true;
+
+							CManager::GetInstance()->GetPlayData()->SetFlag(flag);
 						}
 
 						//プレイヤーの型にキャスト

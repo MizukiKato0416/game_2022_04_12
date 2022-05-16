@@ -44,8 +44,7 @@ private:
 	}SELECT;
 
 	CObject2D *m_apObject2D[SELECT_MAX];	//UI
-	CObject2D *m_pObject2D;					//ポーズのフレーム
-	int m_nSelect;							//選択肢
+	CObject2D *m_pObject2D[2];				//ポーズのフレーム
 	static bool m_bPause;					//ポーズ画面かどうか
 };
 

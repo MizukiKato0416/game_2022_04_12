@@ -89,9 +89,9 @@ void CTitle::Update(void)
 	size[0] = m_button[0]->GetSize();
 	pos[1] = m_button[1]->GetPos();
 	size[1] = m_button[2]->GetSize();
-	hwnd = CManager::GetWindowHandle();
-	fade = CManager::GetFade();
-	mouse = CManager::GetInputMouse();
+	hwnd = CManager::GetInstance()->GetWindowHandle();
+	fade = CManager::GetInstance()->GetFade();
+	mouse = CManager::GetInstance()->GetInputMouse();
 	GetCursorPos(&point);
 	ScreenToClient(hwnd, &point);
 

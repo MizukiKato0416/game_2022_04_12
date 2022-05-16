@@ -123,6 +123,8 @@ void CAirplane::Update(void)
 						{
 							//取得させる
 							flag[(int)CTrophy::TROPHY::AIRPLANE] = true;
+
+							CManager::GetInstance()->GetPlayData()->SetFlag(flag);
 						}
 
 						//プレイヤーの型にキャスト

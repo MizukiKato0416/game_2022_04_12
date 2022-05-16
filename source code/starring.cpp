@@ -91,6 +91,8 @@ void CStarring::Update(void)
 			{
 				//Žæ“¾‚³‚¹‚é
 				flag[(int)CTrophy::TROPHY::STARRING] = true;
+
+				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
 			}
 
 			//‰ñ“]‚³‚¹‚é

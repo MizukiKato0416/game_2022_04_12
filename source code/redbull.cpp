@@ -82,6 +82,8 @@ void CRedbull::Update(void)
 			{
 				//Žæ“¾‚³‚¹‚é
 				flag[(int)CTrophy::TROPHY::REDBULL] = true;
+
+				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
 			}
 
 			m_bHitPlayer = true;

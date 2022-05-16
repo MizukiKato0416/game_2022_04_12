@@ -82,6 +82,8 @@ void CTrampoline::Update(void)
 			{
 				//Žæ“¾‚³‚¹‚é
 				flag[(int)CTrophy::TROPHY::TRAMPOLINE] = true;
+
+				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
 			}
 
 			m_bHitPlayer = true;

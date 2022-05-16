@@ -147,6 +147,8 @@ void CFan::Update(void)
 			{
 				//Žæ“¾‚³‚¹‚é
 				flag[(int)CTrophy::TROPHY::FAN] = true;
+
+				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
 			}
 
 			m_bHitPlayer = true;
