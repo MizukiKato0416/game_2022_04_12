@@ -7,6 +7,9 @@
 #include "model.h"
 #include "player.h"
 #include "smoke.h"
+#include "play_data.h"
+#include "manager.h"
+#include "trophy.h"
 
 //================================================
 //マクロ定義
@@ -104,6 +107,15 @@ void CRocket::Update(void)
 				{
 					if (GetModel()->GetModel()->GetParent() == nullptr)
 					{
+						//トロフィーのフラグ状態を取得
+						vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+						//トロフィーを取得したことがなかったら
+						if (flag[(int)CTrophy::TROPHY::ROCKET] == false)
+						{
+							//取得させる
+							flag[(int)CTrophy::TROPHY::ROCKET] = true;
+						}
+
 						//プレイヤーの型にキャスト
 						CPlayer *pPlayer = static_cast<CPlayer*>(object[count_object]);
 
