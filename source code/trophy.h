@@ -23,6 +23,25 @@ class CObject2D;
 class CTrophy : public CObject
 {
 public:
+	//---------------------------
+	// 列挙型
+	//---------------------------
+	enum class TROPHY
+	{
+		AIRPLANE = 0,
+		FAN,
+		REDBULL,
+		STARRING,
+		THORN,
+		ROCKET,
+		BANANA,
+		TRAMPOLINE,
+		M_1000,
+		M_5000,
+		M_10000,
+		MAX
+	};
+
 	CTrophy(PRIORITY priorty = PRIORITY::NONE);	// デフォルトコンストラクタ
 	~CTrophy();	// デフォルトデストラクタ
 	HRESULT Init(void);	// 初期化

@@ -3,7 +3,7 @@
 //Author:‰Á“¡ˆ¨
 //================================================
 #include "play_data.h"
-#include "happening.h"
+#include "trophy.h"
 
 //================================================
 //Ã“Iƒƒ“ƒo•Ï”éŒ¾
@@ -39,7 +39,7 @@ HRESULT CPlayData::Init(void)
 
 	file = fopen("data/trophy_frag.txt", "r");
 
-	for (int count_flag = 0; count_flag < (int)CHappenig::HAPPENING_TYPE::MAX - 1; count_flag++)
+	for (int count_flag = 0; count_flag < (int)CTrophy::TROPHY::MAX; count_flag++)
 	{
 		int buf = 0;
 		fscanf(file, "%*s%*s%d", &buf);
@@ -58,7 +58,7 @@ void CPlayData::Uninit(void)
 
 	file = fopen("data/trophy_frag.txt", "w");
 
-	for (int count_flag = 0; count_flag < (int)CHappenig::HAPPENING_TYPE::MAX - 1; count_flag++)
+	for (int count_flag = 0; count_flag < (int)CTrophy::TROPHY::MAX; count_flag++)
 	{
 		fprintf(file, "frag_%d : %d\n", count_flag, static_cast<int>(m_trophy_flag[count_flag]));
 	}
