@@ -51,6 +51,9 @@ public:
 
 private:
 	CObject2D* m_buck;	// 戻るボタン
+	CObject2D *m_letter;	// 説明ポリゴン
+	vector<CObject2D*> m_icon;	// アイコン
+	vector<TROPHY> m_type;	// 何のトロフィーか
 };
 
 #endif // !_TROPHY_H_
