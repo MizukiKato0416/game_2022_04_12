@@ -14,6 +14,7 @@
 //マクロ定義
 //================================================
 #define RESULT_TO_TITLE_COUNT			(900)				//タイトルに行くまでの間隔
+#define RESULT_RANKING_POS_Y			(150.0f)			//ランキングの高さ
 
 //================================================
 //静的メンバ変数宣言
@@ -57,7 +58,7 @@ HRESULT CResult::Init(void)
 	pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Ranking.png"));
 
 	//ランキングの生成
-	CRanking::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 0.0f, 0.0f), D3DXVECTOR3(RANKING_POLYGON_WIDTH, RANKING_POLYGON_HEIGHT, 0.0f));
+	CRanking::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, RESULT_RANKING_POS_Y, 0.0f), D3DXVECTOR3(RANKING_POLYGON_WIDTH, RANKING_POLYGON_HEIGHT, 0.0f));
 
 	m_nResultCounter = 0;
 	return S_OK;
