@@ -4,8 +4,7 @@
 //================================================
 #include "result.h"
 #include "manager.h"
-#include "input_keyboard.h"
-#include "input_pad_d.h"
+#include "input_mouse.h"
 #include "fade.h"
 #include "texture.h"
 #include "ranking.h"
@@ -78,16 +77,10 @@ void CResult::Uninit(void)
 //================================================
 void CResult::Update(void)
 {
-	//キーボード取得処理
-	CInputKeyboard *pInputKeyboard;
-	pInputKeyboard = CManager::GetInstance()->GetInputKeyboard();
+	CInputMouse *pMouse = CManager::GetInstance()->GetInputMouse();
 
-	//パッドD取得処理
-	CInputPadD *pInputPadD;
-	pInputPadD = CManager::GetInstance()->GetInputPadD();
-
-	//Enterキー、スタートボタンを押したら
-	if (pInputKeyboard->GetTrigger(DIK_RETURN) == true || pInputPadD->GetPress(CInputPadD::START) == true)
+	//マウス左クリックしたら
+	if (pMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 	{
 		//フェード取得処理
 		CFade *pFade;

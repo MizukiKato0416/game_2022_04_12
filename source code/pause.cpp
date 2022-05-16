@@ -101,8 +101,8 @@ void CPause::Update(void)
 		                                        D3DXVECTOR3(SCREEN_WIDTH / 3.0f, SCREEN_HEIGHT / 5.0f, 0.0f), static_cast<int>(CObject::PRIORITY::PAUSE));
 			m_apObject2D[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
 
-			m_apObject2D[1] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, PAUSE_EXIT_POS_Y, 0.0f),
-		                                     D3DXVECTOR3(MENU_UI_EXIT_SIZE_X* 0.8f, MENU_UI_EXIT_SIZE_Y * 0.8f, 0.0f), static_cast<int>(CObject::PRIORITY::PAUSE));
+			m_apObject2D[1] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, (SCREEN_HEIGHT / 2.0f) + 100.0f, 0.0f),
+		                                     D3DXVECTOR3(SCREEN_WIDTH / 1.3f, SCREEN_HEIGHT / 3.8f, 0.0f), static_cast<int>(CObject::PRIORITY::PAUSE));
 			m_apObject2D[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("exit.png"));
 		}
 		else
