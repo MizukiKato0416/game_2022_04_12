@@ -50,16 +50,20 @@ HRESULT CTitle::Init(void)
 	pObject2D[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Bg.png"));
 	pObject2D[1] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, 0.0f + 200.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH * 0.9, SCREEN_HEIGHT * 0.3, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 	pObject2D[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Title.png"));
-	m_click = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+	m_click = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - (SCREEN_WIDTH / 3) / 2, SCREEN_HEIGHT - (SCREEN_HEIGHT * 0.10) / 2, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 3, SCREEN_HEIGHT * 0.10, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 	m_click->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Click.png"));
-	m_button.push_back(CObject2D::Create(D3DXVECTOR3(0.0f + 300.0f, SCREEN_HEIGHT - 200.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2.2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
-	m_button.push_back(CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, SCREEN_HEIGHT - 200.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2.2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
-	m_button.push_back(CObject2D::Create(D3DXVECTOR3(0.0f + 300.0f, SCREEN_HEIGHT - 200.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2.2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
-	m_button.push_back(CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, SCREEN_HEIGHT - 200.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2.2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
+	m_button.push_back(CObject2D::Create(D3DXVECTOR3(0.0f + 300.0f, SCREEN_HEIGHT - 300.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2.2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
+	m_button.push_back(CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, SCREEN_HEIGHT - 300.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2.2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
+	m_button.push_back(CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT - 150.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2.2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
+	m_button.push_back(CObject2D::Create(D3DXVECTOR3(0.0f + 300.0f, SCREEN_HEIGHT - 300.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2.2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
+	m_button.push_back(CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, SCREEN_HEIGHT - 300.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2.2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
+	m_button.push_back(CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT - 150.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2.2, SCREEN_HEIGHT * 0.15, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
 	m_button[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("frame.png"));
 	m_button[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("frame.png"));
-	m_button[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
-	m_button[3]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Trophy.png"));
+	m_button[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("frame.png"));
+	m_button[3]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
+	m_button[4]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Trophy.png"));
+	m_button[5]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("tutorial.png"));
 	m_fade_flag = true;
 
 	return S_OK;
@@ -81,14 +85,16 @@ void CTitle::Update(void)
 {
 	CFade *fade;
 	CInputMouse *mouse;
-	D3DXVECTOR3 pos[2];
-	D3DXVECTOR3 size[2];
+	D3DXVECTOR3 pos[3];
+	D3DXVECTOR3 size[3];
 	POINT point;
 	HWND hwnd;
 	pos[0] = m_button[0]->GetPos();
 	size[0] = m_button[0]->GetSize();
 	pos[1] = m_button[1]->GetPos();
-	size[1] = m_button[2]->GetSize();
+	size[1] = m_button[1]->GetSize();
+	pos[2] = m_button[2]->GetPos();
+	size[2] = m_button[2]->GetSize();
 	hwnd = CManager::GetInstance()->GetWindowHandle();
 	fade = CManager::GetInstance()->GetFade();
 	mouse = CManager::GetInstance()->GetInputMouse();
@@ -101,7 +107,7 @@ void CTitle::Update(void)
 		pos[0].y + size[0].y / 2.0f >= point.y)
 	{
 		m_button[0]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
-		m_button[2]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
+		m_button[3]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 		{
 			fade->SetFade(CManager::MODE::GAME01);
@@ -110,7 +116,7 @@ void CTitle::Update(void)
 	else
 	{
 		m_button[0]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
-		m_button[2]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		m_button[3]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 
 	if (pos[1].x - size[1].x / 2.0f <= point.x &&
@@ -119,7 +125,7 @@ void CTitle::Update(void)
 		pos[1].y + size[1].y / 2.0f >= point.y)
 	{
 		m_button[1]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
-		m_button[3]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
+		m_button[4]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 		{
 			fade->SetFade(CManager::MODE::TROPHY);
@@ -128,7 +134,25 @@ void CTitle::Update(void)
 	else
 	{
 		m_button[1]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
-		m_button[3]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		m_button[4]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+	}
+
+	if (pos[2].x - size[2].x / 2.0f <= point.x &&
+		pos[2].x + size[2].x / 2.0f >= point.x &&
+		pos[2].y - size[2].y / 2.0f <= point.y &&
+		pos[2].y + size[2].y / 2.0f >= point.y)
+	{
+		m_button[2]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
+		m_button[5]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
+		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
+		{
+			//fade->SetFade(CManager::MODE::TROPHY);
+		}
+	}
+	else
+	{
+		m_button[2]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		m_button[5]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 
 	D3DXCOLOR col = m_click->GetCol();
