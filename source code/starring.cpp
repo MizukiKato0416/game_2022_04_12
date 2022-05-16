@@ -10,6 +10,9 @@
 #include "starring.h"
 #include "player.h"
 #include "model_single.h"
+#include "play_data.h"
+#include "manager.h"
+#include "trophy.h"
 
 //=============================================================================
 // マクロ定義
@@ -81,6 +84,15 @@ void CStarring::Update(void)
 		//回転していない状態なら
 		if (m_bRot == false)
 		{
+			//トロフィーのフラグ状態を取得
+			vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+			//トロフィーを取得したことがなかったら
+			if (flag[(int)CTrophy::TROPHY::STARRING] == false)
+			{
+				//取得させる
+				flag[(int)CTrophy::TROPHY::STARRING] = true;
+			}
+
 			//回転させる
 			m_bRot = true;
 		}

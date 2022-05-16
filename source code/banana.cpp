@@ -10,6 +10,9 @@
 #include "banana.h"
 #include "player.h"
 #include "model_single.h"
+#include "play_data.h"
+#include "manager.h"
+#include "trophy.h"
 
 //=============================================================================
 // マクロ定義
@@ -72,6 +75,15 @@ void CBanana::Update(void)
 	{
 		if (m_bHitPlayer == false)
 		{
+			//トロフィーのフラグ状態を取得
+			vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+			//トロフィーを取得したことがなかったら
+			if (flag[(int)CTrophy::TROPHY::BANANA] == false)
+			{
+				//取得させる
+				flag[(int)CTrophy::TROPHY::BANANA] = true;
+			}
+
 			m_bHitPlayer = true;
 		}
 	}
