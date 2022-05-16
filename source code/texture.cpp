@@ -4,7 +4,6 @@
 // Author : ‰H’¹‘¾ˆê
 //
 //=============================================================================
-#define _CRT_SECURE_NO_WARNINGS
 #pragma warning( disable : 4592)
 #include <stdio.h>
 #include "texture.h"
