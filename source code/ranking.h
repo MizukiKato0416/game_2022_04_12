@@ -17,8 +17,8 @@ class CCommunicationData;
 //================================================
 #define MAX_RANKING (6)								//ランキングの最大数
 #define MAX_SCORE_DATA (MAX_RANKING + 1)			//スコアデータの最大数
-#define RANKING_POLYGON_WIDTH (30.0f * 1.4f)		//ポリゴンの幅
-#define RANKING_POLYGON_HEIGHT (60.0f * 1.4f)		//ポリゴンの高さ
+#define RANKING_POLYGON_WIDTH (30.0f * 1.0f)		//ポリゴンの幅
+#define RANKING_POLYGON_HEIGHT (60.0f * 1.0f)		//ポリゴンの高さ
 
 //========================================================
 //構造体の定義

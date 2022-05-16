@@ -10,6 +10,9 @@
 #include "thorn.h"
 #include "player.h"
 #include "model_single.h"
+#include "play_data.h"
+#include "manager.h"
+#include "trophy.h"
 
 //=============================================================================
 // マクロ定義
@@ -72,6 +75,17 @@ void CThorn::Update(void)
 	{
 		if (m_bHitPlayer == false)
 		{
+			//トロフィーのフラグ状態を取得
+			vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+			//トロフィーを取得したことがなかったら
+			if (flag[(int)CTrophy::TROPHY::THORN] == false)
+			{
+				//取得させる
+				flag[(int)CTrophy::TROPHY::THORN] = true;
+
+				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+			}
+
 			m_bHitPlayer = true;
 		}
 	}
@@ -102,22 +116,10 @@ void CThorn::Update(void)
 
 				if (m_nCntSlow < THORN_SLOW_COUNT)
 				{
-					//カメラズーム処理
-					//SetCameraZoom();
-
 					//移動量設定
 					player->SetMove(D3DXVECTOR3(0.0f, THORN_SLOW_PLAYER_MOVE_Y, 0.0f));
 					//前に進む力設定
 					player->SetMoveForward(THORN_SLOW_FORWORD_POW);
-					//回る量設定
-					//player->SetRotSpeed(THORN_PLAYER_ROTATION_X);
-
-					////軌道エフェクトが出ているなら
-					//if (player->GetSparkle() == true)
-					//{
-					//	//軌道エフェクトを消す
-					//	player->SetSparkle(false);
-					//}
 				}
 				else if (m_nCntSlow == THORN_SLOW_COUNT)
 				{
@@ -127,15 +129,6 @@ void CThorn::Update(void)
 					player->SetMoveForward(THORN_FORWORD_POW);
 					//バウンドする瞬間の移動量を設定
 					player->SetBoundMove(player->GetJump());
-					//回転のスピードを設定
-					//player->SetRotSpeed(PLAYER_ROTATE);
-
-					////軌道エフェクトが出てないなら
-					//if (player->GetSparkle() == false)
-					//{
-					//	//軌道エフェクトを出す
-					//	player->SetSparkle(true);
-					//}
 				}
 			}
 		}

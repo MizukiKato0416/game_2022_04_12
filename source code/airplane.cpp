@@ -116,13 +116,16 @@ void CAirplane::Update(void)
 				{
 					if (GetModel()->GetModel()->GetParent() == nullptr)
 					{
-						/*
-						#include "play_data.h"
-						#include "manager.h"
-						#include "trophy.h"*/
+						//トロフィーのフラグ状態を取得
+						vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+						//トロフィーを取得したことがなかったら
+						if (flag[(int)CTrophy::TROPHY::AIRPLANE] == false)
+						{
+							//取得させる
+							flag[(int)CTrophy::TROPHY::AIRPLANE] = true;
 
-						vector<bool> flag = CManager::GetPlayData()->GetFlag();
-						flag[(int)CTrophy::TROPHY::AIRPLANE] = true;
+							CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+						}
 
 						//プレイヤーの型にキャスト
 						CPlayer *pPlayer = static_cast<CPlayer*>(object[count_object]);
