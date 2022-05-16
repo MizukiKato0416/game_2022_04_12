@@ -51,7 +51,7 @@ HRESULT CResult::Init(void)
 											 D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 	pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Bg.png"));
 	pObject2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
-											 D3DXVECTOR3(SCREEN_WIDTH / 2.4, SCREEN_HEIGHT / 1.1, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+											 D3DXVECTOR3(SCREEN_WIDTH / 2.6, SCREEN_HEIGHT / 1.1, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 	pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("frame_Trophy.png"));
 	pObject2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 0.0f + 70.0f, 0.0f),
 											 D3DXVECTOR3(500.0f, 70.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));

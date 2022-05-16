@@ -10,7 +10,7 @@
 //================================================
 //マクロ定義
 //================================================
-#define MAX_SCORE_POLYGON (8)				//ポリゴンの最大数
+#define MAX_SCORE_POLYGON (6)				//ポリゴンの最大数
 #define SCORE_POLYGON_WIDTH (30.0f)			//ポリゴンの幅
 #define SCORE_POLYGON_HEIGHT (60.0f)		//ポリゴンの高さ
 
