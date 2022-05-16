@@ -204,6 +204,9 @@
     <ClCompile Include="rocket.cpp">
       <Filter>ソース ファイル\ハプニング</Filter>
     </ClCompile>
+    <ClCompile Include="banana.cpp">
+      <Filter>ソース ファイル\ハプニング</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="billboard.h">
@@ -378,6 +381,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="rocket.h">
+      <Filter>ヘッダー ファイル\ハプニング</Filter>
+    </ClInclude>
+    <ClInclude Include="banana.h">
       <Filter>ヘッダー ファイル\ハプニング</Filter>
     </ClInclude>
   </ItemGroup>

@@ -599,7 +599,7 @@ void CGame01::Shot(void)
 			//ñÓàÛUIÇê∂ê¨
 			m_pArrow = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f), D3DXVECTOR3(200.0f, 200.0f, 0.0f),
 				                         static_cast<int>(CObject::PRIORITY::UI));
-			m_pArrow->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("arrow01.png"));
+			m_pArrow->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("arrow02.png"));
 
 			m_pGaugeFrame->SetPriority(static_cast<int>(CObject::PRIORITY::UI));
 			m_pGauge->SetPriority(static_cast<int>(CObject::PRIORITY::UI));

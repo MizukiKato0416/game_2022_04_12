@@ -7,6 +7,9 @@
 #include "model.h"
 #include "player.h"
 #include "smoke.h"
+#include "play_data.h"
+#include "manager.h"
+#include "trophy.h"
 
 //================================================
 //マクロ定義
@@ -113,6 +116,14 @@ void CAirplane::Update(void)
 				{
 					if (GetModel()->GetModel()->GetParent() == nullptr)
 					{
+						/*
+						#include "play_data.h"
+						#include "manager.h"
+						#include "trophy.h"*/
+
+						vector<bool> flag = CManager::GetPlayData()->GetFlag();
+						flag[(int)CTrophy::TROPHY::AIRPLANE] = true;
+
 						//プレイヤーの型にキャスト
 						CPlayer *pPlayer = static_cast<CPlayer*>(object[count_object]);
 

@@ -37,6 +37,7 @@ public:
 		STARRING,		// 六芒星
 		AIRPLANE,		// 飛行機
 		THORN,			// 棘
+		BANANA,			// バナナ
 		MAX,			// 総数
 	};
 

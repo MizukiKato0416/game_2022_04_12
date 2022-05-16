@@ -33,6 +33,7 @@ public:
 		X_TYPE_REDBULL,							//レッドブル
 		X_TYPE_START,							//スタート地点
 		X_TYPE_ROCKET,							//ロケット
+		X_TYPE_BANANA,							//バナナ
 		X_TYPE_MAX								//最大数
 	} X_TYPE;
 
