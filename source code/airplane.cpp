@@ -123,7 +123,7 @@ void CAirplane::Update(void)
 						{
 							//取得させる
 							flag[(int)CTrophy::TROPHY::AIRPLANE] = true;
-
+							//フラグを立てる
 							CManager::GetInstance()->GetPlayData()->SetFlag(flag);
 						}
 
@@ -139,7 +139,8 @@ void CAirplane::Update(void)
 
 						//当たっているフラグを立てる
 						m_bHitPlayer = true;
-
+						//当たっている状態にする
+						CHappenig::SetHit(true);
 						//モデルの位置を取得
 						D3DXVECTOR3 modelPos = GetModel()->GetPos();
 						//プレイヤーの位置を取得
@@ -238,6 +239,9 @@ void CAirplane::Update(void)
 					{
 						//親子関係を離す
 						GetModel()->GetModel()->SetObjParent(false);
+
+						//当たっていない状態にする
+						CHappenig::SetHit(false);
 
 						//ジャンプ力を設定
 						pPlayer->SetJump(AIRPLANE_PLAYER_JUMP);

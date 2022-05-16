@@ -152,6 +152,30 @@ void CFan::Update(void)
 			}
 
 			m_bHitPlayer = true;
+			//当たっている状態にする
+			CHappenig::SetHit(true);
+
+			////オブジェクト情報を入れるポインタ
+			//vector<CObject*> object;
+
+			////先頭のポインタを代入
+			//object = CObject::GetObject(static_cast<int>(CObject::PRIORITY::PLAYER));
+			//int object_size = object.size();
+
+			//for (int count_object = 0; count_object < object_size; count_object++)
+			//{
+			//	//プレイヤーだった時
+			//	if (object[count_object]->GetObjType() == CObject::OBJTYPE::PLAYER)
+			//	{
+			//		//プレイヤーにキャスト
+			//		CPlayer *player = static_cast<CPlayer*>(object[count_object]);
+
+			//		//プレイヤーの状態を風にする
+			//		player->SetState(CPlayer::PLAYER_STATE::WIND);
+			//		//プレイヤーの状態管理のカウンターを0にする
+			//		player->SetStateCounter(0);
+			//	}
+			//}
 		}
 	}
 
@@ -200,6 +224,8 @@ void CFan::Update(void)
 				}
 				else if (m_nCntSlow == FAN_SLOW_COUNT)
 				{
+					//当たっていない状態にする
+					CHappenig::SetHit(false);
 					//ジャンプ量設定
 					player->SetJump(FAN_JUMP_POW);
 					//前に進む力を設定

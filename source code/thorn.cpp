@@ -87,6 +87,8 @@ void CThorn::Update(void)
 			}
 
 			m_bHitPlayer = true;
+			//当たっている状態にする
+			CHappenig::SetHit(true);
 		}
 	}
 
@@ -123,6 +125,8 @@ void CThorn::Update(void)
 				}
 				else if (m_nCntSlow == THORN_SLOW_COUNT)
 				{
+					//当たっていない状態にする
+					CHappenig::SetHit(false);
 					//ジャンプ量設定
 					player->SetJump(THORN_JUMP_POW);
 					//前に進む力を設定

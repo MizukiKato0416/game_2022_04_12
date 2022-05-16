@@ -10,6 +10,7 @@
 class CModel;
 class CMotionPlayer;
 class CSparkle;
+class CWind;
 
 //================================================
 //マクロ定義
@@ -25,6 +26,16 @@ class CSparkle;
 class CPlayer : public CObject
 {
 public:
+	//状態
+	enum class PLAYER_STATE
+	{
+		NONE = 0,
+		NORMAL,			//通常
+		WIND,			//風
+		WING,			//翼
+		MAX
+	};
+
 
 	//メンバ関数
 	CPlayer(CObject::PRIORITY Priority = CObject::PRIORITY::PLAYER);				//コンストラクタ
@@ -63,11 +74,16 @@ public:
 	void SetSparkle(const bool bSparkle) { m_bSparkle = bSparkle; }							//軌道エフェクト設定処理
 	float GetRotSpeed(void) { return m_fRotSpeed; }											//回転させるスピード取得処理
 	void SetRotSpeed(const float &fRotSpeed) { m_fRotSpeed = fRotSpeed; }					//回転させるスピード設定処理
+	PLAYER_STATE GetState(void) { return m_state; }											//状態取得処理
+	void SetState(const PLAYER_STATE &state) { m_state = state; }									//状態設定処理
+	int GetStateCounter(void) { return m_nStateCounter; }									//状態管理のカウンター取得処理
+	void SetStateCounter(const int &nStateCounter) { m_nStateCounter = nStateCounter; }			//状態管理のカウンター設定処理
 
 private:
 	//メンバ関数
 	void Move(void);								//移動処理
 	void Rotate(void);								//回転処理
+	void State(void);								//状態処理
 
 	//メンバ変数
 	D3DXVECTOR3 m_pos;								//位置
@@ -91,6 +107,9 @@ private:
 	bool m_bObjParent;								//モデル以外との親子関係をつけるかどうか
 	bool m_bSparkle;								//軌道エフェクトを出すかどうか
 	float m_fRotSpeed;								//回転させるスピード
+	PLAYER_STATE m_state;							//状態
+	int m_nStateCounter;							//状態管理のカウンター
+	CWind *m_pWind;									//風のポインタ
 };
 
 #endif // !_PLAYER_H_

@@ -97,6 +97,8 @@ void CStarring::Update(void)
 
 			//回転させる
 			m_bRot = true;
+			//当たっている状態にする
+			CHappenig::SetHit(true);
 		}
 	}
 
@@ -150,7 +152,8 @@ void CStarring::Update(void)
 				{
 					//回転させる
 					m_rot.x += STARRING_ROTATION_X;
-
+					//当たっていない状態にする
+					CHappenig::SetHit(false);
 					//ジャンプ量設定
 					player->SetJump(STARRING_JUMP_POW);
 					//前に進む力を設定

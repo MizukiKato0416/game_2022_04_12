@@ -40,6 +40,11 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
+	
+	//終了設定処理
+	void SetFinish(bool bFinish) { m_bFinish = bFinish; }
+	//終了取得処理
+	bool GetFinish(void) { return m_bFinish; }
 
 private:
 	void Camera(void);					//カメラの処理
@@ -50,6 +55,7 @@ private:
 	void Shot(void);					//発射処理
 	void ShotUi(void);					//発射UI処理
 	void Rocket(void);					//ロケットの処理
+	void Finish(void);					//ゴール処理
 
 	//メンバ変数
 	CPlayer *m_pPlayer;					//プレイヤーのポインタ
@@ -66,6 +72,8 @@ private:
 	D3DXVECTOR3 m_shotMoveVec;			//発射するときの移動量ベクトル
 	bool m_bReleaseMouse;				//マウスを離したかどうか
 	CObject2D *m_pArrow;				//矢印UIのポインタ
+	bool m_bFinish;						//終了フラグ
+	int m_nFinishCounter;				//終了時のカウンター
 };
 
 #endif // !_GAME01_H_

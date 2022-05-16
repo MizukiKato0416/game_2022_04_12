@@ -66,6 +66,7 @@
 #define GAME01_SHOT_UI_SUBTRACT_ALPHA			(0.06f)		//発射用UIのα値減算量
 #define GAME01_SHOT_UI_MOVE_Y					(-0.8f)		//発射用UIの移動量Y
 #define GAME01_ARROW_UI_SUBTRACT_ALPHA			(0.06f)		//矢印UIのα値減算量
+#define GAME01_FINISH_COUNTER					(180)		//ゲームクリア表示時間
 
 
 #ifdef _DEBUG
@@ -95,6 +96,8 @@ CGame01::CGame01(CObject::PRIORITY Priority):CObject(Priority)
 	m_pShotUi = nullptr;
 	m_bReleaseMouse = false;
 	m_pArrow = nullptr;
+	m_bFinish = false;
+	m_nFinishCounter = 0;
 }
 
 //================================================
@@ -122,6 +125,8 @@ HRESULT CGame01::Init(void)
 	m_pShotUi = nullptr;
 	m_bReleaseMouse = false;
 	m_pArrow = nullptr;
+	m_bFinish = false;
+	m_nFinishCounter = 0;
 
 	//スコアの生成
 	CScore *pSocre = nullptr;
@@ -249,6 +254,9 @@ void CGame01::Update(void)
 
 	//発射処理
 	Shot();
+
+	//フィニッシュ処理
+	Finish();
 
 	//キーボード取得処理
 	CInputKeyboard *pInputKeyboard;
@@ -426,15 +434,18 @@ void CGame01::Road(void)
 		}
 	}
 
-	//道0の位置がプレイヤーの位置よりも小さくなったら
-	if (m_apRoad[0]->GetPos().x <= m_pPlayer->GetPos().x)
+	if (m_apRoad[0] != nullptr)
 	{
-		if (m_apRoad[1] == nullptr)
+		//道0の位置がプレイヤーの位置よりも小さくなったら
+		if (m_apRoad[0]->GetPos().x <= m_pPlayer->GetPos().x)
 		{
-			//プレイヤーの現在地化から道の現在地を引く
-			D3DXVECTOR3 pos = m_pPlayer->GetPos() - m_apRoad[0]->GetPos();
-			//引いて出た分だけXの位置をずらして道を生成
-			m_apRoad[1] = CRoad::Create(D3DXVECTOR3(FLOOR_SIZE.x - pos.x, 0.0f, 0.0f), FLOOR_SIZE, -m_pPlayer->GetMoveForward());
+			if (m_apRoad[1] == nullptr)
+			{
+				//プレイヤーの現在地化から道の現在地を引く
+				D3DXVECTOR3 pos = m_pPlayer->GetPos() - m_apRoad[0]->GetPos();
+				//引いて出た分だけXの位置をずらして道を生成
+				m_apRoad[1] = CRoad::Create(D3DXVECTOR3(FLOOR_SIZE.x - pos.x, 0.0f, 0.0f), FLOOR_SIZE, -m_pPlayer->GetMoveForward());
+			}
 		}
 	}
 }
@@ -632,6 +643,12 @@ void CGame01::Shot(void)
 			//マウスをクリックした場所から離した場所の角度を算出
 			float fRot = atan2f(differ.y, differ.x);
 
+			//押した瞬間の時
+			if (differ.y == 0.0f && differ.x == 0.0f)
+			{
+				fRot = D3DX_PI;
+			}
+
 			//角度によって矢印を回転させる
 			m_pArrow->SetPos(m_pArrow->GetPos(), size, -fRot + D3DX_PI);
 		}
@@ -826,5 +843,32 @@ void CGame01::Rocket(void)
 			m_pRocket->Uninit();
 			m_pRocket = nullptr;
 		}
+	}
+}
+
+void CGame01::Finish(void)
+{
+	//終了したら
+	if (m_bFinish == true)
+	{
+		if (m_nFinishCounter == 0)
+		{
+			CObject2D *pObject2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
+				                                     D3DXVECTOR3(600.0f, 100.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+			pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
+		}
+		else if (m_nFinishCounter > GAME01_FINISH_COUNTER)
+		{
+			//フェード取得処理
+			CFade *pFade;
+			pFade = CManager::GetInstance()->GetFade();
+
+			if (pFade->GetFade() == CFade::FADE_NONE)
+			{
+				pFade->SetFade(CManager::MODE::RESULT);
+			}
+		}
+		//カウンターを増やす
+		m_nFinishCounter++;
 	}
 }

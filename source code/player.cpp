@@ -23,6 +23,9 @@
 #include "ui.h"
 #include "shadow.h"
 #include "sparkle.h"
+#include "wind.h"
+#include "game01.h"
+#include "happening.h"
 
 //================================================
 //マクロ定義
@@ -72,6 +75,9 @@ CPlayer::CPlayer(CObject::PRIORITY Priority):CObject(Priority)
 	m_pSparkle = nullptr;
 	m_bObjParent = false;
 	m_bSparkle = false;
+	m_state = PLAYER_STATE::NONE;
+	m_nStateCounter = 0;
+	m_pWind = nullptr;
 }
 
 //================================================
@@ -104,6 +110,9 @@ HRESULT CPlayer::Init(void)
 	m_bObjParent = false;
 	m_bSparkle = true;
 	m_fRotSpeed = PLAYER_ROTATE;
+	m_state = PLAYER_STATE::NORMAL;
+	m_nStateCounter = 0;
+	m_pWind = nullptr;
 
 	//モデルの生成
 	//textファイル読み込み
@@ -235,6 +244,9 @@ void CPlayer::Update(void)
 	//位置反映
 	SetPos(m_pos);
 
+	//状態による処理分け
+	State();
+
 	//発射している状態なら
 	if (m_bShot == true)
 	{
@@ -330,6 +342,23 @@ void CPlayer::Update(void)
 				m_pSparkle = CSparkle::Create(m_pos, D3DXVECTOR3(SPARKLE_SIZE_RAND, SPARKLE_SIZE_RAND, 0.0f), D3DXVECTOR3(-m_fMoveForward, 0.0f, 0.0f),
 				                              PLAYER_SPARKLE_NUM);
 				m_pSparkle->SetMove(D3DXVECTOR3(-m_fMoveForward, 0.0f, 0.0f));
+			}
+		}
+		else
+		{//止まっていたら
+			//ジャンプ力が0で物に当たっていないとき
+			if (m_fJump == 0.0f && CHappenig::GetHit() == false)
+			{
+				//ゲームシーンなら
+				if (CManager::GetInstance()->GetMode() == CManager::MODE::GAME01)
+				{
+					//終了状態でないなら
+					if (CManager::GetInstance()->GetGame01()->GetFinish() == false)
+					{
+						//終了状態に設定する
+						CManager::GetInstance()->GetGame01()->SetFinish(true);
+					}
+				}
 			}
 		}
 	}
@@ -639,6 +668,61 @@ void CPlayer::Rotate(void)
 	else if (m_rot.y < -D3DX_PI)
 	{	//-πより小さくなったら+2πする
 		m_rot.y += D3DX_PI * 2.0f;
+	}
+}
+
+//================================================
+//状態処理
+//================================================
+void CPlayer::State(void)
+{
+	switch (m_state)
+	{
+	case CPlayer::PLAYER_STATE::NORMAL:
+		break;
+	case CPlayer::PLAYER_STATE::WIND:
+		//カウンターを増やす
+		m_nStateCounter++;
+
+		//既定の値より大きくなったら
+		if (m_nStateCounter > 120)
+		{
+			//0にする
+			m_nStateCounter = 0;
+			//状態を通常にする
+			m_state = PLAYER_STATE::NORMAL;
+
+			//風エフェクトが生成されていたら
+			if (m_pWind != nullptr)
+			{
+				//消す
+				m_pWind->Uninit();
+				m_pWind = nullptr;
+				break;
+			}
+		}
+		else
+		{
+			//風エフェクトが生成されていなかったら
+			if (m_pWind == nullptr)
+			{
+				m_pWind = CWind::Create(m_pos, D3DXVECTOR3(100.0f, 200.0f, 0.0f), 0);
+			}
+
+			//位置を取得
+			D3DXVECTOR3 pos = m_pWind->GetPos();
+			//位置をプレイヤーと同じにする
+			pos = m_pos;
+			//位置を設定
+			m_pWind->SetPos(pos, m_pWind->GetSize());
+		}
+		break;
+	case CPlayer::PLAYER_STATE::WING:
+		break;
+	case CPlayer::PLAYER_STATE::MAX:
+		break;
+	default:
+		break;
 	}
 }
 

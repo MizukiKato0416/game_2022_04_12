@@ -53,10 +53,15 @@ public:
 	CModelSingle *GetModel(void) { return m_model; }		// ゲッター
 	bool HitPlayer(void);									//プレイヤーとの当たり判定
 	void SetCameraZoom(void);								//カメラがプレイヤーをズームする
+
+	static void SetHit(bool bHit) { m_bHit = bHit; }		//当たっているかどうか設定処理
+	static bool GetHit(void) { return m_bHit; }				//当たっているかどうか取得処理
+
 private:
-	CModelSingle *m_model;	// モデル
-	D3DXVECTOR3 m_pos;	// 位置
-	D3DXVECTOR3 m_rot;	// 向き
+	CModelSingle *m_model;		// モデル
+	D3DXVECTOR3 m_pos;			// 位置
+	D3DXVECTOR3 m_rot;			// 向き
+	static bool m_bHit;			//当たっているかどうか
 };
 
 #endif
