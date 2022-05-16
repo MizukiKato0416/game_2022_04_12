@@ -18,6 +18,7 @@
 #include "redbull.h"
 #include "airplane.h"
 #include "thorn.h"
+#include "banana.h"
 
 //=============================================================================
 // É}ÉNÉçíËã`
@@ -281,10 +282,9 @@ void CRoad::GroundInstallation(const int &happening_type, const int &installatio
 	case CHappenig::HAPPENING_TYPE::REDBULL:
 		m_happening_model.push_back(CRedbull::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y - 1.0f, m_pos.z), D3DXVECTOR3(0.0f, 0.0f, 0.0f)));
 		break;
-	/*case CHappenig::HAPPENING_TYPE::GIRL:
-		m_happening_model.push_back(CModelSingle::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y - 1.0f, m_pos.z),
-			                        D3DXVECTOR3(0.0f, 0.0f, 0.0f), CXload::X_TYPE_A, NULL, true, (CModelSingle::HAPPENING_TYPE)happening_type));
-		break;*/
+	case CHappenig::HAPPENING_TYPE::BANANA:
+		m_happening_model.push_back(CBanana::Create(D3DXVECTOR3(m_pos.x + installation_position, m_pos.y - 1.0f, m_pos.z), D3DXVECTOR3(0.0f, 0.0f, 0.0f)));
+		break;
 	default:
 		break;
 	}
