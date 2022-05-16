@@ -236,8 +236,8 @@ void CTrophy::Update(void)
 {
 	CFade *fade;
 	CInputMouse *mouse;
-	D3DXVECTOR3 pos = m_buck->GetPos();
-	D3DXVECTOR3 size = m_buck->GetSize();
+	D3DXVECTOR3 button_pos = m_buck->GetPos();
+	D3DXVECTOR3 button_size = m_buck->GetSize();
 	POINT point;
 	HWND hwnd;
 	int max_icon = m_icon.size();
@@ -251,18 +251,21 @@ void CTrophy::Update(void)
 	{
 		D3DXVECTOR3 pos = m_icon[icon]->GetPos();
 		D3DXVECTOR3 size = m_icon[icon]->GetSize();
+		D3DXCOLOR col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 
 		if (pos.x - size.x / 2.0f <= point.x &&
 			pos.x + size.x / 2.0f >= point.x &&
 			pos.y - size.y / 2.0f <= point.y &&
 			pos.y + size.y / 2.0f >= point.y)
 		{
+			col.a = 0.5f;
 			if (m_type[icon] == TROPHY::AIRPLANE)
 			{
 				if (m_letter != nullptr)
 				{
 					m_letter->Uninit();
 				}
+				m_icon[icon]->SetCol(col);
 				m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
 					D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_Airplane.png"));
@@ -273,6 +276,7 @@ void CTrophy::Update(void)
 				{
 					m_letter->Uninit();
 				}
+				m_icon[icon]->SetCol(col);
 				m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
 					D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_fan.png"));
@@ -283,6 +287,7 @@ void CTrophy::Update(void)
 				{
 					m_letter->Uninit();
 				}
+				m_icon[icon]->SetCol(col);
 				m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
 					D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_trampoline.png"));
@@ -293,6 +298,7 @@ void CTrophy::Update(void)
 				{
 					m_letter->Uninit();
 				}
+				m_icon[icon]->SetCol(col);
 				m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
 					D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_banana.png"));
@@ -303,6 +309,7 @@ void CTrophy::Update(void)
 				{
 					m_letter->Uninit();
 				}
+				m_icon[icon]->SetCol(col);
 				m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
 					D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_sterling.png"));
@@ -313,6 +320,7 @@ void CTrophy::Update(void)
 				{
 					m_letter->Uninit();
 				}
+				m_icon[icon]->SetCol(col);
 				m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
 					D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_rocket.png"));
@@ -323,6 +331,7 @@ void CTrophy::Update(void)
 				{
 					m_letter->Uninit();
 				}
+				m_icon[icon]->SetCol(col);
 				m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
 					D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_redbull.png"));
@@ -333,6 +342,7 @@ void CTrophy::Update(void)
 				{
 					m_letter->Uninit();
 				}
+				m_icon[icon]->SetCol(col);
 				m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
 					D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_thorn.png"));
@@ -343,6 +353,7 @@ void CTrophy::Update(void)
 				{
 					m_letter->Uninit();
 				}
+				m_icon[icon]->SetCol(col);
 				m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
 					D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_1000.png"));
@@ -353,6 +364,7 @@ void CTrophy::Update(void)
 				{
 					m_letter->Uninit();
 				}
+				m_icon[icon]->SetCol(col);
 				m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
 					D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_5000.png"));
@@ -363,17 +375,23 @@ void CTrophy::Update(void)
 				{
 					m_letter->Uninit();
 				}
+				m_icon[icon]->SetCol(col);
 				m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
 					D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_10000.png"));
 			}
 		}
+		else
+		{
+			col.a = 1.0f;
+			m_icon[icon]->SetCol(col);
+		}
 	}
 
-	if (pos.x - size.x / 2.0f <= point.x &&
-		pos.x + size.x / 2.0f >= point.x &&
-		pos.y - size.y / 2.0f <= point.y &&
-		pos.y + size.y / 2.0f >= point.y)
+	if (button_pos.x - button_size.x / 2.0f <= point.x &&
+		button_pos.x + button_size.x / 2.0f >= point.x &&
+		button_pos.y - button_size.y / 2.0f <= point.y &&
+		button_pos.y + button_size.y / 2.0f >= point.y)
 	{
 		m_buck->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
