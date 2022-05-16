@@ -65,6 +65,7 @@ public:
 		WIND,				// 風
 		AIRPLANE_CLOUD,		// 飛行機雲
 		THORN,				// 棘
+		BANANA,				// バナナ
 		MAX
 	};
 

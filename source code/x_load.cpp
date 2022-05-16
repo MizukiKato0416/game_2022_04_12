@@ -87,6 +87,10 @@ void CXload::Init(void)
 	//ロケット
 	D3DXLoadMeshFromX("data/MODEL/stage/rocket.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
 		&m_apBuffMat[X_TYPE_ROCKET], NULL, &m_aNumMat[X_TYPE_ROCKET], &m_apMesh[X_TYPE_ROCKET]);
+
+	//バナナ
+	D3DXLoadMeshFromX("data/MODEL/stage/banana.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
+		&m_apBuffMat[X_TYPE_BANANA], NULL, &m_aNumMat[X_TYPE_BANANA], &m_apMesh[X_TYPE_BANANA]);
 }	
 
 //=============================================================================
