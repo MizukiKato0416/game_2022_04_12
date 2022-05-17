@@ -405,7 +405,7 @@ void CTrophy::Update(void)
 				m_icon[icon]->SetCol(col);
 				m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
 					D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("999999”ò‚ñ‚¾.png"));
+				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_999999.png"));
 			}
 		}
 		else

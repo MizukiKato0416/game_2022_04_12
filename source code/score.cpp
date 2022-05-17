@@ -10,10 +10,14 @@
 #include "number.h"
 #include "play_data.h"
 #include "texture.h"
+#include "object2D.h"
 
 //================================================
-//静的メンバ変数宣言
+//マクロ定義
 //================================================
+#define SCORE_CONMA_NUM		(6)		//コンマをはさむ位置
+#define SCORE_CONMA_SIZE	(15.0f)	//コンマのサイズ
+#define SCORE_CONMA_POS_X	(5.0f)	//コンマの位置調整値
 
 //================================================
 //デフォルトコンストラクタ
@@ -43,10 +47,26 @@ HRESULT CScore::Init()
 {
 	for (int nCntNumber = 0; nCntNumber < MAX_SCORE_POLYGON; nCntNumber++)
 	{
-		m_apNumber[nCntNumber] = CNumber::Create(D3DXVECTOR3(m_pos.x - (m_size.x * MAX_SCORE_POLYGON / 2) + (m_size.x * nCntNumber) + (m_size.x / 2.0f), m_pos.y, 0.0f),
-												 m_size);
+		//小数点をつけるため、SCORE_COMMA_NUMつ目の数字からずらす
+		if (nCntNumber >= SCORE_CONMA_NUM)
+		{
+			m_apNumber[nCntNumber] = CNumber::Create(D3DXVECTOR3(m_pos.x + 20.0f - (m_size.x * MAX_SCORE_POLYGON / 2) + (m_size.x * nCntNumber) + (m_size.x / 2.0f), m_pos.y, 0.0f),
+												                 m_size);
+		}
+		else
+		{
+			m_apNumber[nCntNumber] = CNumber::Create(D3DXVECTOR3(m_pos.x - (m_size.x * MAX_SCORE_POLYGON / 2) + (m_size.x * nCntNumber) + (m_size.x / 2.0f), m_pos.y, 0.0f),
+												                 m_size);
+		}
 		m_apNumber[nCntNumber]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("number.png"));
 	}
+
+	//コンマの生成
+	CObject2D *pObject2D = CObject2D::Create(D3DXVECTOR3(m_pos.x  - SCORE_CONMA_POS_X - (m_size.x * MAX_SCORE_POLYGON / 2) + (m_size.x * SCORE_CONMA_NUM) + (m_size.x / 2.0f), m_pos.y + m_size.y / 4.0f, 0.0f),
+												         D3DXVECTOR3(SCORE_CONMA_SIZE, SCORE_CONMA_SIZE, 0.0f),
+		                                                 static_cast<int>(CObject::PRIORITY::UI));
+	pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("conma.png"));
+
 	return S_OK;
 }
 
