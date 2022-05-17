@@ -44,7 +44,7 @@ CTexture::~CTexture()
 void CTexture::Init(void)
 {
 	LPDIRECT3DDEVICE9 pDevice; //デバイスのポインタ
-	int nCount = 0;
+	int count_tex = 0;
 	pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();	//デバイスを取得する
 
 	for (const auto &file : recursive_directory_iterator("data/TEXTURE/"))
@@ -52,15 +52,15 @@ void CTexture::Init(void)
 		m_file_name_pas.first.push_back(file.path().string());
 		m_file_name_pas.second.push_back(file.path().string());
 
-		if (m_file_name_pas.second[nCount].find("data\\TEXTURE\\") != string::npos)
+		if (m_file_name_pas.second[count_tex].find("data\\TEXTURE\\") != string::npos)
 		{
 			for (int count_erase = 0; count_erase < 13; count_erase++)
 			{
-				m_file_name_pas.second[nCount].erase(m_file_name_pas.second[nCount].begin());
+				m_file_name_pas.second[count_tex].erase(m_file_name_pas.second[count_tex].begin());
 			}
 		}
-		m_tex_type[m_file_name_pas.second[nCount]] = nCount;
-		nCount++;
+		m_tex_type[m_file_name_pas.second[count_tex]] = count_tex;
+		count_tex++;
 	}
 
 	m_pas = m_file_name_pas.first;
