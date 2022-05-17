@@ -67,6 +67,9 @@
 #define GAME01_SHOT_UI_MOVE_Y					(-0.8f)		//発射用UIの移動量Y
 #define GAME01_ARROW_UI_SUBTRACT_ALPHA			(0.06f)		//矢印UIのα値減算量
 #define GAME01_FINISH_COUNTER					(180)		//ゲームクリア表示時間
+#define GAME01_SHOT_JUDGE_UI_SIZE_X				(400.0f)	//発射時審査UIサイズX
+#define GAME01_SHOT_JUDGE_UI_SIZE_Y				(80.0f)		//発射時審査UIサイズ
+#define GAME01_SHOT_JUDGE_UI_POS_Y				(200.0f)	//発射時審査UI位置
 
 
 #ifdef _DEBUG
@@ -674,69 +677,47 @@ void CGame01::Shot(void)
 			m_shotMoveVec.y *= -1.0f;
 
 			float fmoseVecAdjustment = 0.0f;
+
+			//UIの生成
+			m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, GAME01_SHOT_JUDGE_UI_POS_Y, 0.0f),
+				                          D3DXVECTOR3(GAME01_SHOT_JUDGE_UI_SIZE_X, GAME01_SHOT_JUDGE_UI_SIZE_Y, 0.0f),
+				                          static_cast<int>(CObject::PRIORITY::UI));
+
 			//ゲージの量によってベクトルを小さくする割合を変える
 			if (m_pGauge->GetGauge() == 0)
 			{//0の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_0;
-
-				//UIの生成
-				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
-					                          static_cast<int>(CObject::PRIORITY::UI));
-				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("bad.png"));
 			}
 			else if (m_pGauge->GetGauge() > 0 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_1)
 			{//0より大きくて既定の値以下の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_1;
-				
-				//UIの生成
-				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
-					                          static_cast<int>(CObject::PRIORITY::UI));
-				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("bad.png"));
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_1 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_2)
 			{//既定の値より大きくて既定の値以下の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_2;
-				
-				//UIの生成
-				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
-					                          static_cast<int>(CObject::PRIORITY::UI));
-				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("good.png"));
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_2 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_3)
 			{//既定の値より大きくて既定の値以下の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_3;
-				
-				//UIの生成
-				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
-					                          static_cast<int>(CObject::PRIORITY::UI));
-				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("good.png"));
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_3 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_4)
 			{//既定の値より大きくて既定の値以下の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_4;
-				
-				//UIの生成
-				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
-					                          static_cast<int>(CObject::PRIORITY::UI));
-				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("great.png"));
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_4 && m_pGauge->GetGauge() < m_pGauge->GetMaxNum())
 			{//既定の値より大きくて最大より小さいの時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_5;
-				
-				//UIの生成
-				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
-					                          static_cast<int>(CObject::PRIORITY::UI));
-				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("great.png"));
 			}
 			else if (m_pGauge->GetGauge() == m_pGauge->GetMaxNum())
 			{//最大値の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_6;
-				
-				//UIの生成
-				m_pShotUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 200.0f, 0.0f), D3DXVECTOR3(200.0f, 100.0f, 0.0f),
-					                          static_cast<int>(CObject::PRIORITY::UI));
-				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("perfect.png"));
 			}
 
 			//ベクトルを既定の割合小さくする
@@ -846,6 +827,9 @@ void CGame01::Rocket(void)
 	}
 }
 
+//================================================
+//ゲーム終了処理
+//================================================
 void CGame01::Finish(void)
 {
 	//終了したら
@@ -855,7 +839,7 @@ void CGame01::Finish(void)
 		{
 			CObject2D *pObject2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
 				                                     D3DXVECTOR3(600.0f, 100.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-			pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
+			pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("finish.png"));
 		}
 		else if (m_nFinishCounter > GAME01_FINISH_COUNTER)
 		{
