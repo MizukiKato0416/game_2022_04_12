@@ -16,17 +16,29 @@
     <Filter Include="data">
       <UniqueIdentifier>{a0e43056-ca29-4b5f-8aff-1a26ec080517}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\ハプニング">
-      <UniqueIdentifier>{43c8cee5-8288-4c54-a556-1a615ac646d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\ハプニング">
-      <UniqueIdentifier>{945c9721-1ba8-4ca4-a97f-84832eafe864}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\effect">
       <UniqueIdentifier>{d58cfe6a-03bc-4cdf-add0-a4580fe6414e}</UniqueIdentifier>
     </Filter>
     <Filter Include="ヘッダー ファイル\effect">
       <UniqueIdentifier>{f2f8728c-1354-48cf-bb56-ef8a05f8abec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\scene">
+      <UniqueIdentifier>{c7bd5398-13fb-45f6-9b69-11a9f9469c95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\happening">
+      <UniqueIdentifier>{945c9721-1ba8-4ca4-a97f-84832eafe864}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\happening">
+      <UniqueIdentifier>{43c8cee5-8288-4c54-a556-1a615ac646d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\scene">
+      <UniqueIdentifier>{3adb20eb-3644-4643-891b-fc4dec16c390}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\input">
+      <UniqueIdentifier>{67dfc0b6-54aa-4b45-b8a4-b9c8b4f507be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\input">
+      <UniqueIdentifier>{6b442ca5-d501-471e-9f4b-d9632861202e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -46,24 +58,6 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="floor.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="game01.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="input.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="input_keyboard.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="input_mouse.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="input_pad_d.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="input_pad_x.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="light.cpp">
@@ -123,9 +117,6 @@
     <ClCompile Include="renderer.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="result.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="score.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -136,9 +127,6 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="texture.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="title.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="ui.cpp">
@@ -157,25 +145,25 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="happening.cpp">
-      <Filter>ソース ファイル\ハプニング</Filter>
+      <Filter>ソース ファイル\happening</Filter>
     </ClCompile>
     <ClCompile Include="starring.cpp">
-      <Filter>ソース ファイル\ハプニング</Filter>
+      <Filter>ソース ファイル\happening</Filter>
     </ClCompile>
     <ClCompile Include="road.cpp">
-      <Filter>ソース ファイル\ハプニング</Filter>
+      <Filter>ソース ファイル\happening</Filter>
     </ClCompile>
     <ClCompile Include="trampoline.cpp">
-      <Filter>ソース ファイル\ハプニング</Filter>
+      <Filter>ソース ファイル\happening</Filter>
     </ClCompile>
     <ClCompile Include="fan.cpp">
-      <Filter>ソース ファイル\ハプニング</Filter>
+      <Filter>ソース ファイル\happening</Filter>
     </ClCompile>
     <ClCompile Include="redbull.cpp">
-      <Filter>ソース ファイル\ハプニング</Filter>
+      <Filter>ソース ファイル\happening</Filter>
     </ClCompile>
     <ClCompile Include="airplane.cpp">
-      <Filter>ソース ファイル\ハプニング</Filter>
+      <Filter>ソース ファイル\happening</Filter>
     </ClCompile>
     <ClCompile Include="effect3D.cpp">
       <Filter>ソース ファイル\effect</Filter>
@@ -193,19 +181,43 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="thorn.cpp">
-      <Filter>ソース ファイル\ハプニング</Filter>
+      <Filter>ソース ファイル\happening</Filter>
     </ClCompile>
     <ClCompile Include="wind.cpp">
       <Filter>ソース ファイル\effect</Filter>
     </ClCompile>
-    <ClCompile Include="trophy.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="rocket.cpp">
-      <Filter>ソース ファイル\ハプニング</Filter>
+      <Filter>ソース ファイル\happening</Filter>
     </ClCompile>
     <ClCompile Include="banana.cpp">
-      <Filter>ソース ファイル\ハプニング</Filter>
+      <Filter>ソース ファイル\happening</Filter>
+    </ClCompile>
+    <ClCompile Include="trophy.cpp">
+      <Filter>ソース ファイル\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="title.cpp">
+      <Filter>ソース ファイル\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="result.cpp">
+      <Filter>ソース ファイル\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="game01.cpp">
+      <Filter>ソース ファイル\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>ソース ファイル\input</Filter>
+    </ClCompile>
+    <ClCompile Include="input_keyboard.cpp">
+      <Filter>ソース ファイル\input</Filter>
+    </ClCompile>
+    <ClCompile Include="input_mouse.cpp">
+      <Filter>ソース ファイル\input</Filter>
+    </ClCompile>
+    <ClCompile Include="input_pad_d.cpp">
+      <Filter>ソース ファイル\input</Filter>
+    </ClCompile>
+    <ClCompile Include="input_pad_x.cpp">
+      <Filter>ソース ファイル\input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -225,24 +237,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="floor.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="game01.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="input.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="input_keyboard.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="input_mouse.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="input_pad_d.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="input_pad_x.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="light.h">
@@ -302,9 +296,6 @@
     <ClInclude Include="renderer.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="result.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="score.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -320,9 +311,6 @@
     <ClInclude Include="time.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="title.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="ui.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -336,25 +324,25 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="happening.h">
-      <Filter>ヘッダー ファイル\ハプニング</Filter>
+      <Filter>ヘッダー ファイル\happening</Filter>
     </ClInclude>
     <ClInclude Include="starring.h">
-      <Filter>ヘッダー ファイル\ハプニング</Filter>
+      <Filter>ヘッダー ファイル\happening</Filter>
     </ClInclude>
     <ClInclude Include="road.h">
-      <Filter>ヘッダー ファイル\ハプニング</Filter>
+      <Filter>ヘッダー ファイル\happening</Filter>
     </ClInclude>
     <ClInclude Include="trampoline.h">
-      <Filter>ヘッダー ファイル\ハプニング</Filter>
+      <Filter>ヘッダー ファイル\happening</Filter>
     </ClInclude>
     <ClInclude Include="airplane.h">
-      <Filter>ヘッダー ファイル\ハプニング</Filter>
+      <Filter>ヘッダー ファイル\happening</Filter>
     </ClInclude>
     <ClInclude Include="redbull.h">
-      <Filter>ヘッダー ファイル\ハプニング</Filter>
+      <Filter>ヘッダー ファイル\happening</Filter>
     </ClInclude>
     <ClInclude Include="fan.h">
-      <Filter>ヘッダー ファイル\ハプニング</Filter>
+      <Filter>ヘッダー ファイル\happening</Filter>
     </ClInclude>
     <ClInclude Include="effect3D.h">
       <Filter>ヘッダー ファイル\effect</Filter>
@@ -377,14 +365,38 @@
     <ClInclude Include="wind.h">
       <Filter>ヘッダー ファイル\effect</Filter>
     </ClInclude>
-    <ClInclude Include="trophy.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="rocket.h">
-      <Filter>ヘッダー ファイル\ハプニング</Filter>
+      <Filter>ヘッダー ファイル\happening</Filter>
     </ClInclude>
     <ClInclude Include="banana.h">
-      <Filter>ヘッダー ファイル\ハプニング</Filter>
+      <Filter>ヘッダー ファイル\happening</Filter>
+    </ClInclude>
+    <ClInclude Include="title.h">
+      <Filter>ヘッダー ファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="trophy.h">
+      <Filter>ヘッダー ファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="result.h">
+      <Filter>ヘッダー ファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="game01.h">
+      <Filter>ヘッダー ファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>ヘッダー ファイル\input</Filter>
+    </ClInclude>
+    <ClInclude Include="input_keyboard.h">
+      <Filter>ヘッダー ファイル\input</Filter>
+    </ClInclude>
+    <ClInclude Include="input_mouse.h">
+      <Filter>ヘッダー ファイル\input</Filter>
+    </ClInclude>
+    <ClInclude Include="input_pad_d.h">
+      <Filter>ヘッダー ファイル\input</Filter>
+    </ClInclude>
+    <ClInclude Include="input_pad_x.h">
+      <Filter>ヘッダー ファイル\input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
