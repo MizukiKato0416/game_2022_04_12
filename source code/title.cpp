@@ -108,7 +108,7 @@ void CTitle::Update(void)
 	{
 		m_button[0]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 		m_button[3]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
-		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
+		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true && fade->GetFade() == CFade::FADE_NONE)
 		{
 			fade->SetFade(CManager::MODE::GAME01);
 		}
@@ -126,7 +126,7 @@ void CTitle::Update(void)
 	{
 		m_button[1]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 		m_button[4]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
-		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
+		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true && fade->GetFade() == CFade::FADE_NONE)
 		{
 			fade->SetFade(CManager::MODE::TROPHY);
 		}
@@ -144,7 +144,7 @@ void CTitle::Update(void)
 	{
 		m_button[2]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 		m_button[5]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
-		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
+		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true && fade->GetFade() == CFade::FADE_NONE)
 		{
 			//fade->SetFade(CManager::MODE::TROPHY);
 		}
@@ -175,6 +175,16 @@ void CTitle::Update(void)
 	{
 		col.a += 0.01f;
 		m_click->SetCol(col);
+	}
+
+	m_result_timer++;
+	if (m_result_timer >= 500)
+	{
+		m_result_timer = 0;
+		if (fade->GetFade() == CFade::FADE_NONE)
+		{
+			fade->SetFade(CManager::MODE::RESULT);
+		}
 	}
 }
 

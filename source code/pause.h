@@ -45,6 +45,7 @@ private:
 
 	CObject2D *m_apObject2D[SELECT_MAX];	//UI
 	CObject2D *m_pObject2D[2];				//ポーズのフレーム
+	CObject2D *m_pPauseButton;				// ポーズボタン
 	static bool m_bPause;					//ポーズ画面かどうか
 };
 

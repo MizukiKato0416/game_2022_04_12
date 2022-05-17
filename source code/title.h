@@ -33,7 +33,7 @@ public:
 private:
 	CObject2D *m_click;	// CLICKロゴ
 	vector<CObject2D*> m_button;// ボタン
-	int m_result_timer;	// リザルトへの
+	int m_result_timer;	// リザルトへのタイマー
 	bool m_fade_flag;	// フェードフラグ
 };
 
