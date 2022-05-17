@@ -83,6 +83,25 @@ void CTitle::Uninit(void)
 //=============================================================================
 void CTitle::Update(void)
 {
+	SeletMode();
+	Tutorial();
+	ColUpdate();
+	ResultTimer();
+}
+
+//=============================================================================
+// 描画処理
+//=============================================================================
+void CTitle::Draw(void)
+{
+	
+}
+
+//=============================================================================
+// 選択処理
+//=============================================================================
+void CTitle::SeletMode(void)
+{
 	CFade *fade;
 	CInputMouse *mouse;
 	D3DXVECTOR3 pos[3];
@@ -104,7 +123,8 @@ void CTitle::Update(void)
 	if (pos[0].x - size[0].x / 2.0f <= point.x &&
 		pos[0].x + size[0].x / 2.0f >= point.x &&
 		pos[0].y - size[0].y / 2.0f <= point.y &&
-		pos[0].y + size[0].y / 2.0f >= point.y)
+		pos[0].y + size[0].y / 2.0f >= point.y &&
+		m_tutorial_flag == false)
 	{
 		m_button[0]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 		m_button[3]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
@@ -122,7 +142,8 @@ void CTitle::Update(void)
 	if (pos[1].x - size[1].x / 2.0f <= point.x &&
 		pos[1].x + size[1].x / 2.0f >= point.x &&
 		pos[1].y - size[1].y / 2.0f <= point.y &&
-		pos[1].y + size[1].y / 2.0f >= point.y)
+		pos[1].y + size[1].y / 2.0f >= point.y &&
+		m_tutorial_flag == false)
 	{
 		m_button[1]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 		m_button[4]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
@@ -140,13 +161,25 @@ void CTitle::Update(void)
 	if (pos[2].x - size[2].x / 2.0f <= point.x &&
 		pos[2].x + size[2].x / 2.0f >= point.x &&
 		pos[2].y - size[2].y / 2.0f <= point.y &&
-		pos[2].y + size[2].y / 2.0f >= point.y)
+		pos[2].y + size[2].y / 2.0f >= point.y &&
+		m_tutorial_flag == false)
 	{
 		m_button[2]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 		m_button[5]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
-		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true && fade->GetFade() == CFade::FADE_NONE)
+		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 		{
-			//fade->SetFade(CManager::MODE::TROPHY);
+			for (int count_tutorial = 0; count_tutorial < 5; count_tutorial++)
+			{
+				m_tutorial.push_back(CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
+			}
+			m_tutorial.push_back(CObject2D::Create(D3DXVECTOR3(0.0f + 80.0f, 0.0f + 50.0f, 0.0f), D3DXVECTOR3(80.0f, 80.0f, 70.0f), static_cast<int>(CObject::PRIORITY::UI)));
+			m_tutorial[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("tutorial_up.png"));
+			m_tutorial[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("tutorial_arrow.png"));
+			m_tutorial[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("tutorial_picture_left.png"));
+			m_tutorial[3]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("tutorial_picture_light.png"));
+			m_tutorial[4]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("tutorial_under.png"));
+			m_tutorial[5]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("arrow.png"));
+			m_tutorial_flag = true;
 		}
 	}
 	else
@@ -154,31 +187,96 @@ void CTitle::Update(void)
 		m_button[2]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 		m_button[5]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	}
+}
 
-	D3DXCOLOR col = m_click->GetCol();
+//=============================================================================
+// チュートリアル
+//=============================================================================
+void CTitle::Tutorial(void)
+{
+	CInputMouse *mouse;
+	POINT point;
+	HWND hwnd;
+	hwnd = CManager::GetInstance()->GetWindowHandle();
+	mouse = CManager::GetInstance()->GetInputMouse();
+	GetCursorPos(&point);
+	ScreenToClient(hwnd, &point);
 
-	if (col.a >= 1.0f)
+	if (m_tutorial_flag == true)
+	{
+		D3DXVECTOR3 pos_buck;
+		D3DXVECTOR3 size_buck;
+
+		pos_buck = m_tutorial[5]->GetPos();
+		size_buck = m_tutorial[5]->GetSize();
+
+		if (pos_buck.x - size_buck.x / 2.0f <= point.x &&
+			pos_buck.x + size_buck.x / 2.0f >= point.x &&
+			pos_buck.y - size_buck.y / 2.0f <= point.y &&
+			pos_buck.y + size_buck.y / 2.0f >= point.y)
+		{
+			m_tutorial[5]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
+			if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
+			{
+				int tutorial_size = m_tutorial.size();
+				for (int count_tutorial = tutorial_size - 1; count_tutorial >= 0; count_tutorial--)
+				{
+					m_tutorial[count_tutorial]->Uninit();
+					m_tutorial[count_tutorial] = nullptr;
+					m_tutorial.pop_back();
+				}
+				m_tutorial_flag = false;
+			}
+		}
+		else
+		{
+			m_tutorial[5]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		}
+	}
+}
+
+//=============================================================================
+// カラー変更
+//=============================================================================
+void CTitle::ColUpdate(void)
+{
+	D3DXCOLOR col_click = m_click->GetCol();
+
+	if (col_click.a >= 1.0f)
 	{
 		m_fade_flag = true;
 	}
-	else if (col.a <= 0.0f)
+	else if (col_click.a <= 0.0f)
 	{
 		m_fade_flag = false;
 	}
 
 	if (m_fade_flag == true)
 	{
-		col.a -= 0.01f;
-		m_click->SetCol(col);
+		col_click.a -= 0.01f;
+		m_click->SetCol(col_click);
 	}
 	else
 	{
-		col.a += 0.01f;
-		m_click->SetCol(col);
+		col_click.a += 0.01f;
+		m_click->SetCol(col_click);
 	}
+}
+
+//=============================================================================
+// リザルトタイマー
+//=============================================================================
+void CTitle::ResultTimer(void)
+{
+	CFade *fade;
+	CInputMouse *mouse;
+	fade = CManager::GetInstance()->GetFade();
+	mouse = CManager::GetInstance()->GetInputMouse();
 
 	m_result_timer++;
-	if (m_result_timer >= 500)
+	if (m_result_timer >= 600 &&
+		mouse->GetMouseState().lX == 0 &&
+		mouse->GetMouseState().lY == 0)
 	{
 		m_result_timer = 0;
 		if (fade->GetFade() == CFade::FADE_NONE)
@@ -186,12 +284,4 @@ void CTitle::Update(void)
 			fade->SetFade(CManager::MODE::RESULT);
 		}
 	}
-}
-
-//=============================================================================
-// 描画処理
-//=============================================================================
-void CTitle::Draw(void)
-{
-	
 }
