@@ -105,7 +105,7 @@ void CPause::Update(void)
 				//ÉtÉåÅ[ÉÄÇçÏê¨
 				m_pObject2D[0] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
 					D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), static_cast<int>(CObject::PRIORITY::PAUSE));
-				m_pObject2D[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Menu_frame.png"));
+				m_pObject2D[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("pause_frame.png"));
 
 				m_pObject2D[1] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 0.0f + 70.0f, 0.0f),
 					D3DXVECTOR3(500.0f, 70.0f, 0.0f), static_cast<int>(CObject::PRIORITY::PAUSE));
