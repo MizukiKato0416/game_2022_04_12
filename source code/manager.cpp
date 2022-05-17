@@ -39,13 +39,13 @@ CTexture *CManager::m_pTexture = nullptr;
 CXload *CManager::m_pXload = nullptr;
 CTitle *CManager::m_pTitle = nullptr;
 CTrophy *CManager::m_pTrophy = nullptr;
-CMenu *CManager::m_pMenu = nullptr;
 CGame01 *CManager::m_pGame01 = nullptr;
 CResult *CManager::m_pResult = nullptr;
 CManager::MODE CManager::m_mode = MODE::TITLE;
 CFade *CManager::m_pFade = nullptr;
 CMotionRoad *CManager::m_pMotionRoad = nullptr;
 CPlayData *CManager::m_pPlayData = nullptr;
+//CPause *CManager::m_pPause = nullptr;
 HWND CManager::m_hWnd = NULL;
 
 //================================================
@@ -164,6 +164,16 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 		}
 	}
 
+	//ポーズクラスの生成
+	/*if (m_pPause == nullptr)
+	{
+		m_pPause = new CPause;
+		if (m_pPause != nullptr)
+		{
+			m_pPause->Init();
+		}
+	}*/
+
 	//ライトの生成
 	m_apLight[0] = CLight::Create(D3DXVECTOR3(-0.6f, -0.8f, 0.6f), D3DXVECTOR3(400.0f, 800.0f, -400.0f));
 	m_apLight[1] = CLight::Create(D3DXVECTOR3(0.4f, 0.4f, -0.4f), D3DXVECTOR3(-100.0f, 0.0f, 100.0f));
@@ -184,6 +194,17 @@ void CManager::Uninit(void)
 {
 	//全てのオブジェクトの破棄
 	CObject::ReleaseAll();
+
+	//ポーズクラスの破棄
+	//if (m_pPause != nullptr)
+	//{
+	//	//終了処理
+	//	m_pPause->Uninit();
+
+	//	//メモリの開放
+	//	delete m_pPause;
+	//	m_pPause = nullptr;
+	//}
 
 	//プレイデータクラスの破棄
 	if (m_pPlayData != nullptr)
@@ -352,10 +373,16 @@ void CManager::Update(void)
 		m_pRenderer->Update();
 	}
 
+	//ポーズ
+	/*if (m_pPause != nullptr && m_mode == MODE::GAME01)
+	{
+		m_pPause->Update();
+	}*/
+
 	//カメラの更新処理
 	for (int nCntCamera = 0; nCntCamera < MAX_CAMERA; nCntCamera++)
 	{
-		if (m_apCamera[nCntCamera] != nullptr)
+		if (m_apCamera[nCntCamera] != nullptr && m_mode == MODE::GAME01)
 		{
 			if (CPause::GetPause() == false)
 			{
@@ -478,14 +505,6 @@ CTrophy* CManager::GetTrophy(void)
 }
 
 //=============================================================================
-// menu取得処理
-//=============================================================================
-CMenu* CManager::GetMenu(void)
-{
-	return m_pMenu;
-}
-
-//=============================================================================
 // game01取得処理
 //=============================================================================
 CGame01* CManager::GetGame01(void)
@@ -548,27 +567,6 @@ void CManager::SetMode(MODE mode)
 
 			m_pTrophy->Uninit();
 			m_pTrophy = nullptr;
-		}
-		break;
-	case MODE::MENU:
-		if (m_pMenu != nullptr)
-		{
-			//カメラの破棄
-			for (int nCntCamera = 0; nCntCamera < MAX_CAMERA; nCntCamera++)
-			{
-				if (m_apCamera[nCntCamera] != nullptr)
-				{
-					//終了処理
-					m_apCamera[nCntCamera]->Uninit();
-
-					//メモリの開放
-					delete m_apCamera[nCntCamera];
-					m_apCamera[nCntCamera] = nullptr;
-				}
-			}
-
-			m_pMenu->Uninit();
-			m_pMenu = nullptr;
 		}
 		break;
 	case MODE::GAME01:
@@ -662,26 +660,6 @@ void CManager::SetMode(MODE mode)
 			}
 		}
 		break;
-	case MODE::MENU:
-		//メニュークラスの生成
-		if (m_pMenu == nullptr)
-		{
-			m_pMenu = new CMenu;
-			if (m_pMenu != nullptr)
-			{
-				//メインカメラの生成
-				for (int nCntCamera = 0; nCntCamera < MAX_MAIN_CAMERA; nCntCamera++)
-				{
-					m_apCamera[nCntCamera] = CCamera::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(CAMERA_INIT_ROT_X, D3DX_PI, 0.0f),
-						                                     (float)(SCREEN_WIDTH / MAX_MAIN_CAMERA * nCntCamera), 0.0f,
-						                                     (float)(SCREEN_WIDTH / MAX_MAIN_CAMERA), (float)SCREEN_HEIGHT);
-					m_apCamera[nCntCamera]->SetNum(nCntCamera);
-				}
-
-				m_pMenu->Init();
-			}
-		}
-		break;
 	case MODE::GAME01:
 		//ゲーム01クラスの生成
 		if (m_pGame01 == nullptr)
@@ -757,4 +735,12 @@ CPlayData * CManager::GetPlayData(void)
 {
 	return m_pPlayData;
 }
+
+//=============================================================================
+//ポーズ取得処理
+//=============================================================================
+//CPause * CManager::GetPause(void)
+//{
+//	return m_pPause;
+//}
 

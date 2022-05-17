@@ -26,6 +26,7 @@
 #include "bg.h"
 #include "rocket.h"
 #include "model.h"
+#include "trophy.h"
 
 //================================================
 //マクロ定義
@@ -70,6 +71,12 @@
 #define GAME01_SHOT_JUDGE_UI_SIZE_X				(400.0f)	//発射時審査UIサイズX
 #define GAME01_SHOT_JUDGE_UI_SIZE_Y				(80.0f)		//発射時審査UIサイズ
 #define GAME01_SHOT_JUDGE_UI_POS_Y				(200.0f)	//発射時審査UI位置
+#define GAME01_FLYING_DISTANCE_1000				(100000)	//飛距離1000
+#define GAME01_FLYING_DISTANCE_5000				(500000)	//飛距離5000
+#define GAME01_FLYING_DISTANCE_10000			(1000000)	//飛距離10000
+#define GAME01_ROCKET_POS_X						(-800.0f)	//ロケットの位置
+#define GAME01_START_CLOUD_POS_Y				(-1500.0f)	//スタートの雲の位置Y
+#define GAME01_START_CLOUD_POS_Z				(500.0f)	//スタートの雲の位置Z
 
 
 #ifdef _DEBUG
@@ -101,6 +108,8 @@ CGame01::CGame01(CObject::PRIORITY Priority):CObject(Priority)
 	m_pArrow = nullptr;
 	m_bFinish = false;
 	m_nFinishCounter = 0;
+	m_bPause = false;
+	m_pStart = nullptr;
 }
 
 //================================================
@@ -130,6 +139,7 @@ HRESULT CGame01::Init(void)
 	m_pArrow = nullptr;
 	m_bFinish = false;
 	m_nFinishCounter = 0;
+	m_bPause = false;
 
 	//スコアの生成
 	CScore *pSocre = nullptr;
@@ -146,6 +156,8 @@ HRESULT CGame01::Init(void)
 	//スタート地点の生成
 	m_pFloor = CFloor::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), FLOOR_SIZE, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	m_pFloor->SetCol(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
+	m_pStart = CModelSingle::Create(D3DXVECTOR3(0.0f, GAME01_START_CLOUD_POS_Y, GAME01_START_CLOUD_POS_Z), D3DXVECTOR3(0.0f, 0.0f, 0.0f),
+		                            CXload::X_TYPE_CLOUD, NULL, false);
 
 	//最初の道の生成
 	m_apRoad[0] = CRoad::Create(D3DXVECTOR3(FLOOR_SIZE.x, 0.0f, 0.0f), FLOOR_SIZE, 0.0f);
@@ -179,7 +191,7 @@ HRESULT CGame01::Init(void)
 	m_pBg[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("sky_03.png"));
 	
 	//ロケットの生成
-	m_pRocket = CRocket::Create(D3DXVECTOR3(-800.0f, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	m_pRocket = CRocket::Create(D3DXVECTOR3(GAME01_ROCKET_POS_X, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
 	return S_OK;
 }
@@ -192,6 +204,9 @@ void CGame01::Uninit(void)
 	//スコアを保存
 	CManager::GetInstance()->GetPlayData()->SetScore(CManager::GetInstance()->GetPlayData()->GetScorePoint()->GetScore());
 	
+	//トロフィーの飛距離のフラグ処理
+	FlyingDistanceFlag();
+
 	//オブジェクトの破棄
 	Release();
 }
@@ -255,12 +270,24 @@ void CGame01::Update(void)
 		Gauge();
 	}
 
-	//発射処理
-	Shot();
+	//ポーズのフラグが立っていなかったら
+	if (m_bPause == false)
+	{
+		//発射処理
+		Shot();
+	}
 
 	//フィニッシュ処理
 	Finish();
 
+	//ポーズのフラグが立っていたら
+	if (m_bPause == true)
+	{
+		//フラグをおろす
+		m_bPause = false;
+	}
+
+#ifdef _DEBUG
 	//キーボード取得処理
 	CInputKeyboard *pInputKeyboard;
 	pInputKeyboard = CManager::GetInstance()->GetInputKeyboard();
@@ -277,6 +304,7 @@ void CGame01::Update(void)
 			pFade->SetFade(CManager::MODE::RESULT);
 		}
 	}
+#endif // !_DEBUG
 }
 
 //================================================
@@ -405,6 +433,13 @@ void CGame01::Road(void)
 		floorPos.x += -m_pPlayer->GetMoveForward();
 		//位置設定
 		m_pFloor->SetPos(floorPos, floorSize);
+
+		//雲の位置を取得
+		D3DXVECTOR3 pos = m_pStart->GetModel()->GetPos();
+		//位置を移動させる
+		pos.x += -m_pPlayer->GetMoveForward();
+		//位置設定
+		m_pStart->GetModel()->SetPos(pos);
 	}
 
 	//常にプレイヤーが前に進む力分逆の方向に移動させる
@@ -433,6 +468,9 @@ void CGame01::Road(void)
 				//消す
 				m_pFloor->Uninit();
 				m_pFloor = nullptr;
+
+				m_pStart->Uninit();
+				m_pStart = nullptr;
 			}
 		}
 	}
@@ -658,8 +696,8 @@ void CGame01::Shot(void)
 
 
 
-		//マウスを離した瞬間
-		if (pInputMouse->GetRelease(CInputMouse::MOUSE_TYPE_LEFT) == true)
+		//マウスを離した瞬間且つ矢印が生成されていたら
+		if (pInputMouse->GetRelease(CInputMouse::MOUSE_TYPE_LEFT) == true && m_pArrow!= nullptr)
 		{
 			//マウスを離した状態のフラグを立てる
 			m_bReleaseMouse = true;
@@ -697,7 +735,7 @@ void CGame01::Shot(void)
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_1 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_2)
 			{//既定の値より大きくて既定の値以下の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_2;
-				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("good.png"));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("bad.png"));
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_2 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_3)
 			{//既定の値より大きくて既定の値以下の時
@@ -707,7 +745,7 @@ void CGame01::Shot(void)
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_3 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_4)
 			{//既定の値より大きくて既定の値以下の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_4;
-				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("great.png"));
+				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("good.png"));
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_4 && m_pGauge->GetGauge() < m_pGauge->GetMaxNum())
 			{//既定の値より大きくて最大より小さいの時
@@ -854,5 +892,53 @@ void CGame01::Finish(void)
 		}
 		//カウンターを増やす
 		m_nFinishCounter++;
+	}
+}
+
+//================================================
+//トロフィーの飛距離のフラグ処理
+//================================================
+void CGame01::FlyingDistanceFlag(void)
+{
+	//スコアの取得
+	int nScore = CManager::GetInstance()->GetPlayData()->GetScore();
+
+	//トロフィーのフラグ状態を取得
+	vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+
+	if (nScore >= GAME01_FLYING_DISTANCE_1000)
+	{
+		//トロフィーを取得したことがなかったら
+		if (flag[(int)CTrophy::TROPHY::M_1000] == false)
+		{
+			//取得させる
+			flag[(int)CTrophy::TROPHY::M_1000] = true;
+			//フラグを立てる
+			CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+		}
+
+		if (nScore >= GAME01_FLYING_DISTANCE_5000)
+		{
+			//トロフィーを取得したことがなかったら
+			if (flag[(int)CTrophy::TROPHY::M_5000] == false)
+			{
+				//取得させる
+				flag[(int)CTrophy::TROPHY::M_5000] = true;
+				//フラグを立てる
+				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+			}
+
+			if (nScore >= GAME01_FLYING_DISTANCE_10000)
+			{
+				//トロフィーを取得したことがなかったら
+				if (flag[(int)CTrophy::TROPHY::M_10000] == false)
+				{
+					//取得させる
+					flag[(int)CTrophy::TROPHY::M_10000] = true;
+					//フラグを立てる
+					CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+				}
+			}
+		}
 	}
 }

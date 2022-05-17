@@ -11,7 +11,7 @@
 #include "input_keyboard.h"
 #include "pause.h"
 #include "fade.h"
-#include "menu.h"
+#include "game01.h"
 
 //================================================
 //マクロ定義
@@ -100,6 +100,13 @@ void CPause::Update(void)
 		{
 			if (m_bPause == false)
 			{
+				//ゲーム中にポーズのフラグが立っていなかったら
+				if (CManager::GetInstance()->GetGame01()->GetPause() == false)
+				{
+					//フラグを立てる
+					CManager::GetInstance()->GetGame01()->SetPause(true);
+				}
+
 				m_bPause = true;
 
 				//フレームを作成
@@ -122,6 +129,13 @@ void CPause::Update(void)
 			}
 			else
 			{
+				//ゲーム中にポーズのフラグが立っていなかったら
+				if (CManager::GetInstance()->GetGame01()->GetPause() == false)
+				{
+					//フラグを立てる
+					CManager::GetInstance()->GetGame01()->SetPause(true);
+				}
+
 				m_bPause = false;
 
 				m_pObject2D[0]->Uninit();
@@ -159,11 +173,17 @@ void CPause::Update(void)
 					m_apObject2D[count]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 					if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 					{
+						//ゲーム中にポーズのフラグが立っていなかったら
+						if (CManager::GetInstance()->GetGame01()->GetPause() == false)
+						{
+							//フラグを立てる
+							CManager::GetInstance()->GetGame01()->SetPause(true);
+						}
+
+						m_bPause = false;
 						switch (count)
 						{
 						case SELECT_START:
-							m_bPause = false;
-
 							m_pObject2D[0]->Uninit();
 							m_pObject2D[0] = nullptr;
 							m_pObject2D[1]->Uninit();

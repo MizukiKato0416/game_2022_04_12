@@ -15,6 +15,7 @@ class CGauge;
 class CBg;
 class CObject2D;
 class CRocket;
+class CModelSingle;
 
 //================================================
 //マクロ定義
@@ -32,7 +33,7 @@ class CRocket;
 class CGame01 : public CObject
 {
 public:
-	CGame01(CObject::PRIORITY Priority = CObject::PRIORITY::NONE);		//コンストラクタ
+	CGame01(CObject::PRIORITY Priority = CObject::PRIORITY::GAME);		//コンストラクタ
 	~CGame01();									//デストラクタ
 
 	//メンバ関数
@@ -45,6 +46,10 @@ public:
 	void SetFinish(bool bFinish) { m_bFinish = bFinish; }
 	//終了取得処理
 	bool GetFinish(void) { return m_bFinish; }
+	//ポーズ設定処理
+	void SetPause(bool bPause) { m_bPause = bPause; }
+	//ポーズ取得処理
+	bool GetPause(void) { return m_bPause; }
 
 private:
 	void Camera(void);					//カメラの処理
@@ -56,10 +61,12 @@ private:
 	void ShotUi(void);					//発射UI処理
 	void Rocket(void);					//ロケットの処理
 	void Finish(void);					//ゴール処理
+	void FlyingDistanceFlag(void);		//トロフィーの飛距離のフラグ処理
 
 	//メンバ変数
 	CPlayer *m_pPlayer;					//プレイヤーのポインタ
 	CFloor *m_pFloor;					//床のポインタ
+	CModelSingle *m_pStart;				//スタート床のポインタ
 	CRoad *m_apRoad[GAME01_MAX_ROAD];	//道のポインタ
 	D3DXVECTOR3 m_mouseTriggerPos;		//マウスをクリックした瞬間の位置
 	CGauge *m_pGauge;					//発射ゲージ
@@ -74,6 +81,7 @@ private:
 	CObject2D *m_pArrow;				//矢印UIのポインタ
 	bool m_bFinish;						//終了フラグ
 	int m_nFinishCounter;				//終了時のカウンター
+	bool m_bPause;						//ポーズのフラグ
 };
 
 #endif // !_GAME01_H_

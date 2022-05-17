@@ -8,6 +8,8 @@
 // インクルード
 //=============================================================================
 #include "object.h"
+#include "pause.h"
+#include "manager.h"
 
 //=============================================================================
 // 静的メンバ変数宣言
@@ -51,8 +53,12 @@ void CObject::ReleaseAll(void)
 			{
 				if (m_object[count_priolty][count_object]->m_priority != static_cast<int>(PRIORITY::FADE))
 				{
-					delete m_object[count_priolty][count_object];
-					m_object[count_priolty].pop_back();
+					m_object[count_priolty][count_object]->Uninit();
+					if (m_object[count_priolty][count_object]->m_deth == true)
+					{
+						delete m_object[count_priolty][count_object];
+						m_object[count_priolty].pop_back();
+					}
 				}
 			}
 		}
@@ -82,8 +88,30 @@ void CObject::UpdateAll(void)
 				m_object[count_priolty][count_object]->m_update_count++;
 				if (m_object[count_priolty][count_object]->m_update_count >= m_object[count_priolty][count_object]->m_update_frame)
 				{
-					m_object[count_priolty][count_object]->Update();
-					m_object[count_priolty][count_object]->m_update_count = 0;
+					//m_object[count_priolty][count_object]->Update();
+					//m_object[count_priolty][count_object]->m_update_count = 0;
+
+					if (CManager::GetMode() == CManager::MODE::GAME01)
+					{
+						if (CPause::GetPause() == false)
+						{
+							m_object[count_priolty][count_object]->Update();
+							m_object[count_priolty][count_object]->m_update_count = 0;
+						}
+						else
+						{
+							if (count_priolty == (int)PRIORITY::PAUSE || count_priolty == (int)PRIORITY::FADE)
+							{
+								m_object[count_priolty][count_object]->Update();
+								m_object[count_priolty][count_object]->m_update_count = 0;
+							}
+						}
+					}
+					else
+					{
+						m_object[count_priolty][count_object]->Update();
+						m_object[count_priolty][count_object]->m_update_count = 0;
+					}
 				}
 			}
 		}

@@ -27,7 +27,7 @@ class CRanking;
 class CResult : public CObject
 {
 public:
-	CResult();				//コンストラクタ
+	CResult(PRIORITY priorty = PRIORITY::NONE);				//コンストラクタ
 	~CResult();				//デストラクタ
 
 	//メンバ関数

@@ -17,13 +17,13 @@ class CInputMouse;
 class CTexture;
 class CXload;
 class CTitle;
-class CMenu;
 class CGame01;
 class CResult;
 class CFade;
 class CMotionRoad;
 class CPlayData;
 class CTrophy;
+//class CPause;
 
 //================================================
 //マクロ定義
@@ -40,8 +40,7 @@ public:
 	enum class MODE
 	{
 		TITLE = 0,		//タイトル
-		MENU,			//メニュー
-		TROPHY,		//トロフィールーム
+		TROPHY,			//トロフィールーム
 		GAME01,			//ゲーム01
 		RESULT,			//リザルト
 		MAX
@@ -65,7 +64,6 @@ public:
 	static CXload *GetXload(void);						//xファイル読み込み取得処理
 	static CTitle *GetTitle(void);						//タイトル取得処理
 	static CTrophy *GetTrophy(void);					//トロフィールーム取得処理
-	static CMenu *GetMenu(void);						//メニュー取得処理
 	static CGame01 *GetGame01(void);					//ゲーム01取得処理
 	static CResult *GetResult(void);					//リザルト取得処理
 	static void SetMode(MODE mode);						//モード設定
@@ -73,6 +71,7 @@ public:
 	static CFade *GetFade(void);						//フェード取得処理
 	static CMotionRoad *GetMotionRoad(void);			//モーションロード取得処理
 	static CPlayData *GetPlayData(void);				//プレイデータ取得処理
+	//static CPause *GetPause(void);						//ポーズ取得処理
 	static HWND GetWindowHandle(void) { return m_hWnd; }//hwnd取得処理
 
 private:
@@ -92,13 +91,13 @@ private:
 	static CXload *m_pXload;							//xファイル読み込みのポインタ
 	static CTitle *m_pTitle;							//タイトルのポインタ
 	static CTrophy *m_pTrophy;							//トロフィールのポインタ
-	static CMenu *m_pMenu;								//タイトルのポインタ
 	static CGame01 *m_pGame01;							//ゲーム01のポインタ
 	static CResult *m_pResult;							//リザルトのポインタ
 	static MODE m_mode;									//モード
 	static CFade *m_pFade;								//フェードのポインタ
 	static CMotionRoad *m_pMotionRoad;					//モーションロードのポインタ
 	static CPlayData *m_pPlayData;						//プレイデータのポインタ
+	//static CPause *m_pPause;							//ポーズのポインタ
 	static HWND m_hWnd;									//ウィンドウハンドル
 };
 

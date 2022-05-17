@@ -58,7 +58,7 @@ HRESULT CHappenig::Init(void)
 //=============================================================================
 void CHappenig::Uninit(void)
 {
-	if (m_model != nullptr)
+	if (m_model != nullptr && m_model->GetDeath() == false)
 	{
 		m_model->Uninit();
 		m_model = nullptr;

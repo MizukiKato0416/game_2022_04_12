@@ -26,17 +26,18 @@ public:
 	{
 		NONE = 0,			// なし
 		PLAYER,				// プレイヤー
-		MODEL,				// モデル
 		HAPPENING,			// ハプニング
+		MODEL,				// モデル
 		POLYGON_3D,			// 3Dポリゴン
 		SHADOW,				// 影
 		MESH_FIELD,			// メッシュフィールド
-		ROAD,				// ステージ
 		EFFECT3D,			// パーティクル
 		UI,					// UI
 		RANKING,			// ランキング
 		MASK,				// マスク
 		PAUSE,				// ポーズ
+		GAME,				// ゲーム
+		ROAD,				// ステージ
 		FADE,				// フェード
 		MAX
 	};

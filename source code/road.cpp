@@ -58,7 +58,7 @@ CRoad::~CRoad()
 HRESULT CRoad::Init(void)
 {
 	m_floor = CFloor::Create(m_pos, m_size, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	m_floor->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
+	m_floor->SetCol(D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f));
 	m_cloud = CModelSingle::Create(D3DXVECTOR3(m_pos.x, m_pos.y - 1500.0f, m_pos.z + 500.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 		                           CXload::X_TYPE_CLOUD, NULL, false);
 
@@ -110,17 +110,17 @@ HRESULT CRoad::Init(void)
 void CRoad::Uninit(void)
 {
 	int model_size = m_happening_model.size();
-	if (m_floor != nullptr)
+	if (m_floor != nullptr && m_floor->GetDeath() == false)
 	{
 		m_floor->Uninit();
 	}
-	if (m_cloud != nullptr)
+	if (m_cloud != nullptr && m_cloud->GetDeath() == false)
 	{
 		m_cloud->Uninit();
 	}
 	for (int model_count = 0; model_count < model_size; model_count++)
 	{
-		if (m_happening_model[model_count] != nullptr)
+		if (m_happening_model[model_count] != nullptr && m_happening_model[model_count]->GetDeath() == false)
 		{
 			//オブジェクトタイプが飛行機の時
 			if (m_happening_model[model_count]->GetObjType() == CObject::OBJTYPE::AIR_PLANE)
