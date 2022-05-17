@@ -14,6 +14,7 @@
 #include "result.h"
 #include "tcp_client.h"
 #include "communicationdata.h"
+#include "object2D.h"
 
 //================================================
 //マクロ定義
@@ -61,8 +62,39 @@ HRESULT CRanking::Init(void)
 	//スコアの生成
 	for (int nCntRanking = 0; nCntRanking < MAX_RANKING; nCntRanking++)
 	{
+		CObject2D *pNumber;
+
 		m_apScore[nCntRanking] = CScore::Create(D3DXVECTOR3((m_pos.x), m_pos.y + ((float)(RANKING_SIZE_Y / (MAX_RANKING + 1)) * nCntRanking + (float)(RANKING_SIZE_Y / (MAX_RANKING + 1))), 0.0f),
 											    m_size);
+		switch (nCntRanking)
+		{
+		case 0:
+			pNumber = CObject2D::Create(D3DXVECTOR3(((m_pos.x - ((MAX_SCORE_POLYGON / 2) * m_size.x) - 50.0f)), m_pos.y + ((float)(RANKING_SIZE_Y / (MAX_RANKING + 1)) * nCntRanking + (float)(RANKING_SIZE_Y / (MAX_RANKING + 1))), 0.0f), D3DXVECTOR3(100.0f, 50.0f, 0.0f), static_cast<int>(CObject::PRIORITY::RANKING));
+			pNumber->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("1st.png"));
+			break;
+		case 1:
+			pNumber = CObject2D::Create(D3DXVECTOR3(((m_pos.x - ((MAX_SCORE_POLYGON / 2) * m_size.x) - 50.0f)), m_pos.y + ((float)(RANKING_SIZE_Y / (MAX_RANKING + 1)) * nCntRanking + (float)(RANKING_SIZE_Y / (MAX_RANKING + 1))), 0.0f), D3DXVECTOR3(100.0f, 50.0f, 0.0f), static_cast<int>(CObject::PRIORITY::RANKING));
+			pNumber->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("2nd.png"));
+			break;
+		case 2:
+			pNumber = CObject2D::Create(D3DXVECTOR3(((m_pos.x - ((MAX_SCORE_POLYGON / 2) * m_size.x) - 50.0f)), m_pos.y + ((float)(RANKING_SIZE_Y / (MAX_RANKING + 1)) * nCntRanking + (float)(RANKING_SIZE_Y / (MAX_RANKING + 1))), 0.0f), D3DXVECTOR3(100.0f, 50.0f, 0.0f), static_cast<int>(CObject::PRIORITY::RANKING));
+			pNumber->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("3rd.png"));
+			break;
+		case 3:
+			pNumber = CObject2D::Create(D3DXVECTOR3(((m_pos.x - ((MAX_SCORE_POLYGON / 2) * m_size.x) - 50.0f)), m_pos.y + ((float)(RANKING_SIZE_Y / (MAX_RANKING + 1)) * nCntRanking + (float)(RANKING_SIZE_Y / (MAX_RANKING + 1))), 0.0f), D3DXVECTOR3(100.0f, 50.0f, 0.0f), static_cast<int>(CObject::PRIORITY::RANKING));
+			pNumber->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("4th.png"));
+			break;
+		case 4:
+			pNumber = CObject2D::Create(D3DXVECTOR3(((m_pos.x - ((MAX_SCORE_POLYGON / 2) * m_size.x) - 50.0f)), m_pos.y + ((float)(RANKING_SIZE_Y / (MAX_RANKING + 1)) * nCntRanking + (float)(RANKING_SIZE_Y / (MAX_RANKING + 1))), 0.0f), D3DXVECTOR3(100.0f, 50.0f, 0.0f), static_cast<int>(CObject::PRIORITY::RANKING));
+			pNumber->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("5th.png"));
+			break;
+		case 5:
+			pNumber = CObject2D::Create(D3DXVECTOR3(((m_pos.x - ((MAX_SCORE_POLYGON / 2) * m_size.x) - 50.0f)), m_pos.y + ((float)(RANKING_SIZE_Y / (MAX_RANKING + 1)) * nCntRanking + (float)(RANKING_SIZE_Y / (MAX_RANKING + 1))), 0.0f), D3DXVECTOR3(100.0f, 50.0f, 0.0f), static_cast<int>(CObject::PRIORITY::RANKING));
+			pNumber->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("6th.png"));
+			break;
+		default:
+			break;
+		}
 	}
 	CCommunicationData::COMMUNICATION_DATA *pData = m_pCommuData->GetCommuData();
 	int nScore = CManager::GetPlayData()->GetScore();
