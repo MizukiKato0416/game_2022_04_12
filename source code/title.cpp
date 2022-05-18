@@ -13,6 +13,7 @@
 #include "play_data.h"
 #include "input_mouse.h"
 #include "fade.h"
+#include "sound.h"
 
 //=============================================================================
 // ƒ}ƒNƒ’è‹`
@@ -46,6 +47,13 @@ CTitle::~CTitle()
 HRESULT CTitle::Init(void)
 {
 	CObject2D *pObject2D[2];
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
+
+	sound->Stop();
+	sound->Play(CSound::SOUND_LABEL::TITLE_BGM);
+	sound->ControllVoice(CSound::SOUND_LABEL::TITLE_BGM, 1.4f);
+
 	pObject2D[0] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 	pObject2D[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Bg.png"));
 	pObject2D[1] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 0.0f + 200.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH * 0.9f, SCREEN_HEIGHT * 0.3f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
@@ -108,6 +116,8 @@ void CTitle::SeletMode(void)
 	D3DXVECTOR3 size[3];
 	POINT point;
 	HWND hwnd;
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
 	pos[0] = m_button[0]->GetPos();
 	size[0] = m_button[0]->GetSize();
 	pos[1] = m_button[1]->GetPos();
@@ -130,6 +140,8 @@ void CTitle::SeletMode(void)
 		m_button[3]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true && fade->GetFade() == CFade::FADE_NONE)
 		{
+			sound->ControllVoice(CSound::SOUND_LABEL::DECISION_SE, 1.2f);
+			sound->Play(CSound::SOUND_LABEL::DECISION_SE);
 			fade->SetFade(CManager::MODE::GAME01);
 		}
 	}
@@ -149,6 +161,8 @@ void CTitle::SeletMode(void)
 		m_button[4]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true && fade->GetFade() == CFade::FADE_NONE)
 		{
+			sound->ControllVoice(CSound::SOUND_LABEL::DECISION_SE, 1.2f);
+			sound->Play(CSound::SOUND_LABEL::DECISION_SE);
 			fade->SetFade(CManager::MODE::TROPHY);
 		}
 	}
@@ -168,6 +182,8 @@ void CTitle::SeletMode(void)
 		m_button[5]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 		{
+			sound->ControllVoice(CSound::SOUND_LABEL::DECISION_SE, 1.2f);
+			sound->Play(CSound::SOUND_LABEL::DECISION_SE);
 			for (int count_tutorial = 0; count_tutorial < 5; count_tutorial++)
 			{
 				m_tutorial.push_back(CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
@@ -197,6 +213,8 @@ void CTitle::Tutorial(void)
 	CInputMouse *mouse;
 	POINT point;
 	HWND hwnd;
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
 	hwnd = CManager::GetInstance()->GetWindowHandle();
 	mouse = CManager::GetInstance()->GetInputMouse();
 	GetCursorPos(&point);
@@ -218,6 +236,8 @@ void CTitle::Tutorial(void)
 			m_tutorial[5]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 			if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 			{
+				sound->ControllVoice(CSound::SOUND_LABEL::CANSEL_SE, 1.2f);
+				sound->Play(CSound::SOUND_LABEL::CANSEL_SE);
 				int tutorial_size = m_tutorial.size();
 				for (int count_tutorial = tutorial_size - 1; count_tutorial >= 0; count_tutorial--)
 				{

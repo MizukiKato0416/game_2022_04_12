@@ -12,6 +12,7 @@
 #include "pause.h"
 #include "fade.h"
 #include "game01.h"
+#include "sound.h"
 
 //================================================
 //ƒ}ƒNƒ’è‹`
@@ -80,6 +81,8 @@ void CPause::Update(void)
 	POINT point;
 	HWND hwnd;
 	CInputMouse *mouse;
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
 	hwnd = CManager::GetWindowHandle();
 	GetCursorPos(&point);
 	ScreenToClient(hwnd, &point);
@@ -158,6 +161,7 @@ void CPause::Update(void)
 
 	if (m_bPause == true)
 	{
+		sound->ControllVoice(CSound::SOUND_LABEL::GAME_BGM, 0.4f);
 		for (int count = 0; count < SELECT_MAX; count++)
 		{
 			if (m_apObject2D[count] != nullptr)
@@ -198,6 +202,8 @@ void CPause::Update(void)
 						case SELECT_EXIT:
 							if (pFade->GetFade() == CFade::FADE_NONE)
 							{
+								sound->ControllVoice(CSound::SOUND_LABEL::DECISION_SE, 1.2f);
+								sound->Play(CSound::SOUND_LABEL::DECISION_SE);
 								pFade->SetFade(CManager::MODE::TITLE);
 							}
 							break;
@@ -212,6 +218,10 @@ void CPause::Update(void)
 				}
 			}
 		}
+	}
+	else
+	{
+		sound->ControllVoice(CSound::SOUND_LABEL::GAME_BGM, 1.6f);
 	}
 }
 

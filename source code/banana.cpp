@@ -13,6 +13,7 @@
 #include "play_data.h"
 #include "manager.h"
 #include "trophy.h"
+#include "sound.h"
 
 //=============================================================================
 // マクロ定義
@@ -70,9 +71,13 @@ void CBanana::Uninit(void)
 //=============================================================================
 void CBanana::Update(void)
 {
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
 	CHappenig::Update();
 	if (CHappenig::HitPlayer() == true)
 	{
+		sound->ControllVoice(CSound::SOUND_LABEL::BANANA_SE, 1.4f);
+		sound->Play(CSound::SOUND_LABEL::BANANA_SE);
 		if (m_bHitPlayer == false)
 		{
 			//トロフィーのフラグ状態を取得

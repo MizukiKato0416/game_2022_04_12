@@ -15,6 +15,7 @@
 #include "play_data.h"
 #include "manager.h"
 #include "trophy.h"
+#include "sound.h"
 
 //=============================================================================
 // マクロ定義
@@ -112,6 +113,8 @@ void CFan::Uninit(void)
 //=============================================================================
 void CFan::Update(void)
 {
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
 	CHappenig::Update();
 
 	for (int nCntWind = 0; nCntWind < FAN_MAX_WIND_EFFECT; nCntWind++)
@@ -150,7 +153,8 @@ void CFan::Update(void)
 
 				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
 			}
-
+			sound->ControllVoice(CSound::SOUND_LABEL::FAN_SE, 1.4f);
+			sound->Play(CSound::SOUND_LABEL::FAN_SE);
 			m_bHitPlayer = true;
 			//当たっている状態にする
 			CHappenig::SetHit(true);
@@ -236,6 +240,8 @@ void CFan::Update(void)
 					player->SetBoundMove(player->GetJump());
 					//回転のスピードを設定
 					player->SetRotSpeed(PLAYER_ROTATE);
+
+					sound->Stop(CSound::SOUND_LABEL::FAN_SE);
 
 					//軌道エフェクトが出てないなら
 					if (player->GetSparkle() == false)

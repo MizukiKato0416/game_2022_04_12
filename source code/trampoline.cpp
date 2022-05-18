@@ -13,6 +13,7 @@
 #include "play_data.h"
 #include "manager.h"
 #include "trophy.h"
+#include "sound.h"
 
 //=============================================================================
 // マクロ定義
@@ -70,6 +71,8 @@ void CTrampoline::Uninit(void)
 //=============================================================================
 void CTrampoline::Update(void)
 {
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
 	CHappenig::Update();
 	if (CHappenig::HitPlayer() == true)
 	{
@@ -85,7 +88,6 @@ void CTrampoline::Update(void)
 
 				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
 			}
-
 			m_bHitPlayer = true;
 			//当たっている状態にする
 			CHappenig::SetHit(true);
@@ -149,6 +151,9 @@ void CTrampoline::Update(void)
 					player->SetBoundMove(player->GetJump());
 					//回転のスピードを設定
 					player->SetRotSpeed(PLAYER_ROTATE);
+
+					sound->ControllVoice(CSound::SOUND_LABEL::TRAMPOLINE_SE, 1.4f);
+					sound->Play(CSound::SOUND_LABEL::TRAMPOLINE_SE);
 
 					//軌道エフェクトが出てないなら
 					if (player->GetSparkle() == false)

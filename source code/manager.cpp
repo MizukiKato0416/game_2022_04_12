@@ -23,6 +23,7 @@
 #include "play_data.h"
 #include "pause.h"
 #include "trophy.h"
+#include "sound.h"
 
 //================================================
 //静的メンバ変数宣言
@@ -45,6 +46,7 @@ CManager::MODE CManager::m_mode = MODE::TITLE;
 CFade *CManager::m_pFade = nullptr;
 CMotionRoad *CManager::m_pMotionRoad = nullptr;
 CPlayData *CManager::m_pPlayData = nullptr;
+CSound *CManager::m_pSound = nullptr;
 //CPause *CManager::m_pPause = nullptr;
 HWND CManager::m_hWnd = NULL;
 
@@ -164,6 +166,15 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 		}
 	}
 
+	if (m_pSound == nullptr)
+	{
+		m_pSound = new CSound;
+		if (m_pSound != nullptr)
+		{
+			m_pSound->Init();
+		}
+	}
+
 	//ポーズクラスの生成
 	/*if (m_pPause == nullptr)
 	{
@@ -215,6 +226,14 @@ void CManager::Uninit(void)
 		//メモリの開放
 		delete m_pPlayData;
 		m_pPlayData = nullptr;
+	}
+
+	if (m_pSound != nullptr)
+	{
+		m_pSound->Uninit();
+
+		delete m_pSound;
+		m_pSound = nullptr;
 	}
 
 	//モーションロードクラスの破棄

@@ -27,6 +27,7 @@
 #include "rocket.h"
 #include "model.h"
 #include "trophy.h"
+#include "sound.h"
 
 //================================================
 //マクロ定義
@@ -140,6 +141,12 @@ HRESULT CGame01::Init(void)
 	m_bFinish = false;
 	m_nFinishCounter = 0;
 	m_bPause = false;
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
+
+	sound->Stop();
+	sound->Play(CSound::SOUND_LABEL::GAME_BGM);
+	sound->ControllVoice(CSound::SOUND_LABEL::GAME_BGM, 1.6f);
 
 	//スコアの生成
 	CScore *pSocre = nullptr;
@@ -496,6 +503,9 @@ void CGame01::Road(void)
 //================================================
 void CGame01::Gauge(void)
 {
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
+
 	//ゲージを増やす
 	m_pGauge->AddGauge(GAME01_SHOT_GAUGE_ADD);
 
@@ -583,6 +593,8 @@ void CGame01::UninitArrow(void)
 //================================================
 void CGame01::Shot(void)
 {
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
 #ifdef _DEBUG
 	if (m_pPlayer->GetShot() == true)
 	{
@@ -639,6 +651,9 @@ void CGame01::Shot(void)
 		//マウスを押した瞬間
 		if (pInputMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 		{
+			sound->Play(CSound::SOUND_LABEL::GAGE_SE);
+			sound->ControllVoice(CSound::SOUND_LABEL::GAGE_SE, 1.4f);
+
 			//マウスの位置取得
 			POINT mouseTriggerPos;
 			GetCursorPos(&mouseTriggerPos);
@@ -699,6 +714,7 @@ void CGame01::Shot(void)
 		//マウスを離した瞬間且つ矢印が生成されていたら
 		if (pInputMouse->GetRelease(CInputMouse::MOUSE_TYPE_LEFT) == true && m_pArrow!= nullptr)
 		{
+			sound->Stop(CSound::SOUND_LABEL::GAGE_SE);
 			//マウスを離した状態のフラグを立てる
 			m_bReleaseMouse = true;
 
@@ -870,6 +886,9 @@ void CGame01::Rocket(void)
 //================================================
 void CGame01::Finish(void)
 {
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
+
 	//終了したら
 	if (m_bFinish == true)
 	{
@@ -878,6 +897,8 @@ void CGame01::Finish(void)
 			CObject2D *pObject2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
 				                                     D3DXVECTOR3(600.0f, 100.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 			pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("finish.png"));
+			sound->Play(CSound::SOUND_LABEL::GOAL_SE);
+			sound->ControllVoice(CSound::SOUND_LABEL::GOAL_SE, 1.4f);
 		}
 		else if (m_nFinishCounter > GAME01_FINISH_COUNTER)
 		{

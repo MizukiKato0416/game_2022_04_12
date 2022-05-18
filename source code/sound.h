@@ -27,20 +27,22 @@ public:
 	//サウンドファイル
 	enum class SOUND_LABEL
 	{
-		CANCEL_SE = 0,			//キャンセルSE
-		DECIDE_SE,				//決定SE
-		CURSOR_SE,				//カーソルのSE
-		PAUSE_SE,				//ポーズSE
-		GAMECLEAR_SE,			//ゲームクリアSE
-		GAMEOVER_SE,			//ゲームオーバーSE
-		SLASH_SE,				//斬撃SE
-		GUARD_SE,				//ガードSE
-		MAGIC_SE,				//魔法SE
-		SPECIAL_SE,				//必殺技SE
-		TITLE_BGM,				//タイトルBGM
-		MENU_BGM,				//メニューBGM
-		GAME_BGM,				//ゲーム内BGM
+		AIRPLANE_SE = 0,		//飛行機SE
+		BANANA_SE,				//バナナSE
+		CANSEL_SE,				//戻るのSE
+		PAUSE_BUTTON_SE,		//ポーズSE
+		DECISION_SE,			//決定SE
+		FAN_SE,					//扇風機SE
+		GAGE_SE,				//ゲージSE
+		GOAL_SE,				//ゴールSE
+		REDBULL_SE,				//レッドブルSE
+		ROCKET_SE,				//ロケットSE
+		STAR_RING_SE,			//starringSE
+		THORN_SE,				//とげSE
+		TRAMPOLINE_SE,			//トランポリンSE
 		RESULT_BGM,				//リザルトBGM
+		GAME_BGM,				//ゲームBGM
+		TITLE_BGM,				//タイトルBGM
 		MAX,
 	};
 

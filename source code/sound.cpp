@@ -9,20 +9,22 @@
 //================================================
 CSound::PARAM CSound::m_aParam[(int)SOUND_LABEL::MAX] =
 {
-	{ "data/SOUND/SE/cancel_SE.wav", 0 },			//キャンセルSE
-	{ "data/SOUND/SE/decide_SE.wav", 0 },			//決定SE
-	{ "data/SOUND/SE/cursor_SE.wav", 0 },			//カーソルのSE
-	{ "data/SOUND/SE/pause_SE.wav", 0 },			//ポーズSE
-	{ "data/SOUND/SE/gameClear_SE.wav", 0 },		//ゲームクリアSE
-	{ "data/SOUND/SE/gameOver_SE.wav", 0 },			//ゲームオーバーSE
-	{ "data/SOUND/SE/slash_SE.wav", 0 },			//斬撃SE
-	{ "data/SOUND/SE/guard_SE.wav", 0 },			//ガードSE
-	{ "data/SOUND/SE/magic_SE.wav", 0 },			//魔法SE
-	{ "data/SOUND/SE/special_SE.wav", 0 },			//必殺技SE
-	{ "data/SOUND/BGM/titele_BGM.wav", -1 },		//タイトルBGM
-	{ "data/SOUND/BGM/menu_BGM.wav", -1 },			//メニューBGM
-	{ "data/SOUND/BGM/tutorial_BGM.wav", -1 },		//ゲーム内BGM
-	{ "data/SOUND/BGM/game_BGM.wav", -1 },			//リザルトBGM
+	{ "data/SOUND/SE/Airplane.wav", 0 },		//飛行機SE
+	{ "data/SOUND/SE/banana.wav", 0 },			//バナナSE
+	{ "data/SOUND/SE/cancel.wav", 0 },			//戻るのSE
+	{ "data/SOUND/SE/pause.wav", 0 },			//ポーズSE
+	{ "data/SOUND/SE/enter.wav", 0 },			//決定SE
+	{ "data/SOUND/SE/fan.wav", 0 },				//扇風機SE
+	{ "data/SOUND/SE/gage.wav", -1 },			//ゲージSE
+	{ "data/SOUND/SE/goal.wav", 0 },			//ゴールSE
+	{ "data/SOUND/SE/redbull.wav", 0 },			//レッドブルSE
+	{ "data/SOUND/SE/rocket.wav", 0 },			//ロケットSE
+	{ "data/SOUND/SE/star.wav", 0 },			//starringSE
+	{ "data/SOUND/SE/thorn.wav", 0 },			//とげSE
+	{ "data/SOUND/SE/trampoline.wav", 0 },		//トランポリンSE
+	{ "data/SOUND/BGM/result.wav", -1 },		//リザルトBGM
+	{ "data/SOUND/BGM/game.wav", -1 },			//ゲームBGM
+	{ "data/SOUND/BGM/title.wav", -1 },			//タイトルBGM
 };
 
 //================================================
