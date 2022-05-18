@@ -7,7 +7,7 @@
 //================================================
 //静的メンバ変数宣言
 //================================================
-CSound::PARAM CSound::m_aParam[SOUND_LABEL_MAX] =
+CSound::PARAM CSound::m_aParam[(int)SOUND_LABEL::MAX] =
 {
 	{ "data/SOUND/SE/cancel_SE.wav", 0 },			//キャンセルSE
 	{ "data/SOUND/SE/decide_SE.wav", 0 },			//決定SE
@@ -76,7 +76,7 @@ HRESULT CSound::Init(void)
 	}
 
 	// サウンドデータの初期化
-	for (int nCntSound = 0; nCntSound < SOUND_LABEL_MAX; nCntSound++)
+	for (int nCntSound = 0; nCntSound < (int)SOUND_LABEL::MAX; nCntSound++)
 	{
 		HANDLE hFile;
 		DWORD dwChunksize = 0;
@@ -166,7 +166,7 @@ HRESULT CSound::Init(void)
 void CSound::Uninit(void)
 {
 	// 一時停止
-	for (int nCntSound = 0; nCntSound < SOUND_LABEL_MAX; nCntSound++)
+	for (int nCntSound = 0; nCntSound < (int)SOUND_LABEL::MAX; nCntSound++)
 	{
 		if (m_apSourceVoice[nCntSound] != NULL)
 		{
@@ -204,27 +204,27 @@ HRESULT CSound::Play(const SOUND_LABEL &label)
 
 	// バッファの設定
 	memset(&buffer, 0, sizeof(XAUDIO2_BUFFER));
-	buffer.AudioBytes = m_asizeAudio[label];
-	buffer.pAudioData = m_apDataAudio[label];
+	buffer.AudioBytes = m_asizeAudio[(int)label];
+	buffer.pAudioData = m_apDataAudio[(int)label];
 	buffer.Flags = XAUDIO2_END_OF_STREAM;
-	buffer.LoopCount = m_aParam[label].nCntLoop;
+	buffer.LoopCount = m_aParam[(int)label].nCntLoop;
 
 	// 状態取得
-	m_apSourceVoice[label]->GetState(&xa2state);
+	m_apSourceVoice[(int)label]->GetState(&xa2state);
 	if (xa2state.BuffersQueued != 0)
 	{// 再生中
 	 // 一時停止
-		m_apSourceVoice[label]->Stop(0);
+		m_apSourceVoice[(int)label]->Stop(0);
 
 		// クリア
-		m_apSourceVoice[label]->FlushSourceBuffers();
+		m_apSourceVoice[(int)label]->FlushSourceBuffers();
 	}
 
 	// 登録
-	m_apSourceVoice[label]->SubmitSourceBuffer(&buffer);
+	m_apSourceVoice[(int)label]->SubmitSourceBuffer(&buffer);
 
 	// 再生
-	m_apSourceVoice[label]->Start(0);
+	m_apSourceVoice[(int)label]->Start(0);
 
 	return S_OK;
 }
@@ -237,14 +237,14 @@ void CSound::Stop(const SOUND_LABEL &label)
 	XAUDIO2_VOICE_STATE xa2state;
 
 	// 状態取得
-	m_apSourceVoice[label]->GetState(&xa2state);
+	m_apSourceVoice[(int)label]->GetState(&xa2state);
 	if (xa2state.BuffersQueued != 0)
 	{// 再生中
 	 // 一時停止
-		m_apSourceVoice[label]->Stop(0);
+		m_apSourceVoice[(int)label]->Stop(0);
 
 		// クリア
-		m_apSourceVoice[label]->FlushSourceBuffers();
+		m_apSourceVoice[(int)label]->FlushSourceBuffers();
 	}
 }
 
@@ -253,7 +253,7 @@ void CSound::Stop(const SOUND_LABEL &label)
 //=============================================================================
 void CSound::Stop(void)
 {
-	for (int nCntSound = 0; nCntSound < SOUND_LABEL_MAX; nCntSound++)
+	for (int nCntSound = 0; nCntSound < (int)SOUND_LABEL::MAX; nCntSound++)
 	{
 		if (m_apSourceVoice[nCntSound] != NULL)
 		{
