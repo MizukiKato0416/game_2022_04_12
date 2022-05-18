@@ -53,8 +53,8 @@ HRESULT CTrophy::Init(void)
 	sound = CManager::GetInstance()->GetSound();
 
 	sound->Stop();
-	sound->Play(CSound::SOUND_LABEL::TITLE_BGM);
-	sound->ControllVoice(CSound::SOUND_LABEL::TITLE_BGM, 1.4f);
+	sound->Play(CSound::SOUND_LABEL::TROPHY_BGM);
+	sound->ControllVoice(CSound::SOUND_LABEL::TROPHY_BGM, 1.4f);
 
 	CObject2D *pObject2D[3];
 	pObject2D[0] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), static_cast<int>(CObject::PRIORITY::UI));

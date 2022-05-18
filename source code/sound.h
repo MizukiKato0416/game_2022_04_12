@@ -41,9 +41,12 @@ public:
 		STAR_RING_SE,			//starringSE
 		THORN_SE,				//とげSE
 		TRAMPOLINE_SE,			//トランポリンSE
+		BREAK_SE,				//ブレーキSE
+		JUMP_SE,				//ジャンプSE
 		RESULT_BGM,				//リザルトBGM
 		GAME_BGM,				//ゲームBGM
 		TITLE_BGM,				//タイトルBGM
+		TROPHY_BGM,				//トロフィーBGM
 		MAX,
 	};
 
