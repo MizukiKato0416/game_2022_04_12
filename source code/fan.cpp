@@ -241,8 +241,6 @@ void CFan::Update(void)
 					//回転のスピードを設定
 					player->SetRotSpeed(PLAYER_ROTATE);
 
-					sound->Stop(CSound::SOUND_LABEL::FAN_SE);
-
 					//軌道エフェクトが出てないなら
 					if (player->GetSparkle() == false)
 					{
