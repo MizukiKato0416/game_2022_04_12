@@ -162,7 +162,7 @@ HRESULT CGame01::Init(void)
 
 	//スタート地点の生成
 	m_pFloor = CFloor::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), FLOOR_SIZE, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	m_pFloor->SetCol(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
+	m_pFloor->SetCol(D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.0f));
 	m_pStart = CModelSingle::Create(D3DXVECTOR3(0.0f, GAME01_START_CLOUD_POS_Y, GAME01_START_CLOUD_POS_Z), D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 		                            CXload::X_TYPE_CLOUD, NULL, false);
 

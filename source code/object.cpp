@@ -57,6 +57,7 @@ void CObject::ReleaseAll(void)
 					if (m_object[count_priolty][count_object]->m_deth == true)
 					{
 						delete m_object[count_priolty][count_object];
+						m_object[count_priolty][count_object] = nullptr;
 						m_object[count_priolty].pop_back();
 					}
 				}

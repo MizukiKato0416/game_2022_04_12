@@ -58,7 +58,7 @@ CRoad::~CRoad()
 HRESULT CRoad::Init(void)
 {
 	m_floor = CFloor::Create(m_pos, m_size, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	m_floor->SetCol(D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f));
+	m_floor->SetCol(D3DXCOLOR(1.0f, 0.0f, 1.0f, 0.0f));
 	m_cloud = CModelSingle::Create(D3DXVECTOR3(m_pos.x, m_pos.y - 1500.0f, m_pos.z + 500.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 		                           CXload::X_TYPE_CLOUD, NULL, false);
 
