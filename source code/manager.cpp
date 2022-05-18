@@ -23,6 +23,7 @@
 #include "play_data.h"
 #include "pause.h"
 #include "trophy.h"
+#include "effect_click.h"
 
 //================================================
 //静的メンバ変数宣言
@@ -389,6 +390,22 @@ void CManager::Update(void)
 				m_apCamera[nCntCamera]->Update();
 			}
 		}
+	}
+
+	//マウス取得処理
+	CInputMouse *pInputMouse;
+	pInputMouse = CManager::GetInstance()->GetInputMouse();
+
+	//マウスを押した瞬間
+	if (pInputMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
+	{
+		//マウスの位置取得
+		POINT mouseTriggerPos;
+		GetCursorPos(&mouseTriggerPos);
+		ScreenToClient(CManager::GetWindowHandle(), &mouseTriggerPos);
+
+		//マウスのクリック処理
+		CEffectClick::Create(D3DXVECTOR3(mouseTriggerPos.x, mouseTriggerPos.y, 0.0f));
 	}
 }
 

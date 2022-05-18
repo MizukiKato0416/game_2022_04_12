@@ -32,6 +32,7 @@ public:
 		SHADOW,				// 影
 		MESH_FIELD,			// メッシュフィールド
 		EFFECT3D,			// パーティクル
+		EFFECT2D,			// パーティクル
 		UI,					// UI
 		RANKING,			// ランキング
 		MASK,				// マスク
@@ -39,6 +40,7 @@ public:
 		GAME,				// ゲーム
 		ROAD,				// ステージ
 		FADE,				// フェード
+		CLICK_EFFECT,		//クリックエフェクト
 		MAX
 	};
 
@@ -49,6 +51,7 @@ public:
 		FLOOR,				// 床
 		BG,					// 背景
 		EFFECT_3D,			// 3Dエフェクト
+		EFFECT_2D,			// 2Dエフェクト
 		SPARKLE,			// キラキラエフェクト
 		MODEL,				// モデル
 		PLAYER,				// プレイヤー

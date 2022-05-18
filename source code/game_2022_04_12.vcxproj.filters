@@ -219,6 +219,12 @@
     <ClCompile Include="input_pad_x.cpp">
       <Filter>ソース ファイル\input</Filter>
     </ClCompile>
+    <ClCompile Include="effect_click.cpp">
+      <Filter>ソース ファイル\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="effect2D.cpp">
+      <Filter>ソース ファイル\effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="billboard.h">
@@ -397,6 +403,12 @@
     </ClInclude>
     <ClInclude Include="input_pad_x.h">
       <Filter>ヘッダー ファイル\input</Filter>
+    </ClInclude>
+    <ClInclude Include="effect_click.h">
+      <Filter>ヘッダー ファイル\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="effect2D.h">
+      <Filter>ヘッダー ファイル\effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

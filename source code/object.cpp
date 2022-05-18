@@ -56,10 +56,9 @@ void CObject::ReleaseAll(void)
 					m_object[count_priolty][count_object]->Uninit();
 					if (m_object[count_priolty][count_object]->m_deth == true)
 					{
-						
+						delete m_object[count_priolty][count_object];
+						m_object[count_priolty].pop_back();
 					}
-					delete m_object[count_priolty][count_object];
-					m_object[count_priolty].pop_back();
 				}
 			}
 		}
@@ -98,7 +97,7 @@ void CObject::UpdateAll(void)
 						}
 						else
 						{
-							if (count_priolty == (int)PRIORITY::PAUSE || count_priolty == (int)PRIORITY::FADE)
+							if (count_priolty == (int)PRIORITY::PAUSE || count_priolty == (int)PRIORITY::FADE || count_priolty == (int)PRIORITY::CLICK_EFFECT)
 							{
 								m_object[count_priolty][count_object]->Update();
 								m_object[count_priolty][count_object]->m_update_count = 0;
@@ -144,15 +143,17 @@ void CObject::SetPriority(const int &nPriority)
 	pObject = this;
 
 	m_object[nPriority].push_back(this);
-
-	int object_size = m_object[nPriority].size();
+	int nThisPriority = this->m_priority;
+	int object_size = m_object[nThisPriority].size();
 	for (int count_object = 0; count_object < object_size; count_object++)
 	{
-		if (m_object[nPriority][count_object] == this)
+		if (m_object[nThisPriority][count_object] == this)
 		{
-			m_object[nPriority].erase(m_object[nPriority].begin() + count_object);
-			object_size = m_object[nPriority].size();
+			m_object[nThisPriority].erase(m_object[nThisPriority].begin() + count_object);
+			object_size = m_object[nThisPriority].size();
 			break;
 		}
 	}
+
+	this->m_priority = nPriority;
 }
