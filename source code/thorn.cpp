@@ -76,7 +76,7 @@ void CThorn::Update(void)
 	CHappenig::Update();
 	if (CHappenig::HitPlayer() == true)
 	{
-		sound->ControllVoice(CSound::SOUND_LABEL::THORN_SE, 1.4f);
+		sound->ControllVoice(CSound::SOUND_LABEL::THORN_SE, 1.8f);
 		sound->Play(CSound::SOUND_LABEL::THORN_SE);
 		if (m_bHitPlayer == false)
 		{

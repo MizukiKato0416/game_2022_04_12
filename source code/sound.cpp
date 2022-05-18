@@ -24,6 +24,10 @@ CSound::PARAM CSound::m_aParam[(int)SOUND_LABEL::MAX] =
 	{ "data/SOUND/SE/trampoline.wav", 0 },		//トランポリンSE
 	{ "data/SOUND/SE/break.wav", 0 },			//ブレーキSE
 	{ "data/SOUND/SE/Jump.wav", 0 },			//ジャンプSE
+	{ "data/SOUND/SE/bad.wav", 0 },				//badSE
+	{ "data/SOUND/SE/good.wav", 0 },			//goodSE
+	{ "data/SOUND/SE/great.wav", 0 },			//greatSE
+	{ "data/SOUND/SE/perfect.wav", 0 },			//parfectSE
 	{ "data/SOUND/BGM/result.wav", -1 },		//リザルトBGM
 	{ "data/SOUND/BGM/game.wav", -1 },			//ゲームBGM
 	{ "data/SOUND/BGM/title.wav", -1 },			//タイトルBGM

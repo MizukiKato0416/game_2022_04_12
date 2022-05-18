@@ -43,6 +43,10 @@ public:
 		TRAMPOLINE_SE,			//トランポリンSE
 		BREAK_SE,				//ブレーキSE
 		JUMP_SE,				//ジャンプSE
+		BAD_SE,					//badSE
+		GOOD_SE,				//goodSE
+		GREAT_SE,				//greatSE
+		PARFECT_SE,				//parfectSE
 		RESULT_BGM,				//リザルトBGM
 		GAME_BGM,				//ゲームBGM
 		TITLE_BGM,				//タイトルBGM

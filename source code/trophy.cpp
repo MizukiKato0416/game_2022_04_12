@@ -433,8 +433,8 @@ void CTrophy::Update(void)
 		m_buck->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 		{
-			sound->Play(CSound::SOUND_LABEL::CANSEL_SE);
 			sound->ControllVoice(CSound::SOUND_LABEL::CANSEL_SE, 1.2f);
+			sound->Play(CSound::SOUND_LABEL::CANSEL_SE);
 			fade->SetFade(CManager::MODE::TITLE);
 		}
 	}

@@ -742,36 +742,50 @@ void CGame01::Shot(void)
 			{//0の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_0;
 				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("bad.png"));
+				sound->ControllVoice(CSound::SOUND_LABEL::BAD_SE, 1.2f);
+				sound->Play(CSound::SOUND_LABEL::BAD_SE);
 			}
 			else if (m_pGauge->GetGauge() > 0 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_1)
 			{//0より大きくて既定の値以下の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_1;
 				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("bad.png"));
+				sound->ControllVoice(CSound::SOUND_LABEL::BAD_SE, 1.2f);
+				sound->Play(CSound::SOUND_LABEL::BAD_SE);
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_1 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_2)
 			{//既定の値より大きくて既定の値以下の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_2;
 				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("bad.png"));
+				sound->ControllVoice(CSound::SOUND_LABEL::BAD_SE, 1.2f);
+				sound->Play(CSound::SOUND_LABEL::BAD_SE);
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_2 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_3)
 			{//既定の値より大きくて既定の値以下の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_3;
 				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("good.png"));
+				sound->ControllVoice(CSound::SOUND_LABEL::GOOD_SE, 1.2f);
+				sound->Play(CSound::SOUND_LABEL::GOOD_SE);
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_3 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_4)
 			{//既定の値より大きくて既定の値以下の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_4;
 				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("good.png"));
+				sound->ControllVoice(CSound::SOUND_LABEL::GOOD_SE, 1.2f);
+				sound->Play(CSound::SOUND_LABEL::GOOD_SE);
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_4 && m_pGauge->GetGauge() < m_pGauge->GetMaxNum())
 			{//既定の値より大きくて最大より小さいの時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_5;
 				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("great.png"));
+				sound->ControllVoice(CSound::SOUND_LABEL::GREAT_SE, 1.2f);
+				sound->Play(CSound::SOUND_LABEL::GREAT_SE);
 			}
 			else if (m_pGauge->GetGauge() == m_pGauge->GetMaxNum())
 			{//最大値の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_6;
 				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("perfect.png"));
+				sound->ControllVoice(CSound::SOUND_LABEL::PARFECT_SE, 1.2f);
+				sound->Play(CSound::SOUND_LABEL::PARFECT_SE);
 			}
 
 			//ベクトルを既定の割合小さくする
