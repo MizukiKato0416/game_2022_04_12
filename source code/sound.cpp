@@ -7,22 +7,31 @@
 //================================================
 //静的メンバ変数宣言
 //================================================
-CSound::PARAM CSound::m_aParam[SOUND_LABEL_MAX] =
+CSound::PARAM CSound::m_aParam[(int)SOUND_LABEL::MAX] =
 {
-	{ "data/SOUND/SE/cancel_SE.wav", 0 },			//キャンセルSE
-	{ "data/SOUND/SE/decide_SE.wav", 0 },			//決定SE
-	{ "data/SOUND/SE/cursor_SE.wav", 0 },			//カーソルのSE
-	{ "data/SOUND/SE/pause_SE.wav", 0 },			//ポーズSE
-	{ "data/SOUND/SE/gameClear_SE.wav", 0 },		//ゲームクリアSE
-	{ "data/SOUND/SE/gameOver_SE.wav", 0 },			//ゲームオーバーSE
-	{ "data/SOUND/SE/slash_SE.wav", 0 },			//斬撃SE
-	{ "data/SOUND/SE/guard_SE.wav", 0 },			//ガードSE
-	{ "data/SOUND/SE/magic_SE.wav", 0 },			//魔法SE
-	{ "data/SOUND/SE/special_SE.wav", 0 },			//必殺技SE
-	{ "data/SOUND/BGM/titele_BGM.wav", -1 },		//タイトルBGM
-	{ "data/SOUND/BGM/menu_BGM.wav", -1 },			//メニューBGM
-	{ "data/SOUND/BGM/tutorial_BGM.wav", -1 },		//ゲーム内BGM
-	{ "data/SOUND/BGM/game_BGM.wav", -1 },			//リザルトBGM
+	{ "data/SOUND/SE/Airplane.wav", 0 },		//飛行機SE
+	{ "data/SOUND/SE/banana.wav", 0 },			//バナナSE
+	{ "data/SOUND/SE/cancel.wav", 0 },			//戻るのSE
+	{ "data/SOUND/SE/pause.wav", 0 },			//ポーズSE
+	{ "data/SOUND/SE/enter.wav", 0 },			//決定SE
+	{ "data/SOUND/SE/fan.wav", 0 },				//扇風機SE
+	{ "data/SOUND/SE/gage.wav", -1 },			//ゲージSE
+	{ "data/SOUND/SE/goal.wav", 0 },			//ゴールSE
+	{ "data/SOUND/SE/redbull.wav", 0 },			//レッドブルSE
+	{ "data/SOUND/SE/rocket.wav", 0 },			//ロケットSE
+	{ "data/SOUND/SE/star.wav", 0 },			//starringSE
+	{ "data/SOUND/SE/thorn.wav", 0 },			//とげSE
+	{ "data/SOUND/SE/trampoline.wav", 0 },		//トランポリンSE
+	{ "data/SOUND/SE/break.wav", 0 },			//ブレーキSE
+	{ "data/SOUND/SE/Jump.wav", 0 },			//ジャンプSE
+	{ "data/SOUND/SE/bad.wav", 0 },				//badSE
+	{ "data/SOUND/SE/good.wav", 0 },			//goodSE
+	{ "data/SOUND/SE/great.wav", 0 },			//greatSE
+	{ "data/SOUND/SE/perfect.wav", 0 },			//parfectSE
+	{ "data/SOUND/BGM/result.wav", -1 },		//リザルトBGM
+	{ "data/SOUND/BGM/game.wav", -1 },			//ゲームBGM
+	{ "data/SOUND/BGM/title.wav", -1 },			//タイトルBGM
+	{ "data/SOUND/BGM/trophy.wav", -1 },		//トロフィーBGM
 };
 
 //================================================
@@ -76,7 +85,7 @@ HRESULT CSound::Init(void)
 	}
 
 	// サウンドデータの初期化
-	for (int nCntSound = 0; nCntSound < SOUND_LABEL_MAX; nCntSound++)
+	for (int nCntSound = 0; nCntSound < (int)SOUND_LABEL::MAX; nCntSound++)
 	{
 		HANDLE hFile;
 		DWORD dwChunksize = 0;
@@ -166,7 +175,7 @@ HRESULT CSound::Init(void)
 void CSound::Uninit(void)
 {
 	// 一時停止
-	for (int nCntSound = 0; nCntSound < SOUND_LABEL_MAX; nCntSound++)
+	for (int nCntSound = 0; nCntSound < (int)SOUND_LABEL::MAX; nCntSound++)
 	{
 		if (m_apSourceVoice[nCntSound] != NULL)
 		{
@@ -204,27 +213,27 @@ HRESULT CSound::Play(const SOUND_LABEL &label)
 
 	// バッファの設定
 	memset(&buffer, 0, sizeof(XAUDIO2_BUFFER));
-	buffer.AudioBytes = m_asizeAudio[label];
-	buffer.pAudioData = m_apDataAudio[label];
+	buffer.AudioBytes = m_asizeAudio[(int)label];
+	buffer.pAudioData = m_apDataAudio[(int)label];
 	buffer.Flags = XAUDIO2_END_OF_STREAM;
-	buffer.LoopCount = m_aParam[label].nCntLoop;
+	buffer.LoopCount = m_aParam[(int)label].nCntLoop;
 
 	// 状態取得
-	m_apSourceVoice[label]->GetState(&xa2state);
+	m_apSourceVoice[(int)label]->GetState(&xa2state);
 	if (xa2state.BuffersQueued != 0)
 	{// 再生中
 	 // 一時停止
-		m_apSourceVoice[label]->Stop(0);
+		m_apSourceVoice[(int)label]->Stop(0);
 
 		// クリア
-		m_apSourceVoice[label]->FlushSourceBuffers();
+		m_apSourceVoice[(int)label]->FlushSourceBuffers();
 	}
 
 	// 登録
-	m_apSourceVoice[label]->SubmitSourceBuffer(&buffer);
+	m_apSourceVoice[(int)label]->SubmitSourceBuffer(&buffer);
 
 	// 再生
-	m_apSourceVoice[label]->Start(0);
+	m_apSourceVoice[(int)label]->Start(0);
 
 	return S_OK;
 }
@@ -237,14 +246,14 @@ void CSound::Stop(const SOUND_LABEL &label)
 	XAUDIO2_VOICE_STATE xa2state;
 
 	// 状態取得
-	m_apSourceVoice[label]->GetState(&xa2state);
+	m_apSourceVoice[(int)label]->GetState(&xa2state);
 	if (xa2state.BuffersQueued != 0)
 	{// 再生中
 	 // 一時停止
-		m_apSourceVoice[label]->Stop(0);
+		m_apSourceVoice[(int)label]->Stop(0);
 
 		// クリア
-		m_apSourceVoice[label]->FlushSourceBuffers();
+		m_apSourceVoice[(int)label]->FlushSourceBuffers();
 	}
 }
 
@@ -253,7 +262,7 @@ void CSound::Stop(const SOUND_LABEL &label)
 //=============================================================================
 void CSound::Stop(void)
 {
-	for (int nCntSound = 0; nCntSound < SOUND_LABEL_MAX; nCntSound++)
+	for (int nCntSound = 0; nCntSound < (int)SOUND_LABEL::MAX; nCntSound++)
 	{
 		if (m_apSourceVoice[nCntSound] != NULL)
 		{

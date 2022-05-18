@@ -13,6 +13,7 @@
 #include "play_data.h"
 #include "input_mouse.h"
 #include "fade.h"
+#include "sound.h"
 
 //=============================================================================
 // ƒ}ƒNƒ’è‹`
@@ -48,6 +49,13 @@ CTrophy::~CTrophy()
 //=============================================================================
 HRESULT CTrophy::Init(void)
 {
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
+
+	sound->Stop();
+	sound->Play(CSound::SOUND_LABEL::TROPHY_BGM);
+	sound->ControllVoice(CSound::SOUND_LABEL::TROPHY_BGM, 1.4f);
+
 	CObject2D *pObject2D[3];
 	pObject2D[0] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 	pObject2D[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Bg.png"));
@@ -256,6 +264,8 @@ void CTrophy::Update(void)
 	D3DXVECTOR3 button_size = m_buck->GetSize();
 	POINT point;
 	HWND hwnd;
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
 	int max_icon = m_icon.size();
 	hwnd = CManager::GetWindowHandle();
 	fade = CManager::GetFade();
@@ -423,6 +433,8 @@ void CTrophy::Update(void)
 		m_buck->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 		{
+			sound->ControllVoice(CSound::SOUND_LABEL::CANSEL_SE, 1.2f);
+			sound->Play(CSound::SOUND_LABEL::CANSEL_SE);
 			fade->SetFade(CManager::MODE::TITLE);
 		}
 	}

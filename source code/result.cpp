@@ -8,6 +8,7 @@
 #include "fade.h"
 #include "texture.h"
 #include "ranking.h"
+#include "sound.h"
 
 //================================================
 //マクロ定義
@@ -45,6 +46,13 @@ CResult::~CResult()
 //================================================
 HRESULT CResult::Init(void)
 {
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
+
+	sound->Stop();
+	sound->Play(CSound::SOUND_LABEL::RESULT_BGM);
+	sound->ControllVoice(CSound::SOUND_LABEL::RESULT_BGM, 0.4f);
+
 	/*CObject2D *pObject2D;
 	pObject2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
 											 D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
@@ -78,6 +86,8 @@ void CResult::Uninit(void)
 void CResult::Update(void)
 {
 	CInputMouse *pMouse = CManager::GetInstance()->GetInputMouse();
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
 
 	//マウス左クリックしたら
 	if (pMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
@@ -88,6 +98,8 @@ void CResult::Update(void)
 
 		if (pFade->GetFade() == CFade::FADE_NONE)
 		{
+			sound->ControllVoice(CSound::SOUND_LABEL::DECISION_SE, 1.2f);
+			sound->Play(CSound::SOUND_LABEL::DECISION_SE);
 			pFade->SetFade(CManager::MODE::TITLE);
 		}
 	}

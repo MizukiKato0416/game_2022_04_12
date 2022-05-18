@@ -27,6 +27,7 @@
 #include "rocket.h"
 #include "model.h"
 #include "trophy.h"
+#include "sound.h"
 
 //================================================
 //マクロ定義
@@ -140,6 +141,12 @@ HRESULT CGame01::Init(void)
 	m_bFinish = false;
 	m_nFinishCounter = 0;
 	m_bPause = false;
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
+
+	sound->Stop();
+	sound->Play(CSound::SOUND_LABEL::GAME_BGM);
+	sound->ControllVoice(CSound::SOUND_LABEL::GAME_BGM, 1.6f);
 
 	//スコアの生成
 	CScore *pSocre = nullptr;
@@ -496,6 +503,9 @@ void CGame01::Road(void)
 //================================================
 void CGame01::Gauge(void)
 {
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
+
 	//ゲージを増やす
 	m_pGauge->AddGauge(GAME01_SHOT_GAUGE_ADD);
 
@@ -583,6 +593,8 @@ void CGame01::UninitArrow(void)
 //================================================
 void CGame01::Shot(void)
 {
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
 #ifdef _DEBUG
 	if (m_pPlayer->GetShot() == true)
 	{
@@ -639,6 +651,9 @@ void CGame01::Shot(void)
 		//マウスを押した瞬間
 		if (pInputMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 		{
+			sound->Play(CSound::SOUND_LABEL::GAGE_SE);
+			sound->ControllVoice(CSound::SOUND_LABEL::GAGE_SE, 1.4f);
+
 			//マウスの位置取得
 			POINT mouseTriggerPos;
 			GetCursorPos(&mouseTriggerPos);
@@ -699,6 +714,7 @@ void CGame01::Shot(void)
 		//マウスを離した瞬間且つ矢印が生成されていたら
 		if (pInputMouse->GetRelease(CInputMouse::MOUSE_TYPE_LEFT) == true && m_pArrow!= nullptr)
 		{
+			sound->Stop(CSound::SOUND_LABEL::GAGE_SE);
 			//マウスを離した状態のフラグを立てる
 			m_bReleaseMouse = true;
 
@@ -726,36 +742,50 @@ void CGame01::Shot(void)
 			{//0の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_0;
 				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("bad.png"));
+				sound->ControllVoice(CSound::SOUND_LABEL::BAD_SE, 1.2f);
+				sound->Play(CSound::SOUND_LABEL::BAD_SE);
 			}
 			else if (m_pGauge->GetGauge() > 0 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_1)
 			{//0より大きくて既定の値以下の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_1;
 				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("bad.png"));
+				sound->ControllVoice(CSound::SOUND_LABEL::BAD_SE, 1.2f);
+				sound->Play(CSound::SOUND_LABEL::BAD_SE);
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_1 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_2)
 			{//既定の値より大きくて既定の値以下の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_2;
 				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("bad.png"));
+				sound->ControllVoice(CSound::SOUND_LABEL::BAD_SE, 1.2f);
+				sound->Play(CSound::SOUND_LABEL::BAD_SE);
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_2 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_3)
 			{//既定の値より大きくて既定の値以下の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_3;
 				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("good.png"));
+				sound->ControllVoice(CSound::SOUND_LABEL::GOOD_SE, 1.2f);
+				sound->Play(CSound::SOUND_LABEL::GOOD_SE);
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_3 && m_pGauge->GetGauge() <= GAME01_SHOT_GAUGE_CASE_4)
 			{//既定の値より大きくて既定の値以下の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_4;
 				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("good.png"));
+				sound->ControllVoice(CSound::SOUND_LABEL::GOOD_SE, 1.2f);
+				sound->Play(CSound::SOUND_LABEL::GOOD_SE);
 			}
 			else if (m_pGauge->GetGauge() > GAME01_SHOT_GAUGE_CASE_4 && m_pGauge->GetGauge() < m_pGauge->GetMaxNum())
 			{//既定の値より大きくて最大より小さいの時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_5;
 				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("great.png"));
+				sound->ControllVoice(CSound::SOUND_LABEL::GREAT_SE, 1.2f);
+				sound->Play(CSound::SOUND_LABEL::GREAT_SE);
 			}
 			else if (m_pGauge->GetGauge() == m_pGauge->GetMaxNum())
 			{//最大値の時
 				fmoseVecAdjustment = GAME01_MOUSE_VEC_ADJUSTMENT_6;
 				m_pShotUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("perfect.png"));
+				sound->ControllVoice(CSound::SOUND_LABEL::PARFECT_SE, 1.2f);
+				sound->Play(CSound::SOUND_LABEL::PARFECT_SE);
 			}
 
 			//ベクトルを既定の割合小さくする
@@ -870,6 +900,9 @@ void CGame01::Rocket(void)
 //================================================
 void CGame01::Finish(void)
 {
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
+
 	//終了したら
 	if (m_bFinish == true)
 	{
@@ -878,6 +911,8 @@ void CGame01::Finish(void)
 			CObject2D *pObject2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
 				                                     D3DXVECTOR3(600.0f, 100.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 			pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("finish.png"));
+			sound->Play(CSound::SOUND_LABEL::GOAL_SE);
+			sound->ControllVoice(CSound::SOUND_LABEL::GOAL_SE, 1.4f);
 		}
 		else if (m_nFinishCounter > GAME01_FINISH_COUNTER)
 		{

@@ -23,6 +23,7 @@ class CFade;
 class CMotionRoad;
 class CPlayData;
 class CTrophy;
+class CSound;
 //class CPause;
 
 //================================================
@@ -71,6 +72,7 @@ public:
 	static CFade *GetFade(void);						//フェード取得処理
 	static CMotionRoad *GetMotionRoad(void);			//モーションロード取得処理
 	static CPlayData *GetPlayData(void);				//プレイデータ取得処理
+	static CSound *GetSound(void) { return m_pSound; }//サウンド取得処理
 	//static CPause *GetPause(void);						//ポーズ取得処理
 	static HWND GetWindowHandle(void) { return m_hWnd; }//hwnd取得処理
 
@@ -98,6 +100,7 @@ private:
 	static CMotionRoad *m_pMotionRoad;					//モーションロードのポインタ
 	static CPlayData *m_pPlayData;						//プレイデータのポインタ
 	//static CPause *m_pPause;							//ポーズのポインタ
+	static CSound *m_pSound;							//サウンド
 	static HWND m_hWnd;									//ウィンドウハンドル
 };
 

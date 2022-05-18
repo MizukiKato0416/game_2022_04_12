@@ -5,6 +5,7 @@
 #ifndef _SOUND_H_
 #define _SOUND_H_
 #include "main.h"
+#include <thread>
 
 //================================================
 //マクロ定義
@@ -25,24 +26,33 @@ public:
 	~CSound();				//デストラクタ
 
 	//サウンドファイル
-	typedef enum
+	enum class SOUND_LABEL
 	{
-		SOUND_LABEL_CANCEL_SE = 0,			//キャンセルSE
-		SOUND_LABEL_DECIDE_SE,				//決定SE
-		SOUND_LABEL_CURSOR_SE,				//カーソルのSE
-		SOUND_LABEL_PAUSE_SE,				//ポーズSE
-		SOUND_LABEL_GAMECLEAR_SE,			//ゲームクリアSE
-		SOUND_LABEL_GAMEOVER_SE,			//ゲームオーバーSE
-		SOUND_LABEL_SLASH_SE,				//斬撃SE
-		SOUND_LABEL_GUARD_SE,				//ガードSE
-		SOUND_LABEL_MAGIC_SE,				//魔法SE
-		SOUND_LABEL_SPECIAL_SE,				//必殺技SE
-		SOUND_LABEL_TITLE_BGM,				//タイトルBGM
-		SOUND_LABEL_MENU_BGM,				//メニューBGM
-		SOUND_LABEL_GAME_BGM,				//ゲーム内BGM
-		SOUND_LABEL_RESULT_BGM,				//リザルトBGM
-		SOUND_LABEL_MAX,
-	} SOUND_LABEL;
+		AIRPLANE_SE = 0,		//飛行機SE
+		BANANA_SE,				//バナナSE
+		CANSEL_SE,				//戻るのSE
+		PAUSE_BUTTON_SE,		//ポーズSE
+		DECISION_SE,			//決定SE
+		FAN_SE,					//扇風機SE
+		GAGE_SE,				//ゲージSE
+		GOAL_SE,				//ゴールSE
+		REDBULL_SE,				//レッドブルSE
+		ROCKET_SE,				//ロケットSE
+		STAR_RING_SE,			//starringSE
+		THORN_SE,				//とげSE
+		TRAMPOLINE_SE,			//トランポリンSE
+		BREAK_SE,				//ブレーキSE
+		JUMP_SE,				//ジャンプSE
+		BAD_SE,					//badSE
+		GOOD_SE,				//goodSE
+		GREAT_SE,				//greatSE
+		PARFECT_SE,				//parfectSE
+		RESULT_BGM,				//リザルトBGM
+		GAME_BGM,				//ゲームBGM
+		TITLE_BGM,				//タイトルBGM
+		TROPHY_BGM,				//トロフィーBGM
+		MAX,
+	};
 
 	//メンバ関数
 	HRESULT Init(void);
@@ -50,7 +60,7 @@ public:
 	HRESULT Play(const SOUND_LABEL &label);
 	void Stop(const SOUND_LABEL &label);
 	void Stop(void);
-	void ControllVoice(const SOUND_LABEL &label, const float &fVolume) { m_apSourceVoice[label]->SetVolume(fVolume); }	//音量調整
+	void ControllVoice(const SOUND_LABEL &label, const float &fVolume) { m_apSourceVoice[(int)label]->SetVolume(fVolume); }	//音量調整
 
 private:
 	//パラメーター構造体
@@ -66,11 +76,11 @@ private:
 
 	IXAudio2 *m_pXAudio2 = NULL;										// XAudio2オブジェクトへのインターフェイス
 	IXAudio2MasteringVoice *m_pMasteringVoice = NULL;					// マスターボイス
-	IXAudio2SourceVoice *m_apSourceVoice[SOUND_LABEL_MAX] = {};			// ソースボイス
-	BYTE *m_apDataAudio[SOUND_LABEL_MAX] = {};							// オーディオデータ
-	DWORD m_asizeAudio[SOUND_LABEL_MAX] = {};							// オーディオデータサイズ
+	IXAudio2SourceVoice *m_apSourceVoice[(int)SOUND_LABEL::MAX] = {};			// ソースボイス
+	BYTE *m_apDataAudio[(int)SOUND_LABEL::MAX] = {};							// オーディオデータ
+	DWORD m_asizeAudio[(int)SOUND_LABEL::MAX] = {};							// オーディオデータサイズ
 
-	static PARAM m_aParam[SOUND_LABEL_MAX];								// 各音素材のパラメータ
+	static PARAM m_aParam[(int)SOUND_LABEL::MAX];								// 各音素材のパラメータ
 };
 
 //================================================

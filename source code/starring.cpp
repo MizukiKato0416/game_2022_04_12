@@ -13,6 +13,7 @@
 #include "play_data.h"
 #include "manager.h"
 #include "trophy.h"
+#include "sound.h"
 
 //=============================================================================
 // マクロ定義
@@ -76,11 +77,15 @@ void CStarring::Uninit(void)
 //=============================================================================
 void CStarring::Update(void)
 {
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
 	CHappenig::Update();
 
 	//プレイヤーに当たったら
 	if (CHappenig::HitPlayer() == true)
 	{
+		sound->ControllVoice(CSound::SOUND_LABEL::STAR_RING_SE, 1.4f);
+		sound->Play(CSound::SOUND_LABEL::STAR_RING_SE);
 		//回転していない状態なら
 		if (m_bRot == false)
 		{

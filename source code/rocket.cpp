@@ -10,6 +10,7 @@
 #include "play_data.h"
 #include "manager.h"
 #include "trophy.h"
+#include "sound.h"
 
 //================================================
 //マクロ定義
@@ -86,6 +87,8 @@ void CRocket::Uninit(void)
 //================================================
 void CRocket::Update(void)
 {
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
 	CHappenig::Update();
 
 	if (m_bHitPlayer == false)
@@ -93,6 +96,8 @@ void CRocket::Update(void)
 		//プレイヤーと当たったら
 		if (HitPlayer() == true)
 		{
+			sound->ControllVoice(CSound::SOUND_LABEL::ROCKET_SE, 1.4f);
+			sound->Play(CSound::SOUND_LABEL::ROCKET_SE);
 			//オブジェクト情報を入れるポインタ
 			vector<CObject*> object;
 
