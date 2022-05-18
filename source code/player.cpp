@@ -26,6 +26,7 @@
 #include "wind.h"
 #include "game01.h"
 #include "happening.h"
+#include "sound.h"
 
 //================================================
 //マクロ定義
@@ -221,6 +222,8 @@ void CPlayer::Uninit(void)
 //================================================
 void CPlayer::Update(void)
 {
+	CSound *sound;
+	sound = CManager::GetInstance()->GetSound();
 	//位置取得
 	D3DXVECTOR3 pos = GetPos();
 
@@ -330,6 +333,8 @@ void CPlayer::Update(void)
 				//モーションがダイブではなかったら
 				if (m_pMotionPlayer->GetMotion() != CMotionRoad::MOTION_PLAYER_TYPE_DIVE)
 				{
+					sound->ControllVoice(CSound::SOUND_LABEL::BREAK_SE, 1.4f);
+					sound->Play(CSound::SOUND_LABEL::BREAK_SE);
 					//着地モーションにする
 					m_pMotionPlayer->SetMotion(CMotionRoad::MOTION_PLAYER_TYPE_DIVE, this);
 				}
@@ -380,6 +385,13 @@ void CPlayer::Update(void)
 			}
 			//バウンドさせる
 			m_move.y = m_fJump;
+
+			if (m_fJump > 0.0f)
+			{
+				sound->ControllVoice(CSound::SOUND_LABEL::JUMP_SE, 1.4f);
+				sound->Play(CSound::SOUND_LABEL::JUMP_SE);
+			}
+
 			//バウンドする瞬間の移動量を設定
 			m_fBoundMove = m_move.y;
 		}

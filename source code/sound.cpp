@@ -22,9 +22,12 @@ CSound::PARAM CSound::m_aParam[(int)SOUND_LABEL::MAX] =
 	{ "data/SOUND/SE/star.wav", 0 },			//starringSE
 	{ "data/SOUND/SE/thorn.wav", 0 },			//とげSE
 	{ "data/SOUND/SE/trampoline.wav", 0 },		//トランポリンSE
+	{ "data/SOUND/SE/break.wav", 0 },			//ブレーキSE
+	{ "data/SOUND/SE/Jump.wav", 0 },			//ジャンプSE
 	{ "data/SOUND/BGM/result.wav", -1 },		//リザルトBGM
 	{ "data/SOUND/BGM/game.wav", -1 },			//ゲームBGM
 	{ "data/SOUND/BGM/title.wav", -1 },			//タイトルBGM
+	{ "data/SOUND/BGM/trophy.wav", -1 },		//トロフィーBGM
 };
 
 //================================================
