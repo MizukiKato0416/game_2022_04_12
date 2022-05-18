@@ -10,7 +10,7 @@
 #include "object.h"
 #include "pause.h"
 #include "manager.h"
-
+int g_n = 0;
 //=============================================================================
 // Ã“Iƒƒ“ƒo•Ï”éŒ¾
 //=============================================================================
@@ -56,9 +56,10 @@ void CObject::ReleaseAll(void)
 					m_object[count_priolty][count_object]->Uninit();
 					if (m_object[count_priolty][count_object]->m_deth == true)
 					{
-						delete m_object[count_priolty][count_object];
-						m_object[count_priolty].pop_back();
+						
 					}
+					delete m_object[count_priolty][count_object];
+					m_object[count_priolty].pop_back();
 				}
 			}
 		}
@@ -88,9 +89,6 @@ void CObject::UpdateAll(void)
 				m_object[count_priolty][count_object]->m_update_count++;
 				if (m_object[count_priolty][count_object]->m_update_count >= m_object[count_priolty][count_object]->m_update_frame)
 				{
-					//m_object[count_priolty][count_object]->Update();
-					//m_object[count_priolty][count_object]->m_update_count = 0;
-
 					if (CManager::GetMode() == CManager::MODE::GAME01)
 					{
 						if (CPause::GetPause() == false)
@@ -109,6 +107,15 @@ void CObject::UpdateAll(void)
 					}
 					else
 					{
+						FILE *pFile;
+						pFile = fopen("data/debuglog.txt", "w");
+						char string[128];
+						if (pFile != NULL && fgets(string, 128, pFile) == nullptr)
+						{
+							g_n++;
+							fprintf(pFile, "%d\n", g_n);
+						}
+						fclose(pFile);
 						m_object[count_priolty][count_object]->Update();
 						m_object[count_priolty][count_object]->m_update_count = 0;
 					}

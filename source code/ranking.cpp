@@ -126,6 +126,8 @@ HRESULT CRanking::Init(void)
 		}
 	}
 
+	m_pCommu->Uninit();
+
 	//ƒJƒ‰[‚Ìİ’è
 	m_col = {255.0f, 255.0f, 255.0f, 255.0f};
 

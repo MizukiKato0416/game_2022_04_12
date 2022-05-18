@@ -641,7 +641,7 @@ void CManager::SetMode(MODE mode)
 		}
 		break;
 	case MODE::TROPHY:
-		//タイトルクラスの生成
+		//トロフィークラスの生成
 		if (m_pTrophy == nullptr)
 		{
 			m_pTrophy = new CTrophy;
