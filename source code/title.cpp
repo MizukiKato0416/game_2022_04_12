@@ -149,7 +149,7 @@ void CTitle::SeletMode(void)
 		m_button[4]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true && fade->GetFade() == CFade::FADE_NONE)
 		{
-			fade->SetFade(CManager::MODE::RESULT);
+			fade->SetFade(CManager::MODE::TROPHY);
 		}
 	}
 	else

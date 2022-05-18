@@ -10,7 +10,7 @@
 #include "object.h"
 #include "pause.h"
 #include "manager.h"
-int g_n = 0;
+
 //=============================================================================
 // Ã“Iƒƒ“ƒo•Ï”éŒ¾
 //=============================================================================
@@ -107,15 +107,6 @@ void CObject::UpdateAll(void)
 					}
 					else
 					{
-						FILE *pFile;
-						pFile = fopen("data/debuglog.txt", "w");
-						char string[128];
-						if (pFile != NULL && fgets(string, 128, pFile) == nullptr)
-						{
-							g_n++;
-							fprintf(pFile, "%d\n", g_n);
-						}
-						fclose(pFile);
 						m_object[count_priolty][count_object]->Update();
 						m_object[count_priolty][count_object]->m_update_count = 0;
 					}

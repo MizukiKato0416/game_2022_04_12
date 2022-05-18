@@ -287,7 +287,7 @@ void CGame01::Update(void)
 		m_bPause = false;
 	}
 
-#ifndef _DEBUG
+#ifdef _DEBUG
 	//キーボード取得処理
 	CInputKeyboard *pInputKeyboard;
 	pInputKeyboard = CManager::GetInstance()->GetInputKeyboard();
@@ -301,7 +301,7 @@ void CGame01::Update(void)
 
 		if (pFade->GetFade() == CFade::FADE_NONE)
 		{
-			pFade->SetFade(CManager::MODE::TITLE);
+			pFade->SetFade(CManager::MODE::RESULT);
 		}
 	}
 #endif // !_DEBUG
