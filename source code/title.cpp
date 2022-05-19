@@ -299,7 +299,8 @@ void CTitle::ResultTimer(void)
 		mouse->GetMouseState().lY == 0)
 	{
 		m_result_timer = 0;
-		if (fade->GetFade() == CFade::FADE_NONE)
+		if (fade->GetFade() == CFade::FADE_NONE &&
+			m_tutorial_flag == false)
 		{
 			fade->SetFade(CManager::MODE::RESULT);
 		}
