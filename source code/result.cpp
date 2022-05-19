@@ -25,6 +25,7 @@
 //================================================
 CResult::CResult(CObject::PRIORITY Priority) :CObject(Priority)
 {
+	m_nAnim = 1;
 	m_nResultCounter = 0;
 	m_bCommu = false;
 	m_bBg = false;
@@ -158,9 +159,25 @@ void CResult::Update(void)
 		{
 			if (m_bCommu == false)
 			{
-				m_pCommu = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
+				m_pCommu = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 280.0f, SCREEN_HEIGHT - 50.0f, 0.0f),
 					D3DXVECTOR3(SCREEN_WIDTH / 2.2f, SCREEN_HEIGHT * 0.15f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+				m_pCommu->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("now_loading.png"));
+				m_pCommu->SetTex(0, 4);
 				m_bCommu = true;
+			}
+		}
+		else
+		{
+			m_nAnimSpeed++;
+			if (m_nAnimSpeed >= 25)
+			{
+				m_pCommu->SetTex(m_nAnim, 4);
+				m_nAnim++;
+				if (m_nAnim >= 4)
+				{
+					m_nAnim = 0;
+				}
+				m_nAnimSpeed = 0;
 			}
 		}
 	}
