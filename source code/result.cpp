@@ -26,7 +26,8 @@
 CResult::CResult(CObject::PRIORITY Priority) :CObject(Priority)
 {
 	m_nResultCounter = 0;
-	m_bInstance = false;
+	m_bCommu = false;
+	m_bBg = false;
 }
 
 //================================================
@@ -115,7 +116,7 @@ void CResult::Update(void)
 
 	if (m_pRank->GetOnece() == true)
 	{
-		if (m_bInstance == false)
+		if (m_bBg == false)
 		{
 			if (m_pCommu != nullptr)
 			{
@@ -148,18 +149,18 @@ void CResult::Update(void)
 					D3DXVECTOR3(500.0f, 70.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Ranking.png"));
 			}
-			m_bInstance = true;
+			m_bBg = true;
 		}
 	}
 	else
 	{
 		if (m_pCommu == nullptr)
 		{
-			if (m_bInstance == false)
+			if (m_bCommu == false)
 			{
 				m_pCommu = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
 					D3DXVECTOR3(SCREEN_WIDTH / 2.2f, SCREEN_HEIGHT * 0.15f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-				m_bInstance = true;
+				m_bCommu = true;
 			}
 		}
 	}

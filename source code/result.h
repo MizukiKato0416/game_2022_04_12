@@ -41,7 +41,8 @@ private:
 	CRanking *m_pRank;
 	CObject2D *m_pCommu;
 	int m_nResultCounter;				//タイトルに行くまでのカウンター
-	bool m_bInstance;
+	bool m_bCommu;
+	bool m_bBg;
 };
 //================================================
 //プロトタイプ宣言
