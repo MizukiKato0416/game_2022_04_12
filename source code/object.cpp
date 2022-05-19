@@ -86,6 +86,8 @@ void CObject::ReleaseAll(void)
 			if (m_object[nCnt][nCntPop]->m_priority != static_cast<int>(PRIORITY::FADE))
 			{
 				m_object[nCnt].pop_back();
+				nPrioltySize = m_object[nCnt].size();
+				nCntPop--;
 			}
 		}
 	}

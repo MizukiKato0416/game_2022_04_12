@@ -66,13 +66,13 @@ HRESULT CScore::Init()
 	//ÉRÉìÉ}ÇÃê∂ê¨
 	CObject2D *pConma = CObject2D::Create(D3DXVECTOR3(m_pos.x  - SCORE_CONMA_POS_X - (m_size.x * MAX_SCORE_POLYGON / 2) + (m_size.x * SCORE_CONMA_NUM) + (m_size.x / 2.0f), m_pos.y + m_size.y / 4.0f, 0.0f),
 												      D3DXVECTOR3(SCORE_CONMA_SIZE, SCORE_CONMA_SIZE, 0.0f),
-		                                              static_cast<int>(CObject::PRIORITY::UI));
+		                                              static_cast<int>(CObject::PRIORITY::SCORE));
 	pConma->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("conma.png"));
 
 	//íPà ÇÃê∂ê¨
 	CObject2D *pUnit = CObject2D::Create(D3DXVECTOR3(m_pos.x + SCORE_POS_SHIFT_X - (m_size.x * MAX_SCORE_POLYGON / 2) + (m_size.x * MAX_SCORE_POLYGON) + (m_size.x / 2.0f), m_pos.y, 0.0f),
 												     D3DXVECTOR3(SCORE_UNIT_SIZE, SCORE_UNIT_SIZE, 0.0f),
-		                                             static_cast<int>(CObject::PRIORITY::UI));
+		                                             static_cast<int>(CObject::PRIORITY::SCORE));
 	pUnit->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("m.png"));
 
 	return S_OK;

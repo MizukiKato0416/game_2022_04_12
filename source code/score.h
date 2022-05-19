@@ -25,7 +25,7 @@
 class CScore : public CObject
 {
 public:
-	CScore(CObject::PRIORITY Priority = CObject::PRIORITY::UI);	//コンストラクタ
+	CScore(CObject::PRIORITY Priority = CObject::PRIORITY::SCORE);	//コンストラクタ
 	~CScore();								//デストラクタ
 
 	//メンバ関数

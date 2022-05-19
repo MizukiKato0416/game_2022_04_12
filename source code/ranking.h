@@ -39,16 +39,21 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
+	bool GetConnect(void) { return m_bConnect; }
+	bool GetOnece(void) { return m_bOnece; }
 
 	static CRanking *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size);
-	static void Connect(CTcpClient *pCommu, CCommunicationData *pCommuData, CScore **pScore);
+	static void Connect(CTcpClient *pCommu, CCommunicationData *pCommuData, D3DXVECTOR3 pos, D3DXVECTOR3 size, bool *bConnect, bool *bOnece);
+	static void CreateScore(D3DXVECTOR3 pos, D3DXVECTOR3 size);
 
 private:
-	CScore *m_apScore[MAX_RANKING];			//スコアのポインタ
+	static CScore *m_apScore[MAX_RANKING];	//スコアのポインタ
 	CTcpClient *m_pCommu;					//通信用
 	CCommunicationData *m_pCommuData;		//通信データ
 	int m_nScore[MAX_SCORE_DATA];			//スコア
 	int m_nNowScore;						//今回のスコア
+	bool m_bConnect;						//通信できたか
+	bool m_bOnece;							//一回だけ
 	D3DCOLORVALUE	m_col;					//カラー
 	D3DXVECTOR3 m_pos;						//位置
 	D3DXVECTOR3 m_size;						//サイズ

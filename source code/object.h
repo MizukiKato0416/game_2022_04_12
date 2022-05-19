@@ -34,6 +34,7 @@ public:
 		EFFECT3D,			// パーティクル
 		EFFECT2D,			// パーティクル
 		UI,					// UI
+		SCORE,				// Score
 		RANKING,			// ランキング
 		MASK,				// マスク
 		PAUSE,				// ポーズ
