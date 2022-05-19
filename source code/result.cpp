@@ -26,6 +26,7 @@
 CResult::CResult(CObject::PRIORITY Priority) :CObject(Priority)
 {
 	m_nResultCounter = 0;
+	m_bInstance = false;
 }
 
 //================================================
@@ -150,8 +151,12 @@ void CResult::Update(void)
 	{
 		if (m_pCommu == nullptr)
 		{
-			m_pCommu = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
-				D3DXVECTOR3(SCREEN_WIDTH / 2.2f, SCREEN_HEIGHT * 0.15f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+			if (m_bInstance == false)
+			{
+				m_pCommu = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
+					D3DXVECTOR3(SCREEN_WIDTH / 2.2f, SCREEN_HEIGHT * 0.15f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+				m_bInstance = true;
+			}
 		}
 	}
 }
