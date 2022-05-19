@@ -905,7 +905,7 @@ void CGame01::Finish(void)
 	sound = CManager::GetInstance()->GetSound();
 
 	//I—¹‚µ‚½‚ç
-	if (m_bFinish == true)
+	if (m_bFinish == true && m_pPlayer->GetMoveForward() == 0.0f)
 	{
 		if (m_nFinishCounter == 0)
 		{

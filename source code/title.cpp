@@ -294,7 +294,7 @@ void CTitle::ResultTimer(void)
 	mouse = CManager::GetInstance()->GetInputMouse();
 
 	m_result_timer++;
-	if (m_result_timer >= 600 &&
+	if (m_result_timer >= TITLE_TO_RESULT_COUNT &&
 		mouse->GetMouseState().lX == 0 &&
 		mouse->GetMouseState().lY == 0)
 	{

@@ -424,7 +424,7 @@ void CManager::Update(void)
 		ScreenToClient(CManager::GetWindowHandle(), &mouseTriggerPos);
 
 		//マウスのクリック処理
-		CEffectClick::Create(D3DXVECTOR3(mouseTriggerPos.x, mouseTriggerPos.y, 0.0f));
+		CEffectClick::Create(D3DXVECTOR3((float)mouseTriggerPos.x, (float)mouseTriggerPos.y, 0.0f));
 	}
 }
 
