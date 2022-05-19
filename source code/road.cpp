@@ -109,45 +109,6 @@ HRESULT CRoad::Init(void)
 //=============================================================================
 void CRoad::Uninit(void)
 {
-	int model_size = m_happening_model.size();
-	if (m_floor != nullptr && m_floor->GetDeath() == false)
-	{
-		m_floor->Uninit();
-	}
-	if (m_cloud != nullptr && m_cloud->GetDeath() == false)
-	{
-		m_cloud->Uninit();
-	}
-	for (int model_count = 0; model_count < model_size; model_count++)
-	{
-		if (m_happening_model[model_count] != nullptr && m_happening_model[model_count]->GetDeath() == false)
-		{
-			//オブジェクトタイプが飛行機の時
-			if (m_happening_model[model_count]->GetObjType() == CObject::OBJTYPE::AIR_PLANE)
-			{
-				//飛行機型にキャスト
-				CAirplane *pAirplane = (CAirplane*)m_happening_model[model_count];
-
-				//プレイヤーに当たっていない状態なら
-				if (pAirplane->GetHitPlayer() == false)
-				{
-					m_happening_model[model_count]->Uninit();
-					m_happening_model[model_count] = NULL;
-					m_happening_model.erase(m_happening_model.begin() + model_count);
-					model_size = m_happening_model.size();
-					model_count--;
-				}
-			}
-			else
-			{
-				m_happening_model[model_count]->Uninit();
-				m_happening_model[model_count] = NULL;
-				m_happening_model.erase(m_happening_model.begin() + model_count);
-				model_size = m_happening_model.size();
-				model_count--;
-			}
-		}
-	}
 	Release();
 }
 
@@ -229,6 +190,54 @@ CRoad *CRoad::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const floa
 		}
 	}
 	return load;
+}
+
+//================================================
+// 道削除処理
+//================================================
+void CRoad::DeleteRoad(void)
+{
+	int model_size = m_happening_model.size();
+	if (m_floor != nullptr)
+	{
+		m_floor->Uninit();
+	}
+	if (m_cloud != nullptr)
+	{
+		m_cloud->Uninit();
+	}
+	for (int model_count = 0; model_count < model_size; model_count++)
+	{
+		if (m_happening_model[model_count] != nullptr)
+		{
+			//オブジェクトタイプが飛行機の時
+			if (m_happening_model[model_count]->GetObjType() == CObject::OBJTYPE::AIR_PLANE)
+			{
+				//飛行機型にキャスト
+				CAirplane *pAirplane = (CAirplane*)m_happening_model[model_count];
+
+				//プレイヤーに当たっていない状態なら
+				if (pAirplane->GetHitPlayer() == false)
+				{
+					m_happening_model[model_count]->DeleteModel();
+					m_happening_model[model_count]->Uninit();
+					m_happening_model[model_count] = NULL;
+					m_happening_model.erase(m_happening_model.begin() + model_count);
+					model_size = m_happening_model.size();
+					model_count--;
+				}
+			}
+			else
+			{
+				m_happening_model[model_count]->DeleteModel();
+				m_happening_model[model_count]->Uninit();
+				m_happening_model[model_count] = NULL;
+				m_happening_model.erase(m_happening_model.begin() + model_count);
+				model_size = m_happening_model.size();
+				model_count--;
+			}
+		}
+	}
 }
 
 //================================================

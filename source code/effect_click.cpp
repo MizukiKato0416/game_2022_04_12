@@ -16,16 +16,16 @@
 #define EFFECT_CLICK_SPARKLE_SUBTRACT_SIZE		(0.82f)															//キラキラエフェクトのサイズを減少する割合
 #define EFFECT_CLICK_SPARKLE_ADD_SIZE_TIME		(10)															//キラキラエフェクトのサイズを増加する時間
 #define EFFECT_CLICK_STAR_INIT_ALPHA			(0.0f)															//スターフェクトの初期α値
-#define EFFECT_CLICK_STAR_01_COL				(D3DXCOLOR(1.0f, 1.0f, 0.0f, EFFECT_CLICK_STAR_INIT_ALPHA))		//スターフェクト01の色
-#define EFFECT_CLICK_STAR_02_COL				(D3DXCOLOR(1.0f, 0.0f, 0.0f, EFFECT_CLICK_STAR_INIT_ALPHA))		//スターフェクト02の色
-#define EFFECT_CLICK_STAR_03_COL				(D3DXCOLOR(0.0f, 0.0f, 1.0f, EFFECT_CLICK_STAR_INIT_ALPHA))		//スターフェクト03の色
+#define EFFECT_CLICK_STAR_01_COL				(D3DXCOLOR(0.2f, 0.2f, 0.0f, EFFECT_CLICK_STAR_INIT_ALPHA))		//スターフェクト01の色
+#define EFFECT_CLICK_STAR_02_COL				(D3DXCOLOR(1.0f, 0.2f, 0.2f, EFFECT_CLICK_STAR_INIT_ALPHA))		//スターフェクト02の色
+#define EFFECT_CLICK_STAR_03_COL				(D3DXCOLOR(0.2f, 0.2f, 1.0f, EFFECT_CLICK_STAR_INIT_ALPHA))		//スターフェクト03の色
 #define EFFECT_CLICK_STAR_INIT_DIFFER			(25.0f)															//スターフェクトの中心からの初期距離
 #define EFFECT_CLICK_STAR_ADD_DIFFER			(0.9f)															//スターフェクトの中心からの距離加算値
 #define EFFECT_CLICK_STAR_INIT_SIZE				(40.0f)															//スターフェクトのサイズ
 #define EFFECT_CLICK_STAR_SUBTRACT_ALPHA_TIME	(10)															//スターエフェクトの色を薄くし始める時間
 #define EFFECT_CLICK_STAR_ADD_ALPHA				(0.15f)															//スターエフェクトのα値を増加する割合
 #define EFFECT_CLICK_STAR_SUBTRACT_ALPHA		(0.05f)															//スターエフェクトのα値を減少する割合
-#define EFFECT_CLICK_STAR_ADD_ROT				(0.1f)															//スターエフェクトの回転量
+#define EFFECT_CLICK_STAR_ADD_ROT				(0.25f)															//スターエフェクトの回転量
 #define EFFECT_CLICK_RING_COL					(D3DXCOLOR(0.6f, 0.6f, 1.0f, 1.0f))								//リングフェクトの色
 #define EFFECT_CLICK_RING_INIT_ADD_SIZE			(D3DXVECTOR3(5.0f, 5.0f, 0.0f))									//リングフェクトのサイズ加算量
 #define EFFECT_CLICK_RING_01_SUBTRACT_SIZE		(0.9f)															//リングフェクトのサイズ減算量

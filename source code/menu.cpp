@@ -215,24 +215,7 @@ void CMenu::Update(void)
 			pInputPadD->GetTrigger(CInputPadD::B) == true ||
 			pInputPadD->GetTrigger(CInputPadD::START) == true)
 		{
-			switch (m_nSelect)
-			{
-			case SELECT_MENU_TYPE_TUTORIAL:
-				//pFade->SetFade(CManager::MODE_TUTORIAL);
-				break;
-			case SELECT_MENU_TYPE_GAME_START:
-				pFade->SetFade(CManager::MODE::GAME01);
-				break;
-			case SELECT_MENU_TYPE_EXIT:
-				pFade->SetFade(CManager::MODE::TITLE);
-				break;
-			default:
-				break;
-				////SE‚ÌÄ¶
-				//pSound->Play(CSound::SOUND_LABEL_EXIT_SE);
-				////ƒTƒEƒ“ƒh‚Ì‰¹—Ê’²®
-				//pSound->ControllVoice(CSound::SOUND_LABEL_EXIT_SE, 1.2f);
-			}
+			pFade->SetFade(CManager::MODE::TITLE);
 		}
 	}
 }

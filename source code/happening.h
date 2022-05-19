@@ -53,6 +53,7 @@ public:
 	CModelSingle *GetModel(void) { return m_model; }		// ゲッター
 	bool HitPlayer(void);									//プレイヤーとの当たり判定
 	void SetCameraZoom(void);								//カメラがプレイヤーをズームする
+	void DeleteModel(void);									//モデルの削除処理
 
 	static void SetHit(bool bHit) { m_bHit = bHit; }		//当たっているかどうか設定処理
 	static bool GetHit(void) { return m_bHit; }				//当たっているかどうか取得処理

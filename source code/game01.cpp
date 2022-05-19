@@ -464,6 +464,7 @@ void CGame01::Road(void)
 		if (m_apRoad[1]->GetPos().x <= m_pPlayer->GetPos().x)
 		{
 			//“¹0‚ðÁ‚·
+			m_apRoad[0]->DeleteRoad();
 			m_apRoad[0]->Uninit();
 			m_apRoad[0] = nullptr;
 			//”z—ñ‚ð“ü‚ê‘Ö‚¦‚é

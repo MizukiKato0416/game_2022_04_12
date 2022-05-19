@@ -647,6 +647,8 @@ void CManager::SetMode(MODE mode)
 			m_pResult = nullptr;
 		}
 		break;
+	default:
+		break;
 	}
 
 	//全てのオブジェクトの破棄

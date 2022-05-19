@@ -41,6 +41,7 @@ public:
 	void Draw(void);
 
 	static CRanking *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size);
+	static void Connect(CTcpClient *pCommu, CCommunicationData *pCommuData, CScore **pScore);
 
 private:
 	CScore *m_apScore[MAX_RANKING];			//スコアのポインタ

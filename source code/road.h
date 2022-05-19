@@ -47,6 +47,8 @@ public:
 	static CRoad *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const float &move_speed);	// 生成処理
 	void SetSpeed(const float &move_speed) { m_move_speed = move_speed; }	// セッター
 	float GetSpeed(void) { return m_move_speed; }	// ゲッダー
+	void DeleteRoad(void);	// 道削除処理
+
 private:
 	void SkyInstallation(const int &happening_type, const int &installation_position_x, const int &installation_position_y);	// 空用の設置
 	void GroundInstallation(const int &happening_type, const int &installation_position);	// 地面用の設置

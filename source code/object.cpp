@@ -44,7 +44,7 @@ CObject::~CObject()
 //=============================================================================
 void CObject::ReleaseAll(void)
 {
-	for (int count_priolty = 0; count_priolty < (int)PRIORITY::MAX; count_priolty++)
+	/*for (int count_priolty = 0; count_priolty < (int)PRIORITY::MAX; count_priolty++)
 	{
 		int object_size = m_object[count_priolty].size();
 		if (object_size > 0)
@@ -53,7 +53,10 @@ void CObject::ReleaseAll(void)
 			{
 				if (m_object[count_priolty][count_object]->m_priority != static_cast<int>(PRIORITY::FADE))
 				{
-					m_object[count_priolty][count_object]->Uninit();
+					if (m_object[count_priolty][count_object]->m_deth == false)
+					{
+						m_object[count_priolty][count_object]->Uninit();
+					}
 					if (m_object[count_priolty][count_object]->m_deth == true)
 					{
 						delete m_object[count_priolty][count_object];
@@ -61,6 +64,28 @@ void CObject::ReleaseAll(void)
 						m_object[count_priolty].pop_back();
 					}
 				}
+			}
+		}
+	}
+*/
+	for (int nCnt = 0; nCnt < (int)PRIORITY::MAX; nCnt++)
+	{
+		int nPrioltySize = m_object[nCnt].size();
+
+		for (int nCntPop = 0; nCntPop < nPrioltySize; nCntPop++)
+		{
+			if (m_object[nCnt][nCntPop]->m_priority != static_cast<int>(PRIORITY::FADE))
+			{
+				delete m_object[nCnt][nCntPop];
+			}
+		}
+
+		nPrioltySize = m_object[nCnt].size();
+		for (int nCntPop = 0; nCntPop < nPrioltySize; nCntPop++)
+		{
+			if (m_object[nCnt][nCntPop]->m_priority != static_cast<int>(PRIORITY::FADE))
+			{
+				m_object[nCnt].pop_back();
 			}
 		}
 	}
@@ -86,30 +111,23 @@ void CObject::UpdateAll(void)
 			}
 			else
 			{
-				m_object[count_priolty][count_object]->m_update_count++;
-				if (m_object[count_priolty][count_object]->m_update_count >= m_object[count_priolty][count_object]->m_update_frame)
+				if (CManager::GetMode() == CManager::MODE::GAME01)
 				{
-					if (CManager::GetMode() == CManager::MODE::GAME01)
+					if (CPause::GetPause() == false)
 					{
-						if (CPause::GetPause() == false)
-						{
-							m_object[count_priolty][count_object]->Update();
-							m_object[count_priolty][count_object]->m_update_count = 0;
-						}
-						else
-						{
-							if (count_priolty == (int)PRIORITY::PAUSE || count_priolty == (int)PRIORITY::FADE || count_priolty == (int)PRIORITY::CLICK_EFFECT)
-							{
-								m_object[count_priolty][count_object]->Update();
-								m_object[count_priolty][count_object]->m_update_count = 0;
-							}
-						}
+						m_object[count_priolty][count_object]->Update();
 					}
 					else
 					{
-						m_object[count_priolty][count_object]->Update();
-						m_object[count_priolty][count_object]->m_update_count = 0;
+						if (count_priolty == (int)PRIORITY::PAUSE || count_priolty == (int)PRIORITY::FADE || count_priolty == (int)PRIORITY::CLICK_EFFECT)
+						{
+							m_object[count_priolty][count_object]->Update();
+						}
 					}
+				}
+				else
+				{
+					m_object[count_priolty][count_object]->Update();
 				}
 			}
 		}

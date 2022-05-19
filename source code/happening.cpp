@@ -58,11 +58,6 @@ HRESULT CHappenig::Init(void)
 //=============================================================================
 void CHappenig::Uninit(void)
 {
-	if (m_model != nullptr && m_model->GetDeath() == false)
-	{
-		m_model->Uninit();
-		m_model = nullptr;
-	}
 	Release();
 }
 
@@ -252,5 +247,17 @@ void CHappenig::SetCameraZoom(void)
 				}
 			}
 		}
+	}
+}
+
+//=============================================================================
+//ƒ‚ƒfƒ‹‚Ìíœˆ—
+//=============================================================================
+void CHappenig::DeleteModel(void)
+{
+	if (m_model != nullptr)
+	{
+		m_model->Uninit();
+		m_model = nullptr;
 	}
 }

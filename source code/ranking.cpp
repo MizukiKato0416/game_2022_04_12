@@ -4,6 +4,7 @@
 //================================================
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <thread>
 #include "renderer.h"
 #include "score.h"
 #include "manager.h"
@@ -96,37 +97,9 @@ HRESULT CRanking::Init(void)
 			break;
 		}
 	}
-	CCommunicationData::COMMUNICATION_DATA *pData = m_pCommuData->GetCommuData();
-	int nScore = CManager::GetPlayData()->GetScore();
-	char Send_Data[MAX_COMMUDATA];
-	char recv_data[MAX_COMMUDATA];
+	thread th(Connect, m_pCommu, m_pCommuData, &m_apScore[0]);
 
-	m_pCommu->Init();
-
-	if (m_pCommu->Connect())
-	{
-		memcpy(&Send_Data, &nScore, sizeof(nScore));
-		m_pCommu->Send(&Send_Data[0], sizeof(int));
-
-		m_pCommu->Recv(&recv_data[0], sizeof(CCommunicationData::COMMUNICATION_DATA::ranking));
-		memcpy(&pData->ranking, recv_data, sizeof(CCommunicationData::COMMUNICATION_DATA::ranking));
-
-		//スコアの設定
-		for (int nCntRanking = 0; nCntRanking < MAX_RANKING; nCntRanking++)
-		{
-			m_apScore[nCntRanking]->SetScore(pData->ranking[nCntRanking]);
-		}
-	}
-	else
-	{
-		//スコアの設定
-		for (int nCntRanking = 0; nCntRanking < MAX_RANKING; nCntRanking++)
-		{
-			m_apScore[nCntRanking]->SetScore(0);
-		}
-	}
-
-	m_pCommu->Uninit();
+	th.detach();
 
 	//カラーの設定
 	m_col = {255.0f, 255.0f, 255.0f, 255.0f};
@@ -198,3 +171,37 @@ CRanking* CRanking::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size)
 	return pRanking;
 }
 
+void CRanking::Connect(CTcpClient *pCommu, CCommunicationData *pCommuData, CScore **pScore)
+{
+	CCommunicationData::COMMUNICATION_DATA *pData = pCommuData->GetCommuData();
+	int nScore = CManager::GetPlayData()->GetScore();
+	char Send_Data[MAX_COMMUDATA];
+	char recv_data[MAX_COMMUDATA];
+
+	pCommu->Init();
+
+	if (pCommu->Connect())
+	{
+		memcpy(&Send_Data, &nScore, sizeof(nScore));
+		pCommu->Send(&Send_Data[0], sizeof(int));
+
+		pCommu->Recv(&recv_data[0], sizeof(CCommunicationData::COMMUNICATION_DATA::ranking));
+		memcpy(&pData->ranking, recv_data, sizeof(CCommunicationData::COMMUNICATION_DATA::ranking));
+
+		//スコアの設定
+		for (int nCntRanking = 0; nCntRanking < MAX_RANKING; nCntRanking++)
+		{
+			pScore[nCntRanking]->SetScore(pData->ranking[nCntRanking]);
+		}
+	}
+	else
+	{
+		//スコアの設定
+		for (int nCntRanking = 0; nCntRanking < MAX_RANKING; nCntRanking++)
+		{
+			pScore[nCntRanking]->SetScore(0);
+		}
+	}
+
+	pCommu->Uninit();
+}
