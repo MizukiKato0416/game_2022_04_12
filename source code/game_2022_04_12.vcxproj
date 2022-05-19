@@ -182,7 +182,7 @@
     <ClCompile Include="light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="manager.cpp" />
-    <ClCompile Include="menu.cpp" />
+    <ClCompile Include="rocket_scene.cpp" />
     <ClCompile Include="meshfield.cpp" />
     <ClCompile Include="meshsphere.cpp" />
     <ClCompile Include="model.cpp" />
@@ -247,7 +247,7 @@
     <ClInclude Include="light.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="manager.h" />
-    <ClInclude Include="menu.h" />
+    <ClInclude Include="rocket_scene.h" />
     <ClInclude Include="meshfield.h" />
     <ClInclude Include="meshsphere.h" />
     <ClInclude Include="model.h" />

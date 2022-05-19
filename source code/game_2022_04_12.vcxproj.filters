@@ -69,9 +69,6 @@
     <ClCompile Include="manager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="menu.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="meshfield.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -225,6 +222,9 @@
     <ClCompile Include="effect2D.cpp">
       <Filter>ソース ファイル\effect</Filter>
     </ClCompile>
+    <ClCompile Include="rocket_scene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
     <ClCompile Include="letter.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -255,9 +255,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="manager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="menu.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="meshfield.h">
@@ -412,9 +409,6 @@
     </ClInclude>
     <ClInclude Include="effect2D.h">
       <Filter>ヘッダー ファイル\effect</Filter>
-    </ClInclude>
-    <ClInclude Include="letter.h">
-      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
