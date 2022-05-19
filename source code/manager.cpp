@@ -15,7 +15,7 @@
 #include "x_load.h"
 #include "player.h"
 #include "title.h"
-#include "menu.h"
+#include "rocket_scene.h"
 #include "game01.h"
 #include "result.h"
 #include "fade.h"
@@ -43,6 +43,7 @@ CTitle *CManager::m_pTitle = nullptr;
 CTrophy *CManager::m_pTrophy = nullptr;
 CGame01 *CManager::m_pGame01 = nullptr;
 CResult *CManager::m_pResult = nullptr;
+CRocketScene *CManager::m_pRocketScene = nullptr;
 CManager::MODE CManager::m_mode = MODE::TITLE;
 CFade *CManager::m_pFade = nullptr;
 CMotionRoad *CManager::m_pMotionRoad = nullptr;
@@ -176,16 +177,6 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 		}
 	}
 
-	//ポーズクラスの生成
-	/*if (m_pPause == nullptr)
-	{
-		m_pPause = new CPause;
-		if (m_pPause != nullptr)
-		{
-			m_pPause->Init();
-		}
-	}*/
-
 	//ライトの生成
 	m_apLight[0] = CLight::Create(D3DXVECTOR3(-0.6f, -0.8f, 0.6f), D3DXVECTOR3(400.0f, 800.0f, -400.0f));
 	m_apLight[1] = CLight::Create(D3DXVECTOR3(0.4f, 0.4f, -0.4f), D3DXVECTOR3(-100.0f, 0.0f, 100.0f));
@@ -206,17 +197,6 @@ void CManager::Uninit(void)
 {
 	//全てのオブジェクトの破棄
 	CObject::ReleaseAll();
-
-	//ポーズクラスの破棄
-	//if (m_pPause != nullptr)
-	//{
-	//	//終了処理
-	//	m_pPause->Uninit();
-
-	//	//メモリの開放
-	//	delete m_pPause;
-	//	m_pPause = nullptr;
-	//}
 
 	//プレイデータクラスの破棄
 	if (m_pPlayData != nullptr)
@@ -393,12 +373,6 @@ void CManager::Update(void)
 		m_pRenderer->Update();
 	}
 
-	//ポーズ
-	/*if (m_pPause != nullptr && m_mode == MODE::GAME01)
-	{
-		m_pPause->Update();
-	}*/
-
 	//カメラの更新処理
 	for (int nCntCamera = 0; nCntCamera < MAX_CAMERA; nCntCamera++)
 	{
@@ -557,6 +531,14 @@ CResult* CManager::GetResult(void)
 }
 
 //=======================================================================
+//ロケットシーン取得処理
+//=======================================================================
+CRocketScene * CManager::GetRocketScene(void)
+{
+	return m_pRocketScene;
+}
+
+//=======================================================================
 //モード設定処理
 //=======================================================================
 void CManager::SetMode(MODE mode)
@@ -624,6 +606,27 @@ void CManager::SetMode(MODE mode)
 
 			m_pGame01->Uninit();
 			m_pGame01 = nullptr;
+		}
+		break;
+	case MODE::ROCKET_SCENE:
+		if (m_pRocketScene != nullptr)
+		{
+			//カメラの破棄
+			for (int nCntCamera = 0; nCntCamera < MAX_CAMERA; nCntCamera++)
+			{
+				if (m_apCamera[nCntCamera] != nullptr)
+				{
+					//終了処理
+					m_apCamera[nCntCamera]->Uninit();
+
+					//メモリの開放
+					delete m_apCamera[nCntCamera];
+					m_apCamera[nCntCamera] = nullptr;
+				}
+			}
+
+			m_pRocketScene->Uninit();
+			m_pRocketScene = nullptr;
 		}
 		break;
 	case MODE::RESULT:
@@ -715,6 +718,26 @@ void CManager::SetMode(MODE mode)
 				}
 
 				m_pGame01->Init();
+			}
+		}
+		break;
+	case MODE::ROCKET_SCENE:
+		//ゲーム01クラスの生成
+		if (m_pRocketScene == nullptr)
+		{
+			m_pRocketScene = new CRocketScene;
+			if (m_pRocketScene != nullptr)
+			{
+				//メインカメラの生成
+				for (int nCntCamera = 0; nCntCamera < MAX_MAIN_CAMERA; nCntCamera++)
+				{
+					m_apCamera[nCntCamera] = CCamera::Create(CAMERA_INIT_POS, D3DXVECTOR3(CAMERA_INIT_ROT_X, D3DX_PI, 0.0f),
+						                                     (float)(SCREEN_WIDTH / MAX_MAIN_CAMERA * nCntCamera), 0.0f,
+						                                     (float)(SCREEN_WIDTH / MAX_MAIN_CAMERA), (float)SCREEN_HEIGHT);
+					m_apCamera[nCntCamera]->SetNum(nCntCamera);
+				}
+
+				m_pRocketScene->Init();
 			}
 		}
 		break;

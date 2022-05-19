@@ -19,6 +19,7 @@ class CXload;
 class CTitle;
 class CGame01;
 class CResult;
+class CRocketScene;
 class CFade;
 class CMotionRoad;
 class CPlayData;
@@ -43,6 +44,7 @@ public:
 		TITLE = 0,		//タイトル
 		TROPHY,			//トロフィールーム
 		GAME01,			//ゲーム01
+		ROCKET_SCENE,	//ロケットシーン
 		RESULT,			//リザルト
 		MAX
 	};
@@ -67,6 +69,7 @@ public:
 	static CTrophy *GetTrophy(void);					//トロフィールーム取得処理
 	static CGame01 *GetGame01(void);					//ゲーム01取得処理
 	static CResult *GetResult(void);					//リザルト取得処理
+	static CRocketScene *GetRocketScene(void);			//ロケットシーン取得処理
 	static void SetMode(MODE mode);						//モード設定
 	static MODE GetMode(void);							//モード取得
 	static CFade *GetFade(void);						//フェード取得処理
@@ -95,11 +98,11 @@ private:
 	static CTrophy *m_pTrophy;							//トロフィールのポインタ
 	static CGame01 *m_pGame01;							//ゲーム01のポインタ
 	static CResult *m_pResult;							//リザルトのポインタ
+	static CRocketScene *m_pRocketScene;				//ロケットシーンのポインタ
 	static MODE m_mode;									//モード
 	static CFade *m_pFade;								//フェードのポインタ
 	static CMotionRoad *m_pMotionRoad;					//モーションロードのポインタ
 	static CPlayData *m_pPlayData;						//プレイデータのポインタ
-	//static CPause *m_pPause;							//ポーズのポインタ
 	static CSound *m_pSound;							//サウンド
 	static HWND m_hWnd;									//ウィンドウハンドル
 };

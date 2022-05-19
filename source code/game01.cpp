@@ -921,6 +921,18 @@ void CGame01::Finish(void)
 			CFade *pFade;
 			pFade = CManager::GetInstance()->GetFade();
 
+
+			if (m_pRocket != nullptr)
+			{
+				if (m_pRocket->GetHitPlayer() == true)
+				{
+					if (pFade->GetFade() == CFade::FADE_NONE)
+					{
+						pFade->SetFade(CManager::MODE::ROCKET_SCENE);
+					}
+				}
+			}
+
 			if (pFade->GetFade() == CFade::FADE_NONE)
 			{
 				pFade->SetFade(CManager::MODE::RESULT);
