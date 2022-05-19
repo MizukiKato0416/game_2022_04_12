@@ -25,6 +25,7 @@
 #include "trophy.h"
 #include "sound.h"
 #include "effect_click.h"
+#include "letter.h"
 
 //================================================
 //Ã“Iƒƒ“ƒo•Ï”éŒ¾
@@ -72,6 +73,7 @@ CManager::~CManager()
 //================================================
 HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 {
+	CLetter::Load();
 	//‚Å‰Šú‰»
 	srand((unsigned int)time(NULL));
 

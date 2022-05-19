@@ -12,7 +12,8 @@
 //*****************************************************************************
 #include <tchar.h>
 #include "main.h"
-#include "scene.h"
+#include "object.h"
+#include "object2D.h"
 #include "texture.h"
 
 //*****************************************************************************
@@ -22,23 +23,12 @@
 #define VERTEX_NUM (4)	// 頂点の数
 
 //*****************************************************************************
-// 構造体定義
-//*****************************************************************************
-typedef struct
-{
-	D3DXVECTOR3 pos;//頂点座標
-	float rhw;		//1.0fで固定
-	D3DCOLOR col;	//頂点カラー
-	D3DXVECTOR2 tex;//テクスチャ座標
-} VERTEX_2D;
-
-//*****************************************************************************
 // クラス定義
 //*****************************************************************************
-class CLetter : public CScene
+class CLetter : public CObject
 {
 public:
-	CLetter(LAYER_TYPE Layer = LAYER_TYPE::LAYER_00);	// デフォルトコンストラクタ
+	CLetter(CObject::PRIORITY Layer = CObject::PRIORITY::SCORE);	// デフォルトコンストラクタ
 	~CLetter();	// デフォルトデストラクタ
 	virtual HRESULT Init(void);	// ポリゴンの初期化
 	virtual void Uninit(void);	// ポリゴンの終了

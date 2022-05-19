@@ -30,7 +30,7 @@ public:
 	HRESULT Init(const HINSTANCE &hInstance, const HWND &hWnd);
 	void Uninit(void);
 	void Update(void);
-	int GetAllKeyUpdate(void);	// どのキーが押されたか
+	pair<int, bool> GetAllKeyUpdate(void);	// どのキーが押されたか
 	bool GetPress(const int &nKey);
 	bool GetTrigger(const int &nKey);
 	bool GetRelease(const int &nKey);

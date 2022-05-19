@@ -93,28 +93,24 @@ void  CInputKeyboard::Update(void)
 //=============================================================================
 // どのキーが押されたか
 //=============================================================================
-int CInputKeyboard::GetAllKeyUpdate(void)
+pair<int, bool> CInputKeyboard::GetAllKeyUpdate(void)
 {
+	pair<int, bool> KeyUpdate;
 	bool bTrigger = false;	// トリガーでどこか押されてる
-	bool bPress = false;	// プレスでどこか押されてる
-	int nKeyCode = 0;	// 配列
+	bool bKeyBoard = false;	
 	for (int nCntKey = 0; nCntKey < NUM_KEY_MAX; nCntKey++)
 	{
-		bPress = (m_aKeyState[nCntKey] & 0x80) ? true : false;
 		bTrigger = (m_aKeyStateTrigger[nCntKey] & 0x80) ? true : false;
-		if (bPress == true)
+		if (bTrigger == true)
 		{
-			nKeyCode = nCntKey;
-			break;
-		}
-		else if (bTrigger == true)
-		{
-			nKeyCode = nCntKey;
+			KeyUpdate.first = nCntKey;
+			bKeyBoard = true;
 			break;
 		}
 	}
+	KeyUpdate.second = bKeyBoard;
 
-	return nKeyCode;
+	return KeyUpdate;
 }
 
 //=======================================================================

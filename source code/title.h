@@ -11,11 +11,13 @@
 // ヘッダファイルのインクルード
 //*****************************************************************************
 #include "object.h"
+#include "input_keyboard.h"
 
 //*****************************************************************************
 // 前方宣言
 //*****************************************************************************
 class CObject2D;
+class CLetter;
 
 //*****************************************************************************
 // クラス定義
@@ -40,9 +42,15 @@ private:
 	vector<CObject2D*> m_button;// ボタン
 	vector<CObject2D*> m_tutorial;// チュートリアル
 	vector<CObject2D*> m_pas_word;// パスワード入力欄
+	vector<CLetter*> m_pas_font;// パスワード
+	vector<wstring> m_key_name;
+	vector<string> m_letter_single;	// パスワード
+	string m_pasword;	// パスワード
+	int m_count_letter;
 	int m_result_timer;	// リザルトへのタイマー
 	bool m_fade_flag;	// フェードフラグ
 	bool m_tutorial_flag;	// チュートリアルか
+	bool m_pas_drop;	// パスワード打ち込み
 };
 
 #endif // !_TITLE_H_

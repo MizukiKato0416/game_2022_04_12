@@ -7,6 +7,8 @@
 //=============================================================================
 // インクルード
 //=============================================================================
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
 #include "title.h"
 #include "manager.h"
 #include "object2D.h"
@@ -14,6 +16,7 @@
 #include "input_mouse.h"
 #include "fade.h"
 #include "sound.h"
+#include "letter.h"
 
 //=============================================================================
 // マクロ定義
@@ -30,7 +33,51 @@
 //=============================================================================
 CTitle::CTitle(CObject::PRIORITY Priority):CObject(Priority)
 {
-	
+	FILE *file;
+
+	file = fopen("data/keyconfig.txt", "r");
+
+	if (file != NULL)
+	{
+		for (int nCntKey = 1; nCntKey < NUM_KEY_MAX; nCntKey++)
+		{
+			char name_buf[1][64];
+			string name;
+
+			fscanf(file, "%s", name_buf[0]);
+			name = name_buf[0];
+			m_letter_single.push_back(name);
+
+			// SJIS → wstring
+			int iBufferSize = MultiByteToWideChar(	CP_ACP,
+													0,
+													name.c_str(),
+													-1,
+													(wchar_t*)NULL,
+													0);
+
+			// バッファの取得
+			wchar_t* cpUCS2 = new wchar_t[iBufferSize];
+
+			// SJIS → wstring
+			MultiByteToWideChar(	CP_ACP,
+									0,
+									name.c_str(),
+									-1,
+									cpUCS2,
+									iBufferSize);
+
+			// stringの生成
+			wstring utextbuf(cpUCS2, cpUCS2 + iBufferSize - 1);
+
+			// バッファの破棄
+			delete[] cpUCS2;
+
+			m_key_name.push_back(utextbuf);
+		}
+	}
+
+	fclose(file);
 }
 
 //=============================================================================
@@ -95,6 +142,7 @@ void CTitle::Update(void)
 	Tutorial();
 	ColUpdate();
 	ResultTimer();
+	PasWord();
 }
 
 //=============================================================================
@@ -312,5 +360,39 @@ void CTitle::ResultTimer(void)
 //=============================================================================
 void CTitle::PasWord(void)
 {
+	CInputKeyboard *key = CManager::GetInstance()->GetInputKeyboard();
+	string text_buf;
+	pair<int, bool> key_update;
 
+	m_pas_drop = true;
+	if(m_pas_drop == true)
+	{
+		key_update = key->GetAllKeyUpdate();
+
+		if (key_update.second == true)
+		{
+			if (key_update.first != DIK_RETURN)
+			{
+				m_pas_font.push_back(new CLetter);
+
+				m_pas_font[m_count_letter]->SetPos(D3DXVECTOR3((0.0f + 15.0f) + (30.0f * m_count_letter), SCREEN_WIDTH / 2, 0.0f));
+				m_pas_font[m_count_letter]->SetSize(D3DXVECTOR3(15.0f, 15.0f, 0.0f));
+				m_pas_font[m_count_letter]->SetText(m_key_name[key_update.first - 1][0]);
+				m_pas_font[m_count_letter]->SetFontSize(260);
+				m_pas_font[m_count_letter]->SetFontWeight(500);
+				m_pas_font[m_count_letter]->Init();
+				m_count_letter++;
+				m_pasword.push_back(*m_letter_single[key_update.first - 1].c_str());
+			}
+			else
+			{
+				int font_size = m_pas_font.size();
+				for (int count_font = 0; count_font < font_size; count_font++)
+				{
+					m_pas_font[count_font]->Uninit();
+					m_count_letter = 0;
+				}
+			}
+		}
+	}
 }
