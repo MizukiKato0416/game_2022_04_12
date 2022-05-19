@@ -115,7 +115,7 @@ void CResult::Update(void)
 
 	if (m_pRank->GetOnece() == true)
 	{
-		if (m_bInstance == true)
+		if (m_bInstance == false)
 		{
 			if (m_pCommu != nullptr)
 			{
@@ -148,6 +148,7 @@ void CResult::Update(void)
 					D3DXVECTOR3(500.0f, 70.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Ranking.png"));
 			}
+			m_bInstance = true;
 		}
 	}
 	else
