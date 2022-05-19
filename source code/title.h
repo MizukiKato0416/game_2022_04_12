@@ -35,9 +35,11 @@ private:
 	void Tutorial(void);
 	void ColUpdate(void);
 	void ResultTimer(void);
+	void PasWord(void);
 	CObject2D *m_click;	// CLICKロゴ
 	vector<CObject2D*> m_button;// ボタン
 	vector<CObject2D*> m_tutorial;// チュートリアル
+	vector<CObject2D*> m_pas_word;// パスワード入力欄
 	int m_result_timer;	// リザルトへのタイマー
 	bool m_fade_flag;	// フェードフラグ
 	bool m_tutorial_flag;	// チュートリアルか
