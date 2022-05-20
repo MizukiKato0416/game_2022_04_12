@@ -46,8 +46,9 @@ private:
 	vector<wstring> m_key_name;	// パスワード1文字ずつ
 	vector<string> m_letter_single;	// パスワード
 	string m_pasword;	// パスワード
-	int m_count_letter;
+	int m_count_letter;	// テキストカウント
 	int m_result_timer;	// リザルトへのタイマー
+	int m_letter_limitl;	// 文字制限
 	bool m_fade_flag;	// フェードフラグ
 	bool m_tutorial_flag;	// チュートリアルか
 	bool m_pas_drop;	// パスワード打ち込み

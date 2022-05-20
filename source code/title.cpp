@@ -93,7 +93,7 @@ CTitle::~CTitle()
 //=============================================================================
 HRESULT CTitle::Init(void)
 {
-	CObject2D *pObject2D[2];
+	CObject2D *object_2D[2];
 	CSound *sound;
 	sound = CManager::GetInstance()->GetSound();
 
@@ -101,10 +101,10 @@ HRESULT CTitle::Init(void)
 	sound->Play(CSound::SOUND_LABEL::TITLE_BGM);
 	sound->ControllVoice(CSound::SOUND_LABEL::TITLE_BGM, 1.4f);
 
-	pObject2D[0] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-	pObject2D[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Bg.png"));
-	pObject2D[1] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 0.0f + 200.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH * 0.9f, SCREEN_HEIGHT * 0.3f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-	pObject2D[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Title.png"));
+	object_2D[0] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+	object_2D[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Bg.png"));
+	object_2D[1] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, 0.0f + 200.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH * 0.9f, SCREEN_HEIGHT * 0.3f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+	object_2D[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Title.png"));
 	m_click = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - (SCREEN_WIDTH / 3.0f) / 2.0f, SCREEN_HEIGHT - (SCREEN_HEIGHT * 0.10f) / 2.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 3.0f, SCREEN_HEIGHT * 0.10f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 	m_click->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Click.png"));
 	m_button.push_back(CObject2D::Create(D3DXVECTOR3(0.0f + 300.0f, SCREEN_HEIGHT - 300.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH / 2.2f, SCREEN_HEIGHT * 0.15f, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
@@ -348,7 +348,7 @@ void CTitle::ResultTimer(void)
 	{
 		m_result_timer = 0;
 		if (fade->GetFade() == CFade::FADE_NONE &&
-			m_tutorial_flag == false)
+			m_tutorial_flag == false && m_pas_drop == false)
 		{
 			fade->SetFade(CManager::MODE::RESULT);
 		}
@@ -360,32 +360,74 @@ void CTitle::ResultTimer(void)
 //=============================================================================
 void CTitle::PasWord(void)
 {
-	CInputKeyboard *key = CManager::GetInstance()->GetInputKeyboard();
+	CInputKeyboard *key;
+	CInputMouse *mouse;
+	CObject2D *object_2D;
+	POINT point;
+	HWND hwnd;
 	string text_buf;
 	pair<int, bool> key_update;
+	D3DXVECTOR3 pos;
+	D3DXVECTOR3 size;
+	key = CManager::GetInstance()->GetInputKeyboard();
+	hwnd = CManager::GetInstance()->GetWindowHandle();
+	mouse = CManager::GetInstance()->GetInputMouse();
+	GetCursorPos(&point);
+	ScreenToClient(hwnd, &point);
 
-	m_pas_drop = true;
+	object_2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, 0.0f + 50.0f, 0.0f), D3DXVECTOR3(600.0f, 100.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+	object_2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Bg.png"));
+	m_pas_word = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, 0.0f + 70.0f, 0.0f), D3DXVECTOR3(480.0f, 50.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+	//m_pas_word->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Bg.png"));
+
+	pos = m_pas_word->GetPos();
+	size = m_pas_word->GetSize();
+
+	if (pos.x - size.x / 2.0f <= point.x &&
+		pos.x + size.x / 2.0f >= point.x &&
+		pos.y - size.y / 2.0f <= point.y &&
+		pos.y + size.y / 2.0f >= point.y)
+	{
+		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
+		{
+			m_pas_drop = true;
+		}
+	}
+	else
+	{
+		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
+		{
+			m_pas_drop = false;
+		}
+	}
+
 	if(m_pas_drop == true)
 	{
+		m_pas_word->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
+
 		key_update = key->GetAllKeyUpdate();
 
 		if (key_update.second == true)
 		{
 			if (key_update.first != DIK_RETURN)
 			{
-				int name_size = m_key_name[key_update.first - 1].size();
-				for (int count_name = 0; count_name < name_size; count_name++)
+				if (m_letter_limitl < 15)
 				{
-					m_pas_font.push_back(new CLetter);
+					int name_size = m_key_name[key_update.first - 1].size();
+					for (int count_name = 0; count_name < name_size; count_name++)
+					{
+						m_pas_font.push_back(new CLetter);
 
-					m_pas_font[m_count_letter]->SetPos(D3DXVECTOR3((0.0f + 15.0f) + (30.0f * m_count_letter), SCREEN_WIDTH / 2, 0.0f));
-					m_pas_font[m_count_letter]->SetSize(D3DXVECTOR3(15.0f, 15.0f, 0.0f));
-					m_pas_font[m_count_letter]->SetText(m_key_name[key_update.first - 1][count_name]);
-					m_pas_font[m_count_letter]->SetFontSize(260);
-					m_pas_font[m_count_letter]->SetFontWeight(500);
-					m_pas_font[m_count_letter]->Init();
-					m_count_letter++;
-					m_pasword.push_back(m_letter_single[key_update.first - 1][count_name]);
+						m_pas_font[m_count_letter]->SetPos(D3DXVECTOR3((((SCREEN_WIDTH - 300.0f) - (480.0f / 2.0f)) + 25.0f) + (30.0f * m_count_letter), (((0.0f + 70.0f) - (50.0f / 2.0f)) + 25.0f), 0.0f));
+						m_pas_font[m_count_letter]->SetSize(D3DXVECTOR3(15.0f, 15.0f, 0.0f));
+						m_pas_font[m_count_letter]->SetText(m_key_name[key_update.first - 1][count_name]);
+						m_pas_font[m_count_letter]->SetFontSize(260);
+						m_pas_font[m_count_letter]->SetFontWeight(500);
+						m_pas_font[m_count_letter]->Init();
+						m_count_letter++;
+						m_pasword.push_back(m_letter_single[key_update.first - 1][count_name]);
+						m_letter_limitl++;
+					}
 				}
 			}
 			else
@@ -398,8 +440,13 @@ void CTitle::PasWord(void)
 					font_size = m_pas_font.size();
 					count_font--;
 					m_count_letter = 0;
+					m_letter_limitl = 0;
 				}
 			}
 		}
+	}
+	else
+	{
+		m_pas_word->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 }
