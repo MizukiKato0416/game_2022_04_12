@@ -93,7 +93,7 @@ CTitle::~CTitle()
 //=============================================================================
 HRESULT CTitle::Init(void)
 {
-	CObject2D *object_2D[2];
+	CObject2D *object_2D[3];
 	CSound *sound;
 	sound = CManager::GetInstance()->GetSound();
 
@@ -119,6 +119,10 @@ HRESULT CTitle::Init(void)
 	m_button[3]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("start.png"));
 	m_button[4]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Trophy.png"));
 	m_button[5]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("tutorial.png"));
+	object_2D[2]= CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, 0.0f + 75.0f, 0.0f), D3DXVECTOR3(600.0f, 150.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+	object_2D[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("password_frame.png"));
+	m_pas_word = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, 0.0f + 95.0f, 0.0f), D3DXVECTOR3(480.0f, 50.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+	m_pas_word->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("password_wordbox.png"));
 	m_fade_flag = true;
 
 	return S_OK;
@@ -375,10 +379,7 @@ void CTitle::PasWord(void)
 	GetCursorPos(&point);
 	ScreenToClient(hwnd, &point);
 
-	object_2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, 0.0f + 75.0f, 0.0f), D3DXVECTOR3(600.0f, 150.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-	object_2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("password_frame.png"));
-	m_pas_word = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, 0.0f + 95.0f, 0.0f), D3DXVECTOR3(480.0f, 50.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-	m_pas_word->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("password_wordbox.png"));
+
 
 	pos = m_pas_word->GetPos();
 	size = m_pas_word->GetSize();
