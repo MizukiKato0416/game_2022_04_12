@@ -9,10 +9,13 @@
 //前方宣言
 class CPlayer;
 class CModelSingle;
+class CBg;
+class CScore;
 
 //================================================
 //マクロ定義
 //================================================
+#define ROCKET_SCENE_BG_NUM		(4)			//背景の数
 
 //================================================
 //クラスの定義
@@ -31,8 +34,15 @@ public:
 	void Draw(void);
 
 private:
-	CPlayer *m_pPlayer;			//プレイヤーのポインタ
-	CModelSingle *m_pRocket;	//ロケットのポインタ
+	void Score(void);			//スコア処理
+	void Camera(void);			//カメラ処理
+
+	CPlayer *m_pPlayer;						//プレイヤーのポインタ
+	CModelSingle *m_pRocket;				//ロケットのポインタ
+	CBg *m_apBg[ROCKET_SCENE_BG_NUM];		//背景のポインタ
+	CScore *m_pScore;						//スコアのポインタ
+	bool m_bResult;							//リザルトに行くかどうか
+	int m_nCounter;							//リザルトに行くカウンター
 };
 
 //================================================

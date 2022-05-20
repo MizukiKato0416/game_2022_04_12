@@ -7,12 +7,16 @@
 #include "object.h"
 #include "number.h"
 
+//前方宣言
+class CObject2D;
+
 //================================================
 //マクロ定義
 //================================================
-#define MAX_SCORE_POLYGON (8)				//ポリゴンの最大数
-#define SCORE_POLYGON_WIDTH (30.0f)			//ポリゴンの幅
-#define SCORE_POLYGON_HEIGHT (60.0f)		//ポリゴンの高さ
+#define MAX_SCORE_POLYGON		(8)				//ポリゴンの最大数
+#define MAX_SCORE				(99999999)		//スコアの最大値
+#define SCORE_POLYGON_WIDTH		(30.0f)			//ポリゴンの幅
+#define SCORE_POLYGON_HEIGHT	(60.0f)			//ポリゴンの高さ
 
 //========================================================
 //構造体の定義
@@ -45,7 +49,8 @@ private:
 	int m_nScore;									//スコア
 	D3DXVECTOR3 m_pos;								//位置
 	D3DXVECTOR3 m_size;								//サイズ
-
+	CObject2D *m_pUnit;								//単位のポインタ
+	CObject2D *m_pConma;							//スコアのポインタ
 };
 
 //================================================

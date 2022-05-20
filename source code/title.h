@@ -31,6 +31,7 @@ public:
 	void Uninit(void);	// 終了
 	void Update(void);	// 更新
 	void Draw(void);	// 描画
+	string GetPasWord(void) { return m_pasword; }	// ゲッダー
 
 private:
 	void SeletMode(void);

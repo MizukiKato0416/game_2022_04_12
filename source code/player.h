@@ -51,6 +51,8 @@ public:
 	D3DXVECTOR3 GetModelPos(const int &nCntModel);											//モデルの位置取得処理
 	D3DXVECTOR3 GetRot(void) { return m_rot; }												//プレイヤーの向き取得処理
 	void SetRot(const D3DXVECTOR3 &rot) { m_rot = rot; }									//プレイヤーの向き設定処理
+	D3DXVECTOR3 GetOffsetPos(void) { return m_offsetPos; }												//プレイヤーのオフセット位置取得処理
+	void SetOffsetPos(const D3DXVECTOR3 &offsetPos) { m_offsetPos = offsetPos; }									//プレイヤーのオフセット位置設定処理
 	void SetModelRot(const int &nCntModel, const D3DXVECTOR3 &rot);							//モデルの向き設定処理
 	D3DXVECTOR3 GetModelRot(const int &nCntModel);											//モデルの向き取得処理
 	void SetMove(const D3DXVECTOR3 &move) { m_move = move; }								//移動量設定処理
@@ -75,9 +77,9 @@ public:
 	float GetRotSpeed(void) { return m_fRotSpeed; }											//回転させるスピード取得処理
 	void SetRotSpeed(const float &fRotSpeed) { m_fRotSpeed = fRotSpeed; }					//回転させるスピード設定処理
 	PLAYER_STATE GetState(void) { return m_state; }											//状態取得処理
-	void SetState(const PLAYER_STATE &state) { m_state = state; }									//状態設定処理
+	void SetState(const PLAYER_STATE &state) { m_state = state; }							//状態設定処理
 	int GetStateCounter(void) { return m_nStateCounter; }									//状態管理のカウンター取得処理
-	void SetStateCounter(const int &nStateCounter) { m_nStateCounter = nStateCounter; }			//状態管理のカウンター設定処理
+	void SetStateCounter(const int &nStateCounter) { m_nStateCounter = nStateCounter; }		//状態管理のカウンター設定処理
 
 private:
 	//メンバ関数
@@ -87,6 +89,7 @@ private:
 
 	//メンバ変数
 	D3DXVECTOR3 m_pos;								//位置
+	D3DXVECTOR3 m_offsetPos;						//プレイヤーが子になったときのオフセット位置
 	D3DXVECTOR3 m_posOld;							//1フレーム前の位置
 	D3DXVECTOR3 m_move;								//ポリゴンの移動量
 	D3DXVECTOR3	m_size;								//サイズ

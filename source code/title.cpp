@@ -366,7 +366,6 @@ void CTitle::PasWord(void)
 {
 	CInputKeyboard *key;
 	CInputMouse *mouse;
-	CObject2D *object_2D;
 	POINT point;
 	HWND hwnd;
 	string text_buf;

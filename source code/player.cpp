@@ -60,6 +60,7 @@ CPlayer::CPlayer(CObject::PRIORITY Priority):CObject(Priority)
 	m_size = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	m_offsetPos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_posOld = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_pParent = nullptr;
@@ -100,6 +101,7 @@ CPlayer::~CPlayer()
 HRESULT CPlayer::Init(void)
 {
 	m_move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	m_offsetPos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_fObjectiveRot = 0.0f;
 	m_fNumRot = 0.0f;
 	m_bRotate = false;
@@ -421,8 +423,8 @@ void CPlayer::Draw(void)
 	//êeéqä÷åWÇ™Ç¬ÇØÇÁÇÍÇƒÇ¢ÇΩÇÁ
 	if (m_bObjParent == true)
 	{
-		pos = { 0.0f, 0.0f, 0.0f };
-		rot = { 0.0f, 0.0f, 0.0f };
+		pos = m_offsetPos;
+		rot = m_rot;
 	}
 	else
 	{//Ç¬ÇØÇÁÇÍÇƒÇ¢Ç»Ç©Ç¡ÇΩÇÁ

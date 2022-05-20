@@ -6,6 +6,7 @@
 #include "manager.h"
 #include "renderer.h"
 #include "texture.h"
+#include "floor.h"
 
 //================================================
 //マクロ定義
@@ -115,6 +116,9 @@ void CShadow::Update(void)
 	//位置、サイズ、カラーを設定
 	SetPos(D3DXVECTOR3(posObj.x, 0.01f, posObj.z), size);
 	SetCol(col);
+
+	//当たり判定
+	Collision();
 }
 
 //================================================
@@ -164,4 +168,17 @@ CShadow* CShadow::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, CObjec
 		}
 	}
 	return pShadow;
+}
+
+//================================================
+//当たり判定
+//================================================
+void CShadow::Collision(void)
+{
+	//床との当たり判定
+	if (CFloor::CollisionShadow(this) == false)
+	{
+		//描画されないようにする
+		m_bDraw = false;
+	}
 }

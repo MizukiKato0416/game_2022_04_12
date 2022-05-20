@@ -28,6 +28,7 @@ public:
 	void Draw(void);
 	static CFloor *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const D3DXVECTOR3 &rot);
 	static bool Collision(CObject *pObject);			//“–‚½‚è”»’è
+	static bool CollisionShadow(CObject *pObject);		//‰e‚Æ‚Ì“–‚½‚è”»’è
 
 private:
 };
