@@ -141,7 +141,7 @@ HRESULT CTrophy::Init(void)
 					m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Trophy_10000.png"));
 					m_type.push_back((TROPHY)trophy_count);
 					break;
-				case (int)TROPHY::M_999999:
+				case (int)TROPHY::MEASUREMENT_IMPOSSIBLE:
 					m_icon.push_back(CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_x), (SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT) + (TROPHY_ICON_Y_FEELING * count_y), 0.0f),
 						D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
 					m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("trophy_999999.png"));
@@ -153,83 +153,10 @@ HRESULT CTrophy::Init(void)
 			}
 			else
 			{
-				switch (trophy_count)
-				{
-				case (int)TROPHY::AIRPLANE:
-					m_icon.push_back(CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_x), (SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT) + (TROPHY_ICON_Y_FEELING * count_y), 0.0f),
-						D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
-					m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Trophy_airplane_Black.png"));
-					m_type.push_back((TROPHY)trophy_count);
-					break;
-				case (int)TROPHY::FAN:
-					m_icon.push_back(CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_x), (SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT) + (TROPHY_ICON_Y_FEELING * count_y), 0.0f),
-						D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
-					m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Trophy_fan_Black.png"));
-					m_type.push_back((TROPHY)trophy_count);
-					break;
-				case (int)TROPHY::REDBULL:
-					m_icon.push_back(CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_x), (SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT) + (TROPHY_ICON_Y_FEELING * count_y), 0.0f),
-						D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
-					m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Trophy_redbull_Black.png"));
-					m_type.push_back((TROPHY)trophy_count);
-					break;
-				case (int)TROPHY::STARRING:
-					m_icon.push_back(CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_x), (SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT) + (TROPHY_ICON_Y_FEELING * count_y), 0.0f),
-						D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
-					m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Trophy_starring_Black.png"));
-					m_type.push_back((TROPHY)trophy_count);
-					break;
-				case (int)TROPHY::THORN:
-					m_icon.push_back(CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_x), (SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT) + (TROPHY_ICON_Y_FEELING * count_y), 0.0f),
-						D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
-					m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Trophy_thorn_Black.png"));
-					m_type.push_back((TROPHY)trophy_count);
-					break;
-				case (int)TROPHY::TRAMPOLINE:
-					m_icon.push_back(CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_x), (SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT) + (TROPHY_ICON_Y_FEELING * count_y), 0.0f),
-						D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
-					m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Trophy_trampoline_Black.png"));
-					m_type.push_back((TROPHY)trophy_count);
-					break;
-				case (int)TROPHY::BANANA:
-					m_icon.push_back(CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_x), (SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT) + (TROPHY_ICON_Y_FEELING * count_y), 0.0f),
-						D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
-					m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Trophy_banana_Black.png"));
-					m_type.push_back((TROPHY)trophy_count);
-					break;
-				case (int)TROPHY::ROCKET:
-					m_icon.push_back(CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_x), (SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT) + (TROPHY_ICON_Y_FEELING * count_y), 0.0f),
-						D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
-					m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Trophy_rocket_Black.png"));
-					m_type.push_back((TROPHY)trophy_count);
-					break;
-				case (int)TROPHY::M_1000:
-					m_icon.push_back(CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_x), (SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT) + (TROPHY_ICON_Y_FEELING * count_y), 0.0f),
-						D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
-					m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("trophy_question.png"));
-					m_type.push_back((TROPHY)trophy_count);
-					break;
-				case (int)TROPHY::M_5000:
-					m_icon.push_back(CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_x), (SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT) + (TROPHY_ICON_Y_FEELING * count_y), 0.0f),
-						D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
-					m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("trophy_question.png"));
-					m_type.push_back((TROPHY)trophy_count);
-					break;
-				case (int)TROPHY::M_10000:
-					m_icon.push_back(CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_x), (SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT) + (TROPHY_ICON_Y_FEELING * count_y), 0.0f),
-						D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
-					m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("trophy_question.png"));
-					m_type.push_back((TROPHY)trophy_count);
-					break;
-				case (int)TROPHY::M_999999:
-					m_icon.push_back(CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_x), (SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT) + (TROPHY_ICON_Y_FEELING * count_y), 0.0f),
-						D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
-					m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("trophy_question.png"));
-					m_type.push_back((TROPHY)trophy_count);
-					break;
-				default:
-					break;
-				}
+				m_icon.push_back(CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_x), (SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT) + (TROPHY_ICON_Y_FEELING * count_y), 0.0f),
+					D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
+				m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("trophy_question.png"));
+				m_type.push_back((TROPHY)trophy_count);
 			}
 			trophy_count++;
 			if (trophy_count >= (int)TROPHY::MAX)
@@ -406,7 +333,7 @@ void CTrophy::Update(void)
 					D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_10000.png"));
 			}
-			else if (m_type[icon] == TROPHY::M_999999)
+			else if (m_type[icon] == TROPHY::MEASUREMENT_IMPOSSIBLE)
 			{
 				if (m_letter != nullptr)
 				{

@@ -39,7 +39,7 @@ public:
 		M_1000,
 		M_5000,
 		M_10000,
-		M_999999,
+		MEASUREMENT_IMPOSSIBLE,
 		MAX
 	};
 
