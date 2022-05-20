@@ -194,9 +194,19 @@ void CTitle::SeletMode(void)
 		m_button[3]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true && fade->GetFade() == CFade::FADE_NONE)
 		{
-			sound->ControllVoice(CSound::SOUND_LABEL::DECISION_SE, 1.2f);
-			sound->Play(CSound::SOUND_LABEL::DECISION_SE);
-			fade->SetFade(CManager::MODE::GAME01);
+			if (m_pas_drop == true)
+			{
+				CManager::GetInstance()->GetPlayData()->SetPasword(m_pasword);
+				sound->ControllVoice(CSound::SOUND_LABEL::DECISION_SE, 1.2f);
+				sound->Play(CSound::SOUND_LABEL::DECISION_SE);
+				fade->SetFade(CManager::MODE::GAME01);
+			}
+			else
+			{
+				sound->ControllVoice(CSound::SOUND_LABEL::DECISION_SE, 1.2f);
+				sound->Play(CSound::SOUND_LABEL::DECISION_SE);
+				fade->SetFade(CManager::MODE::GAME01);
+			}
 		}
 	}
 	else
@@ -434,6 +444,7 @@ void CTitle::PasWord(void)
 			}
 			else if(key_update.first == DIK_BACK)
 			{
+				CManager::GetInstance()->GetPlayData()->SetPasword("");
 				int font_size = m_pas_font.size();
 				for (int count_font = 0; count_font < font_size; count_font++)
 				{
@@ -453,7 +464,6 @@ void CTitle::PasWord(void)
 			else if (key_update.first == DIK_RETURN)
 			{
 				CManager::GetInstance()->GetPlayData()->SetPasword(m_pasword);
-
 				m_pas_drop = false;
 			}
 		}
