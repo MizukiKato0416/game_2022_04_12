@@ -409,6 +409,7 @@ void CTitle::PasWord(void)
 	{
 		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 		{
+			CManager::GetInstance()->GetPlayData()->SetPasword(m_pasword);
 			m_pas_drop = false;
 		}
 	}
