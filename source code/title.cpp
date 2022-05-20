@@ -375,9 +375,9 @@ void CTitle::PasWord(void)
 	GetCursorPos(&point);
 	ScreenToClient(hwnd, &point);
 
-	object_2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, 0.0f + 50.0f, 0.0f), D3DXVECTOR3(600.0f, 100.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+	object_2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, 0.0f + 75.0f, 0.0f), D3DXVECTOR3(600.0f, 150.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 	object_2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("password_frame.png"));
-	m_pas_word = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, 0.0f + 70.0f, 0.0f), D3DXVECTOR3(480.0f, 50.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+	m_pas_word = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, 0.0f + 95.0f, 0.0f), D3DXVECTOR3(480.0f, 50.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 	m_pas_word->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("password_wordbox.png"));
 
 	pos = m_pas_word->GetPos();
@@ -418,7 +418,7 @@ void CTitle::PasWord(void)
 					{
 						m_pas_font.push_back(new CLetter);
 
-						m_pas_font[m_count_letter]->SetPos(D3DXVECTOR3((((SCREEN_WIDTH - 300.0f) - (480.0f / 2.0f)) + 25.0f) + (30.0f * m_count_letter), (((0.0f + 70.0f) - (50.0f / 2.0f)) + 25.0f), 0.0f));
+						m_pas_font[m_count_letter]->SetPos(D3DXVECTOR3((((SCREEN_WIDTH - 300.0f) - (480.0f / 2.0f)) + 32.5f) + (30.0f * m_count_letter), (((0.0f + 95.f) - (50.0f / 2.0f)) + 25.0f), 0.0f));
 						m_pas_font[m_count_letter]->SetSize(D3DXVECTOR3(15.0f, 15.0f, 0.0f));
 						m_pas_font[m_count_letter]->SetText(m_key_name[key_update.first - 1][count_name]);
 						m_pas_font[m_count_letter]->SetFontSize(260);
