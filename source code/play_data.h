@@ -36,7 +36,7 @@ public:
 	int GetTime(void) { return m_nTime; }											//時間の取得
 	vector<bool> GetFlag(void) { return m_trophy_flag; }		// セッター
 	void SetFlag(vector<bool> frag) { m_trophy_flag = frag; }	// セッター
-	string  GetPasword(void) { return m_pasword; }
+	string GetPasword(void) { return m_pasword; }
 	void SetPasword(string pas) { m_pasword = pas; }
 
 private:

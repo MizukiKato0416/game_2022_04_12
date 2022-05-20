@@ -62,6 +62,8 @@ CRocketScene::CRocketScene()
 	memset(m_apBg, NULL, sizeof(m_apBg[ROCKET_SCENE_BG_NUM]));
 	m_nCounter = 0;
 	m_bResult = false;
+	m_pDengerMask = nullptr;
+	m_bAddCol = false;
 }
 
 //================================================
@@ -85,6 +87,7 @@ HRESULT CRocketScene::Init(void)
 	//変数初期化
 	m_nCounter = 0;
 	m_bResult = false;
+	m_bAddCol = true;
 
 	//サウンドの取得
 	CSound *pSound;
@@ -144,6 +147,12 @@ HRESULT CRocketScene::Init(void)
 	pCamera->SetPosR(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	pCamera->SetPosV(ROCKET_SCENE_CAMERA_V_POS);
 
+	//マスクの生成
+	m_pDengerMask = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f),
+		                              static_cast<int>(CObject::PRIORITY::MASK));
+	m_pDengerMask->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("denger_mask.png"));
+	m_pDengerMask->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
+
 	return S_OK;
 }
 
@@ -176,6 +185,9 @@ void CRocketScene::Update(void)
 	
 	//カメラ処理
 	Camera();
+
+	//マスク処理
+	Mask();
 
 	//リザルトに行くようになってたら
 	if (m_bResult == true)
@@ -272,4 +284,43 @@ void CRocketScene::Camera(void)
 	//位置設定
 	pCamera->SetPosR(posR);
 	pCamera->SetPosV(posV);
+}
+
+//================================================
+//マスク処理
+//================================================
+void CRocketScene::Mask(void)
+{
+	//色を取得
+	D3DXCOLOR col = m_pDengerMask->GetCol();
+
+	//加算する状態なら
+	if (m_bAddCol == true)
+	{
+		//加算
+		col.a += 0.03f;
+		//1以上になったら
+		if (col.a >= 1.0f)
+		{
+			//1にする
+			col.a = 1.0f;
+			//減算する状態にする
+			m_bAddCol = false;
+		}
+	}
+	else
+	{
+		//加算
+		col.a -= 0.03f;
+		//0以下になったら
+		if (col.a <= 0.0f)
+		{
+			//0にする
+			col.a = 0.0f;
+			//加算する状態にする
+			m_bAddCol = true;
+		}
+	}
+	//色設定
+	m_pDengerMask->SetCol(col);
 }

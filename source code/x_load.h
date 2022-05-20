@@ -24,6 +24,11 @@ public:
 		X_TYPE_PLAYER_ARM_L,					//プレイヤーの左腕
 		X_TYPE_PLAYER_LEG_R,					//プレイヤーの右足
 		X_TYPE_PLAYER_LEG_L,					//プレイヤーの左足
+		X_TYPE_PLAYER_GIRL_BODY,				//プレイヤーガールの体
+		X_TYPE_PLAYER_GIRL_ARM_R,				//プレイヤーガールの右腕
+		X_TYPE_PLAYER_GIRL_ARM_L,				//プレイヤーガールの左腕
+		X_TYPE_PLAYER_GIRL_LEG_R,				//プレイヤーガールの右足
+		X_TYPE_PLAYER_GIRL_LEG_L,				//プレイヤーガールの左足
 		X_TYPE_THORN,							//棘
 		X_TYPE_CLOUD,							//雲
 		X_TYPE_TRAMPLINE,						//トランポリン

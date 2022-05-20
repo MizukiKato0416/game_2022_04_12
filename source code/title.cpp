@@ -93,6 +93,8 @@ CTitle::~CTitle()
 //=============================================================================
 HRESULT CTitle::Init(void)
 {
+	CManager::GetInstance()->GetPlayData()->SetPasword("");
+
 	CObject2D *object_2D[3];
 	CSound *sound;
 	sound = CManager::GetInstance()->GetSound();

@@ -151,8 +151,19 @@ HRESULT CPlayer::Init(void)
 
 				//ƒ‚ƒfƒ‹¶¬
 				int nModelType = 0;
-				nModelType = CXload::X_TYPE_PLAYER_BODY;
+
+				//‡Œ¾—tæ“¾
+				if (strncmp("695", CManager::GetInstance()->GetPlayData()->GetPasword().c_str(), 4) == 0)
+				{
+					nModelType = CXload::X_TYPE_PLAYER_GIRL_BODY;
+				}
+				else
+				{
+					nModelType = CXload::X_TYPE_PLAYER_BODY;
+				}
+				
 				m_apModel[nIndex] = CModel::Create(modelPos, rot, CManager::GetInstance()->GetXload()->GetType(nModelType + nIndex));
+
 
 				//e‚Ìİ’è
 				if (nParent == -1)
