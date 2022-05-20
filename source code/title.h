@@ -39,11 +39,11 @@ private:
 	void ResultTimer(void);
 	void PasWord(void);
 	CObject2D *m_click;	// CLICKロゴ
+	CObject2D *m_pas_word;// パスワード入力欄
 	vector<CObject2D*> m_button;// ボタン
 	vector<CObject2D*> m_tutorial;// チュートリアル
-	vector<CObject2D*> m_pas_word;// パスワード入力欄
 	vector<CLetter*> m_pas_font;// パスワード
-	vector<wstring> m_key_name;
+	vector<wstring> m_key_name;	// パスワード1文字ずつ
 	vector<string> m_letter_single;	// パスワード
 	string m_pasword;	// パスワード
 	int m_count_letter;
