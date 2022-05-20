@@ -376,7 +376,8 @@ void CTitle::PasWord(void)
 	ScreenToClient(hwnd, &point);
 
 	object_2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, 0.0f + 50.0f, 0.0f), D3DXVECTOR3(600.0f, 100.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-	object_2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Bg.png"));
+	//object_2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Bg.png"));
+	object_2D->SetCol(D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
 	m_pas_word = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - 300.0f, 0.0f + 70.0f, 0.0f), D3DXVECTOR3(480.0f, 50.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 	//m_pas_word->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Bg.png"));
 
