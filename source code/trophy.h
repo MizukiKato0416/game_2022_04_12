@@ -40,6 +40,9 @@ public:
 		M_5000,
 		M_10000,
 		MEASUREMENT_IMPOSSIBLE,
+		EVENING,
+		NIGHT,
+		GIRL,
 		MAX
 	};
 
