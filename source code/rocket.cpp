@@ -122,6 +122,14 @@ void CRocket::Update(void)
 
 							CManager::GetInstance()->GetPlayData()->SetFlag(flag);
 						}
+						//トロフィーを取得したことがなかったら
+						if (flag[(int)CTrophy::TROPHY::MEASUREMENT_IMPOSSIBLE] == false)
+						{
+							//取得させる
+							flag[(int)CTrophy::TROPHY::MEASUREMENT_IMPOSSIBLE] = true;
+
+							CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+						}
 
 						//プレイヤーの型にキャスト
 						CPlayer *pPlayer = static_cast<CPlayer*>(object[count_object]);

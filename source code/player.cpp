@@ -27,6 +27,7 @@
 #include "game01.h"
 #include "happening.h"
 #include "sound.h"
+#include "trophy.h"
 
 //================================================
 //マクロ定義
@@ -155,6 +156,16 @@ HRESULT CPlayer::Init(void)
 				//合言葉取得
 				if (strncmp("695", CManager::GetInstance()->GetPlayData()->GetPasword().c_str(), 4) == 0)
 				{
+					//トロフィーのフラグ状態を取得
+					vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+					//トロフィーを取得したことがなかったら
+					if (flag[(int)CTrophy::TROPHY::GIRL] == false)
+					{
+						//取得させる
+						flag[(int)CTrophy::TROPHY::GIRL] = true;
+
+						CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+					}
 					nModelType = CXload::X_TYPE_PLAYER_GIRL_BODY;
 				}
 				else
