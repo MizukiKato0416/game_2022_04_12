@@ -373,16 +373,20 @@ void CTitle::PasWord(void)
 		{
 			if (key_update.first != DIK_RETURN)
 			{
-				m_pas_font.push_back(new CLetter);
+				int name_size = m_key_name[key_update.first - 1].size();
+				for (int count_name = 0; count_name < name_size; count_name++)
+				{
+					m_pas_font.push_back(new CLetter);
 
-				m_pas_font[m_count_letter]->SetPos(D3DXVECTOR3((0.0f + 15.0f) + (30.0f * m_count_letter), SCREEN_WIDTH / 2, 0.0f));
-				m_pas_font[m_count_letter]->SetSize(D3DXVECTOR3(15.0f, 15.0f, 0.0f));
-				m_pas_font[m_count_letter]->SetText(m_key_name[key_update.first - 1][0]);
-				m_pas_font[m_count_letter]->SetFontSize(260);
-				m_pas_font[m_count_letter]->SetFontWeight(500);
-				m_pas_font[m_count_letter]->Init();
-				m_count_letter++;
-				m_pasword.push_back(*m_letter_single[key_update.first - 1].c_str());
+					m_pas_font[m_count_letter]->SetPos(D3DXVECTOR3((0.0f + 15.0f) + (30.0f * m_count_letter), SCREEN_WIDTH / 2, 0.0f));
+					m_pas_font[m_count_letter]->SetSize(D3DXVECTOR3(15.0f, 15.0f, 0.0f));
+					m_pas_font[m_count_letter]->SetText(m_key_name[key_update.first - 1][count_name]);
+					m_pas_font[m_count_letter]->SetFontSize(260);
+					m_pas_font[m_count_letter]->SetFontWeight(500);
+					m_pas_font[m_count_letter]->Init();
+					m_count_letter++;
+					m_pasword.push_back(m_letter_single[key_update.first - 1][count_name]);
+				}
 			}
 			else
 			{
@@ -390,6 +394,9 @@ void CTitle::PasWord(void)
 				for (int count_font = 0; count_font < font_size; count_font++)
 				{
 					m_pas_font[count_font]->Uninit();
+					m_pas_font.erase(m_pas_font.begin());
+					font_size = m_pas_font.size();
+					count_font--;
 					m_count_letter = 0;
 				}
 			}

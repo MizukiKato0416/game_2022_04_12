@@ -47,7 +47,7 @@ private:
 	D3DXVECTOR3				m_Pos;	// ポリゴンの原点
 	D3DXVECTOR3				m_Size;	// サイズ
 	string					m_FontType;	// テクスチャタイプ
-	wstring					m_Text;	// テキスト
+	wchar_t					m_Text;	// テキスト
 	int						m_nFontSize;	// 高さ(高さだけで幅も決まる)
 	int						m_nFontWeight;	// 太さ
 };

@@ -45,7 +45,7 @@ HRESULT CLetter::Init(void)
 	HFONT oldFont = (HFONT)SelectObject(hdc, hFont);
 
 	// フォントビットマップ取得
-	UINT code = (UINT)m_Text[0];
+	UINT code = (UINT)m_Text;
 	const int gradFlag = GGO_GRAY4_BITMAP;
 	int grad = 0; // 階調の最大値
 	switch (gradFlag) 
