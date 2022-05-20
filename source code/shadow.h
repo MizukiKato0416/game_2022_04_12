@@ -31,6 +31,8 @@ public:
 	void SetDraw(const bool &bDraw) { m_bDraw = bDraw; }		//描画設定処理
 
 private:
+	void Collision(void);			//当たり判定
+
 	CObject *m_pObject;		//対象のオブジェクトのポインタ
 	bool m_bDraw;			//描画するかどうか
 	D3DXVECTOR3 m_size;		//サイズ

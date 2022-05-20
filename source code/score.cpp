@@ -28,6 +28,8 @@ CScore::CScore(CObject::PRIORITY Priority) :CObject(Priority)
 {
 	m_nScore = 0;
 	memset(m_apNumber, NULL, sizeof(m_apNumber[MAX_SCORE_POLYGON]));
+	m_pConma = nullptr;
+	m_pUnit = nullptr;
 }
 
 //================================================
@@ -64,16 +66,16 @@ HRESULT CScore::Init()
 	}
 
 	//コンマの生成
-	CObject2D *pConma = CObject2D::Create(D3DXVECTOR3(m_pos.x  - SCORE_CONMA_POS_X - (m_size.x * MAX_SCORE_POLYGON / 2) + (m_size.x * SCORE_CONMA_NUM) + (m_size.x / 2.0f), m_pos.y + m_size.y / 4.0f, 0.0f),
+	m_pConma = CObject2D::Create(D3DXVECTOR3(m_pos.x  - SCORE_CONMA_POS_X - (m_size.x * MAX_SCORE_POLYGON / 2) + (m_size.x * SCORE_CONMA_NUM) + (m_size.x / 2.0f), m_pos.y + m_size.y / 4.0f, 0.0f),
 												      D3DXVECTOR3(SCORE_CONMA_SIZE, SCORE_CONMA_SIZE, 0.0f),
 		                                              static_cast<int>(CObject::PRIORITY::SCORE));
-	pConma->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("conma.png"));
+	m_pConma->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("conma.png"));
 
 	//単位の生成
-	CObject2D *pUnit = CObject2D::Create(D3DXVECTOR3(m_pos.x + SCORE_POS_SHIFT_X - (m_size.x * MAX_SCORE_POLYGON / 2) + (m_size.x * MAX_SCORE_POLYGON) + (m_size.x / 2.0f), m_pos.y, 0.0f),
-												     D3DXVECTOR3(SCORE_UNIT_SIZE, SCORE_UNIT_SIZE, 0.0f),
+	m_pUnit = CObject2D::Create(D3DXVECTOR3(m_pos.x + SCORE_POS_SHIFT_X - (m_size.x * MAX_SCORE_POLYGON / 2) + (m_size.x * MAX_SCORE_POLYGON) + (m_size.x / 2.0f), m_pos.y, 0.0f),
+								     D3DXVECTOR3(SCORE_UNIT_SIZE, SCORE_UNIT_SIZE, 0.0f),
 		                                             static_cast<int>(CObject::PRIORITY::SCORE));
-	pUnit->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("m.png"));
+	m_pUnit->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("m.png"));
 
 	return S_OK;
 }
@@ -99,6 +101,20 @@ void CScore::Uninit(void)
 			delete m_apNumber[nCntNumber];
 			m_apNumber[nCntNumber] = nullptr;
 		}
+	}
+
+	//コンマの破棄
+	if (m_pConma != nullptr)
+	{
+		m_pConma->Uninit();
+		m_pConma = nullptr;
+	}
+
+	//単位の破棄
+	if (m_pUnit != nullptr)
+	{
+		m_pUnit->Uninit();
+		m_pUnit = nullptr;
 	}
 
 	//オブジェクトの破棄
@@ -159,6 +175,13 @@ void CScore::SetScore(const int &nScore)
 {
 	m_nScore = nScore;
 
+	//最大値よりも大きくなったら
+	if (m_nScore > MAX_SCORE)
+	{
+		//最大値にする
+		m_nScore = MAX_SCORE;
+	}
+
 	for (int nCntNumber = 0; nCntNumber < MAX_SCORE_POLYGON; nCntNumber++)
 	{
 		if (nCntNumber == 0)
@@ -182,6 +205,13 @@ void CScore::SetScore(const int &nScore)
 void CScore::AddScore(const int &nValue)
 {
 	m_nScore += nValue;
+
+	//最大値よりも大きくなったら
+	if (m_nScore > MAX_SCORE)
+	{
+		//最大値にする
+		m_nScore = MAX_SCORE;
+	}
 
 	for (int nCntNumber = 0; nCntNumber < MAX_SCORE_POLYGON; nCntNumber++)
 	{

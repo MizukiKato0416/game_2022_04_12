@@ -52,6 +52,26 @@ void CXload::Init(void)
 	D3DXLoadMeshFromX("data/MODEL/player_01/legsL.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
 		&m_apBuffMat[X_TYPE_PLAYER_LEG_L], NULL, &m_aNumMat[X_TYPE_PLAYER_LEG_L], &m_apMesh[X_TYPE_PLAYER_LEG_L]);
 
+	//プレイヤーガールの体
+	D3DXLoadMeshFromX("data/MODEL/player_01/girl_body.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
+		&m_apBuffMat[X_TYPE_PLAYER_GIRL_BODY], NULL, &m_aNumMat[X_TYPE_PLAYER_GIRL_BODY], &m_apMesh[X_TYPE_PLAYER_GIRL_BODY]);
+
+	//プレイヤーガールの右腕
+	D3DXLoadMeshFromX("data/MODEL/player_01/girl_armR.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
+		&m_apBuffMat[X_TYPE_PLAYER_GIRL_ARM_R], NULL, &m_aNumMat[X_TYPE_PLAYER_GIRL_ARM_R], &m_apMesh[X_TYPE_PLAYER_GIRL_ARM_R]);
+
+	//プレイヤーガールの左腕
+	D3DXLoadMeshFromX("data/MODEL/player_01/girl_armL.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
+		&m_apBuffMat[X_TYPE_PLAYER_GIRL_ARM_L], NULL, &m_aNumMat[X_TYPE_PLAYER_GIRL_ARM_L], &m_apMesh[X_TYPE_PLAYER_GIRL_ARM_L]);
+
+	//プレイヤーガールの右足
+	D3DXLoadMeshFromX("data/MODEL/player_01/girl_legsR.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
+		&m_apBuffMat[X_TYPE_PLAYER_GIRL_LEG_R], NULL, &m_aNumMat[X_TYPE_PLAYER_GIRL_LEG_R], &m_apMesh[X_TYPE_PLAYER_GIRL_LEG_R]);
+
+	//プレイヤーガールの左足
+	D3DXLoadMeshFromX("data/MODEL/player_01/girl_legsL.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
+		&m_apBuffMat[X_TYPE_PLAYER_GIRL_LEG_L], NULL, &m_aNumMat[X_TYPE_PLAYER_GIRL_LEG_L], &m_apMesh[X_TYPE_PLAYER_GIRL_LEG_L]);
+
 	//棘
 	D3DXLoadMeshFromX("data/MODEL/stage/thorn.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
 		&m_apBuffMat[X_TYPE_THORN], NULL, &m_aNumMat[X_TYPE_THORN], &m_apMesh[X_TYPE_THORN]);

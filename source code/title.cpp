@@ -93,6 +93,8 @@ CTitle::~CTitle()
 //=============================================================================
 HRESULT CTitle::Init(void)
 {
+	CManager::GetInstance()->GetPlayData()->SetPasword("");
+
 	CObject2D *object_2D[3];
 	CSound *sound;
 	sound = CManager::GetInstance()->GetSound();
@@ -192,9 +194,19 @@ void CTitle::SeletMode(void)
 		m_button[3]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true && fade->GetFade() == CFade::FADE_NONE)
 		{
-			sound->ControllVoice(CSound::SOUND_LABEL::DECISION_SE, 1.2f);
-			sound->Play(CSound::SOUND_LABEL::DECISION_SE);
-			fade->SetFade(CManager::MODE::GAME01);
+			if (m_pas_drop == true)
+			{
+				CManager::GetInstance()->GetPlayData()->SetPasword(m_pasword);
+				sound->ControllVoice(CSound::SOUND_LABEL::DECISION_SE, 1.2f);
+				sound->Play(CSound::SOUND_LABEL::DECISION_SE);
+				fade->SetFade(CManager::MODE::GAME01);
+			}
+			else
+			{
+				sound->ControllVoice(CSound::SOUND_LABEL::DECISION_SE, 1.2f);
+				sound->Play(CSound::SOUND_LABEL::DECISION_SE);
+				fade->SetFade(CManager::MODE::GAME01);
+			}
 		}
 	}
 	else
@@ -366,7 +378,6 @@ void CTitle::PasWord(void)
 {
 	CInputKeyboard *key;
 	CInputMouse *mouse;
-	CObject2D *object_2D;
 	POINT point;
 	HWND hwnd;
 	string text_buf;
@@ -410,7 +421,7 @@ void CTitle::PasWord(void)
 
 		if (key_update.second == true)
 		{
-			if (key_update.first != DIK_RETURN)
+			if (key_update.first != DIK_RETURN && key_update.first != DIK_BACK)
 			{
 				if (m_letter_limitl < 15)
 				{
@@ -431,8 +442,9 @@ void CTitle::PasWord(void)
 					}
 				}
 			}
-			else
+			else if(key_update.first == DIK_BACK)
 			{
+				CManager::GetInstance()->GetPlayData()->SetPasword("");
 				int font_size = m_pas_font.size();
 				for (int count_font = 0; count_font < font_size; count_font++)
 				{
@@ -443,6 +455,16 @@ void CTitle::PasWord(void)
 					m_count_letter = 0;
 					m_letter_limitl = 0;
 				}
+				int pas_size = m_pasword.size();
+				for (int count_pas = 0; count_pas < pas_size; count_pas++)
+				{
+					m_pasword.pop_back();
+				}
+			}
+			else if (key_update.first == DIK_RETURN)
+			{
+				CManager::GetInstance()->GetPlayData()->SetPasword(m_pasword);
+				m_pas_drop = false;
 			}
 		}
 	}
