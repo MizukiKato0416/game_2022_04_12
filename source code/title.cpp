@@ -409,7 +409,7 @@ void CTitle::PasWord(void)
 
 		if (key_update.second == true)
 		{
-			if (key_update.first != DIK_RETURN)
+			if (key_update.first != DIK_RETURN && key_update.first != DIK_BACK)
 			{
 				if (m_letter_limitl < 15)
 				{
@@ -430,7 +430,7 @@ void CTitle::PasWord(void)
 					}
 				}
 			}
-			else
+			else if(key_update.first == DIK_BACK)
 			{
 				int font_size = m_pas_font.size();
 				for (int count_font = 0; count_font < font_size; count_font++)
@@ -442,6 +442,17 @@ void CTitle::PasWord(void)
 					m_count_letter = 0;
 					m_letter_limitl = 0;
 				}
+				int pas_size = m_pasword.size();
+				for (int count_pas = 0; count_pas < pas_size; count_pas++)
+				{
+					m_pasword.pop_back();
+				}
+			}
+			else if (key_update.first == DIK_RETURN)
+			{
+				CManager::GetInstance()->GetPlayData()->SetPasword(m_pasword);
+
+				m_pas_drop = false;
 			}
 		}
 	}
