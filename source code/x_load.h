@@ -31,6 +31,7 @@ public:
 		X_TYPE_PLAYER_GIRL_LEG_L,				//プレイヤーガールの左足
 		X_TYPE_THORN,							//棘
 		X_TYPE_CLOUD,							//雲
+		X_TYPE_GROUND,							//地面
 		X_TYPE_TRAMPLINE,						//トランポリン
 		X_TYPE_FAN,								//扇風機
 		X_TYPE_AIRPLANE,						//飛行機

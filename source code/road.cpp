@@ -19,6 +19,7 @@
 #include "airplane.h"
 #include "thorn.h"
 #include "banana.h"
+#include "play_data.h"
 
 //=============================================================================
 // ƒ}ƒNƒ’è‹`
@@ -59,8 +60,18 @@ HRESULT CRoad::Init(void)
 {
 	m_floor = CFloor::Create(m_pos, m_size, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	m_floor->SetCol(D3DXCOLOR(1.0f, 0.0f, 1.0f, 0.0f));
-	m_cloud = CModelSingle::Create(D3DXVECTOR3(m_pos.x, m_pos.y - 1500.0f, m_pos.z + 500.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f),
-		                           CXload::X_TYPE_CLOUD, NULL, false);
+
+	if (strncmp("GROUND", CManager::GetInstance()->GetPlayData()->GetPasword().c_str(), 7) == 0)
+	{
+		
+		m_cloud = CModelSingle::Create(D3DXVECTOR3(m_pos.x, m_pos.y - 1500.0f, m_pos.z + 500.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f),
+			                           CXload::X_TYPE_GROUND, NULL, false);
+	}
+	else
+	{
+		m_cloud = CModelSingle::Create(D3DXVECTOR3(m_pos.x, m_pos.y - 1500.0f, m_pos.z + 500.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f),
+			                           CXload::X_TYPE_CLOUD, NULL, false);
+	}
 
 	for (int count_candidate = 0; count_candidate < (int)CANDIDATES_PLACE::MAX; count_candidate++)
 	{

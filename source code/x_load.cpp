@@ -80,6 +80,10 @@ void CXload::Init(void)
 	D3DXLoadMeshFromX("data/MODEL/stage/cloud.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
 		&m_apBuffMat[X_TYPE_CLOUD], NULL, &m_aNumMat[X_TYPE_CLOUD], &m_apMesh[X_TYPE_CLOUD]);
 
+	//’n–Ê
+	D3DXLoadMeshFromX("data/MODEL/stage/road.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
+		&m_apBuffMat[X_TYPE_GROUND], NULL, &m_aNumMat[X_TYPE_GROUND], &m_apMesh[X_TYPE_GROUND]);
+
 	//ƒgƒ‰ƒ“ƒ|ƒŠƒ“
 	D3DXLoadMeshFromX("data/MODEL/stage/trampoline.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
 		&m_apBuffMat[X_TYPE_TRAMPLINE], NULL, &m_aNumMat[X_TYPE_TRAMPLINE], &m_apMesh[X_TYPE_TRAMPLINE]);

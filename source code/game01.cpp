@@ -163,8 +163,27 @@ HRESULT CGame01::Init(void)
 	//スタート地点の生成
 	m_pFloor = CFloor::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), FLOOR_SIZE, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	m_pFloor->SetCol(D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.0f));
-	m_pStart = CModelSingle::Create(D3DXVECTOR3(0.0f, GAME01_START_CLOUD_POS_Y, GAME01_START_CLOUD_POS_Z), D3DXVECTOR3(0.0f, 0.0f, 0.0f),
+
+	if (strncmp("GROUND", CManager::GetInstance()->GetPlayData()->GetPasword().c_str(), 7) == 0)
+	{
+		////トロフィーのフラグ状態を取得
+		//vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+		////トロフィーを取得したことがなかったら
+		//if (flag[(int)CTrophy::TROPHY::EVENING] == false)
+		//{
+		//	//取得させる
+		//	flag[(int)CTrophy::TROPHY::EVENING] = true;
+
+		//	CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+		//}
+		m_pStart = CModelSingle::Create(D3DXVECTOR3(0.0f, GAME01_START_CLOUD_POS_Y, GAME01_START_CLOUD_POS_Z), D3DXVECTOR3(0.0f, 0.0f, 0.0f),
+		                            CXload::X_TYPE_GROUND, NULL, false);
+	}
+	else
+	{
+		m_pStart = CModelSingle::Create(D3DXVECTOR3(0.0f, GAME01_START_CLOUD_POS_Y, GAME01_START_CLOUD_POS_Z), D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 		                            CXload::X_TYPE_CLOUD, NULL, false);
+	}
 
 	//最初の道の生成
 	m_apRoad[0] = CRoad::Create(D3DXVECTOR3(FLOOR_SIZE.x, 0.0f, 0.0f), FLOOR_SIZE, 0.0f);
@@ -183,7 +202,41 @@ HRESULT CGame01::Init(void)
 	m_pBg[0] = CBg::Create(D3DXVECTOR3(0.0f, GAME01_BG_POS_Y, GAME01_BG_POS_Z),
 		                   D3DXVECTOR3(SCREEN_WIDTH * GAME01_BG_SIZE_ADJUSTMENT, SCREEN_HEIGHT * GAME01_BG_SIZE_ADJUSTMENT, 0.0f),
 		                   D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(GAME01_BG_1_MOVE_INIT, 0.0f));
-	m_pBg[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("sky_01.png"));
+
+	//合言葉取得
+	if (strncmp("EVENING", CManager::GetInstance()->GetPlayData()->GetPasword().c_str(), 8) == 0)
+	{
+		//トロフィーのフラグ状態を取得
+		vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+		//トロフィーを取得したことがなかったら
+		if (flag[(int)CTrophy::TROPHY::EVENING] == false)
+		{
+			//取得させる
+			flag[(int)CTrophy::TROPHY::EVENING] = true;
+
+			CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+		}
+		m_pBg[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("01_evning.png"));
+	}
+	else if (strncmp("NIGHT", CManager::GetInstance()->GetPlayData()->GetPasword().c_str(), 6) == 0)
+	{
+		//トロフィーのフラグ状態を取得
+		vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+		//トロフィーを取得したことがなかったら
+		if (flag[(int)CTrophy::TROPHY::NIGHT] == false)
+		{
+			//取得させる
+			flag[(int)CTrophy::TROPHY::NIGHT] = true;
+
+			CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+		}
+
+		m_pBg[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("04_night.png"));
+	}
+	else
+	{
+		m_pBg[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("sky_01.png"));
+	}
 
 	//背景2の生成
 	m_pBg[1] = CBg::Create(D3DXVECTOR3(0.0f, GAME01_BG_POS_Y, GAME01_BG_POS_Z),
@@ -668,6 +721,7 @@ void CGame01::Shot(void)
 			m_pArrow = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f), D3DXVECTOR3(200.0f, 200.0f, 0.0f),
 				                         static_cast<int>(CObject::PRIORITY::UI));
 			m_pArrow->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("arrow02.png"));
+			m_pArrow->SetOriginType(CObject2D::ORIGIN_TYPE::LEFT);
 
 			m_pGaugeFrame->SetPriority(static_cast<int>(CObject::PRIORITY::UI));
 			m_pGauge->SetPriority(static_cast<int>(CObject::PRIORITY::UI));
