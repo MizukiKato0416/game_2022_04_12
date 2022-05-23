@@ -165,4 +165,5 @@ void CTcpClient::Uninit(void)
 	printf("接続を切断します。\n");
 	closesocket(m_socket);	// 接続受付用ソケット
 	m_socket = INVALID_SOCKET;
+	WSACleanup();
 }
