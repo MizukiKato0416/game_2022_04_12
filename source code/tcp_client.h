@@ -27,6 +27,8 @@ public:
 	int Send(char *pSendData, int nSendDataSize);	// 送信(送信データ格納先, 送信データサイズ)
 	int Recv(char *pRecvData, int nRecvDataSize);	// 受信(受信データ格納先, 受信データ格納先最大サイズ)
 	void Uninit(void);	// 終了
+	static void WSASInit(void);
+	static void WSASUninit(void);
 private:
 	SOCKET m_socket;	// ソケット
 	string m_Ip;	// IPアドレス

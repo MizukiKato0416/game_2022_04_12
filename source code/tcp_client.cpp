@@ -37,17 +37,6 @@ bool CTcpClient::Init(void)
 	FILE *pFile;
 	char aFile[2][64];
 
-	//------------------------
-	// 初期化
-	//------------------------
-	WSADATA  wsaData;
-	int nErr = WSAStartup(WINSOCK_VERSION, &wsaData);
-
-	if (nErr != 0)
-	{
-		cout << "初期化に失敗しました" << endl;
-	}
-
 	pFile = fopen("data/severdata.txt", "r");
 
 	if (pFile != NULL)
@@ -165,5 +154,21 @@ void CTcpClient::Uninit(void)
 	printf("接続を切断します。\n");
 	closesocket(m_socket);	// 接続受付用ソケット
 	m_socket = INVALID_SOCKET;
+}
+
+//-------------------------------
+// WSAS初期化処理
+//-------------------------------
+void CTcpClient::WSASInit(void)
+{
+	WSADATA  wsaData;
+	int nErr = WSAStartup(WINSOCK_VERSION, &wsaData);
+}
+
+//-------------------------------
+// WSAS終了処理
+//-------------------------------
+void CTcpClient::WSASUninit(void)
+{
 	WSACleanup();
 }
