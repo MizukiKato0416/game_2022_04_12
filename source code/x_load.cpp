@@ -11,7 +11,7 @@
 //=============================================================================
 CXload::CXload()
 {
-	m_bLoadFinish = false;
+	
 }
 
 //=============================================================================
@@ -27,8 +27,6 @@ CXload::~CXload()
 //=============================================================================
 void CXload::Init(void)
 {
-	m_bLoadFinish = false;
-
 	LPDIRECT3DDEVICE9 pDevice; //デバイスのポインタ
 	pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();	//デバイスを取得する
 
@@ -121,8 +119,6 @@ void CXload::Init(void)
 	//バナナ
 	D3DXLoadMeshFromX("data/MODEL/stage/banana.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
 		&m_apBuffMat[X_TYPE_BANANA], NULL, &m_aNumMat[X_TYPE_BANANA], &m_apMesh[X_TYPE_BANANA]);
-
-	m_bLoadFinish = true;
 }	
 
 //=============================================================================

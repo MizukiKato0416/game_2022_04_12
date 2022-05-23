@@ -21,7 +21,6 @@ vector<string> CTexture::m_pas;
 pair<vector<string>, vector<string>> CTexture::m_file_name_pas;
 map<string, int> CTexture::m_tex_type;
 int CTexture::m_num_tex;
-bool CTexture::m_bLoadFinish = false;
 
 //=============================================================================
 // コンストラクタ
@@ -44,8 +43,6 @@ CTexture::~CTexture()
 //=============================================================================
 void CTexture::Init(void)
 {
-	m_bLoadFinish = false;
-
 	LPDIRECT3DDEVICE9 pDevice; //デバイスのポインタ
 	int count_tex = 0;
 	pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();	//デバイスを取得する

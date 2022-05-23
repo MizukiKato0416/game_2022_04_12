@@ -26,7 +26,6 @@
 #include "sound.h"
 #include "effect_click.h"
 #include "letter.h"
-#include "tcp_client.h"
 
 //================================================
 //静的メンバ変数宣言
@@ -75,7 +74,6 @@ CManager::~CManager()
 //================================================
 HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 {
-	CTcpClient::WSASInit();
 	CLetter::Load();
 	//時刻で初期化
 	srand((unsigned int)time(NULL));
@@ -199,7 +197,6 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 //================================================
 void CManager::Uninit(void)
 {
-	CTcpClient::WSASUninit();
 	//全てのオブジェクトの破棄
 	CObject::ReleaseAll();
 
