@@ -62,6 +62,7 @@ private:
 	void Rocket(void);					//ロケットの処理
 	void Finish(void);					//ゴール処理
 	void FlyingDistanceFlag(void);		//トロフィーの飛距離のフラグ処理
+	void Mask(void);					//マスク処理
 
 	//メンバ変数
 	CPlayer *m_pPlayer;					//プレイヤーのポインタ
@@ -82,6 +83,8 @@ private:
 	bool m_bFinish;						//終了フラグ
 	int m_nFinishCounter;				//終了時のカウンター
 	bool m_bPause;						//ポーズのフラグ
+	CObject2D *m_pDengerMask;			//マスク
+	bool m_bAddCol;						//カラー加算の切り替え
 };
 
 #endif // !_GAME01_H_

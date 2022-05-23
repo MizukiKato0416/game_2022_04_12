@@ -11,7 +11,7 @@
 //=============================================================================
 CXload::CXload()
 {
-
+	m_bLoadFinish = false;
 }
 
 //=============================================================================
@@ -23,10 +23,12 @@ CXload::~CXload()
 }
 
 //=============================================================================
-//テクスチャの生成
+//初期化
 //=============================================================================
 void CXload::Init(void)
 {
+	m_bLoadFinish = false;
+
 	LPDIRECT3DDEVICE9 pDevice; //デバイスのポインタ
 	pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();	//デバイスを取得する
 
@@ -80,6 +82,10 @@ void CXload::Init(void)
 	D3DXLoadMeshFromX("data/MODEL/stage/cloud.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
 		&m_apBuffMat[X_TYPE_CLOUD], NULL, &m_aNumMat[X_TYPE_CLOUD], &m_apMesh[X_TYPE_CLOUD]);
 
+	//雷雲
+	D3DXLoadMeshFromX("data/MODEL/stage/cloud_gray.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
+		&m_apBuffMat[X_TYPE_CLOUD_GRAY], NULL, &m_aNumMat[X_TYPE_CLOUD_GRAY], &m_apMesh[X_TYPE_CLOUD_GRAY]);
+
 	//地面
 	D3DXLoadMeshFromX("data/MODEL/stage/road.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
 		&m_apBuffMat[X_TYPE_GROUND], NULL, &m_aNumMat[X_TYPE_GROUND], &m_apMesh[X_TYPE_GROUND]);
@@ -115,6 +121,8 @@ void CXload::Init(void)
 	//バナナ
 	D3DXLoadMeshFromX("data/MODEL/stage/banana.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
 		&m_apBuffMat[X_TYPE_BANANA], NULL, &m_aNumMat[X_TYPE_BANANA], &m_apMesh[X_TYPE_BANANA]);
+
+	m_bLoadFinish = true;
 }	
 
 //=============================================================================

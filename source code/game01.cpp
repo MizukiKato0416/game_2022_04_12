@@ -78,6 +78,7 @@
 #define GAME01_ROCKET_POS_X						(-800.0f)	//ロケットの位置
 #define GAME01_START_CLOUD_POS_Y				(-1500.0f)	//スタートの雲の位置Y
 #define GAME01_START_CLOUD_POS_Z				(500.0f)	//スタートの雲の位置Z
+#define GAME01_MASK_ADD_COL						(0.01f)		//マスクのカラー加算値
 
 
 #ifdef _DEBUG
@@ -111,6 +112,8 @@ CGame01::CGame01(CObject::PRIORITY Priority):CObject(Priority)
 	m_nFinishCounter = 0;
 	m_bPause = false;
 	m_pStart = nullptr;
+	m_pDengerMask = nullptr;
+	m_bAddCol = false;
 }
 
 //================================================
@@ -141,6 +144,8 @@ HRESULT CGame01::Init(void)
 	m_bFinish = false;
 	m_nFinishCounter = 0;
 	m_bPause = false;
+	m_bAddCol = true;
+
 	CSound *sound;
 	sound = CManager::GetInstance()->GetSound();
 
@@ -166,18 +171,23 @@ HRESULT CGame01::Init(void)
 
 	if (strncmp("GROUND", CManager::GetInstance()->GetPlayData()->GetPasword().c_str(), 7) == 0)
 	{
-		////トロフィーのフラグ状態を取得
-		//vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
-		////トロフィーを取得したことがなかったら
-		//if (flag[(int)CTrophy::TROPHY::EVENING] == false)
-		//{
-		//	//取得させる
-		//	flag[(int)CTrophy::TROPHY::EVENING] = true;
+		//トロフィーのフラグ状態を取得
+		vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+		//トロフィーを取得したことがなかったら
+		if (flag[(int)CTrophy::TROPHY::GROUND] == false)
+		{
+			//取得させる
+			flag[(int)CTrophy::TROPHY::GROUND] = true;
 
-		//	CManager::GetInstance()->GetPlayData()->SetFlag(flag);
-		//}
+			CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+		}
 		m_pStart = CModelSingle::Create(D3DXVECTOR3(0.0f, GAME01_START_CLOUD_POS_Y, GAME01_START_CLOUD_POS_Z), D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 		                            CXload::X_TYPE_GROUND, NULL, false);
+	}
+	else if (strncmp("HARD", CManager::GetInstance()->GetPlayData()->GetPasword().c_str(), 5) == 0)
+	{
+		m_pStart = CModelSingle::Create(D3DXVECTOR3(0.0f, GAME01_START_CLOUD_POS_Y, GAME01_START_CLOUD_POS_Z), D3DXVECTOR3(0.0f, 0.0f, 0.0f),
+		                            CXload::X_TYPE_CLOUD_GRAY, NULL, false);
 	}
 	else
 	{
@@ -202,8 +212,17 @@ HRESULT CGame01::Init(void)
 	m_pBg[0] = CBg::Create(D3DXVECTOR3(0.0f, GAME01_BG_POS_Y, GAME01_BG_POS_Z),
 		                   D3DXVECTOR3(SCREEN_WIDTH * GAME01_BG_SIZE_ADJUSTMENT, SCREEN_HEIGHT * GAME01_BG_SIZE_ADJUSTMENT, 0.0f),
 		                   D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(GAME01_BG_1_MOVE_INIT, 0.0f));
-
-	//合言葉取得
+	//背景2の生成
+	m_pBg[1] = CBg::Create(D3DXVECTOR3(0.0f, GAME01_BG_POS_Y, GAME01_BG_POS_Z),
+		                   D3DXVECTOR3(SCREEN_WIDTH * GAME01_BG_SIZE_ADJUSTMENT, SCREEN_HEIGHT * GAME01_BG_SIZE_ADJUSTMENT, 0.0f),
+		                   D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(GAME01_BG_2_MOVE_INIT, 0.0f));
+	//背景3の生成
+	m_pBg[2] = CBg::Create(D3DXVECTOR3(0.0f, GAME01_BG_POS_Y, GAME01_BG_POS_Z),
+		                   D3DXVECTOR3(SCREEN_WIDTH * GAME01_BG_SIZE_ADJUSTMENT, SCREEN_HEIGHT * GAME01_BG_SIZE_ADJUSTMENT, 0.0f),
+		                   D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(GAME01_BG_3_MOVE_INIT, 0.0f));
+	
+	
+	//合言葉がEVENINGの時
 	if (strncmp("EVENING", CManager::GetInstance()->GetPlayData()->GetPasword().c_str(), 8) == 0)
 	{
 		//トロフィーのフラグ状態を取得
@@ -216,10 +235,14 @@ HRESULT CGame01::Init(void)
 
 			CManager::GetInstance()->GetPlayData()->SetFlag(flag);
 		}
+
+		//背景のテクスチャ割り当て
 		m_pBg[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("01_evning.png"));
+		m_pBg[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("sky_02.png"));
+		m_pBg[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("sky_03.png"));
 	}
 	else if (strncmp("NIGHT", CManager::GetInstance()->GetPlayData()->GetPasword().c_str(), 6) == 0)
-	{
+	{//合言葉がNIGHTの時
 		//トロフィーのフラグ状態を取得
 		vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
 		//トロフィーを取得したことがなかったら
@@ -231,25 +254,42 @@ HRESULT CGame01::Init(void)
 			CManager::GetInstance()->GetPlayData()->SetFlag(flag);
 		}
 
+		//背景のテクスチャ割り当て
 		m_pBg[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("04_night.png"));
+		m_pBg[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("sky_02.png"));
+		m_pBg[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("sky_03.png"));
+	}
+	else if (strncmp("HARD", CManager::GetInstance()->GetPlayData()->GetPasword().c_str(), 5) == 0)
+	{//合言葉がHARDの時
+		//トロフィーのフラグ状態を取得
+		vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+		//トロフィーを取得したことがなかったら
+		if (flag[(int)CTrophy::TROPHY::HARD] == false)
+		{
+			//取得させる
+			flag[(int)CTrophy::TROPHY::HARD] = true;
+
+			CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+		}
+
+		//背景のテクスチャ割り当て
+		m_pBg[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("03_cloudy.png"));
+		m_pBg[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("01_cloudy.png"));
+		m_pBg[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("02_cloudy.png"));
+
+		//マスクの生成
+		m_pDengerMask = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f),
+			                              static_cast<int>(CObject::PRIORITY::MASK));
+		m_pDengerMask->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("denger_mask.png"));
 	}
 	else
 	{
+		//背景のテクスチャ割り当て
 		m_pBg[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("sky_01.png"));
+		m_pBg[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("sky_02.png"));
+		m_pBg[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("sky_03.png"));
 	}
 
-	//背景2の生成
-	m_pBg[1] = CBg::Create(D3DXVECTOR3(0.0f, GAME01_BG_POS_Y, GAME01_BG_POS_Z),
-		                   D3DXVECTOR3(SCREEN_WIDTH * GAME01_BG_SIZE_ADJUSTMENT, SCREEN_HEIGHT * GAME01_BG_SIZE_ADJUSTMENT, 0.0f),
-		                   D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(GAME01_BG_2_MOVE_INIT, 0.0f));
-	m_pBg[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("sky_02.png"));
-
-	//背景3の生成
-	m_pBg[2] = CBg::Create(D3DXVECTOR3(0.0f, GAME01_BG_POS_Y, GAME01_BG_POS_Z),
-		                   D3DXVECTOR3(SCREEN_WIDTH * GAME01_BG_SIZE_ADJUSTMENT, SCREEN_HEIGHT * GAME01_BG_SIZE_ADJUSTMENT, 0.0f),
-		                   D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR2(GAME01_BG_3_MOVE_INIT, 0.0f));
-	m_pBg[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("sky_03.png"));
-	
 	//ロケットの生成
 	m_pRocket = CRocket::Create(D3DXVECTOR3(GAME01_ROCKET_POS_X, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
@@ -276,6 +316,12 @@ void CGame01::Uninit(void)
 //================================================
 void CGame01::Update(void)
 {
+	if (m_pDengerMask != nullptr)
+	{
+		//マスク処理
+		Mask();
+	}
+
 	//発射したら
 	if (m_pPlayer->GetShot() == true)
 	{
@@ -1043,4 +1089,43 @@ void CGame01::FlyingDistanceFlag(void)
 			}
 		}
 	}
+}
+
+//================================================
+//マスク処理
+//================================================
+void CGame01::Mask(void)
+{
+	//色を取得
+	D3DXCOLOR col = m_pDengerMask->GetCol();
+
+	//加算する状態なら
+	if (m_bAddCol == true)
+	{
+		//加算
+		col.a += GAME01_MASK_ADD_COL;
+		//1以上になったら
+		if (col.a >= 1.0f)
+		{
+			//1にする
+			col.a = 1.0f;
+			//減算する状態にする
+			m_bAddCol = false;
+		}
+	}
+	else
+	{
+		//加算
+		col.a -= GAME01_MASK_ADD_COL;
+		//0以下になったら
+		if (col.a <= 0.0f)
+		{
+			//0にする
+			col.a = 0.0f;
+			//加算する状態にする
+			m_bAddCol = true;
+		}
+	}
+	//色設定
+	m_pDengerMask->SetCol(col);
 }

@@ -46,6 +46,7 @@
 #define ROCKET_SCENE_CAMERA_SHAKE_POS		(float (rand() % 10 + -5))						//カメラを揺らす量
 #define ROCKET_SCENE_RESULT_COUNTER			(180)											//リザルトに行くまでの時間
 #define ROCKET_SCENE_ERROR_SIZE				(D3DXVECTOR3(927.0f, 155.0f, 0.0f))				//測定不能UIのサイズ
+#define ROCKET_SCENE_MASK_ADD_COL			(0.03f)											//マスクのカラー加算値
 
 //================================================
 //静的メンバ変数宣言
@@ -298,7 +299,7 @@ void CRocketScene::Mask(void)
 	if (m_bAddCol == true)
 	{
 		//加算
-		col.a += 0.03f;
+		col.a += ROCKET_SCENE_MASK_ADD_COL;
 		//1以上になったら
 		if (col.a >= 1.0f)
 		{
@@ -311,7 +312,7 @@ void CRocketScene::Mask(void)
 	else
 	{
 		//加算
-		col.a -= 0.03f;
+		col.a -= ROCKET_SCENE_MASK_ADD_COL;
 		//0以下になったら
 		if (col.a <= 0.0f)
 		{

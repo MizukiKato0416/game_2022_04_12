@@ -67,6 +67,11 @@ HRESULT CRoad::Init(void)
 		m_cloud = CModelSingle::Create(D3DXVECTOR3(m_pos.x, m_pos.y - 1500.0f, m_pos.z + 500.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 			                           CXload::X_TYPE_GROUND, NULL, false);
 	}
+	else if (strncmp("HARD", CManager::GetInstance()->GetPlayData()->GetPasword().c_str(), 5) == 0)
+	{
+		m_cloud = CModelSingle::Create(D3DXVECTOR3(m_pos.x, m_pos.y - 1500.0f, m_pos.z + 500.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f),
+			                           CXload::X_TYPE_CLOUD_GRAY, NULL, false);
+	}
 	else
 	{
 		m_cloud = CModelSingle::Create(D3DXVECTOR3(m_pos.x, m_pos.y - 1500.0f, m_pos.z + 500.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f),
@@ -285,6 +290,12 @@ void CRoad::SkyInstallation(const int &happening_type, const int &installation_p
 			                        D3DXVECTOR3(0.0f, 0.0f, 0.0f)));
 		break;
 	default:
+		if (strncmp("HARD", CManager::GetInstance()->GetPlayData()->GetPasword().c_str(), 5) == 0)
+		{
+
+			m_happening_model.push_back(CThorn::Create(D3DXVECTOR3(m_pos.x + installation_position_x, m_pos.y + installation_position_y, m_pos.z),
+			                        D3DXVECTOR3(0.0f, 0.0f, 0.0f)));
+		}
 		break;
 	}
 }

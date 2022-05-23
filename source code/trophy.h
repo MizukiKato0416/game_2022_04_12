@@ -43,6 +43,11 @@ public:
 		EVENING,
 		NIGHT,
 		GIRL,
+		HARD,
+		GROUND,
+		PLAY_00,
+		PLAY_05,
+		PLAY_10,
 		MAX
 	};
 
