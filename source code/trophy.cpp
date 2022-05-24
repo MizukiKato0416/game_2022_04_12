@@ -240,6 +240,7 @@ void CTrophy::Update(void)
 	POINT point;
 	HWND hwnd;
 	CSound *sound;
+	vector<bool> trophy_flag = CManager::GetPlayData()->GetFlag();
 	sound = CManager::GetInstance()->GetSound();
 	int max_icon = m_icon.size();
 	hwnd = CManager::GetWindowHandle();
@@ -394,36 +395,78 @@ void CTrophy::Update(void)
 			}
 			else if (m_type[icon] == TROPHY::EVENING)
 			{
-				if (m_letter != nullptr)
+				if (trophy_flag[(int)m_type[icon]] == true)
 				{
-					m_letter->Uninit();
+					if (m_letter != nullptr)
+					{
+						m_letter->Uninit();
+					}
+					m_icon[icon]->SetCol(col);
+					m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
+						D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+					m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("password_evening.png"));
 				}
-				m_icon[icon]->SetCol(col);
-				m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
-					D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("password_evening.png"));
+				else if (trophy_flag[(int)m_type[icon]] == false)
+				{
+					if (m_letter != nullptr)
+					{
+						m_letter->Uninit();
+					}
+					m_icon[icon]->SetCol(col);
+					m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
+						D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+					m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_play_evening.png"));
+				}
 			}
 			else if (m_type[icon] == TROPHY::NIGHT)
 			{
-				if (m_letter != nullptr)
+				if (trophy_flag[(int)m_type[icon]] == true)
 				{
-					m_letter->Uninit();
+					if (m_letter != nullptr)
+					{
+						m_letter->Uninit();
+					}
+					m_icon[icon]->SetCol(col);
+					m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
+						D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+					m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("password_night.png"));
 				}
-				m_icon[icon]->SetCol(col);
-				m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
-					D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("password_night.png"));
+				else if (trophy_flag[(int)m_type[icon]] == false)
+				{
+					if (m_letter != nullptr)
+					{
+						m_letter->Uninit();
+					}
+					m_icon[icon]->SetCol(col);
+					m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
+						D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+					m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_play_night.png"));
+				}
 			}
 			else if (m_type[icon] == TROPHY::GIRL)
 			{
-				if (m_letter != nullptr)
+				if (trophy_flag[(int)m_type[icon]] == true)
 				{
-					m_letter->Uninit();
+					if (m_letter != nullptr)
+					{
+						m_letter->Uninit();
+					}
+					m_icon[icon]->SetCol(col);
+					m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
+						D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+					m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("password_695.png"));
 				}
-				m_icon[icon]->SetCol(col);
-				m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
-					D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("password_695.png"));
+				else if (trophy_flag[(int)m_type[icon]] == false)
+				{
+					if (m_letter != nullptr)
+					{
+						m_letter->Uninit();
+					}
+					m_icon[icon]->SetCol(col);
+					m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
+						D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+					m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_play_rokiko.png"));
+				}
 			}
 			else if (m_type[icon] == TROPHY::HARD)
 			{
@@ -438,14 +481,28 @@ void CTrophy::Update(void)
 			}
 			else if (m_type[icon] == TROPHY::GROUND)
 			{
-				if (m_letter != nullptr)
+				if (trophy_flag[(int)m_type[icon]] == true)
 				{
-					m_letter->Uninit();
+					if (m_letter != nullptr)
+					{
+						m_letter->Uninit();
+					}
+					m_icon[icon]->SetCol(col);
+					m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
+						D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+					m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("password_ground.png"));
 				}
-				m_icon[icon]->SetCol(col);
-				m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
-					D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
-				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("password_ground.png"));
+				else if (trophy_flag[(int)m_type[icon]] == false)
+				{
+					if (m_letter != nullptr)
+					{
+						m_letter->Uninit();
+					}
+					m_icon[icon]->SetCol(col);
+					m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
+						D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+					m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_play_ground.png"));
+				}
 			}
 			else if (m_type[icon] == TROPHY::PLAY_00)
 			{
