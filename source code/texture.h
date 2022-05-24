@@ -26,6 +26,7 @@ public:
 	static LPDIRECT3DTEXTURE9 GetTexture(const int &nCnt) { return m_texture[nCnt]; }	// テクスチャの割り当て
 	static string GetPas(const int &nCntTex) { return m_pas[nCntTex]; }				// テクスチャのパス取得処理
 	static int GetNum(void) { return m_num_tex; }									// テクスチャの総数取得処理
+
 private:
 	static vector<LPDIRECT3DTEXTURE9> m_texture;		// テクスチャ
 	static vector<string> m_pas;						// テクスチャのパス

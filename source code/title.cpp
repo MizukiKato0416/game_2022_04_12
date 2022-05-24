@@ -21,7 +21,7 @@
 //=============================================================================
 // マクロ定義
 //=============================================================================
-#define TITLE_TO_RESULT_COUNT		(600)				//リザルトに行くまでの時間
+#define TITLE_TO_RESULT_COUNT		(1000)				//リザルトに行くまでの時間
 #define TITLE_LOGO_SIZE_X			(366.0f)			//タイトルロゴのサイズX
 #define TITLE_LOGO_SIZE_Y			(420.0f)			//タイトルロゴのサイズY
 #define TITLE_PRESS_START_SIZE_X	(594.0f)			//PRESS START UIのサイズX

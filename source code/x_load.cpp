@@ -11,7 +11,7 @@
 //=============================================================================
 CXload::CXload()
 {
-
+	
 }
 
 //=============================================================================
@@ -23,7 +23,7 @@ CXload::~CXload()
 }
 
 //=============================================================================
-//テクスチャの生成
+//初期化
 //=============================================================================
 void CXload::Init(void)
 {
@@ -79,6 +79,10 @@ void CXload::Init(void)
 	//雲
 	D3DXLoadMeshFromX("data/MODEL/stage/cloud.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
 		&m_apBuffMat[X_TYPE_CLOUD], NULL, &m_aNumMat[X_TYPE_CLOUD], &m_apMesh[X_TYPE_CLOUD]);
+
+	//雷雲
+	D3DXLoadMeshFromX("data/MODEL/stage/cloud_gray.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
+		&m_apBuffMat[X_TYPE_CLOUD_GRAY], NULL, &m_aNumMat[X_TYPE_CLOUD_GRAY], &m_apMesh[X_TYPE_CLOUD_GRAY]);
 
 	//地面
 	D3DXLoadMeshFromX("data/MODEL/stage/road.x", D3DXMESH_SYSTEMMEM, pDevice, NULL,
