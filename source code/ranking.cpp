@@ -116,6 +116,9 @@ void CRanking::Draw(void)
 	
 }
 
+//================================================
+//ランキング生成処理
+//================================================
 void CRanking::CreateScore(D3DXVECTOR3 pos, D3DXVECTOR3 size)
 {
 	//スコアの生成
@@ -178,6 +181,9 @@ CRanking* CRanking::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size)
 	return pRanking;
 }
 
+//================================================
+//通信処理
+//================================================
 void CRanking::Connect(CTcpClient *pCommu, CCommunicationData *pCommuData, D3DXVECTOR3 pos, D3DXVECTOR3 size, bool *bConnect, bool *bOnece)
 {
 	CCommunicationData::COMMUNICATION_DATA *pData = pCommuData->GetCommuData();
