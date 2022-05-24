@@ -38,6 +38,8 @@ public:
 	void SetFlag(vector<bool> frag) { m_trophy_flag = frag; }	// セッター
 	string GetPasword(void) { return m_pasword; }
 	void SetPasword(string pas) { m_pasword = pas; }
+	int GetPlayNum(void) { return m_play_num; }
+	void AddPlayNum(int num) { if (m_play_num == INT_MAX) m_play_num = INT_MAX; m_play_num += num; }
 
 private:
 	//メンバ変数
@@ -46,6 +48,7 @@ private:
 	int m_nTime;					//時間
 	vector<bool> m_trophy_flag;	// トロフィーのフラグ
 	string m_pasword;	// パスワード
+	int m_play_num;
 };
 
 //================================================
