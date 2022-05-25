@@ -50,7 +50,7 @@ public:
 		PLAY_10,
 		STAFFROLL,
 		ROCKY_ANGRY,
-		NO_TROPHY,
+		KIYO,
 		COMPLETE,
 		MAX
 	};
