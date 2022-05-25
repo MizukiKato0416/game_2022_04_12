@@ -66,6 +66,8 @@ HRESULT CRanking::Init(void)
 
 	th.detach();
 
+	m_nNowScore = CManager::GetInstance()->GetPlayData()->GetScore();
+
 	//カラーの設定
 	m_col = {255.0f, 255.0f, 255.0f, 255.0f};
 
@@ -86,12 +88,16 @@ void CRanking::Uninit(void)
 //================================================
 void CRanking::Update(void)
 {
+	CCommunicationData::COMMUNICATION_DATA *pData = m_pCommuData->GetCommuData();
+
 	for (int nCntRanking = 0; nCntRanking < MAX_RANKING; nCntRanking++)
 	{
+		m_apScore[nCntRanking]->SetScore(pData->ranking[nCntRanking]);
+		m_nScore[nCntRanking] = pData->ranking[nCntRanking];
 		if (m_nNowScore != 0 && m_nScore[nCntRanking] == m_nNowScore)
 		{
 			//カラーを薄くする
-			m_col.a -= 255.0f;
+			m_col.a -= 10.0f;
 
 			if (m_col.a < 0.0f)
 			{
@@ -102,6 +108,8 @@ void CRanking::Update(void)
 			{
 				//ナンバーを取得してカラーを設定
 				m_apScore[nCntRanking]->GetNumber(nCntNumber)->SetCol(m_col);
+				m_apScore[nCntRanking]->GetConma()->SetCol(m_col);
+				m_apScore[nCntRanking]->GetMeter()->SetCol(m_col);
 			}
 			break;
 		}

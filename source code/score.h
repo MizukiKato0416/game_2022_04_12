@@ -40,6 +40,8 @@ public:
 	void SetScore(const int &nScore);
 	void AddScore(const int &nValue);
 	int GetScore(void);
+	CObject2D *GetConma(void) { return m_pConma; }
+	CObject2D *GetMeter(void) { return m_pUnit; }
 	CNumber *GetNumber(const int nNumber);
 
 	static CScore *Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size);
