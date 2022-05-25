@@ -99,8 +99,8 @@ HRESULT CRocketScene::Init(void)
 	//çƒê∂
 	pSound->ControllVoice(CSound::SOUND_LABEL::ROCKET_SE, 0.8f);
 	pSound->Play(CSound::SOUND_LABEL::ROCKET_SE);
-	pSound->ControllVoice(CSound::SOUND_LABEL::ERROR_BGM, 1.8f);
-	pSound->Play(CSound::SOUND_LABEL::ERROR_BGM);
+	pSound->ControllVoice(CSound::SOUND_LABEL::ERROR_SE, 1.8f);
+	pSound->Play(CSound::SOUND_LABEL::ERROR_SE);
 
 	//îwåiÇÃê∂ê¨
 	for(int nCntBg = 0; nCntBg < ROCKET_SCENE_BG_NUM; nCntBg++)

@@ -47,9 +47,11 @@ public:
 		GOOD_SE,				//goodSE
 		GREAT_SE,				//greatSE
 		PARFECT_SE,				//parfectSE
-		ERROR_BGM,				//エラー
-		KIYO_BREAK,				//キヨ　ブレーキ
-		ANGRY,					//起こったとき
+		ERROR_SE,				//エラー
+		KIYO_BREAK_SE,			//キヨ　ブレーキ
+		ANGRY_SE,				//起こったとき
+		DIALOG_SE,				//ダイアログ
+		ENDROOL_BGM,			//エンドロールBGM
 		RESULT_BGM,				//リザルトBGM
 		GAME_BGM,				//ゲームBGM
 		TITLE_BGM,				//タイトルBGM

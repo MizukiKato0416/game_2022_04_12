@@ -359,8 +359,8 @@ void CPlayer::Update(void)
 				{
 					/*sound->ControllVoice(CSound::SOUND_LABEL::BREAK_SE, 1.4f);
 					sound->Play(CSound::SOUND_LABEL::BREAK_SE);*/
-					sound->ControllVoice(CSound::SOUND_LABEL::KIYO_BREAK, 0.8f);
-					sound->Play(CSound::SOUND_LABEL::KIYO_BREAK);
+					sound->ControllVoice(CSound::SOUND_LABEL::KIYO_BREAK_SE, 0.8f);
+					sound->Play(CSound::SOUND_LABEL::KIYO_BREAK_SE);
 
 					//’…’nƒ‚[ƒVƒ‡ƒ“‚É‚·‚é
 					m_pMotionPlayer->SetMotion(CMotionRoad::MOTION_PLAYER_TYPE_DIVE, this);
