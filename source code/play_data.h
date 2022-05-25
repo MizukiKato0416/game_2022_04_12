@@ -39,7 +39,7 @@ public:
 	string GetPasword(void) { return m_pasword; }
 	void SetPasword(string pas) { m_pasword = pas; }
 	int GetPlayNum(void) { return m_play_num; }
-	void AddPlayNum(int num) { if (m_play_num == INT_MAX) m_play_num = INT_MAX; m_play_num += num; }
+	void AddPlayNum(int num) { if (m_play_num >= INT_MAX) m_play_num = INT_MAX; m_play_num += num; }
 
 private:
 	//ƒƒ“ƒo•Ï”
