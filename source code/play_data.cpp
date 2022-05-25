@@ -75,7 +75,7 @@ void CPlayData::Uninit(void)
 
 	file = fopen("data/playnum.txt", "w");
 
-	fscanf(file, "%d", m_play_num);
+	fprintf(file, "%d", m_play_num);
 
 	fclose(file);
 }

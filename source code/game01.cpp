@@ -28,58 +28,71 @@
 #include "model.h"
 #include "trophy.h"
 #include "sound.h"
+#include "letter.h"
 
 //================================================
 //マクロ定義
 //================================================
-#define GAME01_MOUSE_VEC_ADJUSTMENT_0			(0.4f)		//引っ張ったときのベクトルを小さくする割合0
-#define GAME01_MOUSE_VEC_ADJUSTMENT_1			(0.5f)		//引っ張ったときのベクトルを小さくする割合1
-#define GAME01_MOUSE_VEC_ADJUSTMENT_2			(0.6f)		//引っ張ったときのベクトルを小さくする割合2
-#define GAME01_MOUSE_VEC_ADJUSTMENT_3			(0.7f)		//引っ張ったときのベクトルを小さくする割合3
-#define GAME01_MOUSE_VEC_ADJUSTMENT_4			(0.8f)		//引っ張ったときのベクトルを小さくする割合4
-#define GAME01_MOUSE_VEC_ADJUSTMENT_5			(0.9f)		//引っ張ったときのベクトルを小さくする割合5
-#define GAME01_MOUSE_VEC_ADJUSTMENT_6			(1.0f)		//引っ張ったときのベクトルを小さくする割合6
-#define GAME01_CAMERA_ADD_POS					(10.0f)		//カメラの位置を加算する量
-#define GAME01_CAMERA_ADD_DIFFER				(10.0f)		//カメラの視点と注視点の距離を加算する量
-#define GAME01_CAMERA_VIEW_CHANGE_MOVE			(20.0f)		//カメラを視野をDEFAULTから最大に変える境界線のプレイヤーのバウンドする瞬間の移動量
-#define GAME01_SCORE_MAGNIFICATION				(10.0f)		//プレイヤーが前に進む力をスコアにする際の倍率
-#define GAME01_SHOT_GAUGE_MAX					(100)		//ショットゲージの最大値
-#define GAME01_SHOT_GAUGE_ADD					(2)			//ショットゲージを増やす量
-#define GAME01_SHOT_GAUGE_COUNTER_MAX			(10)		//ショットゲージが最大までたまっている状態の時間
-#define GAME01_SHOT_GAUGE_CASE_1				(20)		//ショットゲージの段階1
-#define GAME01_SHOT_GAUGE_CASE_2				(40)		//ショットゲージの段階2
-#define GAME01_SHOT_GAUGE_CASE_3				(60)		//ショットゲージの段階3
-#define GAME01_SHOT_GAUGE_CASE_4				(80)		//ショットゲージの段階4
-#define GAME01_SHOT_GAUGE_SUBTRACT_ALPHA		(0.02f)		//ショットゲージを薄くする量
-#define GAME01_BG_SIZE_ADJUSTMENT				(3.0f)		//背景の大きくする割合
-#define GAME01_BG_POS_Z							(1000.0f)	//背景の位置Z
-#define GAME01_BG_POS_Y							(300.0f)	//背景の位置Y
-#define GAME01_BG_1_MAGNIFICATION				(0.00004f)	//背景1が前に進む力を背景の移動にする際の倍率
-#define GAME01_BG_2_MAGNIFICATION				(0.00006f)	//背景2が前に進む力を背景の移動にする際の倍率
-#define GAME01_BG_3_MAGNIFICATION				(0.00008f)	//背景3が前に進む力を背景の移動にする際の倍率
-#define GAME01_BG_1_MOVE_INIT					(0.00006f)	//背景1の初期移動量
-#define GAME01_BG_2_MOVE_INIT					(0.00008f)	//背景2の初期移動量
-#define GAME01_BG_3_MOVE_INIT					(0.0001f)	//背景3の初期移動量
-#define GAME01_SHOT_UI_ADD_SIZE_COUNTER			(9)			//発射用UIのサイズを大きくする時間
-#define GAME01_SHOT_UI_ADD_SIZE					(1.02f)		//発射用UIのサイズを大きくする割合
-#define GAME01_SHOT_UI_SUBTRACT_SIZE_COUNTER	(18)		//発射用UIのサイズを小さくする時間
-#define GAME01_SHOT_UI_SUBTRACT_SIZE			(0.98f)		//発射用UIのサイズを小さくする割合
-#define GAME01_SHOT_UI_UNINIT_COUNTER			(30)		//発射用UIを消し始める時間
-#define GAME01_SHOT_UI_SUBTRACT_ALPHA			(0.06f)		//発射用UIのα値減算量
-#define GAME01_SHOT_UI_MOVE_Y					(-0.8f)		//発射用UIの移動量Y
-#define GAME01_ARROW_UI_SUBTRACT_ALPHA			(0.06f)		//矢印UIのα値減算量
-#define GAME01_FINISH_COUNTER					(180)		//ゲームクリア表示時間
-#define GAME01_SHOT_JUDGE_UI_SIZE_X				(400.0f)	//発射時審査UIサイズX
-#define GAME01_SHOT_JUDGE_UI_SIZE_Y				(80.0f)		//発射時審査UIサイズ
-#define GAME01_SHOT_JUDGE_UI_POS_Y				(200.0f)	//発射時審査UI位置
-#define GAME01_FLYING_DISTANCE_1000				(100000)	//飛距離1000
-#define GAME01_FLYING_DISTANCE_5000				(500000)	//飛距離5000
-#define GAME01_FLYING_DISTANCE_10000			(1000000)	//飛距離10000
-#define GAME01_ROCKET_POS_X						(-800.0f)	//ロケットの位置
-#define GAME01_START_CLOUD_POS_Y				(-1500.0f)	//スタートの雲の位置Y
-#define GAME01_START_CLOUD_POS_Z				(500.0f)	//スタートの雲の位置Z
-#define GAME01_MASK_ADD_COL						(0.01f)		//マスクのカラー加算値
-
+#define GAME01_MOUSE_VEC_ADJUSTMENT_0			(0.4f)				//引っ張ったときのベクトルを小さくする割合0
+#define GAME01_MOUSE_VEC_ADJUSTMENT_1			(0.5f)				//引っ張ったときのベクトルを小さくする割合1
+#define GAME01_MOUSE_VEC_ADJUSTMENT_2			(0.6f)				//引っ張ったときのベクトルを小さくする割合2
+#define GAME01_MOUSE_VEC_ADJUSTMENT_3			(0.7f)				//引っ張ったときのベクトルを小さくする割合3
+#define GAME01_MOUSE_VEC_ADJUSTMENT_4			(0.8f)				//引っ張ったときのベクトルを小さくする割合4
+#define GAME01_MOUSE_VEC_ADJUSTMENT_5			(0.9f)				//引っ張ったときのベクトルを小さくする割合5
+#define GAME01_MOUSE_VEC_ADJUSTMENT_6			(1.0f)				//引っ張ったときのベクトルを小さくする割合6
+#define GAME01_CAMERA_ADD_POS					(10.0f)				//カメラの位置を加算する量
+#define GAME01_CAMERA_ADD_DIFFER				(10.0f)				//カメラの視点と注視点の距離を加算する量
+#define GAME01_CAMERA_VIEW_CHANGE_MOVE			(20.0f)				//カメラを視野をDEFAULTから最大に変える境界線のプレイヤーのバウンドする瞬間の移動量
+#define GAME01_SCORE_MAGNIFICATION				(10.0f)				//プレイヤーが前に進む力をスコアにする際の倍率
+#define GAME01_SHOT_GAUGE_MAX					(100)				//ショットゲージの最大値
+#define GAME01_SHOT_GAUGE_ADD					(2)					//ショットゲージを増やす量
+#define GAME01_SHOT_GAUGE_COUNTER_MAX			(10)				//ショットゲージが最大までたまっている状態の時間
+#define GAME01_SHOT_GAUGE_CASE_1				(20)				//ショットゲージの段階1
+#define GAME01_SHOT_GAUGE_CASE_2				(40)				//ショットゲージの段階2
+#define GAME01_SHOT_GAUGE_CASE_3				(60)				//ショットゲージの段階3
+#define GAME01_SHOT_GAUGE_CASE_4				(80)				//ショットゲージの段階4
+#define GAME01_SHOT_GAUGE_SUBTRACT_ALPHA		(0.02f)				//ショットゲージを薄くする量
+#define GAME01_BG_SIZE_ADJUSTMENT				(3.0f)				//背景の大きくする割合
+#define GAME01_BG_POS_Z							(1000.0f)			//背景の位置Z
+#define GAME01_BG_POS_Y							(300.0f)			//背景の位置Y
+#define GAME01_BG_1_MAGNIFICATION				(0.00004f)			//背景1が前に進む力を背景の移動にする際の倍率
+#define GAME01_BG_2_MAGNIFICATION				(0.00006f)			//背景2が前に進む力を背景の移動にする際の倍率
+#define GAME01_BG_3_MAGNIFICATION				(0.00008f)			//背景3が前に進む力を背景の移動にする際の倍率
+#define GAME01_BG_1_MOVE_INIT					(0.00006f)			//背景1の初期移動量
+#define GAME01_BG_2_MOVE_INIT					(0.00008f)			//背景2の初期移動量
+#define GAME01_BG_3_MOVE_INIT					(0.0001f)			//背景3の初期移動量
+#define GAME01_SHOT_UI_ADD_SIZE_COUNTER			(9)					//発射用UIのサイズを大きくする時間
+#define GAME01_SHOT_UI_ADD_SIZE					(1.02f)				//発射用UIのサイズを大きくする割合
+#define GAME01_SHOT_UI_SUBTRACT_SIZE_COUNTER	(18)				//発射用UIのサイズを小さくする時間
+#define GAME01_SHOT_UI_SUBTRACT_SIZE			(0.98f)				//発射用UIのサイズを小さくする割合
+#define GAME01_SHOT_UI_UNINIT_COUNTER			(30)				//発射用UIを消し始める時間
+#define GAME01_SHOT_UI_SUBTRACT_ALPHA			(0.06f)				//発射用UIのα値減算量
+#define GAME01_SHOT_UI_MOVE_Y					(-0.8f)				//発射用UIの移動量Y
+#define GAME01_ARROW_UI_SUBTRACT_ALPHA			(0.06f)				//矢印UIのα値減算量
+#define GAME01_FINISH_COUNTER					(180)				//ゲームクリア表示時間
+#define GAME01_SHOT_JUDGE_UI_SIZE_X				(400.0f)			//発射時審査UIサイズX
+#define GAME01_SHOT_JUDGE_UI_SIZE_Y				(80.0f)				//発射時審査UIサイズ
+#define GAME01_SHOT_JUDGE_UI_POS_Y				(200.0f)			//発射時審査UI位置
+#define GAME01_FLYING_DISTANCE_1000				(100000)			//飛距離1000
+#define GAME01_FLYING_DISTANCE_5000				(500000)			//飛距離5000
+#define GAME01_FLYING_DISTANCE_10000			(1000000)			//飛距離10000
+#define GAME01_ROCKET_POS_X						(-800.0f)			//ロケットの位置
+#define GAME01_START_CLOUD_POS_Y				(-1500.0f)			//スタートの雲の位置Y
+#define GAME01_START_CLOUD_POS_Z				(500.0f)			//スタートの雲の位置Z
+#define GAME01_MASK_ADD_COL						(0.01f)				//マスクのカラー加算値
+#define GAME01_PLAY_NUM_01						(1)					//プレイした回数1
+#define GAME01_PLAY_NUM_05						(5)					//プレイした回数5
+#define GAME01_PLAY_NUM_10						(10)				//プレイした回数10
+#define GAME01_HARD_MODE_UI_SIZE_X				(1314.0f * 0.3f)	//ハードモードのUIのサイズX
+#define GAME01_HARD_MODE_UI_SIZE_Y				(200.0f * 0.3f)		//ハードモードのUIのサイズY
+#define GAME01_CHARACTOR_CREATE_SPEED			(8)					//文字を生成するスピード
+#define GAME01_CLICK_COUNTER					(120)				//クリックができるまでのカウンター
+#define GAME01_ROCKY_UI_POS_Y					(260.0f)			//ロッキー君のUIの位置Y
+#define GAME01_ROCKY_UI_SIZE_X					(222.0f * 1.5f)		//ロッキー君のUIのサイズX
+#define GAME01_ROCKY_UI_SIZE_Y					(246.0f * 1.5f)		//ロッキー君のUIのサイズY
+#define GAME01_DIALOG_FRAME_POS_Y				(230.0f)			//セリフのフレーム位置Y
+#define GAME01_CLICK_END_NUM					(20)				//クリック演出する回数
+#define GAME01_MAX_STRING						(256)				//文字数の上限
 
 #ifdef _DEBUG
 #define GAME01_MOUSE_VEC_ADJUSTMENT_DEBUG	(0.08f)		//引っ張ったときのベクトルを小さくする割合デバッグ用
@@ -114,6 +127,17 @@ CGame01::CGame01(CObject::PRIORITY Priority):CObject(Priority)
 	m_pStart = nullptr;
 	m_pDengerMask = nullptr;
 	m_bAddCol = false;
+	m_nClick = 0;
+	m_dialogType = ROCKY_DIALOG::NONE;
+	m_pRocky = nullptr;
+	m_pDialogFrame = nullptr;
+	m_nClickDelay = 0;
+	m_pLetter.clear();
+	m_dialog.clear();
+	m_nCountFrame = 0;
+	m_nDialogDelay = 0;
+	m_nDialogCntX = 0;
+	m_nDialogCntY = 0;
 }
 
 //================================================
@@ -145,6 +169,15 @@ HRESULT CGame01::Init(void)
 	m_nFinishCounter = 0;
 	m_bPause = false;
 	m_bAddCol = true;
+	m_nClick = 0;
+	m_dialogType = ROCKY_DIALOG::NONE;
+	m_pRocky = nullptr;
+	m_pDialogFrame = nullptr;
+	m_nClickDelay = 0;
+	m_nCountFrame = 0;
+	m_nDialogDelay = 0;
+	m_nDialogCntX = 0;
+	m_nDialogCntY = 0;
 
 	CSound *sound;
 	sound = CManager::GetInstance()->GetSound();
@@ -197,16 +230,6 @@ HRESULT CGame01::Init(void)
 
 	//最初の道の生成
 	m_apRoad[0] = CRoad::Create(D3DXVECTOR3(FLOOR_SIZE.x, 0.0f, 0.0f), FLOOR_SIZE, 0.0f);
-
-	//ゲージのフレーム生成
-	m_pGaugeFrame = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f),
-		                              static_cast<int>(CObject::PRIORITY::UI));
-	m_pGaugeFrame->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("gauge_frame.png"));
-
-	//ショットゲージの生成
-	m_pGauge = CGauge::Create(D3DXVECTOR3(GAUGE_SHOT_POS_X, GAUGE_SHOT_POS_Y, 0.0f),
-		                      D3DXVECTOR3(GAUGE_SHOT_SIZE_X, GAUGE_SHOT_SIZE_Y, 0.0f), GAME01_SHOT_GAUGE_MAX, 0);
-	m_pGauge->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("gauge.png"));
 
 	//背景1の生成
 	m_pBg[0] = CBg::Create(D3DXVECTOR3(0.0f, GAME01_BG_POS_Y, GAME01_BG_POS_Z),
@@ -277,6 +300,13 @@ HRESULT CGame01::Init(void)
 		m_pBg[1]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("01_cloudy.png"));
 		m_pBg[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("02_cloudy.png"));
 
+		//ハードモードのUI生成
+		CObject2D *pHardModeUi = CObject2D::Create(D3DXVECTOR3(GAME01_HARD_MODE_UI_SIZE_X / 2.0f,
+			                                                   SCREEN_HEIGHT - GAME01_HARD_MODE_UI_SIZE_Y / 2.0f, 0.0f),
+			                                       D3DXVECTOR3(GAME01_HARD_MODE_UI_SIZE_X, GAME01_HARD_MODE_UI_SIZE_Y, 0.0f),
+			                                       static_cast<int>(CObject::PRIORITY::UI));
+		pHardModeUi->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("hardmode.png"));
+
 		//マスクの生成
 		m_pDengerMask = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f),
 			                              static_cast<int>(CObject::PRIORITY::MASK));
@@ -292,6 +322,57 @@ HRESULT CGame01::Init(void)
 
 	//ロケットの生成
 	m_pRocket = CRocket::Create(D3DXVECTOR3(GAME01_ROCKET_POS_X, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+
+	FILE *file;
+	file = fopen("data/dialog.txt", "r");
+
+	if (file != NULL)
+	{
+		//一行ずつ保存
+		while (1)
+		{
+			char name_buf[1][GAME01_MAX_STRING];
+			string name;
+
+			fscanf(file, "%s", name_buf[0]);
+
+			//END_SCRIPTと書かれていたら
+			if (strncmp("END_SCRIPT", name_buf[0], 11) == 0)
+			{
+				break;
+			}
+
+			name = name_buf[0];
+
+			// SJIS → wstring
+			int iBufferSize = MultiByteToWideChar(CP_ACP,
+				0,
+				name.c_str(),
+				-1,
+				(wchar_t*)NULL,
+				0);
+
+			// バッファの取得
+			wchar_t* cpUCS2 = new wchar_t[iBufferSize];
+
+			// SJIS → wstring
+			MultiByteToWideChar(CP_ACP,
+				0,
+				name.c_str(),
+				-1,
+				cpUCS2,
+				iBufferSize);
+
+			// stringの生成
+			wstring utextbuf(cpUCS2, cpUCS2 + iBufferSize - 1);
+
+			// バッファの破棄
+			delete[] cpUCS2;
+
+			m_dialog.push_back(utextbuf);
+		}
+	}
+	fclose(file);
 
 	return S_OK;
 }
@@ -325,6 +406,9 @@ void CGame01::Update(void)
 	//発射したら
 	if (m_pPlayer->GetShot() == true)
 	{
+		//クリック処理
+		Click();
+
 		if (m_pGaugeFrame != nullptr && m_pGauge != nullptr)
 		{
 			//ゲージを消す処理
@@ -372,8 +456,11 @@ void CGame01::Update(void)
 	}
 	else if(m_pPlayer->GetShot() == false && m_bReleaseMouse == false)
 	{//発射していなかったら且つマウスを離していないとき
-		//ゲージ処理
-		Gauge();
+		if (m_pGauge != nullptr)
+		{
+			//ゲージ処理
+			Gauge();
+		}
 	}
 
 	//ポーズのフラグが立っていなかったら
@@ -751,6 +838,16 @@ void CGame01::Shot(void)
 		//マウスを押した瞬間
 		if (pInputMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 		{
+			//ゲージのフレーム生成
+			m_pGaugeFrame = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f),
+				                              static_cast<int>(CObject::PRIORITY::UI));
+			m_pGaugeFrame->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("gauge_frame.png"));
+
+			//ショットゲージの生成
+			m_pGauge = CGauge::Create(D3DXVECTOR3(GAUGE_SHOT_POS_X, GAUGE_SHOT_POS_Y, 0.0f),
+				                      D3DXVECTOR3(GAUGE_SHOT_SIZE_X, GAUGE_SHOT_SIZE_Y, 0.0f), GAME01_SHOT_GAUGE_MAX, 0);
+			m_pGauge->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("gauge.png"));
+
 			sound->Play(CSound::SOUND_LABEL::GAGE_SE);
 			sound->ControllVoice(CSound::SOUND_LABEL::GAGE_SE, 1.4f);
 
@@ -949,7 +1046,6 @@ void CGame01::ShotUi(void)
 			//色を設定
 			m_pShotUi->SetCol(col);
 		}
-		
 		//位置Yを既定の値動かす
 		pos.y += GAME01_SHOT_UI_MOVE_Y;
 	}
@@ -957,7 +1053,6 @@ void CGame01::ShotUi(void)
 	{
 		//サイズを既定の割合ずつ大きくする
 		size *= GAME01_SHOT_UI_ADD_SIZE;
-
 	}
 	else if (m_nShotUiCounter > GAME01_SHOT_UI_ADD_SIZE_COUNTER && m_nShotUiCounter <= GAME01_SHOT_UI_SUBTRACT_SIZE_COUNTER)
 	{
@@ -1021,21 +1116,70 @@ void CGame01::Finish(void)
 			CFade *pFade;
 			pFade = CManager::GetInstance()->GetFade();
 
-
-			if (m_pRocket != nullptr)
-			{
-				if (m_pRocket->GetHitPlayer() == true)
-				{
-					if (pFade->GetFade() == CFade::FADE_NONE)
-					{
-						pFade->SetFade(CManager::MODE::ROCKET_SCENE);
-					}
-				}
-			}
-
 			if (pFade->GetFade() == CFade::FADE_NONE)
 			{
-				pFade->SetFade(CManager::MODE::RESULT);
+				if (m_pRocket != nullptr)
+				{
+					if (m_pRocket->GetHitPlayer() == true)
+					{
+						//ロケットシーンに遷移
+						pFade->SetFade(CManager::MODE::ROCKET_SCENE);
+					}
+					else
+					{
+						//リザルトシーンに遷移
+						pFade->SetFade(CManager::MODE::RESULT);
+					}
+				}
+				else
+				{
+					//リザルトシーンに遷移
+					pFade->SetFade(CManager::MODE::RESULT);
+				}
+
+				//プレイ回数を1増やす
+				CManager::GetInstance()->GetPlayData()->AddPlayNum(1);
+
+				//プレイ回数が1なら
+				if (CManager::GetInstance()->GetPlayData()->GetPlayNum() == GAME01_PLAY_NUM_01)
+				{
+					//トロフィーのフラグ状態を取得
+					vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+					//トロフィーを取得したことがなかったら
+					if (flag[(int)CTrophy::TROPHY::PLAY_00] == false)
+					{
+						//取得させる
+						flag[(int)CTrophy::TROPHY::PLAY_00] = true;
+
+						CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+					}
+				}
+				else if (CManager::GetInstance()->GetPlayData()->GetPlayNum() == GAME01_PLAY_NUM_05)
+				{//プレイ回数が5なら
+					//トロフィーのフラグ状態を取得
+					vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+					//トロフィーを取得したことがなかったら
+					if (flag[(int)CTrophy::TROPHY::PLAY_05] == false)
+					{
+						//取得させる
+						flag[(int)CTrophy::TROPHY::PLAY_05] = true;
+
+						CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+					}
+				}
+				else if (CManager::GetInstance()->GetPlayData()->GetPlayNum() == GAME01_PLAY_NUM_10)
+				{//プレイ回数が10なら
+					//トロフィーのフラグ状態を取得
+					vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+					//トロフィーを取得したことがなかったら
+					if (flag[(int)CTrophy::TROPHY::PLAY_10] == false)
+					{
+						//取得させる
+						flag[(int)CTrophy::TROPHY::PLAY_10] = true;
+
+						CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+					}
+				}
 			}
 		}
 		//カウンターを増やす
@@ -1128,4 +1272,183 @@ void CGame01::Mask(void)
 	}
 	//色設定
 	m_pDengerMask->SetCol(col);
+}
+
+//================================================
+//クリック処理
+//================================================
+void CGame01::Click(void)
+{
+	//マウス取得処理
+	CInputMouse *pInputMouse;
+	pInputMouse = CManager::GetInstance()->GetInputMouse();
+
+	//マウスを押した瞬間
+	if (pInputMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
+	{
+		//カウンターを加算
+		m_nClick++;
+
+		//既定の値より大きくなったら
+		if (m_nClick == GAME01_CLICK_END_NUM)
+		{
+			//会話1にする
+			m_dialogType = ROCKY_DIALOG::DIALOG_01;
+
+			//マスクの生成
+			CObject2D *pMask = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
+				                                 D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f),
+				                                 static_cast<int>(CObject::PRIORITY::UI));
+			pMask->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+
+			//ロッキーの生成
+			m_pRocky = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, GAME01_ROCKY_UI_POS_Y, 0.0f),
+				                         D3DXVECTOR3(GAME01_ROCKY_UI_SIZE_X, GAME01_ROCKY_UI_SIZE_Y, 0.0f),
+				                         static_cast<int>(CObject::PRIORITY::UI));
+			m_pRocky->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("rocky_angry.png"));
+
+			//フレームの生成
+			m_pDialogFrame = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT - SCREEN_HEIGHT / 2.0f / 2.0f, 0.0f),
+				                               D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT / 2.0f, 0.0f),
+				                               static_cast<int>(CObject::PRIORITY::UI));
+			m_pDialogFrame->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("click_angry.png"));
+		}
+	}
+
+	switch (m_dialogType)
+	{
+	case CGame01::ROCKY_DIALOG::DIALOG_01:
+		//カウンターを加算
+		m_nClickDelay++;
+
+		if (m_nClickDelay > GAME01_CLICK_COUNTER)
+		{
+			//マウスを押した瞬間
+			if (pInputMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
+			{
+				//ロッキーのテクスチャを変える
+				m_pRocky->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("rocky_sad.png"));
+				//フレームのテクスチャを変える
+				m_pDialogFrame->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("comment_frame.png"));
+				m_pDialogFrame->SetSize(D3DXVECTOR3(SCREEN_WIDTH, GAME01_DIALOG_FRAME_POS_Y, 0.0f));
+				m_pDialogFrame->SetPos(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT - GAME01_DIALOG_FRAME_POS_Y / 2.0f, 0.0f),
+					                   m_pDialogFrame->GetSize());
+				//カウンターを0にする
+				m_nClickDelay = 0;
+
+				//会話2にする
+				m_dialogType = ROCKY_DIALOG::DIALOG_02;
+			}
+		}
+		break;
+	case CGame01::ROCKY_DIALOG::DIALOG_02:
+		//文字表示
+		if (Dialog(0) == true)
+		{
+			//マウスを押した瞬間
+			if (pInputMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
+			{
+				//セリフ破棄
+				UninitDialog();
+
+				//会話3にする
+				m_dialogType = ROCKY_DIALOG::DIALOG_03;
+			}
+		}
+		break;
+	case CGame01::ROCKY_DIALOG::DIALOG_03:
+		//文字表示
+		if (Dialog(1) == true)
+		{
+			//マウスを押した瞬間
+			if (pInputMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
+			{
+				//会話4にする
+				m_dialogType = ROCKY_DIALOG::DIALOG_04;
+			}
+		}
+		break;
+	case CGame01::ROCKY_DIALOG::DIALOG_04:
+		break;
+	case CGame01::ROCKY_DIALOG::MAX:
+		break;
+	default:
+		break;
+	}
+
+}
+
+
+//================================================
+//セリフ処理
+//================================================
+bool CGame01::Dialog(const int &nCntDialog)
+{
+	wchar_t cReturn[] = L"#";
+	int nDialogSize = m_dialog[nCntDialog].size();
+
+	if (m_nDialogDelay < nDialogSize)
+	{
+		//フレームのカウンターを加算
+		m_nCountFrame++;
+		//既定の値より大きくなったら
+		if (m_nCountFrame > GAME01_CHARACTOR_CREATE_SPEED)
+		{
+			if (m_dialog[nCntDialog][m_nDialogDelay] == *cReturn)
+			{
+				//改行するので0にする
+				m_nDialogCntX = 0;
+				m_nDialogCntY++;
+
+				//消す
+				m_dialog[nCntDialog].erase(m_dialog[nCntDialog].begin() + m_nDialogDelay);
+				nDialogSize--;
+				m_nDialogDelay--;
+			}
+			else
+			{
+				m_pLetter.push_back(new CLetter);
+
+				m_pLetter[m_nDialogDelay]->SetPos(D3DXVECTOR3(200.0f + (15.0f * 2.0f) * m_nDialogCntX, 600.0f + (15.0f * 2.0f) * m_nDialogCntY, 0.0f));
+				m_pLetter[m_nDialogDelay]->SetSize(D3DXVECTOR3(15.0f, 15.0f, 0.0f));
+				m_pLetter[m_nDialogDelay]->SetText(m_dialog[nCntDialog][m_nDialogDelay]);
+				m_pLetter[m_nDialogDelay]->SetFontSize(300);
+				m_pLetter[m_nDialogDelay]->SetFontWeight(500);
+				m_pLetter[m_nDialogDelay]->Init();
+
+				//カウンターを加算
+				m_nDialogCntX++;
+			}
+
+			//カウンターを加算
+			m_nDialogDelay++;
+
+			//0にする
+			m_nCountFrame = 0;
+		}
+	}
+	else
+	{
+		return true;
+	}
+	return false;
+}
+
+//================================================
+//セリフ破棄処理
+//================================================
+void CGame01::UninitDialog(void)
+{
+	m_nDialogCntX = 0;
+	m_nDialogCntY = 0;
+	m_nDialogDelay = 0;
+
+	int nSize = m_pLetter.size();
+
+	for (int nCnt = 0; nCnt < nSize; nCnt++)
+	{
+		m_pLetter[nCnt]->Uninit();
+		m_pLetter[nCnt] = nullptr;
+	}
+	m_pLetter.clear();
 }

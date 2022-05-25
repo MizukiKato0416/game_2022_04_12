@@ -194,7 +194,7 @@ void CRanking::Connect(CTcpClient *pCommu, CCommunicationData *pCommuData, D3DXV
 
 	pCommu->Init();
 
-	for (int cout_connect = 0; cout_connect < 5; cout_connect++)
+	for (int cout_connect = 0; cout_connect < 3; cout_connect++)
 	{
 		connect = pCommu->Connect();
 
@@ -213,10 +213,11 @@ void CRanking::Connect(CTcpClient *pCommu, CCommunicationData *pCommuData, D3DXV
 			{
 				m_apScore[nCntRanking]->SetScore(pData->ranking[nCntRanking]);
 			}
+			break;
 		}
 		else if (connect == false)
 		{
-			if (cout_connect == 4)
+			if (cout_connect == 2)
 			{
 				*bConnect = false;
 				CreateScore(pos, size);

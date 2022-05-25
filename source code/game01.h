@@ -16,6 +16,7 @@ class CBg;
 class CObject2D;
 class CRocket;
 class CModelSingle;
+class CLetter;
 
 //================================================
 //マクロ定義
@@ -33,6 +34,16 @@ class CModelSingle;
 class CGame01 : public CObject
 {
 public:
+	enum class ROCKY_DIALOG
+	{
+		NONE = 0,
+		DIALOG_01,
+		DIALOG_02,
+		DIALOG_03,
+		DIALOG_04,
+		MAX
+	};
+
 	CGame01(CObject::PRIORITY Priority = CObject::PRIORITY::GAME);		//コンストラクタ
 	~CGame01();									//デストラクタ
 
@@ -52,18 +63,21 @@ public:
 	bool GetPause(void) { return m_bPause; }
 
 private:
-	void Camera(void);					//カメラの処理
-	void Road(void);					//道の処理
-	void Gauge(void);					//ゲージ処理
-	void UninitGauge(void);				//ゲージを消す処理
-	void UninitArrow(void);				//矢印を消す処理
-	void Shot(void);					//発射処理
-	void ShotUi(void);					//発射UI処理
-	void Rocket(void);					//ロケットの処理
-	void Finish(void);					//ゴール処理
-	void FlyingDistanceFlag(void);		//トロフィーの飛距離のフラグ処理
-	void Mask(void);					//マスク処理
-
+	void Camera(void);											//カメラの処理
+	void Road(void);											//道の処理
+	void Gauge(void);											//ゲージ処理
+	void UninitGauge(void);										//ゲージを消す処理
+	void UninitArrow(void);										//矢印を消す処理
+	void Shot(void);											//発射処理
+	void ShotUi(void);											//発射UI処理
+	void Rocket(void);											//ロケットの処理
+	void Finish(void);											//ゴール処理
+	void FlyingDistanceFlag(void);								//トロフィーの飛距離のフラグ処理
+	void Mask(void);											//マスク処理
+	void Click(void);											//クリック処理
+	bool Dialog(const int &nCntDialog);							//セリフ処理
+	void UninitDialog(void);									//セリフ破棄処理
+		
 	//メンバ変数
 	CPlayer *m_pPlayer;					//プレイヤーのポインタ
 	CFloor *m_pFloor;					//床のポインタ
@@ -85,6 +99,17 @@ private:
 	bool m_bPause;						//ポーズのフラグ
 	CObject2D *m_pDengerMask;			//マスク
 	bool m_bAddCol;						//カラー加算の切り替え
-};
+	int m_nClick;						//クリックした回数
+	ROCKY_DIALOG m_dialogType;			//ロッキーとの対話
+	CObject2D *m_pRocky;				//ロッキー君のポインタ
+	CObject2D *m_pDialogFrame;			//会話のフレーム
+	int m_nClickDelay;					//クリックできるようになるまでのカウンター
+	vector<CLetter*> m_pLetter;			//レターのポインタ
+	vector<wstring> m_dialog;			//セリフ
+	int m_nCountFrame;					//フレームのカウンタ
+	int m_nDialogDelay;					//セリフのディレイ
+	int m_nDialogCntX;					//セリフの行のカウンター
+	int m_nDialogCntY;					//セリフの列のカウンター
+};	
 
 #endif // !_GAME01_H_

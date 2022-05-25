@@ -47,6 +47,7 @@ public:
 		GOOD_SE,				//goodSE
 		GREAT_SE,				//greatSE
 		PARFECT_SE,				//parfectSE
+		ERROR_BGM,				//エラー
 		RESULT_BGM,				//リザルトBGM
 		GAME_BGM,				//ゲームBGM
 		TITLE_BGM,				//タイトルBGM
