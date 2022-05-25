@@ -33,7 +33,7 @@
 //=============================================================================
 CTrophy::CTrophy(PRIORITY priolty) : CObject(priolty)
 {
-
+	m_count_get_trophy = 0;
 }
 
 //=============================================================================
@@ -64,13 +64,25 @@ HRESULT CTrophy::Init(void)
 	pObject2D[2] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, 0.0f + 70.0f, 0.0f), D3DXVECTOR3(500.0f, 70.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 	pObject2D[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Trophy.png"));
 
+	vector<bool> trophy_flag = CManager::GetPlayData()->GetFlag();
+	int size = trophy_flag.size();
+	for (int count_flag = 0; count_flag < size - 1; count_flag++)
+	{
+		if (trophy_flag[count_flag] == true)
+		{
+			m_count_get_trophy++;;
+		}
+	}
+	if (m_count_get_trophy == size - 1)
+	{
+		trophy_flag[(int)TROPHY::COMPLETE] = true;
+	}
+
 	int trophy_count = 0;
 	for (int count_y = 0; count_y < TROPHY_Y_LINE; count_y++)
 	{
 		for (int count_x = 0; count_x < TROPHY_X_LINE; count_x++)
 		{
-			vector<bool> trophy_flag = CManager::GetPlayData()->GetFlag();
-
 			if (trophy_flag[trophy_count])
 			{
 				switch (trophy_count)

@@ -67,6 +67,7 @@ private:
 	CObject2D *m_letter;	// 説明ポリゴン
 	vector<CObject2D*> m_icon;	// アイコン
 	vector<TROPHY> m_type;	// 何のトロフィーか
+	int m_count_get_trophy;	// trueのトロフィー数
 };
 
 #endif // !_TROPHY_H_

@@ -17,6 +17,7 @@
 #include "fade.h"
 #include "sound.h"
 #include "letter.h"
+#include "trophy.h"
 
 //=============================================================================
 // ƒ}ƒNƒ’è‹`
@@ -194,18 +195,34 @@ void CTitle::SeletMode(void)
 		m_button[3]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true && fade->GetFade() == CFade::FADE_NONE)
 		{
-			if (m_pas_drop == true)
+			if (strncmp("STAFFROLL", CManager::GetInstance()->GetPlayData()->GetPasword().c_str(), 10) == 0)
 			{
-				CManager::GetInstance()->GetPlayData()->SetPasword(m_pasword);
+				vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+				if (flag[(int)CTrophy::TROPHY::STAFFROLL] == false)
+				{
+					flag[(int)CTrophy::TROPHY::STAFFROLL] = true;
+
+					CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+				}
 				sound->ControllVoice(CSound::SOUND_LABEL::DECISION_SE, 1.2f);
 				sound->Play(CSound::SOUND_LABEL::DECISION_SE);
-				fade->SetFade(CManager::MODE::GAME01);
+				fade->SetFade(CManager::MODE::ENDING);
 			}
 			else
 			{
-				sound->ControllVoice(CSound::SOUND_LABEL::DECISION_SE, 1.2f);
-				sound->Play(CSound::SOUND_LABEL::DECISION_SE);
-				fade->SetFade(CManager::MODE::GAME01);
+				if (m_pas_drop == true)
+				{
+					CManager::GetInstance()->GetPlayData()->SetPasword(m_pasword);
+					sound->ControllVoice(CSound::SOUND_LABEL::DECISION_SE, 1.2f);
+					sound->Play(CSound::SOUND_LABEL::DECISION_SE);
+					fade->SetFade(CManager::MODE::GAME01);
+				}
+				else
+				{
+					sound->ControllVoice(CSound::SOUND_LABEL::DECISION_SE, 1.2f);
+					sound->Play(CSound::SOUND_LABEL::DECISION_SE);
+					fade->SetFade(CManager::MODE::GAME01);
+				}
 			}
 		}
 	}
