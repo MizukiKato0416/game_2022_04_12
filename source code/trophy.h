@@ -48,6 +48,10 @@ public:
 		PLAY_00,
 		PLAY_05,
 		PLAY_10,
+		STAFFROLL,
+		ROCKY_ANGRY,
+		NO_TROPHY,
+		COMPLETE,
 		MAX
 	};
 
