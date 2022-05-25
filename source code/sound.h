@@ -49,6 +49,7 @@ public:
 		PARFECT_SE,				//parfectSE
 		ERROR_BGM,				//エラー
 		KIYO_BREAK,				//キヨ　ブレーキ
+		ANGRY,					//起こったとき
 		RESULT_BGM,				//リザルトBGM
 		GAME_BGM,				//ゲームBGM
 		TITLE_BGM,				//タイトルBGM

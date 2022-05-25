@@ -30,6 +30,7 @@ CSound::PARAM CSound::m_aParam[(int)SOUND_LABEL::MAX] =
 	{ "data/SOUND/SE/perfect.wav", 0 },			//parfectSE
 	{ "data/SOUND/SE/error.wav", -1 },			//エラーSE
 	{ "data/SOUND/SE/kiyo_break.wav", 0 },		//キヨ　ブレーキ
+	{ "data/SOUND/SE/angry.wav", 0 },			//起こった
 	{ "data/SOUND/BGM/result.wav", -1 },		//リザルトBGM
 	{ "data/SOUND/BGM/game.wav", -1 },			//ゲームBGM
 	{ "data/SOUND/BGM/title.wav", -1 },			//タイトルBGM
