@@ -76,6 +76,8 @@ HRESULT CTrophy::Init(void)
 	if (m_count_get_trophy == size - 1)
 	{
 		trophy_flag[(int)TROPHY::COMPLETE] = true;
+
+		CManager::GetPlayData()->SetFlag(trophy_flag);
 	}
 
 	int trophy_count = 0;
