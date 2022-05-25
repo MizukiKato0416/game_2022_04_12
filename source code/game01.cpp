@@ -138,6 +138,7 @@ CGame01::CGame01(CObject::PRIORITY Priority):CObject(Priority)
 	m_nDialogDelay = 0;
 	m_nDialogCntX = 0;
 	m_nDialogCntY = 0;
+	m_bDialog = false;
 }
 
 //================================================
@@ -178,6 +179,7 @@ HRESULT CGame01::Init(void)
 	m_nDialogDelay = 0;
 	m_nDialogCntX = 0;
 	m_nDialogCntY = 0;
+	m_bDialog = false;
 
 	CSound *sound;
 	sound = CManager::GetInstance()->GetSound();
@@ -397,10 +399,14 @@ void CGame01::Uninit(void)
 //================================================
 void CGame01::Update(void)
 {
-	if (m_pDengerMask != nullptr)
+	//文字を出していない状態なら
+	if (m_bDialog == false)
 	{
-		//マスク処理
-		Mask();
+		if (m_pDengerMask != nullptr)
+		{
+			//マスク処理
+			Mask();
+		}
 	}
 
 	//発射したら
@@ -409,50 +415,54 @@ void CGame01::Update(void)
 		//クリック処理
 		Click();
 
-		if (m_pGaugeFrame != nullptr && m_pGauge != nullptr)
+		//文字を出していない状態なら
+		if (m_bDialog == false)
 		{
-			//ゲージを消す処理
-			UninitGauge();
+			if (m_pGaugeFrame != nullptr && m_pGauge != nullptr)
+			{
+				//ゲージを消す処理
+				UninitGauge();
+			}
+
+			if (m_pArrow != nullptr)
+			{
+				//矢印を消す処理
+				UninitArrow();
+			}
+
+			//カメラの処理
+			Camera();
+
+			//道の処理
+			Road();
+
+			//ロケットの処理
+			Rocket();
+
+			//プレイヤーが前に進む力を取得
+			float fScoreMoveForward = m_pPlayer->GetMoveForward();
+
+			//前に進む力が負の数だったら
+			if (fScoreMoveForward < 0.0f)
+			{
+				//0にする
+				fScoreMoveForward = 0.0f;
+			}
+			else if (fScoreMoveForward > 0.0f)
+			{//前に進む力が正の数だったら
+				//前に進む力を既定の倍率大きくする
+				fScoreMoveForward *= GAME01_SCORE_MAGNIFICATION;
+			}
+
+			//背景のUV座標をプレイヤーが前に進む力分移動させる
+			m_pBg[0]->SetUvMove(D3DXVECTOR2(GAME01_BG_1_MOVE_INIT + m_pPlayer->GetMoveForward() * GAME01_BG_1_MAGNIFICATION, 0.0f));
+			m_pBg[1]->SetUvMove(D3DXVECTOR2(GAME01_BG_2_MOVE_INIT + m_pPlayer->GetMoveForward() * GAME01_BG_2_MAGNIFICATION, 0.0f));
+			m_pBg[2]->SetUvMove(D3DXVECTOR2(GAME01_BG_3_MOVE_INIT + m_pPlayer->GetMoveForward() * GAME01_BG_3_MAGNIFICATION, 0.0f));
+
+
+			//スコアをプレイヤーが前に進む力分加算
+			CManager::GetInstance()->GetPlayData()->GetScorePoint()->AddScore((int)fScoreMoveForward);
 		}
-
-		if (m_pArrow != nullptr)
-		{
-			//矢印を消す処理
-			UninitArrow();
-		}
-
-		//カメラの処理
-		Camera();
-
-		//道の処理
-		Road();
-
-		//ロケットの処理
-		Rocket();
-
-		//プレイヤーが前に進む力を取得
-		float fScoreMoveForward = m_pPlayer->GetMoveForward();
-
-		//前に進む力が負の数だったら
-		if (fScoreMoveForward < 0.0f)
-		{
-			//0にする
-			fScoreMoveForward = 0.0f;
-		}
-		else if(fScoreMoveForward > 0.0f)
-		{//前に進む力が正の数だったら
-			//前に進む力を既定の倍率大きくする
-			fScoreMoveForward *= GAME01_SCORE_MAGNIFICATION;
-		}
-
-		//背景のUV座標をプレイヤーが前に進む力分移動させる
-		m_pBg[0]->SetUvMove(D3DXVECTOR2(GAME01_BG_1_MOVE_INIT + m_pPlayer->GetMoveForward() * GAME01_BG_1_MAGNIFICATION, 0.0f));
-		m_pBg[1]->SetUvMove(D3DXVECTOR2(GAME01_BG_2_MOVE_INIT + m_pPlayer->GetMoveForward() * GAME01_BG_2_MAGNIFICATION, 0.0f));
-		m_pBg[2]->SetUvMove(D3DXVECTOR2(GAME01_BG_3_MOVE_INIT + m_pPlayer->GetMoveForward() * GAME01_BG_3_MAGNIFICATION, 0.0f));
-		
-
-		//スコアをプレイヤーが前に進む力分加算
-		CManager::GetInstance()->GetPlayData()->GetScorePoint()->AddScore((int)fScoreMoveForward);
 	}
 	else if(m_pPlayer->GetShot() == false && m_bReleaseMouse == false)
 	{//発射していなかったら且つマウスを離していないとき
@@ -1312,6 +1322,9 @@ void CGame01::Click(void)
 				                               D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT / 2.0f, 0.0f),
 				                               static_cast<int>(CObject::PRIORITY::UI));
 			m_pDialogFrame->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("click_angry.png"));
+
+			//メッセージを出す状態にする
+			m_bDialog = true;
 		}
 	}
 
