@@ -221,10 +221,10 @@ HRESULT CTrophy::Init(void)
 					m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("trophy_rokki-.png"));
 					m_type.push_back((TROPHY)trophy_count);
 					break;
-				case (int)TROPHY::NO_TROPHY:
+				case (int)TROPHY::KIYO:
 					m_icon.push_back(CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_x), (SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT) + (TROPHY_ICON_Y_FEELING * count_y), 0.0f),
 						D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
-					m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("play_5.png"));
+					m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Trophy_kiyo.png"));
 					m_type.push_back((TROPHY)trophy_count);
 					break;
 				case (int)TROPHY::COMPLETE:
@@ -625,9 +625,30 @@ void CTrophy::Update(void)
 					m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_rocky.png"));
 				}
 			}
-			else if (m_type[icon] == TROPHY::NO_TROPHY)
+			else if (m_type[icon] == TROPHY::KIYO)
 			{
-				
+				if (trophy_flag[(int)m_type[icon]] == true)
+				{
+					if (m_letter != nullptr)
+					{
+						m_letter->Uninit();
+					}
+					m_icon[icon]->SetCol(col);
+					m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
+						D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+					m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("password_kiyo.png"));
+				}
+				else if (trophy_flag[(int)m_type[icon]] == false)
+				{
+					if (m_letter != nullptr)
+					{
+						m_letter->Uninit();
+					}
+					m_icon[icon]->SetCol(col);
+					m_letter = CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / 2) + TROPHY_COMMENT_X_SIZE, 0.0f + TROPHY_COMMENT_Y_SIZE, 0.0f),
+						D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
+					m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_kiyo.png"));
+				}
 			}
 			else if (m_type[icon] == TROPHY::COMPLETE)
 			{
