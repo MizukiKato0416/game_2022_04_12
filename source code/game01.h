@@ -18,6 +18,7 @@ class CRocket;
 class CModelSingle;
 class CLetter;
 class CNextDialogUI;
+class CDialog;
 
 //================================================
 //マクロ定義
@@ -117,6 +118,7 @@ private:
 	int m_nDialogCntY;					//セリフの列のカウンター
 	bool m_bDialog;						//セリフを出しているかどうか	
 	CNextDialogUI *m_pNextDialogUI;		//次のセリフに行くUIのポインタ
+	CDialog *m_pDialog;							//会話のポインタ
 };	
 
 #endif // !_GAME01_H_

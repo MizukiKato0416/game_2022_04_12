@@ -28,6 +28,7 @@
 #include "letter.h"
 #include "tcp_client.h"
 #include "ending_scene.h"
+#include "dialog.h"
 
 //================================================
 //静的メンバ変数宣言
@@ -52,6 +53,7 @@ CManager::MODE CManager::m_mode = MODE::TITLE;
 CFade *CManager::m_pFade = nullptr;
 CMotionRoad *CManager::m_pMotionRoad = nullptr;
 CPlayData *CManager::m_pPlayData = nullptr;
+CDialog *CManager::m_pDialog = nullptr;
 CSound *CManager::m_pSound = nullptr;
 HWND CManager::m_hWnd = NULL;
 
@@ -191,6 +193,9 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 	m_pFade = CFade::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
 							D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f),
 							MODE::TITLE);
+
+	//セリフクラスの生成
+	//m_pDialog = CDialog::Create();
 
 	return S_OK;
 }

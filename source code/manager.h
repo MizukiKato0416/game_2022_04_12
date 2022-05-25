@@ -26,6 +26,7 @@ class CPlayData;
 class CTrophy;
 class CSound;
 class CEndingScene;
+class CDialog;
 
 //================================================
 //マクロ定義
@@ -77,6 +78,7 @@ public:
 	static CFade *GetFade(void);												//フェード取得処理
 	static CMotionRoad *GetMotionRoad(void);									//モーションロード取得処理
 	static CPlayData *GetPlayData(void);										//プレイデータ取得処理
+	static CDialog *GetDialog(void) { return m_pDialog; }						//会話取得処理
 	static CSound *GetSound(void) { return m_pSound; }							//サウンド取得処理
 	static HWND GetWindowHandle(void) { return m_hWnd; }						//hwnd取得処理
 
@@ -105,6 +107,7 @@ private:
 	static CFade *m_pFade;								//フェードのポインタ
 	static CMotionRoad *m_pMotionRoad;					//モーションロードのポインタ
 	static CPlayData *m_pPlayData;						//プレイデータのポインタ
+	static CDialog *m_pDialog;							//会話のポインタ
 	static CSound *m_pSound;							//サウンド
 	static HWND m_hWnd;									//ウィンドウハンドル
 };

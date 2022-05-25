@@ -164,6 +164,7 @@
     <ClCompile Include="communicationdata.cpp" />
     <ClCompile Include="control.cpp" />
     <ClCompile Include="control_ui_subtract_alpha.cpp" />
+    <ClCompile Include="dialog.cpp" />
     <ClCompile Include="effect2D.cpp" />
     <ClCompile Include="effect3D.cpp" />
     <ClCompile Include="effect_click.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="communicationdata.h" />
     <ClInclude Include="control.h" />
     <ClInclude Include="control_ui_subtract_alpha.h" />
+    <ClInclude Include="dialog.h" />
     <ClInclude Include="effect2D.h" />
     <ClInclude Include="effect3D.h" />
     <ClInclude Include="effect_click.h" />

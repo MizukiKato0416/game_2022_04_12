@@ -2,52 +2,92 @@
 //会話の処理
 //Author:KatoMizuki
 //===========================================
-#ifndef _WIND_H_
-#define _WIND_H_
+#ifndef _DIALOG_H_
+#define _DIALOG_H_
 
 #include "object.h"
+#include "object2D.h"
 
 //前方宣言
-class CEffect2D;
-class CObject2D;
+class CLetter;
+class CNextDialogUI;
 
 //================================================
 //マクロ定義
 //================================================
-#define EFFECT_CLICK_RING_NUM	(2)		//リングエフェクトの数
-#define EFFECT_CLICK_STAR_NUM	(3)		//星エフェクトの数
+
+//================================================
+//構造体の定義
+//================================================
+//会話の構成
+typedef struct
+{
+	int nPersonPose;		//キャラポーズ
+	int nPersonFace;		//キャラ顔
+	int nFrame;				//フレーム
+} DIALOG_BODY;
 
 //================================================
 //クラスの定義
 //================================================
 //クラスの定義
-class CEffectClick : public CObject
+class CDialog : public CObject
 {
 public:
-	CEffectClick(CObject::PRIORITY Priority = CObject::PRIORITY::CLICK_EFFECT);	//コンストラクタ
-	~CEffectClick();															//デストラクタ
+	enum class POSE
+	{
+		NORMAL = 0,	    //仁王立ち
+		DOMINATE,	    //腰に手を当てる
+		HNDS_UP,	    //両手を挙げる
+		MAX
+	};
+	enum class FACE
+	{
+		SMILE = 0,		//笑顔
+		SURPRISE,		//驚き
+		EMBARRASSED,	//照れ
+		STUNNED,		//呆然
+		ANGER,			//怒り
+		CRY,			//泣き
+		MELTS,			//とろけ顔
+		MAX
+	};
+	enum class FRAME
+	{
+		NORMAL = 0,		//普通
+		MAX
+	};
+
+	CDialog(CObject::PRIORITY Priority = CObject::PRIORITY::DIALOG);	//コンストラクタ
+	~CDialog();															//デストラクタ
 
 	//メンバ関数
 	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	static CEffectClick *Create(const D3DXVECTOR3 &pos);
+	static CDialog *Create(void);
+	bool Dialog(const int &nCntDialog);		//セリフ処理
+	void UninitDialog(void);				//セリフ破棄処理
+	void SetDialog(const int &nNumDialog);	//セリフ設定処理
 
 private:
-	void Sparkle(void);		//キラキラエフェクトの処理
-	void Ring(void);		//リングエフェクトの処理
-	void Star(void);		//星エフェクトの処理
-
-	CEffect2D *m_pRing[EFFECT_CLICK_RING_NUM];			//リングエフェクト
-	CObject2D *m_pStar[EFFECT_CLICK_STAR_NUM];			//星エフェクト
-	CEffect2D *m_pStarBg[EFFECT_CLICK_STAR_NUM];		//星エフェクトの裏のぼかし
-	CEffect2D *m_pSparkle;								//キラキラエフェクト
-	D3DXVECTOR3 m_pos;									//位置
-	int m_nCounter;										//カウンター
-	float m_fStarDiffer;								//スターの中心からの距離
-	float m_fStarRot[EFFECT_CLICK_STAR_NUM];			//スターの向き
-	D3DXVECTOR3 m_ringAddSize[EFFECT_CLICK_RING_NUM];	//リングエフェクトのサイズの加算量	
+	vector<DIALOG_BODY> m_dialogBody;	//会話の構成
+	vector<CLetter*> m_pLetter;			//レターのポインタ
+	vector<wstring> m_dialog;			//セリフ
+	int m_nDialogDelay;					//セリフのディレイ
+	int m_nDialogCntX;					//セリフの行のカウンター
+	int m_nDialogCntY;					//セリフの列のカウンター
+	int m_nLetterCreateCounter;			//1文字を出すまでの時間
+	CObject2D* m_pPersonPose;			//ポーズのポインタ
+	CObject2D* m_pPersonFace;			//顔のポインタ
+	CObject2D* m_pFrame;				//フレームのポインタ
+	POSE m_poseType;					//ポーズの種類
+	FACE m_faceType;					//顔の種類
+	FRAME m_frameType;					//フレームの種類
+	bool m_bCreateFinish;				//枠組みを作り終えたかどうか
+	int m_nDialogNum;					//何番目のセリフを生成しているか
+	CNextDialogUI *m_pNextDialogUI;		//次のセリフに行くUIのポインタ
+	int m_nCountFrame;					//フレームのカウンタ
 };
-
-#endif // !_WIND_H_
+#endif // !_DIALOG_H_

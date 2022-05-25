@@ -30,6 +30,7 @@
 #include "sound.h"
 #include "letter.h"
 #include "next_dialog_ui.h"
+#include "dialog.h"
 
 //================================================
 //マクロ定義
@@ -1314,29 +1315,17 @@ void CGame01::Click(void)
 				                                 static_cast<int>(CObject::PRIORITY::UI));
 			pMask->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
 
-			//ロッキーの生成
-			m_pRocky = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, GAME01_ROCKY_UI_POS_Y, 0.0f),
-				                         D3DXVECTOR3(GAME01_ROCKY_UI_SIZE_X, GAME01_ROCKY_UI_SIZE_Y, 0.0f),
-				                         static_cast<int>(CObject::PRIORITY::UI));
-			m_pRocky->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("rocky_angry.png"));
-
-			//フレームの生成
-			m_pDialogFrame = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT - SCREEN_HEIGHT / 2.0f / 2.0f, 0.0f),
-				                               D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT / 2.0f, 0.0f),
-				                               static_cast<int>(CObject::PRIORITY::UI));
-			m_pDialogFrame->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("click_angry.png"));
-
-			//次のセリフに行くUIを生成
-			m_pNextDialogUI = CNextDialogUI::Create(D3DXVECTOR3(NEXT_DILOG_UI_POS_X, NEXT_DILOG_UI_POS_Y, 0.0f),
-				                                    D3DXVECTOR3(NEXT_DILOG_UI_SIZE, NEXT_DILOG_UI_SIZE, 0.0f));
-			m_pNextDialogUI->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("click_ui.png"));
-
 			//サウンド取得
 			CSound *sound;
 			sound = CManager::GetInstance()->GetSound();
 			//再生する
 			sound->Play(CSound::SOUND_LABEL::ANGRY_SE);
 			sound->ControllVoice(CSound::SOUND_LABEL::ANGRY_SE, 1.4f);
+
+			//セリフクラスの生成
+			m_pDialog = CDialog::Create();
+			//セリフ生成
+			m_pDialog->SetDialog(0);
 
 			//メッセージを出す状態にする
 			m_bDialog = true;
@@ -1354,20 +1343,11 @@ void CGame01::Click(void)
 			//マウスを押した瞬間
 			if (pInputMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 			{
-				//フレームのテクスチャを変える
-				m_pDialogFrame->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("comment_frame.png"));
-				m_pDialogFrame->SetSize(D3DXVECTOR3(SCREEN_WIDTH, GAME01_DIALOG_FRAME_POS_Y, 0.0f));
-				m_pDialogFrame->SetPos(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT - GAME01_DIALOG_FRAME_POS_Y / 2.0f, 0.0f),
-					                   m_pDialogFrame->GetSize());
 				//カウンターを0にする
 				m_nClickDelay = 0;
 
-				if (m_pNextDialogUI != nullptr)
-				{
-					//次のセリフに行くUIを消す
-					m_pNextDialogUI->Uninit();
-					m_pNextDialogUI = nullptr;
-				}
+				//セリフ生成
+				m_pDialog->SetDialog(1);
 
 				//会話2にする
 				m_dialogType = ROCKY_DIALOG::DIALOG_02;
