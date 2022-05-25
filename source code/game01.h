@@ -61,6 +61,10 @@ public:
 	void SetPause(bool bPause) { m_bPause = bPause; }
 	//ポーズ取得処理
 	bool GetPause(void) { return m_bPause; }
+	//セリフを出しているかどうか設定処理
+	void SetDialog(bool bDialog) { m_bDialog = bDialog; }
+	//セリフを出しているかどうか取得処理
+	bool GetDialog(void) { return m_bDialog; }
 
 private:
 	void Camera(void);											//カメラの処理
@@ -110,6 +114,7 @@ private:
 	int m_nDialogDelay;					//セリフのディレイ
 	int m_nDialogCntX;					//セリフの行のカウンター
 	int m_nDialogCntY;					//セリフの列のカウンター
+	bool m_bDialog;						//セリフを出しているかどうか				
 };	
 
 #endif // !_GAME01_H_

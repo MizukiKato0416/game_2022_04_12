@@ -10,6 +10,7 @@
 #include "object.h"
 #include "pause.h"
 #include "manager.h"
+#include "game01.h"
 
 //=============================================================================
 // Ã“Iƒƒ“ƒo•Ï”éŒ¾
@@ -117,7 +118,17 @@ void CObject::UpdateAll(void)
 				{
 					if (CPause::GetPause() == false)
 					{
-						m_object[count_priolty][count_object]->Update();
+						if (CManager::GetInstance()->GetGame01()->GetDialog() == false)
+						{
+							m_object[count_priolty][count_object]->Update();
+						}
+						else
+						{
+							if (count_priolty == (int)PRIORITY::GAME || count_priolty == (int)PRIORITY::FADE || count_priolty == (int)PRIORITY::CLICK_EFFECT)
+							{
+								m_object[count_priolty][count_object]->Update();
+							}
+						}
 					}
 					else
 					{
