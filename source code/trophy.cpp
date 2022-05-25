@@ -70,7 +70,7 @@ HRESULT CTrophy::Init(void)
 	{
 		if (trophy_flag[count_flag] == true)
 		{
-			m_count_get_trophy++;;
+			m_count_get_trophy++;
 		}
 	}
 	if (m_count_get_trophy == size - 1)
