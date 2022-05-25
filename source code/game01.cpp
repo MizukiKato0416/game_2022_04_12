@@ -1347,7 +1347,7 @@ void CGame01::Click(void)
 				m_nClickDelay = 0;
 
 				//ƒZƒŠƒt¶¬
-				m_pDialog->SetDialog(1);
+				m_pDialog->SetDialog(2);
 
 				//‰ï˜b2‚É‚·‚é
 				m_dialogType = ROCKY_DIALOG::DIALOG_02;

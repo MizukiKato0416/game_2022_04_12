@@ -15,8 +15,8 @@
 #define DIALOG_MAX_STRING				(256)				//文字の最大量
 #define DIALOG_LETTER_CREATE_COUNT		(3)					//1文字出すまでの時間
 #define DIALOG_ROCKY_UI_POS_Y			(260.0f)			//ロッキー君のUIの位置Y
-#define DIALOG_ROCKY_UI_SIZE_X			(222.0f * 1.5f)		//ロッキー君のUIのサイズX
-#define DIALOG_ROCKY_UI_SIZE_Y			(246.0f * 1.5f)		//ロッキー君のUIのサイズY
+#define DIALOG_ROCKY_UI_SIZE_X			(545.0f * 1.0f)		//ロッキー君のUIのサイズX
+#define DIALOG_ROCKY_UI_SIZE_Y			(566.0f * 1.0f)		//ロッキー君のUIのサイズY
 #define DIALOG_FRAME_POS_Y				(230.0f)			//セリフのフレーム位置Y
 
 //================================================
@@ -357,6 +357,10 @@ void CDialog::SetDialog(const int &nNumDialog)
 		{
 			//テクスチャの設定
 			m_pPersonPose->SetTex((int)m_poseType, (int)POSE::MAX);
+		}
+		//前に指定した顔と今回指定している顔が違う場合
+		if (m_dialogBody[nNumDialog - 1].nPersonFace != m_dialogBody[nNumDialog].nPersonFace)
+		{
 			//テクスチャの設定
 			m_pPersonFace->SetTex((int)m_faceType, (int)FACE::MAX);
 		}
