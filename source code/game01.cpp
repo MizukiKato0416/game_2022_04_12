@@ -86,7 +86,7 @@
 #define GAME01_PLAY_NUM_10						(10)				//プレイした回数10
 #define GAME01_HARD_MODE_UI_SIZE_X				(1314.0f * 0.3f)	//ハードモードのUIのサイズX
 #define GAME01_HARD_MODE_UI_SIZE_Y				(200.0f * 0.3f)		//ハードモードのUIのサイズY
-#define GAME01_CHARACTOR_CREATE_SPEED			(8)					//文字を生成するスピード
+#define GAME01_CHARACTOR_CREATE_SPEED			(3)					//文字を生成するスピード
 #define GAME01_CLICK_COUNTER					(120)				//クリックができるまでのカウンター
 #define GAME01_ROCKY_UI_POS_Y					(260.0f)			//ロッキー君のUIの位置Y
 #define GAME01_ROCKY_UI_SIZE_X					(222.0f * 1.5f)		//ロッキー君のUIのサイズX
@@ -1537,7 +1537,7 @@ bool CGame01::Dialog(const int &nCntDialog)
 				sound = CManager::GetInstance()->GetSound();
 				//再生する
 				sound->Play(CSound::SOUND_LABEL::DIALOG_SE);
-				sound->ControllVoice(CSound::SOUND_LABEL::DIALOG_SE, 2.4f);
+				sound->ControllVoice(CSound::SOUND_LABEL::DIALOG_SE, 3.4f);
 
 				//カウンターを加算
 				m_nDialogCntX++;

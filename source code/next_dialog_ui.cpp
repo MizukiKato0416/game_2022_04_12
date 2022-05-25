@@ -9,8 +9,8 @@
 //マクロ定義
 //================================================
 #define NEXT_DIALOG_UI_ADD_ROTATE		(0.05f)		//回転を増やす値
-#define NEXT_DIALOG_UI_SUBTRACTALPHA	(0.01f)		//薄くする値
-#define NEXT_DIALOG_UI_COUNTER			(30)		//見えるようにするまでの時間
+#define NEXT_DIALOG_UI_SUBTRACTALPHA	(0.012f)	//薄くする値
+#define NEXT_DIALOG_UI_COUNTER			(25)		//見えるようにするまでの時間
 
 //================================================
 //静的メンバ変数宣言
@@ -97,10 +97,10 @@ void CNextDialogUI::Update(void)
 	}
 
 	//回転値を増やす
-	m_fRotation += NEXT_DIALOG_UI_ADD_ROTATE;
-	if (m_fRotation >= D3DX_PI * 2.0f)
+	m_fRotation -= NEXT_DIALOG_UI_ADD_ROTATE;
+	if (m_fRotation < -D3DX_PI * 2.0f)
 	{
-		m_fRotation -= D3DX_PI * 2.0f;
+		m_fRotation += D3DX_PI * 2.0f;
 	}
 
 	//設定
