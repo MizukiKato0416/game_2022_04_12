@@ -1,9 +1,9 @@
 //===========================================
-//クリックエフェクトの処理
+//会話の処理
 //Author:KatoMizuki
 //===========================================
-#ifndef _EFFECT_CLICK_H_
-#define _EFFECT_CLICK_H_
+#ifndef _WIND_H_
+#define _WIND_H_
 
 #include "object.h"
 
@@ -50,4 +50,4 @@ private:
 	D3DXVECTOR3 m_ringAddSize[EFFECT_CLICK_RING_NUM];	//リングエフェクトのサイズの加算量	
 };
 
-#endif // !_EFFECT_CLICK_H_
+#endif // !_WIND_H_
