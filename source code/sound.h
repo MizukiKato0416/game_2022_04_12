@@ -48,6 +48,7 @@ public:
 		GREAT_SE,				//greatSE
 		PARFECT_SE,				//parfectSE
 		ERROR_BGM,				//エラー
+		KIYO_BREAK,				//キヨ　ブレーキ
 		RESULT_BGM,				//リザルトBGM
 		GAME_BGM,				//ゲームBGM
 		TITLE_BGM,				//タイトルBGM
