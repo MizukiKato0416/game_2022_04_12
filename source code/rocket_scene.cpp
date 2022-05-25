@@ -252,6 +252,9 @@ void CRocketScene::Score(void)
 		//スコアが最大値以上になったら
 		if (CManager::GetInstance()->GetPlayData()->GetScorePoint()->GetScore() >= MAX_SCORE)
 		{
+			//スコアを加算
+			CManager::GetInstance()->GetPlayData()->GetScorePoint()->SetScore(0);
+
 			//スコアを消す
 			m_pScore->Uninit();
 			m_pScore = nullptr;

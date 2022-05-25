@@ -1331,6 +1331,13 @@ void CGame01::Click(void)
 				                                    D3DXVECTOR3(NEXT_DILOG_UI_SIZE, NEXT_DILOG_UI_SIZE, 0.0f));
 			m_pNextDialogUI->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("click_ui.png"));
 
+			//サウンド取得
+			CSound *sound;
+			sound = CManager::GetInstance()->GetSound();
+			//再生する
+			sound->Play(CSound::SOUND_LABEL::ANGRY_SE);
+			sound->ControllVoice(CSound::SOUND_LABEL::ANGRY_SE, 1.4f);
+
 			//メッセージを出す状態にする
 			m_bDialog = true;
 		}
@@ -1443,6 +1450,12 @@ void CGame01::Click(void)
 			//マウスを押した瞬間
 			if (pInputMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 			{
+				//サウンド取得
+				CSound *sound;
+				sound = CManager::GetInstance()->GetSound();
+				//再生する
+				sound->Play(CSound::SOUND_LABEL::DECISION_SE);
+
 				//フェード取得処理
 				CFade *pFade;
 				pFade = CManager::GetInstance()->GetFade();
@@ -1518,6 +1531,13 @@ bool CGame01::Dialog(const int &nCntDialog)
 				m_pLetter[m_nDialogDelay]->SetFontSize(300);
 				m_pLetter[m_nDialogDelay]->SetFontWeight(500);
 				m_pLetter[m_nDialogDelay]->Init();
+
+				//サウンド取得
+				CSound *sound;
+				sound = CManager::GetInstance()->GetSound();
+				//再生する
+				sound->Play(CSound::SOUND_LABEL::DIALOG_SE);
+				sound->ControllVoice(CSound::SOUND_LABEL::DIALOG_SE, 2.4f);
 
 				//カウンターを加算
 				m_nDialogCntX++;

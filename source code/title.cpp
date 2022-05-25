@@ -195,12 +195,12 @@ void CTitle::SeletMode(void)
 		m_button[3]->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
 		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true && fade->GetFade() == CFade::FADE_NONE)
 		{
-			if (strncmp("STAFFROLL", CManager::GetInstance()->GetPlayData()->GetPasword().c_str(), 10) == 0)
+			if (strncmp("ENDROLL", m_pasword.c_str(), 8) == 0)
 			{
 				vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
-				if (flag[(int)CTrophy::TROPHY::STAFFROLL] == false)
+				if (flag[(int)CTrophy::TROPHY::ENDROLL] == false)
 				{
-					flag[(int)CTrophy::TROPHY::STAFFROLL] = true;
+					flag[(int)CTrophy::TROPHY::ENDROLL] = true;
 
 					CManager::GetInstance()->GetPlayData()->SetFlag(flag);
 				}

@@ -25,7 +25,7 @@ class CMotionRoad;
 class CPlayData;
 class CTrophy;
 class CSound;
-//class CPause;
+class CEndingScene;
 
 //================================================
 //マクロ定義
@@ -56,29 +56,29 @@ public:
 	void Update(void);
 	void Draw(void);
 
-	static CManager *GetInstance(void);					//インスタンス取得処理
-	static CRenderer *GetRenderer(void);				//レンダラー取得処理
-	static CInputKeyboard *GetInputKeyboard(void);		//キーボード取得処理
-	static CInputPadX *GetInputPadX(void);				//パッド(X)取得処理
-	static CInputPadD *GetInputPadD(void);				//パッド(D)取得処理
-	static CInputMouse *GetInputMouse(void);			//マウス取得処理
-	static CLight *GetLight(void);						//ライト取得処理
-	static CTexture *GetTexture(void);					//テクスチャ取得処理
-	static CCamera** GetCamera(void);					//カメラ取得処理
-	static CXload *GetXload(void);						//xファイル読み込み取得処理
-	static CTitle *GetTitle(void);						//タイトル取得処理
-	static CTrophy *GetTrophy(void);					//トロフィールーム取得処理
-	static CGame01 *GetGame01(void);					//ゲーム01取得処理
-	static CResult *GetResult(void);					//リザルト取得処理
-	static CRocketScene *GetRocketScene(void);			//ロケットシーン取得処理
-	static void SetMode(MODE mode);						//モード設定
-	static MODE GetMode(void);							//モード取得
-	static CFade *GetFade(void);						//フェード取得処理
-	static CMotionRoad *GetMotionRoad(void);			//モーションロード取得処理
-	static CPlayData *GetPlayData(void);				//プレイデータ取得処理
-	static CSound *GetSound(void) { return m_pSound; }//サウンド取得処理
-	//static CPause *GetPause(void);						//ポーズ取得処理
-	static HWND GetWindowHandle(void) { return m_hWnd; }//hwnd取得処理
+	static CManager *GetInstance(void);											//インスタンス取得処理
+	static CRenderer *GetRenderer(void);										//レンダラー取得処理
+	static CInputKeyboard *GetInputKeyboard(void);								//キーボード取得処理
+	static CInputPadX *GetInputPadX(void);										//パッド(X)取得処理
+	static CInputPadD *GetInputPadD(void);										//パッド(D)取得処理
+	static CInputMouse *GetInputMouse(void);									//マウス取得処理
+	static CLight *GetLight(void);												//ライト取得処理
+	static CTexture *GetTexture(void);											//テクスチャ取得処理
+	static CCamera** GetCamera(void);											//カメラ取得処理
+	static CXload *GetXload(void);												//xファイル読み込み取得処理
+	static CTitle *GetTitle(void);												//タイトル取得処理
+	static CTrophy *GetTrophy(void);											//トロフィールーム取得処理
+	static CGame01 *GetGame01(void);											//ゲーム01取得処理
+	static CResult *GetResult(void);											//リザルト取得処理
+	static CRocketScene *GetRocketScene(void);									//ロケットシーン取得処理
+	static CEndingScene *GetEndingScene(void) { return m_pEndingScene; };		//エンディングシーン取得処理
+	static void SetMode(MODE mode);												//モード設定
+	static MODE GetMode(void);													//モード取得
+	static CFade *GetFade(void);												//フェード取得処理
+	static CMotionRoad *GetMotionRoad(void);									//モーションロード取得処理
+	static CPlayData *GetPlayData(void);										//プレイデータ取得処理
+	static CSound *GetSound(void) { return m_pSound; }							//サウンド取得処理
+	static HWND GetWindowHandle(void) { return m_hWnd; }						//hwnd取得処理
 
 private:
 	//メンバ関数
@@ -100,6 +100,7 @@ private:
 	static CGame01 *m_pGame01;							//ゲーム01のポインタ
 	static CResult *m_pResult;							//リザルトのポインタ
 	static CRocketScene *m_pRocketScene;				//ロケットシーンのポインタ
+	static CEndingScene *m_pEndingScene;				//エンディングシーンのポインタ
 	static MODE m_mode;									//モード
 	static CFade *m_pFade;								//フェードのポインタ
 	static CMotionRoad *m_pMotionRoad;					//モーションロードのポインタ

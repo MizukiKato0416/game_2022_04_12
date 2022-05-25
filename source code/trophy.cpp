@@ -209,7 +209,7 @@ HRESULT CTrophy::Init(void)
 					m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("play_10.png"));
 					m_type.push_back((TROPHY)trophy_count);
 					break;
-				case (int)TROPHY::STAFFROLL:
+				case (int)TROPHY::ENDROLL:
 					m_icon.push_back(CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_x), (SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT) + (TROPHY_ICON_Y_FEELING * count_y), 0.0f),
 						D3DXVECTOR3(TROPHY_ICON_SIZE, TROPHY_ICON_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI)));
 					m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("trophy_end.png"));
@@ -575,7 +575,7 @@ void CTrophy::Update(void)
 					D3DXVECTOR3(TROPHY_COMMENT_X_SIZE, TROPHY_COMMENT_Y_SIZE, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_play_10.png"));
 			}
-			else if (m_type[icon] == TROPHY::STAFFROLL)
+			else if (m_type[icon] == TROPHY::ENDROLL)
 			{
 				if (trophy_flag[(int)m_type[icon]] == true)
 				{

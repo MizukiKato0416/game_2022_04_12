@@ -27,6 +27,7 @@
 #include "effect_click.h"
 #include "letter.h"
 #include "tcp_client.h"
+#include "ending_scene.h"
 
 //================================================
 //静的メンバ変数宣言
@@ -46,12 +47,12 @@ CTrophy *CManager::m_pTrophy = nullptr;
 CGame01 *CManager::m_pGame01 = nullptr;
 CResult *CManager::m_pResult = nullptr;
 CRocketScene *CManager::m_pRocketScene = nullptr;
+CEndingScene *CManager::m_pEndingScene = nullptr;
 CManager::MODE CManager::m_mode = MODE::TITLE;
 CFade *CManager::m_pFade = nullptr;
 CMotionRoad *CManager::m_pMotionRoad = nullptr;
 CPlayData *CManager::m_pPlayData = nullptr;
 CSound *CManager::m_pSound = nullptr;
-//CPause *CManager::m_pPause = nullptr;
 HWND CManager::m_hWnd = NULL;
 
 //================================================
@@ -655,6 +656,27 @@ void CManager::SetMode(MODE mode)
 			m_pResult = nullptr;
 		}
 		break;
+	case MODE::ENDING:
+		if (m_pEndingScene != nullptr)
+		{
+			//カメラの破棄
+			for (int nCntCamera = 0; nCntCamera < MAX_CAMERA; nCntCamera++)
+			{
+				if (m_apCamera[nCntCamera] != nullptr)
+				{
+					//終了処理
+					m_apCamera[nCntCamera]->Uninit();
+
+					//メモリの開放
+					delete m_apCamera[nCntCamera];
+					m_apCamera[nCntCamera] = nullptr;
+				}
+			}
+
+			m_pEndingScene->Uninit();
+			m_pEndingScene = nullptr;
+		}
+		break;
 	default:
 		break;
 	}
@@ -763,6 +785,26 @@ void CManager::SetMode(MODE mode)
 				}
 
 				m_pResult->Init();
+			}
+		}
+		break;
+	case MODE::ENDING:
+		//エンディングクラスの生成
+		if (m_pEndingScene == nullptr)
+		{
+			m_pEndingScene = new CEndingScene;
+			if (m_pEndingScene != nullptr)
+			{
+				//メインカメラの生成
+				for (int nCntCamera = 0; nCntCamera < MAX_MAIN_CAMERA; nCntCamera++)
+				{
+					m_apCamera[nCntCamera] = CCamera::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(CAMERA_INIT_ROT_X, D3DX_PI, 0.0f),
+						(float)(SCREEN_WIDTH / MAX_MAIN_CAMERA * nCntCamera), 0.0f,
+						(float)(SCREEN_WIDTH / MAX_MAIN_CAMERA), (float)SCREEN_HEIGHT);
+					m_apCamera[nCntCamera]->SetNum(nCntCamera);
+				}
+
+				m_pEndingScene->Init();
 			}
 		}
 		break;
