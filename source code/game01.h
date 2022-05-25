@@ -17,6 +17,7 @@ class CObject2D;
 class CRocket;
 class CModelSingle;
 class CLetter;
+class CNextDialogUI;
 
 //================================================
 //マクロ定義
@@ -114,7 +115,8 @@ private:
 	int m_nDialogDelay;					//セリフのディレイ
 	int m_nDialogCntX;					//セリフの行のカウンター
 	int m_nDialogCntY;					//セリフの列のカウンター
-	bool m_bDialog;						//セリフを出しているかどうか				
+	bool m_bDialog;						//セリフを出しているかどうか	
+	CNextDialogUI *m_pNextDialogUI;		//次のセリフに行くUIのポインタ
 };	
 
 #endif // !_GAME01_H_

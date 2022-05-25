@@ -124,7 +124,8 @@ void CObject::UpdateAll(void)
 						}
 						else
 						{
-							if (count_priolty == (int)PRIORITY::GAME || count_priolty == (int)PRIORITY::FADE || count_priolty == (int)PRIORITY::CLICK_EFFECT)
+							if (count_priolty == (int)PRIORITY::GAME || count_priolty == (int)PRIORITY::FADE ||
+								count_priolty == (int)PRIORITY::CLICK_EFFECT || count_priolty == (int)PRIORITY::NEXT_DIALOG_UI)
 							{
 								m_object[count_priolty][count_object]->Update();
 							}

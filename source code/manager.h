@@ -46,6 +46,7 @@ public:
 		GAME01,			//ゲーム01
 		ROCKET_SCENE,	//ロケットシーン
 		RESULT,			//リザルト
+		ENDING,			//エンディング
 		MAX
 	};
 

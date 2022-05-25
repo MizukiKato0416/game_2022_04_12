@@ -29,6 +29,7 @@
 #include "trophy.h"
 #include "sound.h"
 #include "letter.h"
+#include "next_dialog_ui.h"
 
 //================================================
 //マクロ定義
@@ -139,6 +140,7 @@ CGame01::CGame01(CObject::PRIORITY Priority):CObject(Priority)
 	m_nDialogCntX = 0;
 	m_nDialogCntY = 0;
 	m_bDialog = false;
+	m_pNextDialogUI = nullptr;
 }
 
 //================================================
@@ -180,6 +182,7 @@ HRESULT CGame01::Init(void)
 	m_nDialogCntX = 0;
 	m_nDialogCntY = 0;
 	m_bDialog = false;
+	m_pNextDialogUI = nullptr;
 
 	CSound *sound;
 	sound = CManager::GetInstance()->GetSound();
@@ -1323,6 +1326,11 @@ void CGame01::Click(void)
 				                               static_cast<int>(CObject::PRIORITY::UI));
 			m_pDialogFrame->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("click_angry.png"));
 
+			//次のセリフに行くUIを生成
+			m_pNextDialogUI = CNextDialogUI::Create(D3DXVECTOR3(NEXT_DILOG_UI_POS_X, NEXT_DILOG_UI_POS_Y, 0.0f),
+				                                    D3DXVECTOR3(NEXT_DILOG_UI_SIZE, NEXT_DILOG_UI_SIZE, 0.0f));
+			m_pNextDialogUI->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("click_ui.png"));
+
 			//メッセージを出す状態にする
 			m_bDialog = true;
 		}
@@ -1339,8 +1347,6 @@ void CGame01::Click(void)
 			//マウスを押した瞬間
 			if (pInputMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 			{
-				//ロッキーのテクスチャを変える
-				m_pRocky->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("rocky_sad.png"));
 				//フレームのテクスチャを変える
 				m_pDialogFrame->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("comment_frame.png"));
 				m_pDialogFrame->SetSize(D3DXVECTOR3(SCREEN_WIDTH, GAME01_DIALOG_FRAME_POS_Y, 0.0f));
@@ -1348,6 +1354,13 @@ void CGame01::Click(void)
 					                   m_pDialogFrame->GetSize());
 				//カウンターを0にする
 				m_nClickDelay = 0;
+
+				if (m_pNextDialogUI != nullptr)
+				{
+					//次のセリフに行くUIを消す
+					m_pNextDialogUI->Uninit();
+					m_pNextDialogUI = nullptr;
+				}
 
 				//会話2にする
 				m_dialogType = ROCKY_DIALOG::DIALOG_02;
@@ -1358,11 +1371,28 @@ void CGame01::Click(void)
 		//文字表示
 		if (Dialog(0) == true)
 		{
+			if (m_pNextDialogUI == nullptr)
+			{
+				//次のセリフに行くUIを生成
+				m_pNextDialogUI = CNextDialogUI::Create(D3DXVECTOR3(NEXT_DILOG_UI_POS_X, NEXT_DILOG_UI_POS_Y, 0.0f),
+					                                    D3DXVECTOR3(NEXT_DILOG_UI_SIZE, NEXT_DILOG_UI_SIZE, 0.0f));
+				m_pNextDialogUI->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("click_ui.png"));
+			}
+
 			//マウスを押した瞬間
 			if (pInputMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 			{
+				if (m_pNextDialogUI != nullptr)
+				{
+					//次のセリフに行くUIを消す
+					m_pNextDialogUI->Uninit();
+					m_pNextDialogUI = nullptr;
+				}
+
 				//セリフ破棄
 				UninitDialog();
+				//ロッキーのテクスチャを変える
+				m_pRocky->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("rocky_sad.png"));
 
 				//会話3にする
 				m_dialogType = ROCKY_DIALOG::DIALOG_03;
@@ -1373,15 +1403,75 @@ void CGame01::Click(void)
 		//文字表示
 		if (Dialog(1) == true)
 		{
+			if (m_pNextDialogUI == nullptr)
+			{
+				//次のセリフに行くUIを生成
+				m_pNextDialogUI = CNextDialogUI::Create(D3DXVECTOR3(NEXT_DILOG_UI_POS_X, NEXT_DILOG_UI_POS_Y, 0.0f),
+					                                    D3DXVECTOR3(NEXT_DILOG_UI_SIZE, NEXT_DILOG_UI_SIZE, 0.0f));
+				m_pNextDialogUI->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("click_ui.png"));
+			}
+
 			//マウスを押した瞬間
 			if (pInputMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 			{
+				if (m_pNextDialogUI != nullptr)
+				{
+					//次のセリフに行くUIを消す
+					m_pNextDialogUI->Uninit();
+					m_pNextDialogUI = nullptr;
+				}
+
+				//セリフ破棄
+				UninitDialog();
 				//会話4にする
 				m_dialogType = ROCKY_DIALOG::DIALOG_04;
 			}
 		}
 		break;
 	case CGame01::ROCKY_DIALOG::DIALOG_04:
+		//文字表示
+		if (Dialog(2) == true)
+		{
+			if (m_pNextDialogUI == nullptr)
+			{
+				//次のセリフに行くUIを生成
+				m_pNextDialogUI = CNextDialogUI::Create(D3DXVECTOR3(NEXT_DILOG_UI_POS_X, NEXT_DILOG_UI_POS_Y, 0.0f),
+					                                    D3DXVECTOR3(NEXT_DILOG_UI_SIZE, NEXT_DILOG_UI_SIZE, 0.0f));
+				m_pNextDialogUI->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("click_ui.png"));
+			}
+
+			//マウスを押した瞬間
+			if (pInputMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
+			{
+				//フェード取得処理
+				CFade *pFade;
+				pFade = CManager::GetInstance()->GetFade();
+
+				if (pFade->GetFade() == CFade::FADE_NONE)
+				{
+					if (m_pNextDialogUI != nullptr)
+					{
+						//次のセリフに行くUIを消す
+						m_pNextDialogUI->Uninit();
+						m_pNextDialogUI = nullptr;
+					}
+
+					//タイトルシーンに遷移
+					pFade->SetFade(CManager::MODE::TITLE);
+
+					//トロフィーのフラグ状態を取得
+					vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+					//トロフィーを取得したことがなかったら
+					if (flag[(int)CTrophy::TROPHY::ROCKY_ANGRY] == false)
+					{
+						//取得させる
+						flag[(int)CTrophy::TROPHY::ROCKY_ANGRY] = true;
+						//フラグを立てる
+						CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+					}
+				}
+			}
+		}
 		break;
 	case CGame01::ROCKY_DIALOG::MAX:
 		break;

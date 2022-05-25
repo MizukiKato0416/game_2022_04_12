@@ -357,8 +357,11 @@ void CPlayer::Update(void)
 				//モーションがダイブではなかったら
 				if (m_pMotionPlayer->GetMotion() != CMotionRoad::MOTION_PLAYER_TYPE_DIVE)
 				{
-					sound->ControllVoice(CSound::SOUND_LABEL::BREAK_SE, 1.4f);
-					sound->Play(CSound::SOUND_LABEL::BREAK_SE);
+					/*sound->ControllVoice(CSound::SOUND_LABEL::BREAK_SE, 1.4f);
+					sound->Play(CSound::SOUND_LABEL::BREAK_SE);*/
+					sound->ControllVoice(CSound::SOUND_LABEL::KIYO_BREAK, 0.8f);
+					sound->Play(CSound::SOUND_LABEL::KIYO_BREAK);
+
 					//着地モーションにする
 					m_pMotionPlayer->SetMotion(CMotionRoad::MOTION_PLAYER_TYPE_DIVE, this);
 				}

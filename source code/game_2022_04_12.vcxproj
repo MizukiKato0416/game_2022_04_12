@@ -167,6 +167,7 @@
     <ClCompile Include="effect2D.cpp" />
     <ClCompile Include="effect3D.cpp" />
     <ClCompile Include="effect_click.cpp" />
+    <ClCompile Include="ending_scene.cpp" />
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="fan.cpp" />
     <ClCompile Include="floor.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="manager.cpp" />
+    <ClCompile Include="next_dialog_ui.cpp" />
     <ClCompile Include="rocket_scene.cpp" />
     <ClCompile Include="meshfield.cpp" />
     <ClCompile Include="meshsphere.cpp" />
@@ -231,6 +233,7 @@
     <ClInclude Include="effect2D.h" />
     <ClInclude Include="effect3D.h" />
     <ClInclude Include="effect_click.h" />
+    <ClInclude Include="ending_scene.h" />
     <ClInclude Include="fade.h" />
     <ClInclude Include="fan.h" />
     <ClInclude Include="floor.h" />
@@ -247,6 +250,7 @@
     <ClInclude Include="light.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="manager.h" />
+    <ClInclude Include="next_dialog_ui.h" />
     <ClInclude Include="rocket_scene.h" />
     <ClInclude Include="meshfield.h" />
     <ClInclude Include="meshsphere.h" />

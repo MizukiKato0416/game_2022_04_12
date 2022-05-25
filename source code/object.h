@@ -34,6 +34,7 @@ public:
 		EFFECT3D,			// パーティクル
 		EFFECT2D,			// パーティクル
 		UI,					// UI
+		NEXT_DIALOG_UI,		// 次のセリフに進むUI
 		SCORE,				// Score
 		RANKING,			// ランキング
 		MASK,				// マスク
