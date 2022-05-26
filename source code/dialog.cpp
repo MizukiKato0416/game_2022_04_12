@@ -11,6 +11,7 @@
 #include "fade.h"
 #include "trophy.h"
 #include "play_data.h"
+#include "history_letter.h"
 
 //================================================
 //マクロ定義
@@ -310,10 +311,20 @@ void CDialog::Update(void)
 						CFade *pFade;
 						pFade = CManager::GetInstance()->GetFade();
 
-						if (pFade->GetFade() == CFade::FADE_NONE)
+					if (pFade->GetFade() == CFade::FADE_NONE)
+					{
+						//タイトルシーンに遷移
+						pFade->SetFade(CManager::MODE::TITLE);
+
+						//トロフィーのフラグ状態を取得
+						vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+						//トロフィーを取得したことがなかったら
+						if (flag[(int)CTrophy::TROPHY::ROCKY_ANGRY] == false)
 						{
-							//指定されたシーンに遷移
-							pFade->SetFade(m_nextScene);
+							//取得させる
+							flag[(int)CTrophy::TROPHY::ROCKY_ANGRY] = true;
+							//フラグを立てる
+							CManager::GetInstance()->GetPlayData()->SetFlag(flag);
 						}
 					}
 				}

@@ -200,6 +200,7 @@ HRESULT CGame01::Init(void)
 			flag[(int)CTrophy::TROPHY::GROUND] = true;
 
 			CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+			CHistory::Create(CTrophy::TROPHY::GROUND);
 		}
 		m_pStart = CModelSingle::Create(D3DXVECTOR3(0.0f, GAME01_START_CLOUD_POS_Y, GAME01_START_CLOUD_POS_Z), D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 		                            CXload::X_TYPE_GROUND, NULL, false);
@@ -244,6 +245,7 @@ HRESULT CGame01::Init(void)
 			flag[(int)CTrophy::TROPHY::EVENING] = true;
 
 			CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+			CHistory::Create(CTrophy::TROPHY::EVENING);
 		}
 
 		//背景のテクスチャ割り当て
@@ -262,6 +264,7 @@ HRESULT CGame01::Init(void)
 			flag[(int)CTrophy::TROPHY::NIGHT] = true;
 
 			CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+			CHistory::Create(CTrophy::TROPHY::NIGHT);
 		}
 
 		//背景のテクスチャ割り当て
@@ -1097,6 +1100,7 @@ void CGame01::Finish(void)
 						flag[(int)CTrophy::TROPHY::PLAY_00] = true;
 
 						CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+						CHistory::Create(CTrophy::TROPHY::PLAY_00);
 					}
 				}
 				else if (CManager::GetInstance()->GetPlayData()->GetPlayNum() == GAME01_PLAY_NUM_05)
@@ -1110,6 +1114,7 @@ void CGame01::Finish(void)
 						flag[(int)CTrophy::TROPHY::PLAY_05] = true;
 
 						CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+						CHistory::Create(CTrophy::TROPHY::PLAY_05);
 					}
 				}
 				else if (CManager::GetInstance()->GetPlayData()->GetPlayNum() == GAME01_PLAY_NUM_10)
@@ -1123,6 +1128,7 @@ void CGame01::Finish(void)
 						flag[(int)CTrophy::TROPHY::PLAY_10] = true;
 
 						CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+						CHistory::Create(CTrophy::TROPHY::PLAY_10);
 					}
 				}
 			}
@@ -1152,6 +1158,7 @@ void CGame01::FlyingDistanceFlag(void)
 			flag[(int)CTrophy::TROPHY::M_1000] = true;
 			//フラグを立てる
 			CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+			CHistory::Create(CTrophy::TROPHY::M_1000);
 		}
 
 		if (nScore >= GAME01_FLYING_DISTANCE_5000)
@@ -1163,6 +1170,7 @@ void CGame01::FlyingDistanceFlag(void)
 				flag[(int)CTrophy::TROPHY::M_5000] = true;
 				//フラグを立てる
 				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+				CHistory::Create(CTrophy::TROPHY::M_5000);
 			}
 
 			if (nScore >= GAME01_FLYING_DISTANCE_10000)
@@ -1174,6 +1182,7 @@ void CGame01::FlyingDistanceFlag(void)
 					flag[(int)CTrophy::TROPHY::M_10000] = true;
 					//フラグを立てる
 					CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+					CHistory::Create(CTrophy::TROPHY::M_10000);
 				}
 			}
 		}

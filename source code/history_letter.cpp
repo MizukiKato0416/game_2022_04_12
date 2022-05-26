@@ -19,8 +19,8 @@ bool CHistory::m_in_object = false;
 //=============================================================================
 // ƒ}ƒNƒ’è‹`
 //=============================================================================
-#define HISTORY_SIZE (D3DXVECTOR3(500.0f, 50.0f, 0.0f))
-#define HISTORY_POS (D3DXVECTOR3(SCREEN_WIDTH + (500.0f / 2), 0.0f + (50.0f / 2), 0.0f))
+#define HISTORY_SIZE (D3DXVECTOR3(500.0f, 100.0f, 0.0f))
+#define HISTORY_POS (D3DXVECTOR3(SCREEN_WIDTH + (500.0f / 2), SCREEN_HEIGHT - (100.0f / 2), 0.0f))
 #define HISTORY_STOP_POS_X (SCREEN_WIDTH - (500.0f / 2))
 #define HISTORY_MOVE_SPEED (5.0f)
 #define HISTORY_TIME (120)
@@ -54,76 +54,76 @@ HRESULT CHistory::Init(void)
 	switch (m_type)
 	{
 	case CTrophy::TROPHY::AIRPLANE:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("1st.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_airport.png"));
 		break;
 	case CTrophy::TROPHY::FAN:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("02_cloudy.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_fan.png"));
 		break;
 	case CTrophy::TROPHY::REDBULL:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("2nd.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_redbull.png"));
 		break;
 	case CTrophy::TROPHY::STARRING:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("01_evning.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_star.png"));
 		break;
 	case CTrophy::TROPHY::THORN:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("3rd.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_thorn.png"));
 		break;
 	case CTrophy::TROPHY::ROCKET:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_rocket.png"));
 		break;
 	case CTrophy::TROPHY::BANANA:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_banana.png"));
 		break;
 	case CTrophy::TROPHY::TRAMPOLINE:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_trampoline.png"));
 		break;
 	case CTrophy::TROPHY::M_1000:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_1000m.png"));
 		break;
 	case CTrophy::TROPHY::M_5000:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_5000m.png"));
 		break;
 	case CTrophy::TROPHY::M_10000:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_10000m.png"));
 		break;
 	case CTrophy::TROPHY::MEASUREMENT_IMPOSSIBLE:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_error.png"));
 		break;
 	case CTrophy::TROPHY::EVENING:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_evenig.png"));
 		break;
 	case CTrophy::TROPHY::NIGHT:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_night.png"));
 		break;
 	case CTrophy::TROPHY::GIRL:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_rokiko.png"));
 		break;
 	case CTrophy::TROPHY::HARD:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_hard.png"));
 		break;
 	case CTrophy::TROPHY::GROUND:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_ground.png"));
 		break;
 	case CTrophy::TROPHY::PLAY_00:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_first.png"));
 		break;
 	case CTrophy::TROPHY::PLAY_05:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_5.png"));
 		break;
 	case CTrophy::TROPHY::PLAY_10:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_10.png"));
 		break;
 	case CTrophy::TROPHY::ENDROLL:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_end.png"));
 		break;
 	case CTrophy::TROPHY::ROCKY_ANGRY:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_angry.png"));
 		break;
 	case CTrophy::TROPHY::KIYO:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_kiyo.png"));
 		break;
 	case CTrophy::TROPHY::COMPLETE:
-		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
+		m_history->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("achievement_complete.png"));
 		break;
 	default:
 		break;

@@ -14,6 +14,7 @@
 #include "manager.h"
 #include "trophy.h"
 #include "sound.h"
+#include "history_letter.h"
 
 //=============================================================================
 // ƒ}ƒNƒ’è‹`
@@ -87,6 +88,7 @@ void CTrampoline::Update(void)
 				flag[(int)CTrophy::TROPHY::TRAMPOLINE] = true;
 
 				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+				CHistory::Create(CTrophy::TROPHY::TRAMPOLINE);
 			}
 			m_bHitPlayer = true;
 			//“–‚½‚Á‚Ä‚¢‚éó‘Ô‚É‚·‚é

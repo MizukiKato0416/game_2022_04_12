@@ -14,6 +14,7 @@
 #include "input_mouse.h"
 #include "fade.h"
 #include "sound.h"
+#include "history_letter.h"
 
 //=============================================================================
 // ƒ}ƒNƒ’è‹`
@@ -78,6 +79,7 @@ HRESULT CTrophy::Init(void)
 		trophy_flag[(int)TROPHY::COMPLETE] = true;
 
 		CManager::GetPlayData()->SetFlag(trophy_flag);
+		CHistory::Create(CTrophy::TROPHY::COMPLETE);
 	}
 
 	int trophy_count = 0;

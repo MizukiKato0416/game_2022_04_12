@@ -11,6 +11,7 @@
 #include "manager.h"
 #include "trophy.h"
 #include "sound.h"
+#include "history_letter.h"
 
 //================================================
 //マクロ定義
@@ -121,6 +122,7 @@ void CRocket::Update(void)
 							flag[(int)CTrophy::TROPHY::ROCKET] = true;
 
 							CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+							CHistory::Create(CTrophy::TROPHY::ROCKET);
 						}
 						//トロフィーを取得したことがなかったら
 						if (flag[(int)CTrophy::TROPHY::MEASUREMENT_IMPOSSIBLE] == false)
@@ -129,6 +131,7 @@ void CRocket::Update(void)
 							flag[(int)CTrophy::TROPHY::MEASUREMENT_IMPOSSIBLE] = true;
 
 							CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+							CHistory::Create(CTrophy::TROPHY::MEASUREMENT_IMPOSSIBLE);
 						}
 
 						//プレイヤーの型にキャスト

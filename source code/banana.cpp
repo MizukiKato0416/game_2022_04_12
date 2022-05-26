@@ -14,6 +14,7 @@
 #include "manager.h"
 #include "trophy.h"
 #include "sound.h"
+#include "history_letter.h"
 
 //=============================================================================
 // ƒ}ƒNƒ’è‹`
@@ -91,6 +92,7 @@ void CBanana::Update(void)
 				flag[(int)CTrophy::TROPHY::BANANA] = true;
 
 				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+				CHistory::Create(CTrophy::TROPHY::BANANA);
 			}
 
 			m_bHitPlayer = true;

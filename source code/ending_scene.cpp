@@ -12,6 +12,7 @@
 #include "input_mouse.h"
 #include "play_data.h"
 #include "trophy.h"
+#include "history_letter.h"
 #include "dialog.h"
 
 #ifdef _DEBUG
@@ -145,6 +146,7 @@ void CEndingScene::Update(void)
 					flag[(int)CTrophy::TROPHY::ENDROLL] = true;
 					//ƒtƒ‰ƒO‚ð—§‚Ä‚é
 					CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+					CHistory::Create(CTrophy::TROPHY::ENDROLL);
 				}
 			}
 		}
