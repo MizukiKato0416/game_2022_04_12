@@ -36,16 +36,6 @@ class CDialog;
 class CGame01 : public CObject
 {
 public:
-	enum class ROCKY_DIALOG
-	{
-		NONE = 0,
-		DIALOG_01,
-		DIALOG_02,
-		DIALOG_03,
-		DIALOG_04,
-		MAX
-	};
-
 	CGame01(CObject::PRIORITY Priority = CObject::PRIORITY::GAME);		//コンストラクタ
 	~CGame01();									//デストラクタ
 
@@ -81,8 +71,6 @@ private:
 	void FlyingDistanceFlag(void);								//トロフィーの飛距離のフラグ処理
 	void Mask(void);											//マスク処理
 	void Click(void);											//クリック処理
-	bool Dialog(const int &nCntDialog);							//セリフ処理
-	void UninitDialog(void);									//セリフ破棄処理
 		
 	//メンバ変数
 	CPlayer *m_pPlayer;					//プレイヤーのポインタ
@@ -106,19 +94,8 @@ private:
 	CObject2D *m_pDengerMask;			//マスク
 	bool m_bAddCol;						//カラー加算の切り替え
 	int m_nClick;						//クリックした回数
-	ROCKY_DIALOG m_dialogType;			//ロッキーとの対話
-	CObject2D *m_pRocky;				//ロッキー君のポインタ
-	CObject2D *m_pDialogFrame;			//会話のフレーム
-	int m_nClickDelay;					//クリックできるようになるまでのカウンター
-	vector<CLetter*> m_pLetter;			//レターのポインタ
-	vector<wstring> m_dialog;			//セリフ
-	int m_nCountFrame;					//フレームのカウンタ
-	int m_nDialogDelay;					//セリフのディレイ
-	int m_nDialogCntX;					//セリフの行のカウンター
-	int m_nDialogCntY;					//セリフの列のカウンター
 	bool m_bDialog;						//セリフを出しているかどうか	
-	CNextDialogUI *m_pNextDialogUI;		//次のセリフに行くUIのポインタ
-	CDialog *m_pDialog;							//会話のポインタ
+	CDialog *m_pDialog;					//会話のポインタ
 };	
 
 #endif // !_GAME01_H_

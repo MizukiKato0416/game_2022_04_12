@@ -184,17 +184,20 @@ void CScore::SetScore(const int &nScore)
 
 	for (int nCntNumber = 0; nCntNumber < MAX_SCORE_POLYGON; nCntNumber++)
 	{
-		if (nCntNumber == 0)
+		if (m_apNumber[nCntNumber] != nullptr)
 		{
-			m_apNumber[nCntNumber]->SetNumber(m_nScore / (int)powf(10, MAX_SCORE_POLYGON - 1));
-		}
-		else if (nCntNumber == MAX_SCORE_POLYGON - 1)
-		{
-			m_apNumber[nCntNumber]->SetNumber(m_nScore % 10);
-		}
-		else
-		{
-			m_apNumber[nCntNumber]->SetNumber(m_nScore % (int)powf(10, MAX_SCORE_POLYGON - nCntNumber) / (int)powf(10, MAX_SCORE_POLYGON - 1 - nCntNumber));
+			if (nCntNumber == 0)
+			{
+				m_apNumber[nCntNumber]->SetNumber(m_nScore / (int)powf(10, MAX_SCORE_POLYGON - 1));
+			}
+			else if (nCntNumber == MAX_SCORE_POLYGON - 1)
+			{
+				m_apNumber[nCntNumber]->SetNumber(m_nScore % 10);
+			}
+			else
+			{
+				m_apNumber[nCntNumber]->SetNumber(m_nScore % (int)powf(10, MAX_SCORE_POLYGON - nCntNumber) / (int)powf(10, MAX_SCORE_POLYGON - 1 - nCntNumber));
+			}
 		}
 	}
 }
@@ -233,7 +236,7 @@ void CScore::AddScore(const int &nValue)
 //=============================================================================
 // numberæ“¾ˆ—
 //=============================================================================
-CNumber* CScore::GetNumber(int nNumber)
+CNumber* CScore::GetNumber(const int &nNumber)
 {
 	return m_apNumber[nNumber];
 }

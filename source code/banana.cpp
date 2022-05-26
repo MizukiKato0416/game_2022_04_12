@@ -19,7 +19,7 @@
 // マクロ定義
 //=============================================================================
 #define BANANA_JUMP_POW				(0.0f)		// ジャンプ力
-#define BANANA_FORWORD_POW			(15.0f)		// 進力
+#define BANANA_FORWORD_POW			(20.0f)		// 進力
 #define BANANA_PLAYER_ROTATION_X	(-0.1f)		// プレイヤーの回転
 #define BANANA_SLOW_PLAYER_MOVE_Y	(0.2f)		// スロー時の移動量Y
 #define BANANA_SLOW_FORWORD_POW		(0.3f)		// スロー時の進力
@@ -47,8 +47,10 @@ CBanana::~CBanana()
 //=============================================================================
 HRESULT CBanana::Init(void)
 {
-	CHappenig::Init();
 	CHappenig::SetModel(CModelSingle::Create(m_pos, m_rot, CXload::X_TYPE_BANANA, NULL, true));
+
+	CHappenig::Init();
+	
 	CObject::SetObjType(CObject::OBJTYPE::BANANA);
 
 	//変数初期化

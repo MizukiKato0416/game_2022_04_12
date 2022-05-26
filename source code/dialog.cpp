@@ -8,16 +8,24 @@
 #include "sound.h"
 #include "manager.h"
 #include "next_dialog_ui.h"
+#include "input_mouse.h"
+#include "fade.h"
+#include "trophy.h"
+#include "play_data.h"
 
 //================================================
 //マクロ定義
 //================================================
-#define DIALOG_MAX_STRING				(256)				//文字の最大量
-#define DIALOG_LETTER_CREATE_COUNT		(3)					//1文字出すまでの時間
-#define DIALOG_ROCKY_UI_POS_Y			(260.0f)			//ロッキー君のUIの位置Y
-#define DIALOG_ROCKY_UI_SIZE_X			(545.0f * 1.0f)		//ロッキー君のUIのサイズX
-#define DIALOG_ROCKY_UI_SIZE_Y			(566.0f * 1.0f)		//ロッキー君のUIのサイズY
-#define DIALOG_FRAME_POS_Y				(230.0f)			//セリフのフレーム位置Y
+#define DIALOG_MAX_STRING				(256)									//文字の最大量
+#define DIALOG_LETTER_CREATE_COUNT		(3)										//1文字出すまでの時間
+#define DIALOG_ROCKY_UI_POS_Y			(260.0f)								//ロッキー君のUIの位置Y
+#define DIALOG_ROCKY_UI_SIZE_X			(545.0f * 1.0f)							//ロッキー君のUIのサイズX
+#define DIALOG_ROCKY_UI_SIZE_Y			(566.0f * 1.0f)							//ロッキー君のUIのサイズY
+#define DIALOG_ROCKY_FACE_UI_SIZE_X		(545.0f * 0.7f)							//ロッキー君の顔UIのサイズX
+#define DIALOG_ROCKY_FACE_UI_SIZE_Y		(566.0f * 0.7f)							//ロッキー君の顔UIのサイズY
+#define DIALOG_ROCKY_FACE_UI_POS_X		(SCREEN_WIDTH / 2.0f - 10.0f)			//ロッキー君の顔UIの位置X
+#define DIALOG_ROCKY_FACE_UI_POS_Y		(230.0f)								//ロッキー君の顔UIの位置Y
+#define DIALOG_FRAME_POS_Y				(230.0f)								//セリフのフレーム位置Y
 
 //================================================
 //静的メンバ変数宣言
@@ -45,6 +53,8 @@ CDialog::CDialog(CObject::PRIORITY Priority) :CObject(Priority)
 	m_nDialogNum = 0;
 	m_pNextDialogUI = nullptr;
 	m_nCountFrame = 0;
+	m_bDialogFinish = false;
+	m_nMaxDialog = 0;
 }
 
 //================================================
@@ -76,9 +86,9 @@ HRESULT CDialog::Init()
 	m_nDialogNum = 0;
 	m_pNextDialogUI = nullptr;
 	m_nCountFrame = 0;
+	m_bDialogFinish = false;
 
 	char cString[DIALOG_MAX_STRING];
-	int nCntDialog = 0;
 	FILE *file;
 	file = fopen("data/dialog_ss.txt", "r");
 
@@ -99,11 +109,11 @@ HRESULT CDialog::Init()
 				//配列を増やす
 				m_dialogBody.push_back(dialogBody);
 				//ポーズを読み込む
-				fscanf(file, "%*s%*s%d", &m_dialogBody[nCntDialog].nPersonPose);
+				fscanf(file, "%*s%*s%d", &m_dialogBody[m_nMaxDialog].nPersonPose);
 				//顔を読み込む
-				fscanf(file, "%*s%*s%d", &m_dialogBody[nCntDialog].nPersonFace);
+				fscanf(file, "%*s%*s%d", &m_dialogBody[m_nMaxDialog].nPersonFace);
 				//フレームを読み込む
-				fscanf(file, "%*s%*s%d", &m_dialogBody[nCntDialog].nFrame);
+				fscanf(file, "%*s%*s%d", &m_dialogBody[m_nMaxDialog].nFrame);
 
 				char name_buf[1][DIALOG_MAX_STRING];
 				string name;
@@ -140,7 +150,7 @@ HRESULT CDialog::Init()
 				m_dialog.push_back(utextbuf);
 
 				//総数を増やす
-				nCntDialog++;
+				m_nMaxDialog++;
 			}
 			else if (strncmp("END_SCRIPT", cString, 11) == 0)
 			{//END_SCRIPTと書かれていたら
@@ -167,8 +177,14 @@ void CDialog::Update(void)
 {
 	if (m_bCreateFinish == true)
 	{
-		//セリフの生成
-		if (Dialog(m_nDialogNum) == true)
+		//総数以下だったら
+		if (m_nDialogNum < m_nMaxDialog)
+		{
+			//セリフの生成と全文が表示されたかどうかを取得
+			m_bDialogFinish = Dialog(m_nDialogNum);
+		}
+		//全文が表示されたら
+		if (m_bDialogFinish)
 		{
 			if (m_pNextDialogUI == nullptr)
 			{
@@ -176,6 +192,56 @@ void CDialog::Update(void)
 				m_pNextDialogUI = CNextDialogUI::Create(D3DXVECTOR3(NEXT_DILOG_UI_POS_X, NEXT_DILOG_UI_POS_Y, 0.0f),
 					                                    D3DXVECTOR3(NEXT_DILOG_UI_SIZE, NEXT_DILOG_UI_SIZE, 0.0f));
 				m_pNextDialogUI->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("click_ui.png"));
+				//全文を表示した状態にする
+				m_bDialogFinish = true;
+			}
+
+
+			//マウス取得処理
+			CInputMouse *pInputMouse;
+			pInputMouse = CManager::GetInstance()->GetInputMouse();
+
+			//マウスを押した瞬間
+			if (pInputMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
+			{
+				//次のセリフにする
+				m_nDialogNum++;
+
+				//総数以下だったら
+				if (m_nDialogNum < m_nMaxDialog)
+				{
+					//セリフ生成
+					SetDialog(m_nDialogNum);
+				}
+				else
+				{
+					//サウンド取得
+					CSound *sound;
+					sound = CManager::GetInstance()->GetSound();
+					//再生する
+					sound->Play(CSound::SOUND_LABEL::DECISION_SE);
+
+					//フェード取得処理
+					CFade *pFade;
+					pFade = CManager::GetInstance()->GetFade();
+
+					if (pFade->GetFade() == CFade::FADE_NONE)
+					{
+						//タイトルシーンに遷移
+						pFade->SetFade(CManager::MODE::TITLE);
+
+						//トロフィーのフラグ状態を取得
+						vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+						//トロフィーを取得したことがなかったら
+						if (flag[(int)CTrophy::TROPHY::ROCKY_ANGRY] == false)
+						{
+							//取得させる
+							flag[(int)CTrophy::TROPHY::ROCKY_ANGRY] = true;
+							//フラグを立てる
+							CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+						}
+					}
+				}
 			}
 		}
 	}
@@ -296,6 +362,7 @@ void CDialog::UninitDialog(void)
 	}
 
 	m_bCreateFinish = false;
+	m_bDialogFinish = false;
 }
 
 //================================================
@@ -328,8 +395,8 @@ void CDialog::SetDialog(const int &nNumDialog)
 	if (m_pPersonFace == nullptr)
 	{
 		//顔の生成
-		m_pPersonFace = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, DIALOG_ROCKY_UI_POS_Y, 0.0f),
-			                              D3DXVECTOR3(DIALOG_ROCKY_UI_SIZE_X, DIALOG_ROCKY_UI_SIZE_Y, 0.0f),
+		m_pPersonFace = CObject2D::Create(D3DXVECTOR3(DIALOG_ROCKY_FACE_UI_POS_X, DIALOG_ROCKY_FACE_UI_POS_Y, 0.0f),
+			                              D3DXVECTOR3(DIALOG_ROCKY_FACE_UI_SIZE_X, DIALOG_ROCKY_FACE_UI_SIZE_Y, 0.0f),
 			                              static_cast<int>(CObject::PRIORITY::DIALOG));
 		m_pPersonFace->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("rocky_face.png"));
 	}
@@ -365,6 +432,5 @@ void CDialog::SetDialog(const int &nNumDialog)
 			m_pPersonFace->SetTex((int)m_faceType, (int)FACE::MAX);
 		}
 	}
-
 	m_bCreateFinish = true;
 }

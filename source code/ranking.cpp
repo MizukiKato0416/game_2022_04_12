@@ -26,7 +26,7 @@
 //================================================
 //静的メンバ変数宣言
 //================================================
-CScore *CRanking::m_apScore[MAX_RANKING];
+CScore *CRanking::m_apScore[MAX_RANKING] = {nullptr};
 
 //================================================
 //デフォルトコンストラクタ
@@ -92,26 +92,29 @@ void CRanking::Update(void)
 
 	for (int nCntRanking = 0; nCntRanking < MAX_RANKING; nCntRanking++)
 	{
-		m_apScore[nCntRanking]->SetScore(pData->ranking[nCntRanking]);
-		m_nScore[nCntRanking] = pData->ranking[nCntRanking];
-		if (m_nNowScore != 0 && m_nScore[nCntRanking] == m_nNowScore)
+		if (m_apScore[nCntRanking] != nullptr && m_bOnece == true)
 		{
-			//カラーを薄くする
-			m_col.a -= 10.0f;
-
-			if (m_col.a < 0.0f)
+			m_apScore[nCntRanking]->SetScore(pData->ranking[nCntRanking]);
+ 			m_nScore[nCntRanking] = pData->ranking[nCntRanking];
+			if (m_nNowScore != 0 && m_nScore[nCntRanking] == m_nNowScore)
 			{
-				m_col.a = 255.0f;
-			}
+				//カラーを薄くする
+				m_col.a -= 10.0f;
 
-			for (int nCntNumber = 0; nCntNumber < MAX_SCORE_POLYGON; nCntNumber++)
-			{
-				//ナンバーを取得してカラーを設定
-				m_apScore[nCntRanking]->GetNumber(nCntNumber)->SetCol(m_col);
-				m_apScore[nCntRanking]->GetConma()->SetCol(m_col);
-				m_apScore[nCntRanking]->GetMeter()->SetCol(m_col);
+				if (m_col.a < 0.0f)
+				{
+					m_col.a = 255.0f;
+				}
+
+				for (int nCntNumber = 0; nCntNumber < MAX_SCORE_POLYGON; nCntNumber++)
+				{
+					//ナンバーを取得してカラーを設定
+					m_apScore[nCntRanking]->GetNumber(nCntNumber)->SetCol(m_col);
+					m_apScore[nCntRanking]->GetConma()->SetCol(m_col);
+					m_apScore[nCntRanking]->GetMeter()->SetCol(m_col);
+				}
+				break;
 			}
-			break;
 		}
 	}
 }

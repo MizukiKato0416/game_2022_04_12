@@ -25,6 +25,7 @@ typedef struct
 	int nPersonPose;		//キャラポーズ
 	int nPersonFace;		//キャラ顔
 	int nFrame;				//フレーム
+
 } DIALOG_BODY;
 
 //================================================
@@ -70,6 +71,10 @@ public:
 	bool Dialog(const int &nCntDialog);		//セリフ処理
 	void UninitDialog(void);				//セリフ破棄処理
 	void SetDialog(const int &nNumDialog);	//セリフ設定処理
+	//全文が表示されたかどうか設定処理
+	void SetDialogFinish(bool bDialogFinish) { m_bDialogFinish = bDialogFinish; }
+	//全文が表示されたかどうか取得処理
+	bool GetDialogFinish(void) { return m_bDialogFinish; }
 
 private:
 	vector<DIALOG_BODY> m_dialogBody;	//会話の構成
@@ -89,5 +94,7 @@ private:
 	int m_nDialogNum;					//何番目のセリフを生成しているか
 	CNextDialogUI *m_pNextDialogUI;		//次のセリフに行くUIのポインタ
 	int m_nCountFrame;					//フレームのカウンタ
+	bool m_bDialogFinish;				//全文が表示されたかどうか
+	int m_nMaxDialog;					//総数
 };
 #endif // !_DIALOG_H_

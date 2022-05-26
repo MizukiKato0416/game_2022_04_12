@@ -21,7 +21,7 @@
 // マクロ定義
 //=============================================================================
 #define FAN_JUMP_POW					(22.0f)									// ジャンプ力
-#define FAN_FORWORD_POW					(18.0f)									// 進力
+#define FAN_FORWORD_POW					(23.0f)									// 進力
 #define FAN_PLAYER_ROTATION_X			(-0.1f)									// プレイヤーの回転
 #define FAN_SLOW_PLAYER_MOVE_Y			(0.2f)									// スロー時の移動量Y
 #define FAN_SLOW_FORWORD_POW			(0.3f)									// スロー時の進力
@@ -52,8 +52,9 @@ CFan::~CFan()
 //=============================================================================
 HRESULT CFan::Init(void)
 {
-	CHappenig::Init();
 	CHappenig::SetModel(CModelSingle::Create(m_pos, m_rot, CXload::X_TYPE_FAN, NULL, true));
+	CHappenig::Init();
+	
 	CObject::SetObjType(CObject::OBJTYPE::FAN);
 
 	//風の生成

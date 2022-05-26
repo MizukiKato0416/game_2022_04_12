@@ -60,10 +60,10 @@ HRESULT CRocket::Init()
 	m_bHitPlayer = false;
 	m_pSmoke.clear();
 
-	CHappenig::Init();
-
 	//モデルの生成
 	CHappenig::SetModel(CModelSingle::Create(m_pos, m_rot, CXload::X_TYPE_ROCKET, NULL, true));
+
+	CHappenig::Init();
 
 	//オブジェクトの種類を設定
 	SetObjType(CObject::OBJTYPE::AIR_PLANE);

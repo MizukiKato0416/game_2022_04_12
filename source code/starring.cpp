@@ -22,7 +22,7 @@
 #define STARRING_PLAYER_ROTATION_X	(-0.1f)		// プレイヤーの回転
 #define STARRING_ROTATION_X_SLOW	(0.02f)		// スロー時の回転
 #define STARRING_JUMP_POW			(20.0f)		// ジャンプ力
-#define STARRING_FORWORD_POW		(35.0f)		// 進力
+#define STARRING_FORWORD_POW		(40.0f)		// 進力
 #define STARRING_SLOW_PLAYER_MOVE_Y	(0.2f)		// スロー時の移動量Y
 #define STARRING_PLAYER_MOVE_Y		(8.0f)		// 飛ばすときの移動量Y
 #define STARRING_SLOW_FORWORD_POW	(0.3f)		// スロー時の進力
@@ -50,10 +50,11 @@ CStarring::~CStarring()
 //=============================================================================
 HRESULT CStarring::Init(void)
 {
-	CHappenig::Init();
-
 	//モデルの生成
 	CHappenig::SetModel(CModelSingle::Create(m_pos, m_rot, CXload::X_TYPE_STARRING, NULL, true));
+
+	CHappenig::Init();
+	
 	//種類の設定
 	CObject::SetObjType(CObject::OBJTYPE::STAR_RING);
 

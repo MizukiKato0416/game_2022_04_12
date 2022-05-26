@@ -15,7 +15,7 @@
 //================================================
 //マクロ定義
 //================================================
-#define AIRPLANE_MOVE_COUNT				(180)								//前に進む時間
+#define AIRPLANE_MOVE_COUNT				(240)								//前に進む時間
 #define AIRPLANE_MOVE_FORWARD			(30.0f)								//前に進む力
 #define AIRPLANE_PLAYER_MOVE_FORWARD	(20.0f)								//プレイヤーの前に進む力
 #define AIRPLANE_PLAYER_JUMP			(20.0f)								//ジャンプ力
@@ -69,10 +69,10 @@ HRESULT CAirplane::Init()
 	m_nMoveCounter = 0;
 	m_pSmoke.clear();
 
-	CHappenig::Init();
-
 	//モデルの生成
 	CHappenig::SetModel(CModelSingle::Create(m_pos, m_rot, CXload::X_TYPE_AIRPLANE, NULL, true));
+
+	CHappenig::Init();
 
 	//オブジェクトの種類を設定
 	SetObjType(CObject::OBJTYPE::AIR_PLANE);

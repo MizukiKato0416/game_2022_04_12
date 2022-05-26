@@ -48,6 +48,35 @@ CHappenig::~CHappenig()
 //=============================================================================
 HRESULT CHappenig::Init(void)
 {
+	//モデルの上頂点の位置を取得
+	D3DXVECTOR3 vtxPos[8];
+	for (int nCntVtx = 0; nCntVtx < 8; nCntVtx++)
+	{
+		vtxPos[nCntVtx] = GetModel()->GetModel()->GetVtxPos(nCntVtx);
+	}
+
+	//モデルのサイズYを風のエフェクトのサイズの3分の2引き延ばす
+	vtxPos[0].y += HAPPENING_ADD_SIZE_Y;
+	vtxPos[1].y += HAPPENING_ADD_SIZE_Y;
+	vtxPos[4].y += HAPPENING_ADD_SIZE_Y;
+	vtxPos[5].y += HAPPENING_ADD_SIZE_Y;
+
+	vtxPos[0].x -= HAPPENING_ADD_SIZE_X;
+	vtxPos[2].x -= HAPPENING_ADD_SIZE_X;
+	vtxPos[4].x -= HAPPENING_ADD_SIZE_X;
+	vtxPos[6].x -= HAPPENING_ADD_SIZE_X;
+
+	vtxPos[1].x += HAPPENING_ADD_SIZE_X;
+	vtxPos[3].x += HAPPENING_ADD_SIZE_X;
+	vtxPos[5].x += HAPPENING_ADD_SIZE_X;
+	vtxPos[7].x += HAPPENING_ADD_SIZE_X;
+
+	//サイズを設定
+	for (int nCntVtx = 0; nCntVtx < 8; nCntVtx++)
+	{
+		GetModel()->GetModel()->SetVtxPos(nCntVtx, vtxPos[nCntVtx]);
+	}
+
 	SetPos(m_pos);
 
 	return S_OK;

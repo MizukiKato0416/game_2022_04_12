@@ -19,7 +19,7 @@
 // マクロ定義
 //=============================================================================
 #define REDBULL_JUMP_POW			(15.0f)		// ジャンプ力
-#define REDBULL_FORWORD_POW			(40.0f)		// 進力
+#define REDBULL_FORWORD_POW			(45.0f)		// 進力
 #define REDBULL_PLAYER_ROTATION_X	(-0.1f)		// プレイヤーの回転
 #define REDBULL_SLOW_PLAYER_MOVE_Y	(0.2f)		// スロー時の移動量Y
 #define REDBULL_SLOW_FORWORD_POW	(0.3f)		// スロー時の進力
@@ -47,8 +47,8 @@ CRedbull::~CRedbull()
 //=============================================================================
 HRESULT CRedbull::Init(void)
 {
-	CHappenig::Init();
 	CHappenig::SetModel(CModelSingle::Create(m_pos, m_rot, CXload::X_TYPE_REDBULL, NULL, true));
+	CHappenig::Init();
 	CObject::SetObjType(CObject::OBJTYPE::REDBULL);
 
 	//変数初期化

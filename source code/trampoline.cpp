@@ -19,7 +19,7 @@
 // マクロ定義
 //=============================================================================
 #define TRAMPOLINE_JUMP_POW				(21.0f)		// ジャンプ力
-#define TRAMPOLINE_FORWORD_POW			(25.0f)		// 進力
+#define TRAMPOLINE_FORWORD_POW			(30.0f)		// 進力
 #define TRAMPOLINE_PLAYER_ROTATION_X	(-0.1f)		// プレイヤーの回転
 #define TRAMPOLINE_SLOW_PLAYER_MOVE_Y	(0.2f)		// スロー時の移動量Y
 #define TRAMPOLINE_SLOW_FORWORD_POW		(0.3f)		// スロー時の進力
@@ -47,8 +47,8 @@ CTrampoline::~CTrampoline()
 //=============================================================================
 HRESULT CTrampoline::Init(void)
 {
-	CHappenig::Init();
 	CHappenig::SetModel(CModelSingle::Create(m_pos, m_rot, CXload::X_TYPE_TRAMPLINE, NULL, true));
+	CHappenig::Init();
 	CObject::SetObjType(CObject::OBJTYPE::TRAMPOLINE);
 
 	//変数初期化

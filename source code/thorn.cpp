@@ -14,12 +14,13 @@
 #include "manager.h"
 #include "trophy.h"
 #include "sound.h"
+#include "model.h"
 
 //=============================================================================
 // マクロ定義
 //=============================================================================
 #define THORN_JUMP_POW				(10.0f)		// ジャンプ力
-#define THORN_FORWORD_POW			(15.0f)		// 進力
+#define THORN_FORWORD_POW			(20.0f)		// 進力
 #define THORN_PLAYER_ROTATION_X		(-0.1f)		// プレイヤーの回転
 #define THORN_SLOW_PLAYER_MOVE_Y	(0.2f)		// スロー時の移動量Y
 #define THORN_SLOW_FORWORD_POW		(0.3f)		// スロー時の進力
@@ -47,9 +48,39 @@ CThorn::~CThorn()
 //=============================================================================
 HRESULT CThorn::Init(void)
 {
-	CHappenig::Init();
 	CHappenig::SetModel(CModelSingle::Create(m_pos, m_rot, CXload::X_TYPE_THORN, NULL, true));
+	CHappenig::Init();
 	CObject::SetObjType(CObject::OBJTYPE::THORN);
+
+	//モデルの上頂点の位置を取得
+	D3DXVECTOR3 vtxPos[8];
+	for (int nCntVtx = 0; nCntVtx < 8; nCntVtx++)
+	{
+		vtxPos[nCntVtx] = GetModel()->GetModel()->GetVtxPos(nCntVtx);
+	}
+
+	//モデルのサイズYを風のエフェクトのサイズの3分の2引き延ばす
+	vtxPos[0].y -= HAPPENING_ADD_SIZE_Y;
+	vtxPos[1].y -= HAPPENING_ADD_SIZE_Y;
+	vtxPos[4].y -= HAPPENING_ADD_SIZE_Y;
+	vtxPos[5].y -= HAPPENING_ADD_SIZE_Y;
+
+	vtxPos[0].x += HAPPENING_ADD_SIZE_X;
+	vtxPos[2].x += HAPPENING_ADD_SIZE_X;
+	vtxPos[4].x += HAPPENING_ADD_SIZE_X;
+	vtxPos[6].x += HAPPENING_ADD_SIZE_X;
+
+	vtxPos[1].x -= HAPPENING_ADD_SIZE_X;
+	vtxPos[3].x -= HAPPENING_ADD_SIZE_X;
+	vtxPos[5].x -= HAPPENING_ADD_SIZE_X;
+	vtxPos[7].x -= HAPPENING_ADD_SIZE_X;
+
+	//サイズを設定
+	for (int nCntVtx = 0; nCntVtx < 8; nCntVtx++)
+	{
+		GetModel()->GetModel()->SetVtxPos(nCntVtx, vtxPos[nCntVtx]);
+	}
+
 
 	//変数初期化
 	m_bHitPlayer = false;
