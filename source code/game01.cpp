@@ -31,6 +31,7 @@
 #include "letter.h"
 #include "next_dialog_ui.h"
 #include "dialog.h"
+#include "history_letter.h"
 
 //================================================
 //マクロ定義
@@ -279,6 +280,7 @@ HRESULT CGame01::Init(void)
 			flag[(int)CTrophy::TROPHY::HARD] = true;
 
 			CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+			CHistory::Create(CTrophy::TROPHY::HARD);
 		}
 
 		//背景のテクスチャ割り当て

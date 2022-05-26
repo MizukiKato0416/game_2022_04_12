@@ -11,6 +11,8 @@
 #include "manager.h"
 #include "trophy.h"
 #include "sound.h"
+#include "history_letter.h"
+#include "history_letter.h"
 
 //================================================
 //マクロ定義
@@ -130,6 +132,7 @@ void CAirplane::Update(void)
 							flag[(int)CTrophy::TROPHY::AIRPLANE] = true;
 							//フラグを立てる
 							CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+							CHistory::Create(CTrophy::TROPHY::AIRPLANE);
 						}
 
 						//プレイヤーの型にキャスト
