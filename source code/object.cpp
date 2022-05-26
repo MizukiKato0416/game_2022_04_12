@@ -75,7 +75,8 @@ void CObject::ReleaseAll(void)
 
 		for (int nCntPop = 0; nCntPop < nPrioltySize; nCntPop++)
 		{
-			if (m_object[nCnt][nCntPop]->m_priority != static_cast<int>(PRIORITY::FADE))
+			if (m_object[nCnt][nCntPop]->m_priority != static_cast<int>(PRIORITY::FADE) &&
+				m_object[nCnt][nCntPop]->m_priority != static_cast<int>(PRIORITY::HISTORY_LETTER))
 			{
 				delete m_object[nCnt][nCntPop];
 			}
@@ -84,7 +85,8 @@ void CObject::ReleaseAll(void)
 		nPrioltySize = m_object[nCnt].size();
 		for (int nCntPop = 0; nCntPop < nPrioltySize; nCntPop++)
 		{
-			if (m_object[nCnt][nCntPop]->m_priority != static_cast<int>(PRIORITY::FADE))
+			if (m_object[nCnt][nCntPop]->m_priority != static_cast<int>(PRIORITY::FADE)  &&
+				m_object[nCnt][nCntPop]->m_priority != static_cast<int>(PRIORITY::HISTORY_LETTER))
 			{
 				m_object[nCnt].pop_back();
 				nPrioltySize = m_object[nCnt].size();
@@ -134,7 +136,7 @@ void CObject::UpdateAll(void)
 					}
 					else
 					{
-						if (count_priolty == (int)PRIORITY::PAUSE || count_priolty == (int)PRIORITY::FADE || count_priolty == (int)PRIORITY::CLICK_EFFECT)
+						if (count_priolty == (int)PRIORITY::PAUSE || count_priolty == (int)PRIORITY::FADE || count_priolty == (int)PRIORITY::CLICK_EFFECT || count_priolty == (int)PRIORITY::HISTORY_LETTER)
 						{
 							m_object[count_priolty][count_object]->Update();
 						}

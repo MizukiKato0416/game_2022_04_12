@@ -15,6 +15,7 @@
 #include "trophy.h"
 #include "sound.h"
 #include "model.h"
+#include "history_letter.h"
 
 //=============================================================================
 // ƒ}ƒNƒ’è‹`
@@ -120,6 +121,7 @@ void CThorn::Update(void)
 				flag[(int)CTrophy::TROPHY::THORN] = true;
 
 				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+				CHistory::Create(CTrophy::TROPHY::THORN);
 			}
 
 			m_bHitPlayer = true;

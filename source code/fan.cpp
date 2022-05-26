@@ -16,6 +16,7 @@
 #include "manager.h"
 #include "trophy.h"
 #include "sound.h"
+#include "history_letter.h"
 
 //=============================================================================
 // ƒ}ƒNƒ’è‹`
@@ -153,6 +154,7 @@ void CFan::Update(void)
 				flag[(int)CTrophy::TROPHY::FAN] = true;
 
 				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+				CHistory::Create(CTrophy::TROPHY::FAN);
 			}
 			sound->ControllVoice(CSound::SOUND_LABEL::FAN_SE, 1.4f);
 			sound->Play(CSound::SOUND_LABEL::FAN_SE);

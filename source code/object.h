@@ -43,7 +43,8 @@ public:
 		GAME,				// ゲーム
 		ROAD,				// ステージ
 		FADE,				// フェード
-		CLICK_EFFECT,		//クリックエフェクト
+		HISTORY_LETTER,		// 実績解除文字
+		CLICK_EFFECT,		// クリックエフェクト
 		MAX
 	};
 
