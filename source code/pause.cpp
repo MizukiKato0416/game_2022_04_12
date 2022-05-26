@@ -53,7 +53,7 @@ CPause::~CPause()
 HRESULT CPause::Init(void)
 {
 	m_bPause = false;
-	m_pPauseButton = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH - (250.0f / 2), 0.0f + (75.0f / 2), 0.0f),
+	m_pPauseButton = CObject2D::Create(D3DXVECTOR3(0.0f + (250.0f / 2), SCREEN_HEIGHT - (75.0f / 2), 0.0f),
 									   D3DXVECTOR3(250.0f, 75.0f, 0.0f), static_cast<int>(CObject::PRIORITY::PAUSE));
 	m_pPauseButton->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("pause_button.png"));
 

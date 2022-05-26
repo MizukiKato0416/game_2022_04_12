@@ -19,10 +19,10 @@ bool CHistory::m_in_object = false;
 //=============================================================================
 // É}ÉNÉçíËã`
 //=============================================================================
-#define HISTORY_SIZE (D3DXVECTOR3(500.0f, 100.0f, 0.0f))
-#define HISTORY_POS (D3DXVECTOR3(SCREEN_WIDTH + (500.0f / 2), SCREEN_HEIGHT - (100.0f / 2), 0.0f))
-#define HISTORY_STOP_POS_X (SCREEN_WIDTH - (500.0f / 2))
-#define HISTORY_MOVE_SPEED (5.0f)
+#define HISTORY_SIZE (D3DXVECTOR3(300.0f, 60.0f, 0.0f))
+#define HISTORY_POS (D3DXVECTOR3(SCREEN_WIDTH + (300.0f / 2), 0.0f + (60.0f / 2), 0.0f))
+#define HISTORY_STOP_POS_X (SCREEN_WIDTH - (300.0f / 2))
+#define HISTORY_MOVE_SPEED (10.5f)
 #define HISTORY_TIME (120)
 
 //=============================================================================
