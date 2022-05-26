@@ -310,21 +310,10 @@ void CDialog::Update(void)
 						//フェード取得処理
 						CFade *pFade;
 						pFade = CManager::GetInstance()->GetFade();
-
-					if (pFade->GetFade() == CFade::FADE_NONE)
-					{
-						//タイトルシーンに遷移
-						pFade->SetFade(CManager::MODE::TITLE);
-
-						//トロフィーのフラグ状態を取得
-						vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
-						//トロフィーを取得したことがなかったら
-						if (flag[(int)CTrophy::TROPHY::ROCKY_ANGRY] == false)
+						if (pFade->GetFade() == CFade::FADE_NONE)
 						{
-							//取得させる
-							flag[(int)CTrophy::TROPHY::ROCKY_ANGRY] = true;
-							//フラグを立てる
-							CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+							//タイトルシーンに遷移
+							pFade->SetFade(m_nextScene);
 						}
 					}
 				}

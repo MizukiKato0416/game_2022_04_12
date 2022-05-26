@@ -75,10 +75,6 @@ HRESULT CEndingScene::Init(void)
 		                            static_cast<int>(CObject::PRIORITY::UI));
 	m_pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("endroll.png"));
 
-	//会話文の生成
-	m_pDialog = CDialog::Create(CDialog::SCENE_TYPE::ENDROLL_SCENE);
-	m_pDialog->SetDialog(0);
-
 	return S_OK;
 }
 
@@ -108,46 +104,22 @@ void CEndingScene::Update(void)
 		//止める
 		pos.y = 0.0f - ENDING_SCENE_ENDROLL_SIZE_Y / 2.0f + SCREEN_HEIGHT;
 
-		if (m_pNextDialogUI == nullptr)
+		if (m_pDialog == nullptr)
 		{
-			//次のセリフに行くUIを生成
-			m_pNextDialogUI = CNextDialogUI::Create(D3DXVECTOR3(NEXT_DILOG_UI_POS_X, NEXT_DILOG_UI_POS_Y, 0.0f),
-				                                    D3DXVECTOR3(NEXT_DILOG_UI_SIZE, NEXT_DILOG_UI_SIZE, 0.0f));
-			m_pNextDialogUI->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("click_ui.png"));
-		}
+			//会話文の生成
+			m_pDialog = CDialog::Create(CDialog::SCENE_TYPE::ENDROLL_SCENE);
+			m_pDialog->SetDialog(0);
 
-		//マウス取得処理
-		CInputMouse *pInputMouse;
-		pInputMouse = CManager::GetInstance()->GetInputMouse();
-
-		//マウスを押した瞬間
-		if (pInputMouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
-		{
-			//フェード取得処理
-			CFade *pFade;
-			pFade = CManager::GetInstance()->GetFade();
-
-			if (pFade->GetFade() == CFade::FADE_NONE)
+			//トロフィーのフラグ状態を取得
+			vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+			//トロフィーを取得したことがなかったら
+			if (flag[(int)CTrophy::TROPHY::ENDROLL] == false)
 			{
-				//サウンド取得
-				CSound *sound;
-				sound = CManager::GetInstance()->GetSound();
-				sound->Play(CSound::SOUND_LABEL::DECISION_SE);
-
-				//タイトルシーンに遷移
-				pFade->SetFade(CManager::MODE::TITLE);
-
-				//トロフィーのフラグ状態を取得
-				vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
-				//トロフィーを取得したことがなかったら
-				if (flag[(int)CTrophy::TROPHY::ENDROLL] == false)
-				{
-					//取得させる
-					flag[(int)CTrophy::TROPHY::ENDROLL] = true;
-					//フラグを立てる
-					CManager::GetInstance()->GetPlayData()->SetFlag(flag);
-					CHistory::Create(CTrophy::TROPHY::ENDROLL);
-				}
+				//取得させる
+				flag[(int)CTrophy::TROPHY::ENDROLL] = true;
+				//フラグを立てる
+				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+				CHistory::Create(CTrophy::TROPHY::ENDROLL);
 			}
 		}
 	}

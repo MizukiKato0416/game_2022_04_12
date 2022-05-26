@@ -1273,6 +1273,7 @@ void CGame01::Click(void)
 				flag[(int)CTrophy::TROPHY::ROCKY_ANGRY] = true;
 				//フラグを立てる
 				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+				CHistory::Create(CTrophy::TROPHY::ROCKY_ANGRY);
 			}
 
 			//メッセージを出す状態にする

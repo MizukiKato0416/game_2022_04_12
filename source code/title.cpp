@@ -197,13 +197,6 @@ void CTitle::SeletMode(void)
 		{
 			if (strncmp("ENDROLL", m_pasword.c_str(), 8) == 0)
 			{
-				vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
-				if (flag[(int)CTrophy::TROPHY::ENDROLL] == false)
-				{
-					flag[(int)CTrophy::TROPHY::ENDROLL] = true;
-
-					CManager::GetInstance()->GetPlayData()->SetFlag(flag);
-				}
 				sound->ControllVoice(CSound::SOUND_LABEL::DECISION_SE, 1.2f);
 				sound->Play(CSound::SOUND_LABEL::DECISION_SE);
 				fade->SetFade(CManager::MODE::ENDING);
