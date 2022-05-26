@@ -12,6 +12,7 @@
 #include "input_mouse.h"
 #include "play_data.h"
 #include "trophy.h"
+#include "dialog.h"
 
 #ifdef _DEBUG
 #include "input_keyboard.h"
@@ -34,6 +35,7 @@ CEndingScene::CEndingScene()
 {
 	m_pObject2D = nullptr;
 	m_pNextDialogUI = nullptr;
+	m_pDialog = nullptr;
 }
 
 //================================================
@@ -71,6 +73,10 @@ HRESULT CEndingScene::Init(void)
                                     D3DXVECTOR3(SCREEN_WIDTH, ENDING_SCENE_ENDROLL_SIZE_Y, 0.0f),
 		                            static_cast<int>(CObject::PRIORITY::UI));
 	m_pObject2D->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("endroll.png"));
+
+	//‰ï˜b•¶‚Ì¶¬
+	m_pDialog = CDialog::Create(CDialog::SCENE_TYPE::ENDROLL_SCENE);
+	m_pDialog->SetDialog(0);
 
 	return S_OK;
 }

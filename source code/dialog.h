@@ -7,6 +7,7 @@
 
 #include "object.h"
 #include "object2D.h"
+#include "manager.h"
 
 //前方宣言
 class CLetter;
@@ -35,6 +36,7 @@ typedef struct
 class CDialog : public CObject
 {
 public:
+	//ポーズの種類
 	enum class POSE
 	{
 		NORMAL = 0,	    //仁王立ち
@@ -42,6 +44,7 @@ public:
 		HNDS_UP,	    //両手を挙げる
 		MAX
 	};
+	//顔の種類
 	enum class FACE
 	{
 		SMILE = 0,		//笑顔
@@ -53,9 +56,18 @@ public:
 		MELTS,			//とろけ顔
 		MAX
 	};
+	//フレームの種類
 	enum class FRAME
 	{
 		NORMAL = 0,		//普通
+		MAX
+	};
+	//会話文を出すシーンの種類
+	enum class SCENE_TYPE
+	{
+		NONE = 0,
+		CLICK_SCENE,		//クリック連打のシーン
+		ENDROLL_SCENE,		//エンドロールのシーン
 		MAX
 	};
 
@@ -67,7 +79,7 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	static CDialog *Create(void);
+	static CDialog *Create(const SCENE_TYPE &sceneType);
 	bool Dialog(const int &nCntDialog);		//セリフ処理
 	void UninitDialog(void);				//セリフ破棄処理
 	void SetDialog(const int &nNumDialog);	//セリフ設定処理
@@ -96,5 +108,9 @@ private:
 	int m_nCountFrame;					//フレームのカウンタ
 	bool m_bDialogFinish;				//全文が表示されたかどうか
 	int m_nMaxDialog;					//総数
+	SCENE_TYPE m_sceneType;				//会話を出すシーンの種類
+	bool m_bRead;						//読み込み始めるかどうか
+	CManager::MODE m_nextScene;			//シーンの遷移先
+	bool m_bUninit;						//消すかどうか
 };
 #endif // !_DIALOG_H_

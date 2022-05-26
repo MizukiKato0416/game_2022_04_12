@@ -9,6 +9,7 @@
 //前方宣言
 class CObject2D;
 class CNextDialogUI;
+class CDialog;
 
 //================================================
 //マクロ定義
@@ -33,6 +34,7 @@ public:
 private:
 	CObject2D *m_pObject2D;				//object2Dのポインタ
 	CNextDialogUI *m_pNextDialogUI;		//次のセリフに行くUIのポインタ
+	CDialog *m_pDialog;					//会話のポインタ
 };
 
 //================================================

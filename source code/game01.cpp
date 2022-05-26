@@ -1249,9 +1249,20 @@ void CGame01::Click(void)
 			sound->ControllVoice(CSound::SOUND_LABEL::ANGRY_SE, 1.4f);
 
 			//セリフクラスの生成
-			m_pDialog = CDialog::Create();
+			m_pDialog = CDialog::Create(CDialog::SCENE_TYPE::CLICK_SCENE);
 			//セリフ生成
 			m_pDialog->SetDialog(0);
+
+			//トロフィーのフラグ状態を取得
+			vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+			//トロフィーを取得したことがなかったら
+			if (flag[(int)CTrophy::TROPHY::ROCKY_ANGRY] == false)
+			{
+				//取得させる
+				flag[(int)CTrophy::TROPHY::ROCKY_ANGRY] = true;
+				//フラグを立てる
+				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+			}
 
 			//メッセージを出す状態にする
 			m_bDialog = true;

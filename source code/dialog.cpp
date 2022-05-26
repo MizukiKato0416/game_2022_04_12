@@ -6,7 +6,6 @@
 #include "dialog.h"
 #include "letter.h"
 #include "sound.h"
-#include "manager.h"
 #include "next_dialog_ui.h"
 #include "input_mouse.h"
 #include "fade.h"
@@ -55,6 +54,10 @@ CDialog::CDialog(CObject::PRIORITY Priority) :CObject(Priority)
 	m_nCountFrame = 0;
 	m_bDialogFinish = false;
 	m_nMaxDialog = 0;
+	m_sceneType = SCENE_TYPE::NONE;
+	m_bRead = false;
+	m_nextScene = CManager::MODE::TITLE;
+	m_bUninit = false;
 }
 
 //================================================
@@ -87,74 +90,128 @@ HRESULT CDialog::Init()
 	m_pNextDialogUI = nullptr;
 	m_nCountFrame = 0;
 	m_bDialogFinish = false;
+	m_bRead = false;
+	m_bUninit = false;
 
 	char cString[DIALOG_MAX_STRING];
 	FILE *file;
 	file = fopen("data/dialog_ss.txt", "r");
+
+	//タイプによって読み込み始める位置を変える
+	string sBeginSceneType;
+	string sEndSceneType;
+	switch (m_sceneType)
+	{
+	case CDialog::SCENE_TYPE::CLICK_SCENE:
+		sBeginSceneType = "BEGIN_CLICK_SCENE_DIALOG\n";
+		sEndSceneType = "END_CLICK_SCENE_DIALOG\n";
+		break;
+	case CDialog::SCENE_TYPE::ENDROLL_SCENE:
+		sBeginSceneType = "BEGIN_ENDROLL_SCENE_DIALOG\n";
+		sEndSceneType = "END_ENDROLL_SCENE_DIALOG\n";
+		break;
+	default:
+		break;
+	}
 
 	if (file != NULL)
 	{
 		//一行ずつ保存
 		while (fgets(cString, DIALOG_MAX_STRING, file) != NULL)
 		{
-			//BEGIN_DIALOGと書かれていたら
-			if (strncmp("BEGIN_DIALOG\n", cString, 14) == 0)
+			//END_SCRIPTと書かれていたら
+			if (strncmp("END_SCRIPT", cString, 11) == 0)
 			{
-				//初期化
-				DIALOG_BODY dialogBody;
-				dialogBody.nPersonPose = 0;
-				dialogBody.nPersonFace = 0;
-				dialogBody.nFrame = 0;
-
-				//配列を増やす
-				m_dialogBody.push_back(dialogBody);
-				//ポーズを読み込む
-				fscanf(file, "%*s%*s%d", &m_dialogBody[m_nMaxDialog].nPersonPose);
-				//顔を読み込む
-				fscanf(file, "%*s%*s%d", &m_dialogBody[m_nMaxDialog].nPersonFace);
-				//フレームを読み込む
-				fscanf(file, "%*s%*s%d", &m_dialogBody[m_nMaxDialog].nFrame);
-
-				char name_buf[1][DIALOG_MAX_STRING];
-				string name;
-
-				fscanf(file, "%s", name_buf[0]);
-
-				name = name_buf[0];
-
-				// SJIS → wstring
-				int iBufferSize = MultiByteToWideChar(CP_ACP,
-					0,
-					name.c_str(),
-					-1,
-					(wchar_t*)NULL,
-					0);
-
-				// バッファの取得
-				wchar_t* cpUCS2 = new wchar_t[iBufferSize];
-
-				// SJIS → wstring
-				MultiByteToWideChar(CP_ACP,
-					0,
-					name.c_str(),
-					-1,
-					cpUCS2,
-					iBufferSize);
-
-				// stringの生成
-				wstring utextbuf(cpUCS2, cpUCS2 + iBufferSize - 1);
-
-				// バッファの破棄
-				delete[] cpUCS2;
-
-				m_dialog.push_back(utextbuf);
-
-				//総数を増やす
-				m_nMaxDialog++;
-			}
-			else if (strncmp("END_SCRIPT", cString, 11) == 0)
-			{//END_SCRIPTと書かれていたら
+				//処理をやめる
 				break;
+			}
+
+			//読み込んでいない態なら
+			if (m_bRead == false)
+			{
+				//既定の文字が書かれていたら
+				if (strncmp(sBeginSceneType.c_str(), cString, sBeginSceneType.size()) == 0)
+				{
+					//読み込み始める
+					m_bRead = true;
+				}
+			}
+			
+
+			//読み込み始める状態なら
+			if (m_bRead == true)
+			{
+				//SET_NEXT_SCENEと書かれていたら
+				if (strncmp("SET_NEXT_SCENE\n", cString, 16) == 0)
+				{
+					//次のシーンを読み込む
+					fscanf(file, "%*s%*s%d", &m_nextScene);
+				}
+				else if (strncmp(sEndSceneType.c_str(), cString, sEndSceneType.size()) == 0)
+				{//既定の文字が書かれていたら
+					//処理をやめる
+					m_bRead = false;
+					break;
+				}
+				else if (strncmp("UNINIT_DIALOG\n", cString, 15) == 0)
+				{//UNINIT_DIALOGと書かれていたら
+					//最後にクリックを押したときにこのクラスを消す
+					m_bUninit = true;
+				}
+				else if (strncmp("BEGIN_DIALOG\n", cString, 14) == 0)
+				{//BEGIN_DIALOGと書かれていたら
+					//初期化
+					DIALOG_BODY dialogBody;
+					dialogBody.nPersonPose = 0;
+					dialogBody.nPersonFace = 0;
+					dialogBody.nFrame = 0;
+
+					//配列を増やす
+					m_dialogBody.push_back(dialogBody);
+					//ポーズを読み込む
+					fscanf(file, "%*s%*s%d", &m_dialogBody[m_nMaxDialog].nPersonPose);
+					//顔を読み込む
+					fscanf(file, "%*s%*s%d", &m_dialogBody[m_nMaxDialog].nPersonFace);
+					//フレームを読み込む
+					fscanf(file, "%*s%*s%d", &m_dialogBody[m_nMaxDialog].nFrame);
+
+					char name_buf[1][DIALOG_MAX_STRING];
+					string name;
+
+					fscanf(file, "%s", name_buf[0]);
+
+					name = name_buf[0];
+
+					// SJIS → wstring
+					int iBufferSize = MultiByteToWideChar(CP_ACP,
+						0,
+						name.c_str(),
+						-1,
+						(wchar_t*)NULL,
+						0);
+
+					// バッファの取得
+					wchar_t* cpUCS2 = new wchar_t[iBufferSize];
+
+					// SJIS → wstring
+					MultiByteToWideChar(CP_ACP,
+						0,
+						name.c_str(),
+						-1,
+						cpUCS2,
+						iBufferSize);
+
+					// stringの生成
+					wstring utextbuf(cpUCS2, cpUCS2 + iBufferSize - 1);
+
+					// バッファの破棄
+					delete[] cpUCS2;
+
+					m_dialog.push_back(utextbuf);
+
+					//総数を増やす
+					m_nMaxDialog++;
+				}
 			}
 		}
 	}
@@ -221,24 +278,42 @@ void CDialog::Update(void)
 					//再生する
 					sound->Play(CSound::SOUND_LABEL::DECISION_SE);
 
-					//フェード取得処理
-					CFade *pFade;
-					pFade = CManager::GetInstance()->GetFade();
-
-					if (pFade->GetFade() == CFade::FADE_NONE)
+					//消す設定になっていたら
+					if (m_bUninit == true)
 					{
-						//タイトルシーンに遷移
-						pFade->SetFade(CManager::MODE::TITLE);
-
-						//トロフィーのフラグ状態を取得
-						vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
-						//トロフィーを取得したことがなかったら
-						if (flag[(int)CTrophy::TROPHY::ROCKY_ANGRY] == false)
+						//消す
+						UninitDialog();
+						//フレームの削除
+						if (m_pFrame != nullptr)
 						{
-							//取得させる
-							flag[(int)CTrophy::TROPHY::ROCKY_ANGRY] = true;
-							//フラグを立てる
-							CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+							m_pFrame->Uninit();
+							m_pFrame = nullptr;
+						}
+						//顔の削除
+						if (m_pPersonFace != nullptr)
+						{
+							m_pPersonFace->Uninit();
+							m_pPersonFace = nullptr;
+						}
+						//ポーズの削除
+						if (m_pPersonPose != nullptr)
+						{
+							m_pPersonPose->Uninit();
+							m_pPersonPose = nullptr;
+						}
+						Uninit();
+						return;
+					}
+					else
+					{
+						//フェード取得処理
+						CFade *pFade;
+						pFade = CManager::GetInstance()->GetFade();
+
+						if (pFade->GetFade() == CFade::FADE_NONE)
+						{
+							//指定されたシーンに遷移
+							pFade->SetFade(m_nextScene);
 						}
 					}
 				}
@@ -258,7 +333,7 @@ void CDialog::Draw(void)
 //================================================
 //生成処理
 //================================================
-CDialog *CDialog::Create(void)
+CDialog *CDialog::Create(const SCENE_TYPE &sceneType)
 {
 	//インスタンスの生成
 	CDialog *pDialog = nullptr;
@@ -267,6 +342,7 @@ CDialog *CDialog::Create(void)
 		pDialog = new CDialog();
 		if (pDialog != nullptr)
 		{
+			pDialog->m_sceneType = sceneType;
 			pDialog->Init();
 		}
 	}
