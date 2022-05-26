@@ -50,7 +50,7 @@ void main(void)
 		th.detach();
 		while (pListenner != NULL)
 		{
-			if (g_accept_count <= 4)
+			if (g_accept_count <= 10)
 			{
 				thread th(Accept, pListenner);
 
