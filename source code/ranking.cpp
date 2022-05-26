@@ -205,7 +205,7 @@ void CRanking::Connect(CTcpClient *pCommu, CCommunicationData *pCommuData, D3DXV
 
 	pCommu->Init();
 
-	for (int cout_connect = 0; cout_connect < 3; cout_connect++)
+	for (int cout_connect = 0; cout_connect < 2; cout_connect++)
 	{
 		connect = pCommu->Connect();
 
@@ -228,7 +228,7 @@ void CRanking::Connect(CTcpClient *pCommu, CCommunicationData *pCommuData, D3DXV
 		}
 		else if (connect == false)
 		{
-			if (cout_connect == 2)
+			if (cout_connect == 1)
 			{
 				*bConnect = false;
 				CreateScore(pos, size);

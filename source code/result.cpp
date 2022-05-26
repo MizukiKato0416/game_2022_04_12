@@ -89,7 +89,8 @@ void CResult::Update(void)
 		pFade = CManager::GetInstance()->GetFade();
 
 		if (pFade->GetFade() == CFade::FADE_NONE &&
-			m_pCommu == nullptr)
+			m_pCommu == nullptr &&
+			m_pRank->GetOnece() == true)
 		{
 			sound->ControllVoice(CSound::SOUND_LABEL::DECISION_SE, 1.2f);
 			sound->Play(CSound::SOUND_LABEL::DECISION_SE);
@@ -97,19 +98,22 @@ void CResult::Update(void)
 		}
 	}
 
-	//カウンターを加算
-	m_nResultCounter++;
+	if (m_pCommu == nullptr &&
+		m_pRank->GetOnece() == true)
+	{
+		//カウンターを加算
+		m_nResultCounter++;
+	}
 
 	if (m_nResultCounter >= RESULT_TO_TITLE_COUNT)
 	{
-		m_nResultCounter = 0;
-
 		//フェード取得処理
 		CFade *pFade;
 		pFade = CManager::GetInstance()->GetFade();
 
 		if (pFade->GetFade() == CFade::FADE_NONE)
 		{
+			m_nResultCounter = 0;
 			//タイトルに行く
 			pFade->SetFade(CManager::MODE::TITLE);
 		}
