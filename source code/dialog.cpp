@@ -12,6 +12,7 @@
 #include "fade.h"
 #include "trophy.h"
 #include "play_data.h"
+#include "history_letter.h"
 
 //================================================
 //マクロ定義
@@ -239,6 +240,7 @@ void CDialog::Update(void)
 							flag[(int)CTrophy::TROPHY::ROCKY_ANGRY] = true;
 							//フラグを立てる
 							CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+							CHistory::Create(CTrophy::TROPHY::ROCKY_ANGRY);
 						}
 					}
 				}

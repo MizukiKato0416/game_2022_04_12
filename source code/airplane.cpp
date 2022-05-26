@@ -12,7 +12,6 @@
 #include "trophy.h"
 #include "sound.h"
 #include "history_letter.h"
-#include "history_letter.h"
 
 //================================================
 //É}ÉNÉçíËã`

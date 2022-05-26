@@ -28,6 +28,7 @@
 #include "happening.h"
 #include "sound.h"
 #include "trophy.h"
+#include "history_letter.h"
 
 //================================================
 //ƒ}ƒNƒ’è‹`
@@ -165,6 +166,7 @@ HRESULT CPlayer::Init(void)
 						flag[(int)CTrophy::TROPHY::GIRL] = true;
 
 						CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+						CHistory::Create(CTrophy::TROPHY::GIRL);
 					}
 					nModelType = CXload::X_TYPE_PLAYER_GIRL_BODY;
 				}
@@ -365,6 +367,7 @@ void CPlayer::Update(void)
 							flag[(int)CTrophy::TROPHY::KIYO] = true;
 
 							CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+							CHistory::Create(CTrophy::TROPHY::KIYO);
 						}
 						sound->ControllVoice(CSound::SOUND_LABEL::KIYO_BREAK_SE, 0.8f);
 						sound->Play(CSound::SOUND_LABEL::KIYO_BREAK_SE);
