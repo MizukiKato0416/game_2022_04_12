@@ -35,6 +35,7 @@ private:
 	CObject2D *m_pObject2D;				//object2Dのポインタ
 	CNextDialogUI *m_pNextDialogUI;		//次のセリフに行くUIのポインタ
 	CDialog *m_pDialog;					//会話のポインタ
+	int m_nConter;						//フレームカウンター
 };
 
 //================================================

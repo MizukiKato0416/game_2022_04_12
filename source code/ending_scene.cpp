@@ -22,8 +22,9 @@
 //================================================
 //マクロ定義
 //================================================
-#define ENDING_SCENE_ENDROLL_SIZE_Y		(5045.0f)		//エンドロールのサイズY
-#define ENDING_SCENE_ENDROLL_SPEED		(3.0f)			//エンドロールの速さ
+#define ENDING_SCENE_ENDROLL_SIZE_Y			(5045.0f)		//エンドロールのサイズY
+#define ENDING_SCENE_ENDROLL_SPEED			(3.0f)			//エンドロールの速さ
+#define ENDING_SCENE_CREATE_DIALOG_TIME		(60)			//会話が出てくるまでの時間
 
 //================================================
 //静的メンバ変数宣言
@@ -37,6 +38,7 @@ CEndingScene::CEndingScene()
 	m_pObject2D = nullptr;
 	m_pNextDialogUI = nullptr;
 	m_pDialog = nullptr;
+	m_nConter = 0;
 }
 
 //================================================
@@ -68,6 +70,7 @@ HRESULT CEndingScene::Init(void)
 
 	//変数初期化
 	m_pNextDialogUI = nullptr;
+	m_nConter = 0;
 
 	//エンドロールの生成
 	m_pObject2D = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT + ENDING_SCENE_ENDROLL_SIZE_Y / 2.0f, 0.0f),
@@ -104,22 +107,28 @@ void CEndingScene::Update(void)
 		//止める
 		pos.y = 0.0f - ENDING_SCENE_ENDROLL_SIZE_Y / 2.0f + SCREEN_HEIGHT;
 
-		if (m_pDialog == nullptr)
-		{
-			//会話文の生成
-			m_pDialog = CDialog::Create(CDialog::SCENE_TYPE::ENDROLL_SCENE);
-			m_pDialog->SetDialog(0);
+		//カウンターを加算
+		m_nConter++;
 
-			//トロフィーのフラグ状態を取得
-			vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
-			//トロフィーを取得したことがなかったら
-			if (flag[(int)CTrophy::TROPHY::ENDROLL] == false)
+		if (m_nConter > ENDING_SCENE_CREATE_DIALOG_TIME)
+		{
+			if (m_pDialog == nullptr)
 			{
-				//取得させる
-				flag[(int)CTrophy::TROPHY::ENDROLL] = true;
-				//フラグを立てる
-				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
-				CHistory::Create(CTrophy::TROPHY::ENDROLL);
+				//会話文の生成
+				m_pDialog = CDialog::Create(CDialog::SCENE_TYPE::ENDROLL_SCENE);
+				m_pDialog->SetDialog(0);
+
+				//トロフィーのフラグ状態を取得
+				vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
+				//トロフィーを取得したことがなかったら
+				if (flag[(int)CTrophy::TROPHY::ENDROLL] == false)
+				{
+					//取得させる
+					flag[(int)CTrophy::TROPHY::ENDROLL] = true;
+					//フラグを立てる
+					CManager::GetInstance()->GetPlayData()->SetFlag(flag);
+					CHistory::Create(CTrophy::TROPHY::ENDROLL);
+				}
 			}
 		}
 	}
