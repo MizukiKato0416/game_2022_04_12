@@ -205,39 +205,32 @@ void CRanking::Connect(CTcpClient *pCommu, CCommunicationData *pCommuData, D3DXV
 
 	pCommu->Init();
 
-	for (int cout_connect = 0; cout_connect < 2; cout_connect++)
+	connect = pCommu->Connect();
+
+	if (connect == true)
 	{
-		connect = pCommu->Connect();
+		*bConnect = true;
+		CreateScore(pos, size);
+		memcpy(&Send_Data, &nScore, sizeof(nScore));
+		pCommu->Send(&Send_Data[0], sizeof(int));
 
-		if (connect == true)
+		pCommu->Recv(&recv_data[0], sizeof(CCommunicationData::COMMUNICATION_DATA::ranking));
+		memcpy(&pData->ranking, recv_data, sizeof(CCommunicationData::COMMUNICATION_DATA::ranking));
+
+		//スコアの設定
+		for (int nCntRanking = 0; nCntRanking < MAX_RANKING; nCntRanking++)
 		{
-			*bConnect = true;
-			CreateScore(pos, size);
-			memcpy(&Send_Data, &nScore, sizeof(nScore));
-			pCommu->Send(&Send_Data[0], sizeof(int));
-
-			pCommu->Recv(&recv_data[0], sizeof(CCommunicationData::COMMUNICATION_DATA::ranking));
-			memcpy(&pData->ranking, recv_data, sizeof(CCommunicationData::COMMUNICATION_DATA::ranking));
-
-			//スコアの設定
-			for (int nCntRanking = 0; nCntRanking < MAX_RANKING; nCntRanking++)
-			{
-				m_apScore[nCntRanking]->SetScore(pData->ranking[nCntRanking]);
-			}
-			break;
+			m_apScore[nCntRanking]->SetScore(pData->ranking[nCntRanking]);
 		}
-		else if (connect == false)
+	}
+	else if (connect == false)
+	{
+		*bConnect = false;
+		CreateScore(pos, size);
+		//スコアの設定
+		for (int nCntRanking = 0; nCntRanking < MAX_RANKING; nCntRanking++)
 		{
-			if (cout_connect == 1)
-			{
-				*bConnect = false;
-				CreateScore(pos, size);
-				//スコアの設定
-				for (int nCntRanking = 0; nCntRanking < MAX_RANKING; nCntRanking++)
-				{
-					m_apScore[nCntRanking]->SetScore(0);
-				}
-			}
+			m_apScore[nCntRanking]->SetScore(0);
 		}
 	}
 

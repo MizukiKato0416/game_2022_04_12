@@ -17,19 +17,6 @@ class CNextDialogUI;
 //================================================
 //マクロ定義
 //================================================
-
-//================================================
-//構造体の定義
-//================================================
-//会話の構成
-typedef struct
-{
-	int nPersonPose;		//キャラポーズ
-	int nPersonFace;		//キャラ顔
-	int nFrame;				//フレーム
-	string sBgTexturePas;	//背景のテクスチャのパス
-} DIALOG_BODY;
-
 //================================================
 //クラスの定義
 //================================================
@@ -71,6 +58,34 @@ public:
 		ENDROLL_SCENE,		//エンドロールのシーン
 		MAX
 	};
+	//揺れる演出の種類
+	enum class SHAKE_TYPE
+	{
+		NONE = 0,			//なし
+		UP_TO_DOWN,			//上から下
+		DOWN_TO_UP,			//下から上
+		RIGHT_AND_LEFT,		//左右両方
+		//RANDOM,				//ランダム
+		MAX
+	};
+
+	//================================================
+	//構造体の定義
+	//================================================
+	//会話の構成
+	typedef struct
+	{
+		int nPersonPose;					//キャラポーズ
+		int nPersonFace;					//キャラ顔
+		int nFrame;							//フレーム
+		string sBgTexturePas;				//背景のテクスチャのパス
+		CDialog::SHAKE_TYPE shakeType;		//揺れの種類
+		int nNumShake;						//揺れの回数
+		D3DXVECTOR3 shakeSpeed;				//揺れの速さ
+		D3DXVECTOR3 shakeMinusSpeed;		//揺れの速さをマイナスする量
+		float fShakeWidth;					//揺れの幅
+	} DIALOG_BODY;
+
 
 	CDialog(CObject::PRIORITY Priority = CObject::PRIORITY::DIALOG);	//コンストラクタ
 	~CDialog();															//デストラクタ
@@ -91,6 +106,7 @@ public:
 
 private:
 	void LoadTxt(void);					//テキストファイルロード処理
+	void Shake(void);					//揺れ処理
 
 	vector<DIALOG_BODY> m_dialogBody;	//会話の構成
 	vector<CLetter*> m_pLetter;			//レターのポインタ
@@ -116,5 +132,12 @@ private:
 	CManager::MODE m_nextScene;			//シーンの遷移先
 	bool m_bUninit;						//消すかどうか
 	CObject2D *m_pBg;					//背景
+	bool m_bShake;						//揺れるかどうか
+	D3DXVECTOR3 m_createPosePos;		//生成時のポーズの位置
+	D3DXVECTOR3 m_createFacePos;		//生成時の顔の位置
+	D3DXVECTOR3 m_move;					//移動量
+	int m_nCounterShake;				//往復量
+	bool m_bShakeReturn;				//揺れの折り返し
 };
+
 #endif // !_DIALOG_H_

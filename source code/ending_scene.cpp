@@ -24,6 +24,7 @@
 //================================================
 #define ENDING_SCENE_ENDROLL_SIZE_Y			(5045.0f)		//エンドロールのサイズY
 #define ENDING_SCENE_ENDROLL_SPEED			(3.0f)			//エンドロールの速さ
+#define ENDING_SCENE_ENDROLL_SPEED_SKIP		(9.0f)			//SKIPするときのエンドロールの速さ
 #define ENDING_SCENE_CREATE_DIALOG_TIME		(60)			//会話が出てくるまでの時間
 
 //================================================
@@ -129,6 +130,19 @@ void CEndingScene::Update(void)
 					CHistory::Create(CTrophy::TROPHY::ENDROLL);
 				}
 			}
+		}
+	}
+	else
+	{
+		//マウス取得処理
+		CInputMouse *pInputMouse;
+		pInputMouse = CManager::GetInstance()->GetInputMouse();
+
+		//マウスを押した瞬間
+		if (pInputMouse->GetPress(CInputMouse::MOUSE_TYPE_LEFT) == true)
+		{
+			//さらに位置Yを既定の値増加
+			pos.y -= ENDING_SCENE_ENDROLL_SPEED_SKIP;
 		}
 	}
 

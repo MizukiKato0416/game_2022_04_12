@@ -436,19 +436,19 @@ void CTitle::PasWord(void)
 			{
 				if (m_letter_limitl < 15)
 				{
-					int name_size = m_key_name[key_update.first - 1].size();
+					int name_size = m_key_name[key_update.first].size();
 					for (int count_name = 0; count_name < name_size; count_name++)
 					{
 						m_pas_font.push_back(new CLetter);
 
 						m_pas_font[m_count_letter]->SetPos(D3DXVECTOR3((((SCREEN_WIDTH - 300.0f) - (480.0f / 2.0f)) + 32.5f) + (30.0f * m_count_letter), (((0.0f + 95.f) - (50.0f / 2.0f)) + 25.0f), 0.0f));
 						m_pas_font[m_count_letter]->SetSize(D3DXVECTOR3(15.0f, 15.0f, 0.0f));
-						m_pas_font[m_count_letter]->SetText(m_key_name[key_update.first - 1][count_name]);
+						m_pas_font[m_count_letter]->SetText(m_key_name[key_update.first][count_name]);
 						m_pas_font[m_count_letter]->SetFontSize(300);
 						m_pas_font[m_count_letter]->SetFontWeight(500);
 						m_pas_font[m_count_letter]->Init();
 						m_count_letter++;
-						m_pasword.push_back(m_letter_single[key_update.first - 1][count_name]);
+						m_pasword.push_back(m_letter_single[key_update.first][count_name]);
 						m_letter_limitl++;
 					}
 				}

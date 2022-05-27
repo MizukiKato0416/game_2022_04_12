@@ -60,6 +60,12 @@ CDialog::CDialog(CObject::PRIORITY Priority) :CObject(Priority)
 	m_nextScene = CManager::MODE::TITLE;
 	m_bUninit = false;
 	m_pBg = nullptr;
+	m_bShake = false;
+	m_createPosePos = { 0.0f, 0.0f, 0.0f };
+	m_createFacePos = { 0.0f, 0.0f, 0.0f };
+	m_move = { 0.0f, 0.0f, 0.0f };
+	m_nCounterShake = 0;
+	m_bShakeReturn = false;
 }
 
 //================================================
@@ -95,6 +101,12 @@ HRESULT CDialog::Init()
 	m_bRead = false;
 	m_bUninit = false;
 	m_pBg = nullptr;
+	m_bShake = false;
+	m_createPosePos = { 0.0f, 0.0f, 0.0f };
+	m_createFacePos = { 0.0f, 0.0f, 0.0f };
+	m_move = { 0.0f, 0.0f, 0.0f };
+	m_nCounterShake = 0;
+	m_bShakeReturn = false;
 
 	//テキストファイルロード処理
 	LoadTxt();
@@ -120,6 +132,13 @@ void CDialog::Update(void)
 {
 	if (m_bCreateFinish == true)
 	{
+		//揺れる状態になっているなら
+		if (m_bShake == true)
+		{
+			//揺れる処理
+			Shake();
+		}
+
 		//総数以下だったら
 		if (m_nDialogNum < m_nMaxDialog)
 		{
@@ -127,7 +146,7 @@ void CDialog::Update(void)
 			m_bDialogFinish = Dialog(m_nDialogNum);
 		}
 		//全文が表示されたら
-		if (m_bDialogFinish)
+		if (m_bDialogFinish == true)
 		{
 			if (m_pNextDialogUI == nullptr)
 			{
@@ -135,10 +154,7 @@ void CDialog::Update(void)
 				m_pNextDialogUI = CNextDialogUI::Create(D3DXVECTOR3(NEXT_DILOG_UI_POS_X, NEXT_DILOG_UI_POS_Y, 0.0f),
 					                                    D3DXVECTOR3(NEXT_DILOG_UI_SIZE, NEXT_DILOG_UI_SIZE, 0.0f));
 				m_pNextDialogUI->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("click_ui.png"));
-				//全文を表示した状態にする
-				m_bDialogFinish = true;
 			}
-
 
 			//マウス取得処理
 			CInputMouse *pInputMouse;
@@ -205,8 +221,35 @@ void CDialog::Update(void)
 						{
 							//タイトルシーンに遷移
 							pFade->SetFade(m_nextScene);
+							//消す
+							UninitDialog();
+							//背景の削除
+							if (m_pBg != nullptr)
+							{
+								m_pBg->Uninit();
+								m_pBg = nullptr;
+							}
+							//フレームの削除
+							if (m_pFrame != nullptr)
+							{
+								m_pFrame->Uninit();
+								m_pFrame = nullptr;
+							}
+							//顔の削除
+							if (m_pPersonFace != nullptr)
+							{
+								m_pPersonFace->Uninit();
+								m_pPersonFace = nullptr;
+							}
+							//ポーズの削除
+							if (m_pPersonPose != nullptr)
+							{
+								m_pPersonPose->Uninit();
+								m_pPersonPose = nullptr;
+							}
 						}
 					}
+					
 				}
 			}
 		}
@@ -308,9 +351,19 @@ bool CDialog::Dialog(const int &nCntDialog)
 //================================================
 void CDialog::UninitDialog(void)
 {
+	if (m_pPersonPose != nullptr && m_pPersonFace != nullptr)
+	{
+		//位置設定
+		m_pPersonPose->SetPos(m_createPosePos, m_pPersonPose->GetSize());
+		m_pPersonFace->SetPos(m_createFacePos, m_pPersonFace->GetSize());
+	}
 	m_nDialogCntX = 0;
 	m_nDialogCntY = 0;
 	m_nDialogDelay = 0;
+	m_bShake = false;
+	m_move = { 0.0f, 0.0f, 0.0f };
+	m_nCounterShake = 0;
+	m_bShakeReturn = false;
 
 	int nSize = m_pLetter.size();
 
@@ -414,7 +467,23 @@ void CDialog::SetDialog(const int &nNumDialog)
 			m_pPersonFace->SetTex((int)m_faceType, (int)FACE::MAX);
 		}
 	}
+	//生成を終了した状態にする
 	m_bCreateFinish = true;
+
+	//揺れのタイプがNONEではないとき
+	if (m_dialogBody[nNumDialog].shakeType != SHAKE_TYPE::NONE)
+	{
+		//揺れる状態にする
+		m_bShake = true;
+		//生成時の位置を保存
+		m_createPosePos = m_pPersonPose->GetPos();
+		m_createFacePos = m_pPersonFace->GetPos();
+
+		//移動量を設定
+		m_move = m_dialogBody[nNumDialog].shakeSpeed;
+
+	}
+
 }
 
 //================================================
@@ -477,6 +546,11 @@ void CDialog::LoadTxt(void)
 					dialogBody.nPersonFace = 0;
 					dialogBody.nFrame = 0;
 					dialogBody.sBgTexturePas.clear();
+					dialogBody.shakeType = SHAKE_TYPE::NONE;
+					dialogBody.nNumShake = 0;
+					dialogBody.shakeSpeed = {0.0f, 0.0f, 0.0f};
+					dialogBody.shakeMinusSpeed = {0.0f, 0.0f, 0.0f};
+					dialogBody.fShakeWidth = 0.0f;
 
 					//配列を増やす
 					m_dialogBody.push_back(dialogBody);
@@ -551,6 +625,19 @@ void CDialog::LoadTxt(void)
 					//代入
 					m_dialogBody[m_nMaxDialog].sBgTexturePas = sPas;
 				}
+				else if (strncmp("SET_SHAKE\n", cString, 11) == 0)
+				{//SET_SHAKEと書かれていたら
+					//タイプを読み込む
+					fscanf(file, "%*s%*s%d", &m_dialogBody[m_nMaxDialog].shakeType);
+					//回数を読み込む
+					fscanf(file, "%*s%*s%d", &m_dialogBody[m_nMaxDialog].nNumShake);
+					//スピードを読み込む
+					fscanf(file, "%*s%*s%f%f%f", &m_dialogBody[m_nMaxDialog].shakeSpeed.x, &m_dialogBody[m_nMaxDialog].shakeSpeed.y, &m_dialogBody[m_nMaxDialog].shakeSpeed.z);
+					//スピードをマイナスする量を読み込む
+					fscanf(file, "%*s%*s%f%f%f", &m_dialogBody[m_nMaxDialog].shakeMinusSpeed.x, &m_dialogBody[m_nMaxDialog].shakeMinusSpeed.y , &m_dialogBody[m_nMaxDialog].shakeMinusSpeed.z);
+					//幅を読み込む
+					fscanf(file, "%*s%*s%f", &m_dialogBody[m_nMaxDialog].fShakeWidth);
+				}
 				else if (strncmp("END_DIALOG\n", cString, 12) == 0)
 				{//END_DIALOGと書かれていたら
 					//総数を増やす
@@ -560,4 +647,88 @@ void CDialog::LoadTxt(void)
 		}
 	}
 	fclose(file);
+}
+
+//================================================
+//揺れ処理
+//================================================
+void CDialog::Shake(void)
+{
+	if (m_pPersonPose != nullptr && m_pPersonFace != nullptr)
+	{
+		//立ち絵と顔の位置を取得
+		D3DXVECTOR3 posePos = m_pPersonPose->GetPos();
+		D3DXVECTOR3 facePos = m_pPersonFace->GetPos();
+
+		//位置をずらす
+		posePos += m_move;
+		facePos += m_move;
+
+		//位置設定
+		m_pPersonPose->SetPos(posePos, m_pPersonPose->GetSize());
+		m_pPersonFace->SetPos(facePos, m_pPersonFace->GetSize());
+
+		//移動量を減らしていく
+		m_move += m_dialogBody[m_nDialogNum].shakeMinusSpeed;
+
+		//折り返していなかったら
+		if (m_bShakeReturn == false)
+		{
+			if ((m_dialogBody[m_nDialogNum].shakeType == SHAKE_TYPE::UP_TO_DOWN && posePos.y < m_createPosePos.y - m_dialogBody[m_nDialogNum].fShakeWidth) ||
+				(m_dialogBody[m_nDialogNum].shakeType == SHAKE_TYPE::DOWN_TO_UP && posePos.y > m_createPosePos.y + m_dialogBody[m_nDialogNum].fShakeWidth) ||
+				(m_dialogBody[m_nDialogNum].shakeType == SHAKE_TYPE::RIGHT_AND_LEFT && posePos.x > m_createPosePos.x + m_dialogBody[m_nDialogNum].fShakeWidth))
+			{
+				//折り返す
+				m_bShakeReturn = true;
+				//逆向きにする
+				m_dialogBody[m_nDialogNum].shakeSpeed *= -1.0f;
+				m_dialogBody[m_nDialogNum].shakeMinusSpeed *= -1.0f;
+				//移動量を設定
+				m_move = m_dialogBody[m_nDialogNum].shakeSpeed;
+				//折り返した回数を1増やす
+				m_nCounterShake++;
+			}
+		}
+		else
+		{
+			if ((m_dialogBody[m_nDialogNum].shakeType == SHAKE_TYPE::UP_TO_DOWN && posePos.y > m_createPosePos.y + m_dialogBody[m_nDialogNum].fShakeWidth) ||
+				(m_dialogBody[m_nDialogNum].shakeType == SHAKE_TYPE::DOWN_TO_UP && posePos.y < m_createPosePos.y - m_dialogBody[m_nDialogNum].fShakeWidth) ||
+				(m_dialogBody[m_nDialogNum].shakeType == SHAKE_TYPE::RIGHT_AND_LEFT && posePos.x < m_createPosePos.x - m_dialogBody[m_nDialogNum].fShakeWidth))
+			{
+				//折り返す
+				m_bShakeReturn = false;
+				//逆向きにする
+				m_dialogBody[m_nDialogNum].shakeSpeed *= -1.0f;
+				m_dialogBody[m_nDialogNum].shakeMinusSpeed *= -1.0f;
+				//移動量を設定
+				m_move = m_dialogBody[m_nDialogNum].shakeSpeed;
+				//折り返した回数を1増やす
+				m_nCounterShake++;
+			}
+		}
+
+
+		//指定した回数分終えたとき
+		if (m_nCounterShake == m_dialogBody[m_nDialogNum].nNumShake * 2)
+		{
+			if ((m_move.y < 0.0f && posePos.y < m_createPosePos.y) || (m_move.y > 0.0f && posePos.y > m_createPosePos.y))
+			{
+				posePos.y = m_createPosePos.y;
+				facePos.y = m_createFacePos.y;
+				m_bShake = false;
+				//位置設定
+				m_pPersonPose->SetPos(posePos, m_pPersonPose->GetSize());
+				m_pPersonFace->SetPos(facePos, m_pPersonFace->GetSize());
+			}
+			else if (m_move.x > 0.0f && posePos.x > m_createPosePos.x)
+			{
+				posePos.x = m_createPosePos.x;
+				facePos.x = m_createFacePos.x;
+				m_bShake = false;
+				//位置設定
+				m_pPersonPose->SetPos(posePos, m_pPersonPose->GetSize());
+				m_pPersonFace->SetPos(facePos, m_pPersonFace->GetSize());
+			}
+		}
+	}
 }
