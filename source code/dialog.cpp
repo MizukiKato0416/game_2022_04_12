@@ -59,6 +59,7 @@ CDialog::CDialog(CObject::PRIORITY Priority) :CObject(Priority)
 	m_bRead = false;
 	m_nextScene = CManager::MODE::TITLE;
 	m_bUninit = false;
+	m_pBg = nullptr;
 }
 
 //================================================
@@ -93,130 +94,14 @@ HRESULT CDialog::Init()
 	m_bDialogFinish = false;
 	m_bRead = false;
 	m_bUninit = false;
+	m_pBg = nullptr;
 
-	char cString[DIALOG_MAX_STRING];
-	FILE *file;
-	file = fopen("data/dialog_ss.txt", "r");
+	//テキストファイルロード処理
+	LoadTxt();
 
-	//タイプによって読み込み始める位置を変える
-	string sBeginSceneType;
-	string sEndSceneType;
-	switch (m_sceneType)
-	{
-	case CDialog::SCENE_TYPE::CLICK_SCENE:
-		sBeginSceneType = "BEGIN_CLICK_SCENE_DIALOG\n";
-		sEndSceneType = "END_CLICK_SCENE_DIALOG\n";
-		break;
-	case CDialog::SCENE_TYPE::ENDROLL_SCENE:
-		sBeginSceneType = "BEGIN_ENDROLL_SCENE_DIALOG\n";
-		sEndSceneType = "END_ENDROLL_SCENE_DIALOG\n";
-		break;
-	default:
-		break;
-	}
+	//セリフ生成
+	SetDialog(0);
 
-	if (file != NULL)
-	{
-		//一行ずつ保存
-		while (fgets(cString, DIALOG_MAX_STRING, file) != NULL)
-		{
-			//END_SCRIPTと書かれていたら
-			if (strncmp("END_SCRIPT", cString, 11) == 0)
-			{
-				//処理をやめる
-				break;
-			}
-
-			//読み込んでいない態なら
-			if (m_bRead == false)
-			{
-				//既定の文字が書かれていたら
-				if (strncmp(sBeginSceneType.c_str(), cString, sBeginSceneType.size()) == 0)
-				{
-					//読み込み始める
-					m_bRead = true;
-				}
-			}
-			
-
-			//読み込み始める状態なら
-			if (m_bRead == true)
-			{
-				//SET_NEXT_SCENEと書かれていたら
-				if (strncmp("SET_NEXT_SCENE\n", cString, 16) == 0)
-				{
-					//次のシーンを読み込む
-					fscanf(file, "%*s%*s%d", &m_nextScene);
-				}
-				else if (strncmp(sEndSceneType.c_str(), cString, sEndSceneType.size()) == 0)
-				{//既定の文字が書かれていたら
-					//処理をやめる
-					m_bRead = false;
-					break;
-				}
-				else if (strncmp("UNINIT_DIALOG\n", cString, 15) == 0)
-				{//UNINIT_DIALOGと書かれていたら
-					//最後にクリックを押したときにこのクラスを消す
-					m_bUninit = true;
-				}
-				else if (strncmp("BEGIN_DIALOG\n", cString, 14) == 0)
-				{//BEGIN_DIALOGと書かれていたら
-					//初期化
-					DIALOG_BODY dialogBody;
-					dialogBody.nPersonPose = 0;
-					dialogBody.nPersonFace = 0;
-					dialogBody.nFrame = 0;
-
-					//配列を増やす
-					m_dialogBody.push_back(dialogBody);
-					//ポーズを読み込む
-					fscanf(file, "%*s%*s%d", &m_dialogBody[m_nMaxDialog].nPersonPose);
-					//顔を読み込む
-					fscanf(file, "%*s%*s%d", &m_dialogBody[m_nMaxDialog].nPersonFace);
-					//フレームを読み込む
-					fscanf(file, "%*s%*s%d", &m_dialogBody[m_nMaxDialog].nFrame);
-
-					char name_buf[1][DIALOG_MAX_STRING];
-					string name;
-
-					fscanf(file, "%s", name_buf[0]);
-
-					name = name_buf[0];
-
-					// SJIS → wstring
-					int iBufferSize = MultiByteToWideChar(CP_ACP,
-						0,
-						name.c_str(),
-						-1,
-						(wchar_t*)NULL,
-						0);
-
-					// バッファの取得
-					wchar_t* cpUCS2 = new wchar_t[iBufferSize];
-
-					// SJIS → wstring
-					MultiByteToWideChar(CP_ACP,
-						0,
-						name.c_str(),
-						-1,
-						cpUCS2,
-						iBufferSize);
-
-					// stringの生成
-					wstring utextbuf(cpUCS2, cpUCS2 + iBufferSize - 1);
-
-					// バッファの破棄
-					delete[] cpUCS2;
-
-					m_dialog.push_back(utextbuf);
-
-					//総数を増やす
-					m_nMaxDialog++;
-				}
-			}
-		}
-	}
-	fclose(file);
 	return S_OK;
 }
 
@@ -284,6 +169,12 @@ void CDialog::Update(void)
 					{
 						//消す
 						UninitDialog();
+						//背景の削除
+						if (m_pBg != nullptr)
+						{
+							m_pBg->Uninit();
+							m_pBg = nullptr;
+						}
 						//フレームの削除
 						if (m_pFrame != nullptr)
 						{
@@ -458,6 +349,21 @@ void CDialog::SetDialog(const int &nNumDialog)
 	//フレームタイプに代入
 	m_faceType = (CDialog::FACE)m_dialogBody[nNumDialog].nPersonFace;
 
+	//生成されていなかったら且つ背景テクスチャのパスが入っていたら
+	if (m_pBg == nullptr && m_dialogBody[nNumDialog].sBgTexturePas.size() > 0)
+	{
+		//背景の生成
+		m_pBg = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
+			                      D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f),
+			                      static_cast<int>(CObject::PRIORITY::DIALOG));
+		//指定したテクスチャを設定
+		m_pBg->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture(m_dialogBody[nNumDialog].sBgTexturePas));
+	}
+	else if (m_pBg != nullptr  && m_dialogBody[nNumDialog].sBgTexturePas.size() > 0)
+	{//すでに生成されている場合
+		//指定したテクスチャを設定
+		m_pBg->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture(m_dialogBody[nNumDialog].sBgTexturePas));
+	}
 	//生成されていなかったら
 	if (m_pPersonPose == nullptr)
 	{
@@ -509,4 +415,149 @@ void CDialog::SetDialog(const int &nNumDialog)
 		}
 	}
 	m_bCreateFinish = true;
+}
+
+//================================================
+//テキストファイルロード処理
+//================================================
+void CDialog::LoadTxt(void)
+{
+	char cString[DIALOG_MAX_STRING];
+	FILE *file;
+	file = fopen("data/dialog_ss.txt", "r");
+
+	//タイプによって読み込み始める位置を変える
+	string sBeginSceneType;
+	string sEndSceneType;
+	switch (m_sceneType)
+	{
+	case CDialog::SCENE_TYPE::CLICK_SCENE:
+		sBeginSceneType = "BEGIN_CLICK_SCENE_DIALOG\n";
+		sEndSceneType = "END_CLICK_SCENE_DIALOG\n";
+		break;
+	case CDialog::SCENE_TYPE::ENDROLL_SCENE:
+		sBeginSceneType = "BEGIN_ENDROLL_SCENE_DIALOG\n";
+		sEndSceneType = "END_ENDROLL_SCENE_DIALOG\n";
+		break;
+	default:
+		break;
+	}
+
+	if (file != NULL)
+	{
+		//一行ずつ保存
+		while (fgets(cString, DIALOG_MAX_STRING, file) != NULL)
+		{
+			//END_SCRIPTと書かれていたら
+			if (strncmp("END_SCRIPT", cString, 11) == 0)
+			{
+				//処理をやめる
+				break;
+			}
+
+			//読み込んでいない態なら
+			if (m_bRead == false)
+			{
+				//既定の文字が書かれていたら
+				if (strncmp(sBeginSceneType.c_str(), cString, sBeginSceneType.size()) == 0)
+				{
+					//読み込み始める
+					m_bRead = true;
+				}
+			}
+
+			//読み込み始める状態なら
+			if (m_bRead == true)
+			{
+				if (strncmp("BEGIN_DIALOG\n", cString, 14) == 0)
+				{//BEGIN_DIALOGと書かれていたら
+					//初期化
+					DIALOG_BODY dialogBody;
+					dialogBody.nPersonPose = 0;
+					dialogBody.nPersonFace = 0;
+					dialogBody.nFrame = 0;
+					dialogBody.sBgTexturePas.clear();
+
+					//配列を増やす
+					m_dialogBody.push_back(dialogBody);
+
+					//ポーズを読み込む
+					fscanf(file, "%*s%*s%d", &m_dialogBody[m_nMaxDialog].nPersonPose);
+					//顔を読み込む
+					fscanf(file, "%*s%*s%d", &m_dialogBody[m_nMaxDialog].nPersonFace);
+					//フレームを読み込む
+					fscanf(file, "%*s%*s%d", &m_dialogBody[m_nMaxDialog].nFrame);
+
+					char name_buf[1][DIALOG_MAX_STRING];
+					string name;
+
+					fscanf(file, "%s", name_buf[0]);
+
+					name = name_buf[0];
+
+					// SJIS → wstring
+					int iBufferSize = MultiByteToWideChar(CP_ACP,
+						0,
+						name.c_str(),
+						-1,
+						(wchar_t*)NULL,
+						0);
+
+					// バッファの取得
+					wchar_t* cpUCS2 = new wchar_t[iBufferSize];
+
+					// SJIS → wstring
+					MultiByteToWideChar(CP_ACP,
+						0,
+						name.c_str(),
+						-1,
+						cpUCS2,
+						iBufferSize);
+
+					// stringの生成
+					wstring utextbuf(cpUCS2, cpUCS2 + iBufferSize - 1);
+
+					// バッファの破棄
+					delete[] cpUCS2;
+
+					m_dialog.push_back(utextbuf);
+				}
+				else if (strncmp("SET_NEXT_SCENE\n", cString, 16) == 0)
+				{//SET_NEXT_SCENEと書かれていたら
+					//次のシーンを読み込む
+					fscanf(file, "%*s%*s%d", &m_nextScene);
+				}
+				else if (strncmp(sEndSceneType.c_str(), cString, sEndSceneType.size()) == 0)
+				{//既定の文字が書かれていたら
+					//処理をやめる
+					m_bRead = false;
+					break;
+				}
+				else if (strncmp("UNINIT_DIALOG\n", cString, 15) == 0)
+				{//UNINIT_DIALOGと書かれていたら
+					//最後にクリックを押したときにこのクラスを消す
+					m_bUninit = true;
+				}
+				else if (strncmp("SET_BG\n", cString, 8) == 0)
+				{//SET_BGと書かれていたら
+					//代入用変数を用意
+					string sPas = "";
+					//テクスチャのパスを読み込む
+					fscanf(file, "%s", m_dialogBody[m_nMaxDialog].sBgTexturePas.c_str());
+					//代入
+					sPas = m_dialogBody[m_nMaxDialog].sBgTexturePas.c_str();
+					//配列の数を指定
+					m_dialogBody[m_nMaxDialog].sBgTexturePas.resize(m_dialogBody[m_nMaxDialog].sBgTexturePas.size());
+					//代入
+					m_dialogBody[m_nMaxDialog].sBgTexturePas = sPas;
+				}
+				else if (strncmp("END_DIALOG\n", cString, 12) == 0)
+				{//END_DIALOGと書かれていたら
+					//総数を増やす
+					m_nMaxDialog++;
+				}
+			}
+		}
+	}
+	fclose(file);
 }

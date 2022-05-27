@@ -8,6 +8,7 @@
 #include "object.h"
 #include "object2D.h"
 #include "manager.h"
+#include "texture.h"
 
 //前方宣言
 class CLetter;
@@ -26,7 +27,7 @@ typedef struct
 	int nPersonPose;		//キャラポーズ
 	int nPersonFace;		//キャラ顔
 	int nFrame;				//フレーム
-
+	string sBgTexturePas;	//背景のテクスチャのパス
 } DIALOG_BODY;
 
 //================================================
@@ -89,6 +90,8 @@ public:
 	bool GetDialogFinish(void) { return m_bDialogFinish; }
 
 private:
+	void LoadTxt(void);					//テキストファイルロード処理
+
 	vector<DIALOG_BODY> m_dialogBody;	//会話の構成
 	vector<CLetter*> m_pLetter;			//レターのポインタ
 	vector<wstring> m_dialog;			//セリフ
@@ -112,5 +115,6 @@ private:
 	bool m_bRead;						//読み込み始めるかどうか
 	CManager::MODE m_nextScene;			//シーンの遷移先
 	bool m_bUninit;						//消すかどうか
+	CObject2D *m_pBg;					//背景
 };
 #endif // !_DIALOG_H_

@@ -116,7 +116,6 @@ void CEndingScene::Update(void)
 			{
 				//会話文の生成
 				m_pDialog = CDialog::Create(CDialog::SCENE_TYPE::ENDROLL_SCENE);
-				m_pDialog->SetDialog(0);
 
 				//トロフィーのフラグ状態を取得
 				vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();

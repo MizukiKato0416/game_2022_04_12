@@ -132,6 +132,7 @@ CGame01::CGame01(CObject::PRIORITY Priority):CObject(Priority)
 	m_bAddCol = false;
 	m_nClick = 0;
 	m_bDialog = false;
+	m_pPause = nullptr;
 }
 
 //================================================
@@ -180,7 +181,7 @@ HRESULT CGame01::Init(void)
 	CManager::GetInstance()->GetPlayData()->SetScorePoint(pSocre);
 
 	//ポーズの生成
-	CPause::Create();
+	m_pPause = CPause::Create();
 
 	//プレイヤーの生成
 	m_pPlayer = CPlayer::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, -D3DX_PI / 2.0f, 0.0f));
@@ -292,7 +293,7 @@ HRESULT CGame01::Init(void)
 		m_pBg[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("02_cloudy.png"));
 
 		//ハードモードのUI生成
-		CObject2D *pHardModeUi = CObject2D::Create(D3DXVECTOR3(GAME01_HARD_MODE_UI_SIZE_X / 2.0f,
+		CObject2D *pHardModeUi = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH -  GAME01_HARD_MODE_UI_SIZE_X / 2.0f,
 			                                                   SCREEN_HEIGHT - GAME01_HARD_MODE_UI_SIZE_Y / 2.0f, 0.0f),
 			                                       D3DXVECTOR3(GAME01_HARD_MODE_UI_SIZE_X, GAME01_HARD_MODE_UI_SIZE_Y, 0.0f),
 			                                       static_cast<int>(CObject::PRIORITY::UI));
@@ -1243,15 +1244,9 @@ void CGame01::Click(void)
 		//カウンターを加算
 		m_nClick++;
 
-		//既定の値より大きくなったら
+		//既定の値になったら
 		if (m_nClick == GAME01_CLICK_END_NUM)
 		{
-			//マスクの生成
-			CObject2D *pMask = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f),
-				                                 D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f),
-				                                 static_cast<int>(CObject::PRIORITY::UI));
-			pMask->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("mask_gray.png"));
-
 			//サウンド取得
 			CSound *sound;
 			sound = CManager::GetInstance()->GetSound();
@@ -1260,9 +1255,7 @@ void CGame01::Click(void)
 			sound->ControllVoice(CSound::SOUND_LABEL::ANGRY_SE, 1.4f);
 
 			//セリフクラスの生成
-			m_pDialog = CDialog::Create(CDialog::SCENE_TYPE::CLICK_SCENE);
-			//セリフ生成
-			m_pDialog->SetDialog(0);
+			CDialog::Create(CDialog::SCENE_TYPE::CLICK_SCENE);
 
 			//トロフィーのフラグ状態を取得
 			vector<bool> flag = CManager::GetInstance()->GetPlayData()->GetFlag();
@@ -1274,6 +1267,14 @@ void CGame01::Click(void)
 				//フラグを立てる
 				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
 				CHistory::Create(CTrophy::TROPHY::ROCKY_ANGRY);
+			}
+
+			//ポーズが生成されているのなら
+			if (m_pPause != nullptr)
+			{
+				//消す
+				m_pPause->Uninit();
+				m_pPause = nullptr;
 			}
 
 			//メッセージを出す状態にする

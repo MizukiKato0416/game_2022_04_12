@@ -19,6 +19,7 @@ class CModelSingle;
 class CLetter;
 class CNextDialogUI;
 class CDialog;
+class CPause;
 
 //================================================
 //マクロ定義
@@ -95,7 +96,7 @@ private:
 	bool m_bAddCol;						//カラー加算の切り替え
 	int m_nClick;						//クリックした回数
 	bool m_bDialog;						//セリフを出しているかどうか	
-	CDialog *m_pDialog;					//会話のポインタ
+	CPause *m_pPause;					//のポインタ
 };	
 
 #endif // !_GAME01_H_

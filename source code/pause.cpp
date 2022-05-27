@@ -67,6 +67,12 @@ void CPause::Uninit(void)
 {
 	m_bPause = false;
 	
+	if (m_pPauseButton != nullptr)
+	{
+		m_pPauseButton->Uninit();
+		m_pPauseButton = nullptr;
+	}
+
 	//オブジェクトの破棄
 	Release();
 }

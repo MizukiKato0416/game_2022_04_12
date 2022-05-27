@@ -37,6 +37,9 @@ POSE = 2
 FACE = 4
 FRAME = 0
 u‚³‚Á‚«‚©‚çv
+SET_BG
+mask_gray.png
+
 END_DIALOG
 
 BEGIN_DIALOG
