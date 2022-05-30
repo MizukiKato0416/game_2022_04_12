@@ -28,6 +28,7 @@
 #define TROPHY_Y_LINE (4)				// トロフィーの億サイズ
 #define SCREEN_DIVISION_X_COUNT (9)		// 何分割を基本にするか
 #define SCREEN_DIVISION_Y_COUNT (3)		// 何分割を基本にするか
+#define MAX_ROOM_UI_FACTOR (3)			// トロフィールームの動かないUI数
 
 //=============================================================================
 // デフォルトコンストラクタ
@@ -50,14 +51,17 @@ CTrophy::~CTrophy()
 //=============================================================================
 HRESULT CTrophy::Init(void)
 {
+	// サウンドクラスを取得
 	CSound *sound;
 	sound = CManager::GetInstance()->GetSound();
 
+	// 前のシーンでの音を止めて別の音を出す
 	sound->Stop();
 	sound->Play(CSound::SOUND_LABEL::TROPHY_BGM);
 	sound->ControllVoice(CSound::SOUND_LABEL::TROPHY_BGM, 1.4f);
 
-	CObject2D *pObject2D[3];
+	// トロフィールームの生成
+	CObject2D *pObject2D[MAX_ROOM_UI_FACTOR];
 	pObject2D[0] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 	pObject2D[0]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Bg.png"));
 	pObject2D[1] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
@@ -65,28 +69,37 @@ HRESULT CTrophy::Init(void)
 	pObject2D[2] = CObject2D::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, 0.0f + 70.0f, 0.0f), D3DXVECTOR3(500.0f, 70.0f, 0.0f), static_cast<int>(CObject::PRIORITY::UI));
 	pObject2D[2]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("Trophy.png"));
 
+	// トロフィーフラグの取得
 	vector<bool> trophy_flag = CManager::GetPlayData()->GetFlag();
+	// トロフィーのサイズを取得
 	int size = trophy_flag.size();
 	for (int count_flag = 0; count_flag < size - 1; count_flag++)
 	{
+		// 取ってるやつがあるなら
 		if (trophy_flag[count_flag] == true)
 		{
+			// 取ってる数を+
 			m_count_get_trophy++;
 		}
 	}
+	// 全部取ってたら
 	if (m_count_get_trophy == size - 1)
 	{
+		// コンプリートフラグを立てる
 		trophy_flag[(int)TROPHY::COMPLETE] = true;
 
+		// フラグを保存
 		CManager::GetPlayData()->SetFlag(trophy_flag);
 		CHistory::Create(CTrophy::TROPHY::COMPLETE);
 	}
 
+	// トロフィーを並べる
 	int trophy_count = 0;
 	for (int count_y = 0; count_y < TROPHY_Y_LINE; count_y++)
 	{
 		for (int count_x = 0; count_x < TROPHY_X_LINE; count_x++)
 		{
+			// フラグが立ってたら
 			if (trophy_flag[trophy_count])
 			{
 				switch (trophy_count)
@@ -239,6 +252,7 @@ HRESULT CTrophy::Init(void)
 					break;
 				}
 			}
+			// フラグが立ってなかったら
 			else
 			{
 				m_icon.push_back(CObject2D::Create(D3DXVECTOR3((SCREEN_WIDTH / (float)SCREEN_DIVISION_X_COUNT) + (TROPHY_ICON_X_FEELING * count_x), (SCREEN_HEIGHT / (float)SCREEN_DIVISION_Y_COUNT) + (TROPHY_ICON_Y_FEELING * count_y), 0.0f),
@@ -246,14 +260,18 @@ HRESULT CTrophy::Init(void)
 				m_icon[trophy_count]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("trophy_question.png"));
 				m_type.push_back((TROPHY)trophy_count);
 			}
+			// トロフィーカウントの加算
 			trophy_count++;
+			// トロフィーカウントが最後まで行ったら
 			if (trophy_count >= (int)TROPHY::MAX)
 			{
+				// ぬける
 				break;
 			}
 		}
 	}
 
+	// 戻るボタンの生成
 	m_buck = CObject2D::Create(D3DXVECTOR3(0.0f + 80.0f, 0.0f + 80.0f, 0.0f), D3DXVECTOR3(80.0f, 80.0f, 70.0f), static_cast<int>(CObject::PRIORITY::UI));
 	m_buck->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("arrow.png"));
 
@@ -273,34 +291,37 @@ void CTrophy::Uninit(void)
 //=============================================================================
 void CTrophy::Update(void)
 {
-	CFade *fade;
-	CInputMouse *mouse;
-	D3DXVECTOR3 button_pos = m_buck->GetPos();
-	D3DXVECTOR3 button_size = m_buck->GetSize();
-	POINT point;
-	HWND hwnd;
-	CSound *sound;
-	vector<bool> trophy_flag = CManager::GetPlayData()->GetFlag();
-	sound = CManager::GetInstance()->GetSound();
-	int max_icon = m_icon.size();
-	hwnd = CManager::GetWindowHandle();
-	fade = CManager::GetFade();
-	mouse = CManager::GetInputMouse();
-	GetCursorPos(&point);
-	ScreenToClient(hwnd, &point);
+	CFade *fade;	// フェードクラス
+	CInputMouse *mouse;	// マウスクラス
+	D3DXVECTOR3 button_pos = m_buck->GetPos();	// 戻るボタンのpos
+	D3DXVECTOR3 button_size = m_buck->GetSize();// 戻るボタンのsize
+	POINT point;	// マウスの位置
+	HWND hwnd;	// ウィンドウハンドル
+	CSound *sound;	// サウンドクラス
+	vector<bool> trophy_flag = CManager::GetPlayData()->GetFlag();	// トロフィーフラグ
+	int max_icon = m_icon.size();	//トロフィーアイコンのサイズ
+	sound = CManager::GetInstance()->GetSound();	// サウンドクラスの取得
+	hwnd = CManager::GetWindowHandle();	// ウィンドウハンドルの取得
+	fade = CManager::GetFade();	// フェードクラスの取得
+	mouse = CManager::GetInputMouse();	// マウスクラスの取得
+	GetCursorPos(&point);	// マウス位置の取得
+	ScreenToClient(hwnd, &point);	// スクリーン座標をクライアント座標に変換
 
 	for (int icon = 0; icon < max_icon; icon++)
 	{
-		D3DXVECTOR3 pos = m_icon[icon]->GetPos();
-		D3DXVECTOR3 size = m_icon[icon]->GetSize();
-		D3DXCOLOR col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+		D3DXVECTOR3 pos = m_icon[icon]->GetPos();	// アイコンのpos
+		D3DXVECTOR3 size = m_icon[icon]->GetSize();	// アイコンのsize
+		D3DXCOLOR col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);	// ポリゴンのカラー
 
+		// マウスがトロフィーアイコンに触れていたら
 		if (pos.x - size.x / 2.0f <= point.x &&
 			pos.x + size.x / 2.0f >= point.x &&
 			pos.y - size.y / 2.0f <= point.y &&
 			pos.y + size.y / 2.0f >= point.y)
 		{
+			// α値を薄く
 			col.a = 0.5f;
+			// アイコンに合ったポリゴンの生成
 			if (m_type[icon] == TROPHY::AIRPLANE)
 			{
 				if (m_letter != nullptr)
@@ -664,28 +685,36 @@ void CTrophy::Update(void)
 				m_letter->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("letter_complete.png"));
 			}
 		}
+		// マウスが触れてなかったら
 		else
 		{
+			// α値を濃く
 			col.a = 1.0f;
 			m_icon[icon]->SetCol(col);
 		}
 	}
 
+	// 戻るボタンに触れていたら
 	if (button_pos.x - button_size.x / 2.0f <= point.x &&
 		button_pos.x + button_size.x / 2.0f >= point.x &&
 		button_pos.y - button_size.y / 2.0f <= point.y &&
 		button_pos.y + button_size.y / 2.0f >= point.y)
 	{
+		// 戻るボタンを薄く
 		m_buck->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.5f));
+		// 左クリックしていたら
 		if (mouse->GetTrigger(CInputMouse::MOUSE_TYPE_LEFT) == true)
 		{
+			// 音を鳴らしてタイトルへ
 			sound->ControllVoice(CSound::SOUND_LABEL::CANSEL_SE, 1.2f);
 			sound->Play(CSound::SOUND_LABEL::CANSEL_SE);
 			fade->SetFade(CManager::MODE::TITLE);
 		}
 	}
+	// 触れていなかったら
 	else
 	{
+		// 戻るボタンを濃く
 		m_buck->SetCol(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 }

@@ -34,11 +34,11 @@ public:
 	string GetPasWord(void) { return m_pasword; }	// ゲッダー
 
 private:
-	void SeletMode(void);
-	void Tutorial(void);
-	void ColUpdate(void);
-	void ResultTimer(void);
-	void PasWord(void);
+	void SeletMode(void);	// 選択処理
+	void Tutorial(void);	// チュートリアル処理
+	void ColUpdate(void);	// カラーの更新処理
+	void ResultTimer(void);	// リザルトへの遷移
+	void PasWord(void);	// パスワード入力処理
 	CObject2D *m_click;	// CLICKロゴ
 	CObject2D *m_pas_word;// パスワード入力欄
 	vector<CObject2D*> m_button;// ボタン

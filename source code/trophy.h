@@ -28,31 +28,31 @@ public:
 	//---------------------------
 	enum class TROPHY
 	{
-		AIRPLANE = 0,
-		FAN,
-		REDBULL,
-		STARRING,
-		THORN,
-		ROCKET,
-		BANANA,
-		TRAMPOLINE,
-		M_1000,
-		M_5000,
-		M_10000,
-		MEASUREMENT_IMPOSSIBLE,
-		EVENING,
-		NIGHT,
-		GIRL,
-		HARD,
-		GROUND,
-		PLAY_00,
-		PLAY_05,
-		PLAY_10,
-		ENDROLL,
-		ROCKY_ANGRY,
-		KIYO,
-		COMPLETE,
-		MAX
+		AIRPLANE = 0,	// 飛行機
+		FAN,			// 扇風機
+		REDBULL,		// レッドブル
+		STARRING,		// スターリング
+		THORN,			// とげ
+		ROCKET,			// ロケット
+		BANANA,			// バナナ
+		TRAMPOLINE,		// トランポリン
+		M_1000,			// 1000m
+		M_5000,			// 5000m
+		M_10000,		// 10000m
+		MEASUREMENT_IMPOSSIBLE,	// 測定不能
+		EVENING,		// 夕方
+		NIGHT,			// 夜
+		GIRL,			// ロキ子
+		HARD,			// ハード
+		GROUND,			// 地面
+		PLAY_00,		// 初プレイ
+		PLAY_05,		// 5プレイ
+		PLAY_10,		// 10プレイ
+		ENDROLL,		// エンドロール
+		ROCKY_ANGRY,	// ロッキーくん怒る
+		KIYO,			// キヨのブレーキ音
+		COMPLETE,		// コンプリート
+		MAX				// 最大数
 	};
 
 	CTrophy(PRIORITY priorty = PRIORITY::NONE);	// デフォルトコンストラクタ

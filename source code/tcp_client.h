@@ -1,6 +1,6 @@
 //====================================================
 //
-// プレイヤーのヘッダーファイル(tcp_client.h)
+// 通信処理(tcp_client.h)
 // Author : 羽鳥 太一
 //
 //====================================================
@@ -27,8 +27,8 @@ public:
 	int Send(char *pSendData, int nSendDataSize);	// 送信(送信データ格納先, 送信データサイズ)
 	int Recv(char *pRecvData, int nRecvDataSize);	// 受信(受信データ格納先, 受信データ格納先最大サイズ)
 	void Uninit(void);	// 終了
-	static void WSASInit(void);
-	static void WSASUninit(void);
+	static void WSASInit(void);		// WSASの初期化処理
+	static void WSASUninit(void);	// WSASの終了処理
 private:
 	SOCKET m_socket;	// ソケット
 	string m_Ip;	// IPアドレス
