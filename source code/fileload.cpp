@@ -33,7 +33,7 @@ CFileLoad::~CFileLoad()
 pair<vector<string>, vector<string>> CFileLoad::Load(string load_file)
 {
 	pair<vector<string>, vector<string>> pas_name_buf;	// パスと名前のバッファ
-	vector<string> folder_name;
+	vector<string> folder_name;	// フォルダの保存バッファ
 	int count_element = 0;			// 要素カウント様
 	int pas_size = load_file.size();	// パスの文字数サイズ
 
