@@ -59,6 +59,7 @@ HRESULT CSparkle::Init()
 			                                    m_size, D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f), CEffect3D::EFFECT3D_TYPE::TRAJECTORY_PLAYER));
 		//テクスチャ設定
 		m_pEffect3D[nCnt]->BindTexture(CManager::GetInstance()->GetTexture()->GetTexture("effect_sparkle.png"));
+		//減算合成か加算合成かをランダムで選択
 		m_pEffect3D[nCnt]->SetAlphaBlendSubtraction((bool)(rand() % 2));
 	}
 
@@ -138,6 +139,7 @@ void CSparkle::Update(void)
 	//サイズが0になったら
 	if ((int)m_pEffect3D.size() == 0)
 	{
+		//消す
 		Uninit();
 	}
 }

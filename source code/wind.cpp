@@ -115,7 +115,6 @@ void CWind::Update(void)
 void CWind::Draw(void)
 {
 	CEffect3D::Draw();
-
 }
 
 //================================================

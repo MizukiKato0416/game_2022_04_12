@@ -130,6 +130,7 @@ void CDialog::Uninit(void)
 //================================================
 void CDialog::Update(void)
 {
+	//背景、フレーム、キャラを生成し終わったら
 	if (m_bCreateFinish == true)
 	{
 		//揺れる状態になっているなら
@@ -289,9 +290,11 @@ CDialog *CDialog::Create(const SCENE_TYPE &sceneType)
 //================================================
 bool CDialog::Dialog(const int &nCntDialog)
 {
+	//#文字を改行文字に設定
 	wchar_t cReturn[] = L"#";
+	//文章のサイズを取得
 	int nDialogSize = m_dialog[nCntDialog].size();
-
+	//全ての文字が生成されていなかったら
 	if (m_nDialogDelay < nDialogSize)
 	{
 		//フレームのカウンターを加算
@@ -299,6 +302,7 @@ bool CDialog::Dialog(const int &nCntDialog)
 		//既定の値より大きくなったら
 		if (m_nCountFrame > m_nLetterCreateCounter)
 		{
+			//改行文字があったら
 			if (m_dialog[nCntDialog][m_nDialogDelay] == *cReturn)
 			{
 				//改行するので0にする
@@ -311,7 +315,8 @@ bool CDialog::Dialog(const int &nCntDialog)
 				m_nDialogDelay--;
 			}
 			else
-			{
+			{//改行文字がなかったら
+				//文字を生成
 				m_pLetter.push_back(new CLetter);
 
 				m_pLetter[m_nDialogDelay]->SetPos(D3DXVECTOR3(200.0f + (15.0f * 2.0f) * m_nDialogCntX, 600.0f + (15.0f * 2.0f) * m_nDialogCntY, 0.0f));
@@ -340,7 +345,7 @@ bool CDialog::Dialog(const int &nCntDialog)
 		}
 	}
 	else
-	{
+	{//全ての文字を生成していたらtrueを返す
 		return true;
 	}
 	return false;
@@ -357,6 +362,7 @@ void CDialog::UninitDialog(void)
 		m_pPersonPose->SetPos(m_createPosePos, m_pPersonPose->GetSize());
 		m_pPersonFace->SetPos(m_createFacePos, m_pPersonFace->GetSize());
 	}
+	//変数初期化
 	m_nDialogCntX = 0;
 	m_nDialogCntY = 0;
 	m_nDialogDelay = 0;
@@ -366,7 +372,7 @@ void CDialog::UninitDialog(void)
 	m_bShakeReturn = false;
 
 	int nSize = m_pLetter.size();
-
+	//文字を消す
 	for (int nCnt = 0; nCnt < nSize; nCnt++)
 	{
 		m_pLetter[nCnt]->Uninit();

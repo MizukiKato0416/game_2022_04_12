@@ -88,8 +88,10 @@ void CRocket::Uninit(void)
 //================================================
 void CRocket::Update(void)
 {
+	//サウンド取得
 	CSound *sound;
 	sound = CManager::GetInstance()->GetSound();
+
 	CHappenig::Update();
 
 	if (m_bHitPlayer == false)
@@ -97,8 +99,10 @@ void CRocket::Update(void)
 		//プレイヤーと当たったら
 		if (HitPlayer() == true)
 		{
+			//SE設定
 			sound->ControllVoice(CSound::SOUND_LABEL::ROCKET_SE, 1.4f);
 			sound->Play(CSound::SOUND_LABEL::ROCKET_SE);
+
 			//オブジェクト情報を入れるポインタ
 			vector<CObject*> object;
 
@@ -120,7 +124,6 @@ void CRocket::Update(void)
 						{
 							//取得させる
 							flag[(int)CTrophy::TROPHY::ROCKET] = true;
-
 							CManager::GetInstance()->GetPlayData()->SetFlag(flag);
 							CHistory::Create(CTrophy::TROPHY::ROCKET);
 						}
@@ -129,7 +132,6 @@ void CRocket::Update(void)
 						{
 							//取得させる
 							flag[(int)CTrophy::TROPHY::MEASUREMENT_IMPOSSIBLE] = true;
-
 							CManager::GetInstance()->GetPlayData()->SetFlag(flag);
 							CHistory::Create(CTrophy::TROPHY::MEASUREMENT_IMPOSSIBLE);
 						}

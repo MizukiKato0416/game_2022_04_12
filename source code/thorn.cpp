@@ -49,6 +49,7 @@ CThorn::~CThorn()
 //=============================================================================
 HRESULT CThorn::Init(void)
 {
+	//モデルの生成
 	CHappenig::SetModel(CModelSingle::Create(m_pos, m_rot, CXload::X_TYPE_THORN, NULL, true));
 	CHappenig::Init();
 	CObject::SetObjType(CObject::OBJTYPE::THORN);
@@ -60,7 +61,7 @@ HRESULT CThorn::Init(void)
 		vtxPos[nCntVtx] = GetModel()->GetModel()->GetVtxPos(nCntVtx);
 	}
 
-	//モデルのサイズYを風のエフェクトのサイズの3分の2引き延ばす
+	//モデルのサイズを既定の値分小さくする
 	vtxPos[0].y -= HAPPENING_ADD_SIZE_Y;
 	vtxPos[1].y -= HAPPENING_ADD_SIZE_Y;
 	vtxPos[4].y -= HAPPENING_ADD_SIZE_Y;
@@ -103,13 +104,20 @@ void CThorn::Uninit(void)
 //=============================================================================
 void CThorn::Update(void)
 {
+	//サウンド取得
 	CSound *sound;
 	sound = CManager::GetInstance()->GetSound();
+
 	CHappenig::Update();
+
+	//プレイヤーに当たったら
 	if (CHappenig::HitPlayer() == true)
 	{
+		//SE設定
 		sound->ControllVoice(CSound::SOUND_LABEL::THORN_SE, 1.8f);
 		sound->Play(CSound::SOUND_LABEL::THORN_SE);
+
+		//プレイヤーに当たっていない状態なら
 		if (m_bHitPlayer == false)
 		{
 			//トロフィーのフラグ状態を取得
@@ -130,7 +138,7 @@ void CThorn::Update(void)
 		}
 	}
 
-	
+	//プレイヤーに当たった状態なら
 	if (m_bHitPlayer == true)
 	{
 		//カウンターを加算

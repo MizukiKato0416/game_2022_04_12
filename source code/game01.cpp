@@ -167,10 +167,12 @@ HRESULT CGame01::Init(void)
 	m_nClick = 0;
 	m_bDialog = false;
 
+	//サウンド取得
 	CSound *sound;
 	sound = CManager::GetInstance()->GetSound();
 
 	sound->Stop();
+	//SE設定
 	sound->Play(CSound::SOUND_LABEL::GAME_BGM);
 	sound->ControllVoice(CSound::SOUND_LABEL::GAME_BGM, 1.6f);
 
@@ -190,6 +192,7 @@ HRESULT CGame01::Init(void)
 	m_pFloor = CFloor::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), FLOOR_SIZE, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	m_pFloor->SetCol(D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.0f));
 
+	//合言葉がGROUNDの時
 	if (strncmp("GROUND", CManager::GetInstance()->GetPlayData()->GetPasword().c_str(), 7) == 0)
 	{
 		//トロフィーのフラグ状態を取得
@@ -207,7 +210,7 @@ HRESULT CGame01::Init(void)
 		                            CXload::X_TYPE_GROUND, NULL, false);
 	}
 	else if (strncmp("HARD", CManager::GetInstance()->GetPlayData()->GetPasword().c_str(), 5) == 0)
-	{
+	{//合言葉がHARDの時
 		m_pStart = CModelSingle::Create(D3DXVECTOR3(0.0f, GAME01_START_CLOUD_POS_Y, GAME01_START_CLOUD_POS_Z), D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 		                            CXload::X_TYPE_CLOUD_GRAY, NULL, false);
 	}

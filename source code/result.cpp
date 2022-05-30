@@ -49,10 +49,12 @@ CResult::~CResult()
 //================================================
 HRESULT CResult::Init(void)
 {
+	//サウンド取得
 	CSound *sound;
 	sound = CManager::GetInstance()->GetSound();
 
 	sound->Stop();
+	//BGM設定
 	sound->Play(CSound::SOUND_LABEL::RESULT_BGM);
 	sound->ControllVoice(CSound::SOUND_LABEL::RESULT_BGM, 0.4f);
 
@@ -77,7 +79,9 @@ void CResult::Uninit(void)
 //================================================
 void CResult::Update(void)
 {
+	//マウス取得
 	CInputMouse *pMouse = CManager::GetInstance()->GetInputMouse();
+	//サウンド取得
 	CSound *sound;
 	sound = CManager::GetInstance()->GetSound();
 
@@ -92,12 +96,15 @@ void CResult::Update(void)
 			m_pCommu == nullptr &&
 			m_pRank->GetOnece() == true)
 		{
+			//SE設定
 			sound->ControllVoice(CSound::SOUND_LABEL::DECISION_SE, 1.2f);
 			sound->Play(CSound::SOUND_LABEL::DECISION_SE);
+			//タイトルに遷移
 			pFade->SetFade(CManager::MODE::TITLE);
 		}
 	}
 
+	//通信が終わったら
 	if (m_pCommu == nullptr &&
 		m_pRank->GetOnece() == true)
 	{
@@ -105,6 +112,7 @@ void CResult::Update(void)
 		m_nResultCounter++;
 	}
 
+	//既定の値より大きくなったら
 	if (m_nResultCounter >= RESULT_TO_TITLE_COUNT)
 	{
 		//フェード取得処理

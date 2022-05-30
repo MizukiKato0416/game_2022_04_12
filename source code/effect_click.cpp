@@ -244,6 +244,7 @@ void CEffectClick::Ring(void)
 			}
 			else
 			{
+				//カラー設定
 				m_pRing[0]->SetCol(ringCol);
 			}
 		}
@@ -271,6 +272,7 @@ void CEffectClick::Ring(void)
 			}
 			else
 			{
+				//カラー設定
 				m_pRing[1]->SetCol(ringCol);
 			}
 		}

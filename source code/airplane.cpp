@@ -106,8 +106,10 @@ void CAirplane::Update(void)
 		//プレイヤーと当たったら
 		if (HitPlayer() == true)
 		{
+			//SEを設定
 			sound->ControllVoice(CSound::SOUND_LABEL::AIRPLANE_SE, 1.4f);
 			sound->Play(CSound::SOUND_LABEL::AIRPLANE_SE);
+
 			//オブジェクト情報を入れるポインタ
 			vector<CObject*> object;
 

@@ -55,7 +55,7 @@ HRESULT CHappenig::Init(void)
 		vtxPos[nCntVtx] = GetModel()->GetModel()->GetVtxPos(nCntVtx);
 	}
 
-	//モデルのサイズYを風のエフェクトのサイズの3分の2引き延ばす
+	//モデルのサイズを既定の値だけ引き延ばす
 	vtxPos[0].y += HAPPENING_ADD_SIZE_Y;
 	vtxPos[1].y += HAPPENING_ADD_SIZE_Y;
 	vtxPos[4].y += HAPPENING_ADD_SIZE_Y;

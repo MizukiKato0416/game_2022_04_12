@@ -48,6 +48,7 @@ CBanana::~CBanana()
 //=============================================================================
 HRESULT CBanana::Init(void)
 {
+	//モデルの生成
 	CHappenig::SetModel(CModelSingle::Create(m_pos, m_rot, CXload::X_TYPE_BANANA, NULL, true));
 
 	CHappenig::Init();
@@ -74,13 +75,20 @@ void CBanana::Uninit(void)
 //=============================================================================
 void CBanana::Update(void)
 {
+	//サウンド取得
 	CSound *sound;
 	sound = CManager::GetInstance()->GetSound();
+
 	CHappenig::Update();
+
+	//プレイヤーに当たったら
 	if (CHappenig::HitPlayer() == true)
 	{
+		//SE設定
 		sound->ControllVoice(CSound::SOUND_LABEL::BANANA_SE, 1.4f);
 		sound->Play(CSound::SOUND_LABEL::BANANA_SE);
+
+		//プレイヤーに当たっていない状態なら
 		if (m_bHitPlayer == false)
 		{
 			//トロフィーのフラグ状態を取得
@@ -90,7 +98,6 @@ void CBanana::Update(void)
 			{
 				//取得させる
 				flag[(int)CTrophy::TROPHY::BANANA] = true;
-
 				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
 				CHistory::Create(CTrophy::TROPHY::BANANA);
 			}
@@ -101,7 +108,7 @@ void CBanana::Update(void)
 		}
 	}
 
-
+	//プレイヤーに当たっている状態なら
 	if (m_bHitPlayer == true)
 	{
 		//カウンターを加算

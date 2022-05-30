@@ -53,6 +53,7 @@ CFan::~CFan()
 //=============================================================================
 HRESULT CFan::Init(void)
 {
+	//モデルの生成
 	CHappenig::SetModel(CModelSingle::Create(m_pos, m_rot, CXload::X_TYPE_FAN, NULL, true));
 	CHappenig::Init();
 	
@@ -115,8 +116,10 @@ void CFan::Uninit(void)
 //=============================================================================
 void CFan::Update(void)
 {
+	//サウンド取得
 	CSound *sound;
 	sound = CManager::GetInstance()->GetSound();
+
 	CHappenig::Update();
 
 	for (int nCntWind = 0; nCntWind < FAN_MAX_WIND_EFFECT; nCntWind++)
@@ -156,33 +159,14 @@ void CFan::Update(void)
 				CManager::GetInstance()->GetPlayData()->SetFlag(flag);
 				CHistory::Create(CTrophy::TROPHY::FAN);
 			}
+
+			//SE設定
 			sound->ControllVoice(CSound::SOUND_LABEL::FAN_SE, 1.4f);
 			sound->Play(CSound::SOUND_LABEL::FAN_SE);
+
 			m_bHitPlayer = true;
 			//当たっている状態にする
 			CHappenig::SetHit(true);
-
-			////オブジェクト情報を入れるポインタ
-			//vector<CObject*> object;
-
-			////先頭のポインタを代入
-			//object = CObject::GetObject(static_cast<int>(CObject::PRIORITY::PLAYER));
-			//int object_size = object.size();
-
-			//for (int count_object = 0; count_object < object_size; count_object++)
-			//{
-			//	//プレイヤーだった時
-			//	if (object[count_object]->GetObjType() == CObject::OBJTYPE::PLAYER)
-			//	{
-			//		//プレイヤーにキャスト
-			//		CPlayer *player = static_cast<CPlayer*>(object[count_object]);
-
-			//		//プレイヤーの状態を風にする
-			//		player->SetState(CPlayer::PLAYER_STATE::WIND);
-			//		//プレイヤーの状態管理のカウンターを0にする
-			//		player->SetStateCounter(0);
-			//	}
-			//}
 		}
 	}
 
