@@ -171,6 +171,7 @@
     <ClCompile Include="ending_scene.cpp" />
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="fan.cpp" />
+    <ClCompile Include="fileload.cpp" />
     <ClCompile Include="floor.cpp" />
     <ClCompile Include="game01.cpp" />
     <ClCompile Include="gauge.cpp" />
@@ -239,6 +240,7 @@
     <ClInclude Include="ending_scene.h" />
     <ClInclude Include="fade.h" />
     <ClInclude Include="fan.h" />
+    <ClInclude Include="fileload.h" />
     <ClInclude Include="floor.h" />
     <ClInclude Include="game01.h" />
     <ClInclude Include="gauge.h" />

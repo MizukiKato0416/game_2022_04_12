@@ -9,6 +9,7 @@
 #include "texture.h"
 #include "renderer.h"
 #include "manager.h"
+#include "fileload.h"
 
 namespace file = experimental::filesystem;
 using file::recursive_directory_iterator;
@@ -52,6 +53,8 @@ void CTexture::Init(void)
 	int count_tex = 0;			// テクスチャカウント様
 	int pas_size = sizeof(PAS_NAME) - 1;	// パスの文字数サイズ
 	pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();	// デバイスを取得する
+
+	pair<vector<string>, vector<string>> name_pas = CFileLoad::Load("data\\TEXTURE\\");
 
 	// パスのファイル名を読み込む
 	for (const auto &file : recursive_directory_iterator("data/TEXTURE/"))
