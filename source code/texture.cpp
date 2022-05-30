@@ -9,23 +9,15 @@
 #include "texture.h"
 #include "renderer.h"
 #include "manager.h"
-#include "fileload.h"
 
 namespace file = experimental::filesystem;
 using file::recursive_directory_iterator;
 
 //=============================================================================
-// マクロ定義
-//=============================================================================
-#define PAS_NAME ("data\\TEXTURE\\")	// パスの名前
-
-//=============================================================================
 // 静的メンバ変数宣言
 //=============================================================================
 vector<LPDIRECT3DTEXTURE9> CTexture::m_texture = {};
-vector<string> CTexture::m_pas;
-pair<vector<string>, vector<string>> CTexture::m_file_name_pas;
-map<string, int> CTexture::m_tex_type;
+CFileLoad::FILE_LOAD_DATA CTexture::m_file_data = {};
 int CTexture::m_num_tex;
 
 //=============================================================================
@@ -33,7 +25,7 @@ int CTexture::m_num_tex;
 //=============================================================================
 CTexture::CTexture()
 {
-	m_tex_type.clear();
+	m_file_data.tex_type.clear();
 }
 
 //=============================================================================
@@ -54,17 +46,17 @@ void CTexture::Init(void)
 	pDevice = CManager::GetInstance()->GetRenderer()->GetDevice();	// デバイスを取得する
 
 	// ファイルを読み込む
-	m_file_name_pas = CFileLoad::Load("data\\TEXTURE\\");
-	element_max = m_file_name_pas.second.size();
+	m_file_data.file_name_pas = CFileLoad::Load("data\\TEXTURE\\");
+	element_max = m_file_data.file_name_pas.second.size();
 
 	for (int count_element = 0; count_element < element_max; count_element++)
 	{
 		// 疑似列挙型を作る
-		m_tex_type[m_file_name_pas.second[count_element]] = count_element;
+		m_file_data.tex_type[m_file_data.file_name_pas.second[count_element]] = count_element;
 	}
 	// パスとサイズを保存
-	m_pas = m_file_name_pas.first;
-	m_num_tex = m_file_name_pas.first.size();
+	m_file_data.pas = m_file_data.file_name_pas.first;
+	m_num_tex = m_file_data.file_name_pas.first.size();
 
 	// サイズ分回す
 	for (int nCntTex = 0; nCntTex < m_num_tex; nCntTex++)
@@ -72,7 +64,7 @@ void CTexture::Init(void)
 		LPDIRECT3DTEXTURE9 pTexBuffer = NULL;	// テクスチャのバッファ
 		//テクスチャの生成
 		D3DXCreateTextureFromFile(	pDevice,
-									m_pas[nCntTex].c_str(),
+									m_file_data.pas[nCntTex].c_str(),
 									&pTexBuffer);
 		// vectorに格納
 		m_texture.push_back(pTexBuffer);

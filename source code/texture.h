@@ -11,6 +11,7 @@
 // ヘッダファイルのインクルード
 //*****************************************************************************
 #include "main.h"
+#include "fileload.h"
 
 //*****************************************************************************
 // クラス定義
@@ -22,16 +23,14 @@ public:
 	~CTexture();					//デストラクタ
 	static void Init(void);															// テクスチャの生成
 	static void Uninit(void);														// 終了
-	static LPDIRECT3DTEXTURE9 GetTexture(const string &texType) { return m_texture[m_tex_type[texType]]; }	// テクスチャの割り当て
+	static LPDIRECT3DTEXTURE9 GetTexture(const string &texType) { return m_texture[m_file_data.tex_type[texType]]; }	// テクスチャの割り当て
 	static LPDIRECT3DTEXTURE9 GetTexture(const int &nCnt) { return m_texture[nCnt]; }	// テクスチャの割り当て
-	static string GetPas(const int &nCntTex) { return m_pas[nCntTex]; }				// テクスチャのパス取得処理
+	static string GetPas(const int &nCntTex) { return m_file_data.pas[nCntTex]; }				// テクスチャのパス取得処理
 	static int GetNum(void) { return m_num_tex; }									// テクスチャの総数取得処理
 
 private:
 	static vector<LPDIRECT3DTEXTURE9> m_texture;		// テクスチャ
-	static vector<string> m_pas;						// テクスチャのパス
-	static pair<vector<string>, vector<string>> m_file_name_pas;	// パスと名前の読み込み
-	static map<string, int> m_tex_type;					// テクスチャの種類
+	static CFileLoad::FILE_LOAD_DATA m_file_data;
 	static int m_num_tex;								// テクスチャの総数
 };
 
