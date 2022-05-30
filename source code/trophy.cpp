@@ -85,12 +85,16 @@ HRESULT CTrophy::Init(void)
 	// 全部取ってたら
 	if (m_count_get_trophy == size - 1)
 	{
-		// コンプリートフラグを立てる
-		trophy_flag[(int)TROPHY::COMPLETE] = true;
+		// フラグが立ってなかったら
+		if (trophy_flag[(int)TROPHY::COMPLETE] == false)
+		{
+			// コンプリートフラグを立てる
+			trophy_flag[(int)TROPHY::COMPLETE] = true;
 
-		// フラグを保存
-		CManager::GetPlayData()->SetFlag(trophy_flag);
-		CHistory::Create(CTrophy::TROPHY::COMPLETE);
+			// フラグを保存
+			CManager::GetPlayData()->SetFlag(trophy_flag);
+			CHistory::Create(CTrophy::TROPHY::COMPLETE);
+		}
 	}
 
 	// トロフィーを並べる

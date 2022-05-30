@@ -33,6 +33,7 @@ CFileLoad::~CFileLoad()
 pair<vector<string>, vector<string>> CFileLoad::Load(string load_file)
 {
 	pair<vector<string>, vector<string>> pas_name_buf;	// パスと名前のバッファ
+	vector<string> folder_name;
 	int count_element = 0;			// 要素カウント様
 	int pas_size = load_file.size();	// パスの文字数サイズ
 
@@ -46,13 +47,35 @@ pair<vector<string>, vector<string>> CFileLoad::Load(string load_file)
 		// パスが混ざってたら
 		if (pas_name_buf.second[count_element].find(load_file) != string::npos)
 		{
-			for (int count_erase = 0; count_erase < pas_size; count_erase++)
+			// 拡張子がついていたら
+			if (pas_name_buf.second[count_element].find(".") != string::npos)
 			{
-				// 要らないところを削除
-				pas_name_buf.second[count_element].erase(pas_name_buf.second[count_element].begin());
+				// フォルダの名前サイズを取得
+				int folder_max = folder_name.size();
+				for (int folder_count = 0; folder_count < folder_max; folder_count++)
+				{
+					// 名前を保存する所にパスが混ざっていたら
+					if (pas_name_buf.second[count_element].find(folder_name[folder_count]) != string::npos)
+					{
+						// フォルダの名前のサイズを取得
+						int name_size = folder_name[folder_count].size();
+						for (int count_erase = 0; count_erase < name_size + 1; count_erase++)
+						{
+							// 名前だけを残す
+							pas_name_buf.second[count_element].erase(pas_name_buf.second[count_element].begin());
+						}
+					}
+				}
+				count_element++;
+			}
+			// 拡張子が付いていない(フォルダなので消去)
+			else
+			{
+				folder_name.push_back(pas_name_buf.second[count_element]);
+				pas_name_buf.second.erase(pas_name_buf.second.begin() + count_element);
+				pas_name_buf.first.erase(pas_name_buf.first.begin() + count_element);
 			}
 		}
-		count_element++;
 	}
 
 	return pas_name_buf;
