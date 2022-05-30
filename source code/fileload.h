@@ -18,6 +18,12 @@
 class CFileLoad
 {
 public:
+	typedef struct 
+	{
+		vector<string> pas;				// テクスチャのパス
+		pair<vector<string>, vector<string>> file_name_pas;	// パスと名前の読み込み
+		map<string, int> tex_type;		// テクスチャの種類
+	} FILE_LOAD_DATA;
 	CFileLoad();		//コンストラクタ
 	~CFileLoad();		//デストラクタ
 	static pair<vector<string>, vector<string>> Load(string load_file);	// ファイルロード
